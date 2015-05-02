@@ -1,0 +1,865 @@
+
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## This test demonstrates that write.xport can exactly duplicate an
+> ## existing SAS xport file "Alfalfa.xpt"
+> 
+> library(SASxport)
+Loading required package: chron
+Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
+Loading required package: survival
+Loading required package: splines
+Loading required package: Formula
+
+Attaching package: 'Hmisc'
+
+The following objects are masked from 'package:base':
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+
+Loaded SASxport version 1.5.0 (2014-07-21).
+
+  Type `?SASxport' for usage information.
+
+> Sys.setenv("TZ"="GMT")
+> 
+> # existing data file
+> SPEC <- read.xport("Alfalfa.xpt", verbose=TRUE)
+### Checking if the specified file has the appropriate header ###
+### Extracting data file information... ###
+### Reading the data file... ###
+### Processing contents... ###
+### Processing SAS dataset SPEC ###
+### . ###
+### . ###
+### Done ###
+> 
+> str(SPEC)
+'data.frame':	40 obs. of  6 variables:
+ $ POP   : Factor w/ 2 levels "MAX","min": 2 2 2 2 2 1 1 1 1 1 ...
+ $ SAMPLE: int  0 1 2 3 4 5 6 7 8 9 ...
+ $ REP   : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ SEEDWT: int  64 54 40 45 64 75 45 63 65 59 ...
+ $ HARV1 : num  172 138 146 170 125 ...
+ $ HARV2 : num  180 151 129 191 173 ...
+ - attr(*, "label")= chr " "
+ - attr(*, "SAStype")= chr " "
+> 
+> ## Write it out again, pretending to be the same OS, SAS version, and creation date
+> write.xport(SPEC,
++             file="Alfalfa2.xpt",
++             cDate=strptime("10DEC99:15:56:30", format="%d%b%y:%H:%M:%S"),
++             osType="OSF1",
++             sasVer="7.00",
++             autogen.formats=FALSE
++             )
+> 
+> ## Display for diff
+> write.xport(SPEC,
++             file="", # display inline
++             cDate=strptime("10DEC99:15:56:30", format="%d%b%y:%H:%M:%S"),
++             osType="OSF1",
++             sasVer="7.00",
++             autogen.formats=FALSE,
++             verbose=TRUE
++             )
+### Ensure all objects to be stored are data.frames...
+ ###
+### Ensure object names are valid and unique...
+ ###
+### opening file ... ###
+### Done ###
+### Write file header ... ###
+ASCII:  HEADER RECORD*******LIBRARY HEADER RECORD!!!!!!!000000000000000000000000000000  SAS     SAS     SASLIB  7.00    OSF1....                        10DEC99:15:56:3010DEC99:15:56:30                                                                 
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4c 49 42 52 41 52 59 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 53 41 53 20 20 20 20 20 53 41 53 20 20 20 20 20 53 41 53 4c 49 42 20 20 37 2e 30 30 20 20 20 20 4f 53 46 31 00 00 00 00 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 31 30 44 45 43 39 39 3a 31 35 3a 35 36 3a 33 30 31 30 44 45 43 39 39 3a 31 35 3a 35 36 3a 33 30 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+### Done. ###
+### Write data frame header ... ###
+ASCII:  HEADER RECORD*******MEMBER  HEADER RECORD!!!!!!!000000000000000001600000000140  HEADER RECORD*******DSCRPTR HEADER RECORD!!!!!!!000000000000000000000000000000  SAS     SPEC    SASDATA 7.00    OSF1....                        10DEC99:15:56:3010DEC99:15:56:30                                                                 
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4d 45 4d 42 45 52 20 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 31 36 30 30 30 30 30 30 30 30 31 34 30 20 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 44 53 43 52 50 54 52 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 53 41 53 20 20 20 20 20 53 50 45 43 20 20 20 20 53 41 53 44 41 54 41 20 37 2e 30 30 20 20 20 20 4f 53 46 31 00 00 00 00 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 31 30 44 45 43 39 39 3a 31 35 3a 35 36 3a 33 30 31 30 44 45 43 39 39 3a 31 35 3a 35 36 3a 33 30 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+### Done. ###
+### Write variable information block header ... ###
+ASCII:  HEADER RECORD*******NAMESTR HEADER RECORD!!!!!!!000000000600000000000000000000   
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4e 41 4d 45 53 54 52 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 36 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 
+### Done. ###
+### Write entries for variable information block ... ###
+###  POP ... ###
+ASCII:  ........POP                                                     ........        ............................................................ 
+HEX:    00 02 00 00 00 08 00 01 50 4f 50 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+###  SAMPLE ... ###
+ASCII:  ........SAMPLE                                                  ........        ............................................................ 
+HEX:    00 01 00 00 00 08 00 02 53 41 4d 50 4c 45 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+###  REP ... ###
+ASCII:  ........REP                                                     ........        ............................................................ 
+HEX:    00 01 00 00 00 08 00 03 52 45 50 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+###  SEEDWT ... ###
+ASCII:  ........SEEDWT                                                  ........        ............................................................ 
+HEX:    00 01 00 00 00 08 00 04 53 45 45 44 57 54 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 18 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+###  HARV1 ... ###
+ASCII:  ........HARV1                                                   ........        ....... .................................................... 
+HEX:    00 01 00 00 00 08 00 05 48 41 52 56 31 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+###  HARV2 ... ###
+ASCII:  ........HARV2                                                   ........        .......(.................................................... 
+HEX:    00 01 00 00 00 08 00 06 48 41 52 56 32 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 28 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+### Done. ###
+ASCII:                                           
+HEX:    20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+### Write header for data block ... ###
+ASCII:  HEADER RECORD*******OBS     HEADER RECORD!!!!!!!000000000000000000000000000000   
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4f 42 53 20 20 20 20 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 
+### Done ###
+### Write data ...  ###
+### i= 1  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 1  j= 2  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 1  j= 3  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 1  j= 4  value= 64  len= 8  ###
+ASCII:  B@...... 
+HEX:    42 40 00 00 00 00 00 00 
+### i= 1  j= 5  value= 171.7  len= 8  ###
+ASCII:  B..33330 
+HEX:    42 ab b3 33 33 33 33 30 
+### i= 1  j= 6  value= 180.3  len= 8  ###
+ASCII:  B.L..... 
+HEX:    42 b4 4c cc cc cc cc d0 
+### i= 2  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 2  j= 2  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 2  j= 3  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 2  j= 4  value= 54  len= 8  ###
+ASCII:  B6...... 
+HEX:    42 36 00 00 00 00 00 00 
+### i= 2  j= 5  value= 138.2  len= 8  ###
+ASCII:  B.333330 
+HEX:    42 8a 33 33 33 33 33 30 
+### i= 2  j= 6  value= 150.7  len= 8  ###
+ASCII:  B..33330 
+HEX:    42 96 b3 33 33 33 33 30 
+### i= 3  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 3  j= 2  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 3  j= 3  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 3  j= 4  value= 40  len= 8  ###
+ASCII:  B(...... 
+HEX:    42 28 00 00 00 00 00 00 
+### i= 3  j= 5  value= 145.6  len= 8  ###
+ASCII:  B....... 
+HEX:    42 91 99 99 99 99 99 98 
+### i= 3  j= 6  value= 129.1  len= 8  ###
+ASCII:  B....... 
+HEX:    42 81 19 99 99 99 99 98 
+### i= 4  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 4  j= 2  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 4  j= 3  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 4  j= 4  value= 45  len= 8  ###
+ASCII:  B-...... 
+HEX:    42 2d 00 00 00 00 00 00 
+### i= 4  j= 5  value= 170.4  len= 8  ###
+ASCII:  B.fffffh 
+HEX:    42 aa 66 66 66 66 66 68 
+### i= 4  j= 6  value= 191.2  len= 8  ###
+ASCII:  B.333330 
+HEX:    42 bf 33 33 33 33 33 30 
+### i= 5  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 5  j= 2  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 5  j= 3  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 5  j= 4  value= 64  len= 8  ###
+ASCII:  B@...... 
+HEX:    42 40 00 00 00 00 00 00 
+### i= 5  j= 5  value= 124.8  len= 8  ###
+ASCII:  B|...... 
+HEX:    42 7c cc cc cc cc cc cc 
+### i= 5  j= 6  value= 172.6  len= 8  ###
+ASCII:  B....... 
+HEX:    42 ac 99 99 99 99 99 98 
+### i= 6  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 6  j= 2  value= 5  len= 8  ###
+ASCII:  AP...... 
+HEX:    41 50 00 00 00 00 00 00 
+### i= 6  j= 3  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 6  j= 4  value= 75  len= 8  ###
+ASCII:  BK...... 
+HEX:    42 4b 00 00 00 00 00 00 
+### i= 6  j= 5  value= 179  len= 8  ###
+ASCII:  B....... 
+HEX:    42 b3 00 00 00 00 00 00 
+### i= 6  j= 6  value= 235.3  len= 8  ###
+ASCII:  B.L..... 
+HEX:    42 eb 4c cc cc cc cc d0 
+### i= 7  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 7  j= 2  value= 6  len= 8  ###
+ASCII:  A`...... 
+HEX:    41 60 00 00 00 00 00 00 
+### i= 7  j= 3  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 7  j= 4  value= 45  len= 8  ###
+ASCII:  B-...... 
+HEX:    42 2d 00 00 00 00 00 00 
+### i= 7  j= 5  value= 166.3  len= 8  ###
+ASCII:  B.L..... 
+HEX:    42 a6 4c cc cc cc cc d0 
+### i= 7  j= 6  value= 173.9  len= 8  ###
+ASCII:  B..ffffh 
+HEX:    42 ad e6 66 66 66 66 68 
+### i= 8  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 8  j= 2  value= 7  len= 8  ###
+ASCII:  Ap...... 
+HEX:    41 70 00 00 00 00 00 00 
+### i= 8  j= 3  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 8  j= 4  value= 63  len= 8  ###
+ASCII:  B?...... 
+HEX:    42 3f 00 00 00 00 00 00 
+### i= 8  j= 5  value= 169.7  len= 8  ###
+ASCII:  B..33330 
+HEX:    42 a9 b3 33 33 33 33 30 
+### i= 8  j= 6  value= 155.8  len= 8  ###
+ASCII:  B....... 
+HEX:    42 9b cc cc cc cc cc d0 
+### i= 9  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 9  j= 2  value= 8  len= 8  ###
+ASCII:  A....... 
+HEX:    41 80 00 00 00 00 00 00 
+### i= 9  j= 3  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 9  j= 4  value= 65  len= 8  ###
+ASCII:  BA...... 
+HEX:    42 41 00 00 00 00 00 00 
+### i= 9  j= 5  value= 192.9  len= 8  ###
+ASCII:  B..ffffh 
+HEX:    42 c0 e6 66 66 66 66 68 
+### i= 9  j= 6  value= 177.6  len= 8  ###
+ASCII:  B....... 
+HEX:    42 b1 99 99 99 99 99 98 
+### i= 10  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 10  j= 2  value= 9  len= 8  ###
+ASCII:  A....... 
+HEX:    41 90 00 00 00 00 00 00 
+### i= 10  j= 3  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 10  j= 4  value= 59  len= 8  ###
+ASCII:  B;...... 
+HEX:    42 3b 00 00 00 00 00 00 
+### i= 10  j= 5  value= 185.8  len= 8  ###
+ASCII:  B....... 
+HEX:    42 b9 cc cc cc cc cc d0 
+### i= 10  j= 6  value= 179.2  len= 8  ###
+ASCII:  B.333330 
+HEX:    42 b3 33 33 33 33 33 30 
+### i= 11  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 11  j= 2  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 11  j= 3  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 11  j= 4  value= 59  len= 8  ###
+ASCII:  B;...... 
+HEX:    42 3b 00 00 00 00 00 00 
+### i= 11  j= 5  value= 158.8  len= 8  ###
+ASCII:  B....... 
+HEX:    42 9e cc cc cc cc cc d0 
+### i= 11  j= 6  value= 139.7  len= 8  ###
+ASCII:  B..33330 
+HEX:    42 8b b3 33 33 33 33 30 
+### i= 12  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 12  j= 2  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 12  j= 3  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 12  j= 4  value= 46  len= 8  ###
+ASCII:  B....... 
+HEX:    42 2e 00 00 00 00 00 00 
+### i= 12  j= 5  value= 163.7  len= 8  ###
+ASCII:  B..33330 
+HEX:    42 a3 b3 33 33 33 33 30 
+### i= 12  j= 6  value= 150  len= 8  ###
+ASCII:  B....... 
+HEX:    42 96 00 00 00 00 00 00 
+### i= 13  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 13  j= 2  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 13  j= 3  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 13  j= 4  value= 42  len= 8  ###
+ASCII:  B*...... 
+HEX:    42 2a 00 00 00 00 00 00 
+### i= 13  j= 5  value= 120.6  len= 8  ###
+ASCII:  Bx...... 
+HEX:    42 78 99 99 99 99 99 98 
+### i= 13  j= 6  value= 131.1  len= 8  ###
+ASCII:  B....... 
+HEX:    42 83 19 99 99 99 99 98 
+### i= 14  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 14  j= 2  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 14  j= 3  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 14  j= 4  value= 38  len= 8  ###
+ASCII:  B&...... 
+HEX:    42 26 00 00 00 00 00 00 
+### i= 14  j= 5  value= 193.1  len= 8  ###
+ASCII:  B....... 
+HEX:    42 c1 19 99 99 99 99 98 
+### i= 14  j= 6  value= 195.4  len= 8  ###
+ASCII:  B.fffffh 
+HEX:    42 c3 66 66 66 66 66 68 
+### i= 15  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 15  j= 2  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 15  j= 3  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 15  j= 4  value= 54  len= 8  ###
+ASCII:  B6...... 
+HEX:    42 36 00 00 00 00 00 00 
+### i= 15  j= 5  value= 171.5  len= 8  ###
+ASCII:  B....... 
+HEX:    42 ab 80 00 00 00 00 00 
+### i= 15  j= 6  value= 167.6  len= 8  ###
+ASCII:  B....... 
+HEX:    42 a7 99 99 99 99 99 98 
+### i= 16  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 16  j= 2  value= 5  len= 8  ###
+ASCII:  AP...... 
+HEX:    41 50 00 00 00 00 00 00 
+### i= 16  j= 3  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 16  j= 4  value= 59  len= 8  ###
+ASCII:  B;...... 
+HEX:    42 3b 00 00 00 00 00 00 
+### i= 16  j= 5  value= 181.4  len= 8  ###
+ASCII:  B.fffffh 
+HEX:    42 b5 66 66 66 66 66 68 
+### i= 16  j= 6  value= 152.9  len= 8  ###
+ASCII:  B..ffffh 
+HEX:    42 98 e6 66 66 66 66 68 
+### i= 17  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 17  j= 2  value= 6  len= 8  ###
+ASCII:  A`...... 
+HEX:    41 60 00 00 00 00 00 00 
+### i= 17  j= 3  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 17  j= 4  value= 60  len= 8  ###
+ASCII:  B<...... 
+HEX:    42 3c 00 00 00 00 00 00 
+### i= 17  j= 5  value= 165.3  len= 8  ###
+ASCII:  B.L..... 
+HEX:    42 a5 4c cc cc cc cc d0 
+### i= 17  j= 6  value= 167.5  len= 8  ###
+ASCII:  B....... 
+HEX:    42 a7 80 00 00 00 00 00 
+### i= 18  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 18  j= 2  value= 7  len= 8  ###
+ASCII:  Ap...... 
+HEX:    41 70 00 00 00 00 00 00 
+### i= 18  j= 3  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 18  j= 4  value= 63  len= 8  ###
+ASCII:  B?...... 
+HEX:    42 3f 00 00 00 00 00 00 
+### i= 18  j= 5  value= 163.9  len= 8  ###
+ASCII:  B..ffffh 
+HEX:    42 a3 e6 66 66 66 66 68 
+### i= 18  j= 6  value= 158  len= 8  ###
+ASCII:  B....... 
+HEX:    42 9e 00 00 00 00 00 00 
+### i= 19  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 19  j= 2  value= 8  len= 8  ###
+ASCII:  A....... 
+HEX:    41 80 00 00 00 00 00 00 
+### i= 19  j= 3  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 19  j= 4  value= 70  len= 8  ###
+ASCII:  BF...... 
+HEX:    42 46 00 00 00 00 00 00 
+### i= 19  j= 5  value= 152.5  len= 8  ###
+ASCII:  B....... 
+HEX:    42 98 80 00 00 00 00 00 
+### i= 19  j= 6  value= 150.2  len= 8  ###
+ASCII:  B.333330 
+HEX:    42 96 33 33 33 33 33 30 
+### i= 20  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 20  j= 2  value= 9  len= 8  ###
+ASCII:  A....... 
+HEX:    41 90 00 00 00 00 00 00 
+### i= 20  j= 3  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 20  j= 4  value= 62  len= 8  ###
+ASCII:  B>...... 
+HEX:    42 3e 00 00 00 00 00 00 
+### i= 20  j= 5  value= 173.5  len= 8  ###
+ASCII:  B....... 
+HEX:    42 ad 80 00 00 00 00 00 
+### i= 20  j= 6  value= 190.7  len= 8  ###
+ASCII:  B..33330 
+HEX:    42 be b3 33 33 33 33 30 
+### i= 21  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 21  j= 2  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 21  j= 3  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 21  j= 4  value= 60  len= 8  ###
+ASCII:  B<...... 
+HEX:    42 3c 00 00 00 00 00 00 
+### i= 21  j= 5  value= 147.9  len= 8  ###
+ASCII:  B..ffffh 
+HEX:    42 93 e6 66 66 66 66 68 
+### i= 21  j= 6  value= 164.9  len= 8  ###
+ASCII:  B..ffffh 
+HEX:    42 a4 e6 66 66 66 66 68 
+### i= 22  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 22  j= 2  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 22  j= 3  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 22  j= 4  value= 42  len= 8  ###
+ASCII:  B*...... 
+HEX:    42 2a 00 00 00 00 00 00 
+### i= 22  j= 5  value= 181.3  len= 8  ###
+ASCII:  B.L..... 
+HEX:    42 b5 4c cc cc cc cc d0 
+### i= 22  j= 6  value= 151.5  len= 8  ###
+ASCII:  B....... 
+HEX:    42 97 80 00 00 00 00 00 
+### i= 23  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 23  j= 2  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 23  j= 3  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 23  j= 4  value= 35  len= 8  ###
+ASCII:  B#...... 
+HEX:    42 23 00 00 00 00 00 00 
+### i= 23  j= 5  value= 124.3  len= 8  ###
+ASCII:  B|L..... 
+HEX:    42 7c 4c cc cc cc cc cc 
+### i= 23  j= 6  value= 134.4  len= 8  ###
+ASCII:  B.fffffh 
+HEX:    42 86 66 66 66 66 66 68 
+### i= 24  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 24  j= 2  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 24  j= 3  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 24  j= 4  value= 47  len= 8  ###
+ASCII:  B/...... 
+HEX:    42 2f 00 00 00 00 00 00 
+### i= 24  j= 5  value= 174.8  len= 8  ###
+ASCII:  B....... 
+HEX:    42 ae cc cc cc cc cc d0 
+### i= 24  j= 6  value= 200.8  len= 8  ###
+ASCII:  B....... 
+HEX:    42 c8 cc cc cc cc cc d0 
+### i= 25  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 25  j= 2  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 25  j= 3  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 25  j= 4  value= 59  len= 8  ###
+ASCII:  B;...... 
+HEX:    42 3b 00 00 00 00 00 00 
+### i= 25  j= 5  value= 167.8  len= 8  ###
+ASCII:  B....... 
+HEX:    42 a7 cc cc cc cc cc d0 
+### i= 25  j= 6  value= 178.3  len= 8  ###
+ASCII:  B.L..... 
+HEX:    42 b2 4c cc cc cc cc d0 
+### i= 26  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 26  j= 2  value= 5  len= 8  ###
+ASCII:  AP...... 
+HEX:    41 50 00 00 00 00 00 00 
+### i= 26  j= 3  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 26  j= 4  value= 57  len= 8  ###
+ASCII:  B9...... 
+HEX:    42 39 00 00 00 00 00 00 
+### i= 26  j= 5  value= 193.4  len= 8  ###
+ASCII:  B.fffffh 
+HEX:    42 c1 66 66 66 66 66 68 
+### i= 26  j= 6  value= 183.5  len= 8  ###
+ASCII:  B....... 
+HEX:    42 b7 80 00 00 00 00 00 
+### i= 27  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 27  j= 2  value= 6  len= 8  ###
+ASCII:  A`...... 
+HEX:    41 60 00 00 00 00 00 00 
+### i= 27  j= 3  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 27  j= 4  value= 60  len= 8  ###
+ASCII:  B<...... 
+HEX:    42 3c 00 00 00 00 00 00 
+### i= 27  j= 5  value= 150.7  len= 8  ###
+ASCII:  B..33330 
+HEX:    42 96 b3 33 33 33 33 30 
+### i= 27  j= 6  value= 147.1  len= 8  ###
+ASCII:  B....... 
+HEX:    42 93 19 99 99 99 99 98 
+### i= 28  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 28  j= 2  value= 7  len= 8  ###
+ASCII:  Ap...... 
+HEX:    41 70 00 00 00 00 00 00 
+### i= 28  j= 3  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 28  j= 4  value= 59  len= 8  ###
+ASCII:  B;...... 
+HEX:    42 3b 00 00 00 00 00 00 
+### i= 28  j= 5  value= 142.5  len= 8  ###
+ASCII:  B....... 
+HEX:    42 8e 80 00 00 00 00 00 
+### i= 28  j= 6  value= 148.7  len= 8  ###
+ASCII:  B..33330 
+HEX:    42 94 b3 33 33 33 33 30 
+### i= 29  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 29  j= 2  value= 8  len= 8  ###
+ASCII:  A....... 
+HEX:    41 80 00 00 00 00 00 00 
+### i= 29  j= 3  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 29  j= 4  value= 59  len= 8  ###
+ASCII:  B;...... 
+HEX:    42 3b 00 00 00 00 00 00 
+### i= 29  j= 5  value= 176.4  len= 8  ###
+ASCII:  B.fffffh 
+HEX:    42 b0 66 66 66 66 66 68 
+### i= 29  j= 6  value= 204.8  len= 8  ###
+ASCII:  B....... 
+HEX:    42 cc cc cc cc cc cc d0 
+### i= 30  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 30  j= 2  value= 9  len= 8  ###
+ASCII:  A....... 
+HEX:    41 90 00 00 00 00 00 00 
+### i= 30  j= 3  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 30  j= 4  value= 70  len= 8  ###
+ASCII:  BF...... 
+HEX:    42 46 00 00 00 00 00 00 
+### i= 30  j= 5  value= 144.2  len= 8  ###
+ASCII:  B.333330 
+HEX:    42 90 33 33 33 33 33 30 
+### i= 30  j= 6  value= 143.8  len= 8  ###
+ASCII:  B....... 
+HEX:    42 8f cc cc cc cc cc d0 
+### i= 31  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 31  j= 2  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 31  j= 3  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 31  j= 4  value= 61  len= 8  ###
+ASCII:  B=...... 
+HEX:    42 3d 00 00 00 00 00 00 
+### i= 31  j= 5  value= 148.4  len= 8  ###
+ASCII:  B.fffffh 
+HEX:    42 94 66 66 66 66 66 68 
+### i= 31  j= 6  value= 168.8  len= 8  ###
+ASCII:  B....... 
+HEX:    42 a8 cc cc cc cc cc d0 
+### i= 32  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 32  j= 2  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 32  j= 3  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 32  j= 4  value= 52  len= 8  ###
+ASCII:  B4...... 
+HEX:    42 34 00 00 00 00 00 00 
+### i= 32  j= 5  value= 164.9  len= 8  ###
+ASCII:  B..ffffh 
+HEX:    42 a4 e6 66 66 66 66 68 
+### i= 32  j= 6  value= 158.6  len= 8  ###
+ASCII:  B....... 
+HEX:    42 9e 99 99 99 99 99 98 
+### i= 33  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 33  j= 2  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 33  j= 3  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 33  j= 4  value= 43  len= 8  ###
+ASCII:  B+...... 
+HEX:    42 2b 00 00 00 00 00 00 
+### i= 33  j= 5  value= 141.2  len= 8  ###
+ASCII:  B.333330 
+HEX:    42 8d 33 33 33 33 33 30 
+### i= 33  j= 6  value= 158.1  len= 8  ###
+ASCII:  B....... 
+HEX:    42 9e 19 99 99 99 99 98 
+### i= 34  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 34  j= 2  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 34  j= 3  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 34  j= 4  value= 49  len= 8  ###
+ASCII:  B1...... 
+HEX:    42 31 00 00 00 00 00 00 
+### i= 34  j= 5  value= 176.5  len= 8  ###
+ASCII:  B....... 
+HEX:    42 b0 80 00 00 00 00 00 
+### i= 34  j= 6  value= 208.3  len= 8  ###
+ASCII:  B.L..... 
+HEX:    42 d0 4c cc cc cc cc d0 
+### i= 35  j= 1  value= min  len= 8  ###
+ASCII:  min      
+HEX:    6d 69 6e 20 20 20 20 20 
+### i= 35  j= 2  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 35  j= 3  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 35  j= 4  value= 60  len= 8  ###
+ASCII:  B<...... 
+HEX:    42 3c 00 00 00 00 00 00 
+### i= 35  j= 5  value= 177.5  len= 8  ###
+ASCII:  B....... 
+HEX:    42 b1 80 00 00 00 00 00 
+### i= 35  j= 6  value= 137.1  len= 8  ###
+ASCII:  B....... 
+HEX:    42 89 19 99 99 99 99 98 
+### i= 36  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 36  j= 2  value= 5  len= 8  ###
+ASCII:  AP...... 
+HEX:    41 50 00 00 00 00 00 00 
+### i= 36  j= 3  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 36  j= 4  value= 59  len= 8  ###
+ASCII:  B;...... 
+HEX:    42 3b 00 00 00 00 00 00 
+### i= 36  j= 5  value= 174.1  len= 8  ###
+ASCII:  B....... 
+HEX:    42 ae 19 99 99 99 99 98 
+### i= 36  j= 6  value= 160.2  len= 8  ###
+ASCII:  B.333330 
+HEX:    42 a0 33 33 33 33 33 30 
+### i= 37  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 37  j= 2  value= 6  len= 8  ###
+ASCII:  A`...... 
+HEX:    41 60 00 00 00 00 00 00 
+### i= 37  j= 3  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 37  j= 4  value= 48  len= 8  ###
+ASCII:  B0...... 
+HEX:    42 30 00 00 00 00 00 00 
+### i= 37  j= 5  value= 155.5  len= 8  ###
+ASCII:  B....... 
+HEX:    42 9b 80 00 00 00 00 00 
+### i= 37  j= 6  value= 185.8  len= 8  ###
+ASCII:  B....... 
+HEX:    42 b9 cc cc cc cc cc d0 
+### i= 38  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 38  j= 2  value= 7  len= 8  ###
+ASCII:  Ap...... 
+HEX:    41 70 00 00 00 00 00 00 
+### i= 38  j= 3  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 38  j= 4  value= 61  len= 8  ###
+ASCII:  B=...... 
+HEX:    42 3d 00 00 00 00 00 00 
+### i= 38  j= 5  value= 186.7  len= 8  ###
+ASCII:  B..33330 
+HEX:    42 ba b3 33 33 33 33 30 
+### i= 38  j= 6  value= 157.7  len= 8  ###
+ASCII:  B..33330 
+HEX:    42 9d b3 33 33 33 33 30 
+### i= 39  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 39  j= 2  value= 8  len= 8  ###
+ASCII:  A....... 
+HEX:    41 80 00 00 00 00 00 00 
+### i= 39  j= 3  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 39  j= 4  value= 64  len= 8  ###
+ASCII:  B@...... 
+HEX:    42 40 00 00 00 00 00 00 
+### i= 39  j= 5  value= 162.4  len= 8  ###
+ASCII:  B.fffffh 
+HEX:    42 a2 66 66 66 66 66 68 
+### i= 39  j= 6  value= 179.4  len= 8  ###
+ASCII:  B.fffffh 
+HEX:    42 b3 66 66 66 66 66 68 
+### i= 40  j= 1  value= MAX  len= 8  ###
+ASCII:  MAX      
+HEX:    4d 41 58 20 20 20 20 20 
+### i= 40  j= 2  value= 9  len= 8  ###
+ASCII:  A....... 
+HEX:    41 90 00 00 00 00 00 00 
+### i= 40  j= 3  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 40  j= 4  value= 71  len= 8  ###
+ASCII:  BG...... 
+HEX:    42 47 00 00 00 00 00 00 
+### i= 40  j= 5  value= 141  len= 8  ###
+ASCII:  B....... 
+HEX:    42 8d 00 00 00 00 00 00 
+### i= 40  j= 6  value= 161.5  len= 8  ###
+ASCII:  B....... 
+HEX:    42 a1 80 00 00 00 00 00 
+ASCII:   
+HEX:     
+### Done. ###
+### Closing file ... ###
+### Done ###
+> 
+> 
+> ## Load both files back in as raw data
+> a.1 <- readBin( con="Alfalfa.xpt",  what=raw(), n=3600 )
+> a.2 <- readBin( con="Alfalfa2.xpt", what=raw(), n=3600 )
+> 
+> ## Test that the files are identical
+> stopifnot( all(a.1 == a.2) )
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  0.531   0.054   0.576 

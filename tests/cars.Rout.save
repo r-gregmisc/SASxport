@@ -1,0 +1,528 @@
+
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(SASxport)
+Loading required package: chron
+Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
+Loading required package: survival
+Loading required package: splines
+Loading required package: Formula
+
+Attaching package: 'Hmisc'
+
+The following objects are masked from 'package:base':
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+
+Loaded SASxport version 1.5.0 (2014-07-21).
+
+  Type `?SASxport' for usage information.
+
+> Sys.setenv("TZ"="GMT")
+> 
+> 
+> cars <- read.table(file="cars.sas", skip=3, nrows=26,
++                    col.names=c("MAKE","PRICE","MPG","REP78","FOREIGN"),
++                    header=F)
+> 
+> head(cars, n=5)
+  MAKE PRICE MPG REP78 FOREIGN
+1  AMC  4099  22     3       0
+2  AMC  4749  17     3       0
+3  AMC  3799  22     3       0
+4 Audi  9690  17     5       1
+5 Audi  6295  23     3       1
+> 
+> summary(cars)
+     MAKE       PRICE            MPG            REP78          FOREIGN      
+ AMC   :3   Min.   : 3299   Min.   :14.00   Min.   :2.000   Min.   :0.0000  
+ Audi  :2   1st Qu.: 4466   1st Qu.:17.25   1st Qu.:3.000   1st Qu.:0.0000  
+ BMW   :1   Median : 5146   Median :21.00   Median :3.000   Median :0.0000  
+ Buick :7   Mean   : 6652   Mean   :20.92   Mean   :3.269   Mean   :0.2692  
+ Cad.  :3   3rd Qu.: 8054   3rd Qu.:23.00   3rd Qu.:4.000   3rd Qu.:0.7500  
+ Chev. :6   Max.   :15906   Max.   :35.00   Max.   :5.000   Max.   :1.0000  
+ Datsun:4                                                                   
+> 
+> ## Write to file
+> write.xport(cars,
++             file="cars2.xpt",
++             cDate=strptime("28JUL07: 20:59:49", format="%d%b%y:%H:%M:%S"),
++             osType="SunOS",
++             sasVer="9.1",
++             autogen.formats=FALSE
++             )
+> 
+> ## Display for diff
+> write.xport(cars,
++             file="",
++             cDate=strptime("28JUL07: 20:59:49", format="%d%b%y:%H:%M:%S"),
++             osType="SunOS",
++             sasVer="9.1",
++             autogen.formats=FALSE,
++             verbose=TRUE
++             )
+### Ensure all objects to be stored are data.frames...
+ ###
+### Ensure object names are valid and unique...
+ ###
+### opening file ... ###
+### Done ###
+### Write file header ... ###
+ASCII:  HEADER RECORD*******LIBRARY HEADER RECORD!!!!!!!000000000000000000000000000000  SAS     SAS     SASLIB  9.1     SunOS...                        28JUL07:20:59:4928JUL07:20:59:49                                                                 
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4c 49 42 52 41 52 59 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 53 41 53 20 20 20 20 20 53 41 53 20 20 20 20 20 53 41 53 4c 49 42 20 20 39 2e 31 20 20 20 20 20 53 75 6e 4f 53 00 00 00 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 32 38 4a 55 4c 30 37 3a 32 30 3a 35 39 3a 34 39 32 38 4a 55 4c 30 37 3a 32 30 3a 35 39 3a 34 39 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+### Done. ###
+### Write data frame header ... ###
+ASCII:  HEADER RECORD*******MEMBER  HEADER RECORD!!!!!!!000000000000000001600000000140  HEADER RECORD*******DSCRPTR HEADER RECORD!!!!!!!000000000000000000000000000000  SAS     CARS    SASDATA 9.1     SunOS...                        28JUL07:20:59:4928JUL07:20:59:49                                                                 
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4d 45 4d 42 45 52 20 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 31 36 30 30 30 30 30 30 30 30 31 34 30 20 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 44 53 43 52 50 54 52 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 53 41 53 20 20 20 20 20 43 41 52 53 20 20 20 20 53 41 53 44 41 54 41 20 39 2e 31 20 20 20 20 20 53 75 6e 4f 53 00 00 00 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 32 38 4a 55 4c 30 37 3a 32 30 3a 35 39 3a 34 39 32 38 4a 55 4c 30 37 3a 32 30 3a 35 39 3a 34 39 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+### Done. ###
+### Write variable information block header ... ###
+ASCII:  HEADER RECORD*******NAMESTR HEADER RECORD!!!!!!!000000000500000000000000000000   
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4e 41 4d 45 53 54 52 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 35 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 
+### Done. ###
+### Write entries for variable information block ... ###
+###  MAKE ... ###
+ASCII:  ........MAKE                                                    ........        ............................................................ 
+HEX:    00 02 00 00 00 08 00 01 4d 41 4b 45 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+###  PRICE ... ###
+ASCII:  ........PRICE                                                   ........        ............................................................ 
+HEX:    00 01 00 00 00 08 00 02 50 52 49 43 45 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+###  MPG ... ###
+ASCII:  ........MPG                                                     ........        ............................................................ 
+HEX:    00 01 00 00 00 08 00 03 4d 50 47 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+###  REP78 ... ###
+ASCII:  ........REP78                                                   ........        ............................................................ 
+HEX:    00 01 00 00 00 08 00 04 52 45 50 37 38 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 18 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+###  FOREIGN ... ###
+ASCII:  ........FOREIGN                                                 ........        ....... .................................................... 
+HEX:    00 01 00 00 00 08 00 05 46 4f 52 45 49 47 4e 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+### Done. ###
+ASCII:                       
+HEX:    20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+### Write header for data block ... ###
+ASCII:  HEADER RECORD*******OBS     HEADER RECORD!!!!!!!000000000000000000000000000000   
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4f 42 53 20 20 20 20 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 
+### Done ###
+### Write data ...  ###
+### i= 1  j= 1  value= AMC  len= 8  ###
+ASCII:  AMC      
+HEX:    41 4d 43 20 20 20 20 20 
+### i= 1  j= 2  value= 4099  len= 8  ###
+ASCII:  D....... 
+HEX:    44 10 03 00 00 00 00 00 
+### i= 1  j= 3  value= 22  len= 8  ###
+ASCII:  B....... 
+HEX:    42 16 00 00 00 00 00 00 
+### i= 1  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 1  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 2  j= 1  value= AMC  len= 8  ###
+ASCII:  AMC      
+HEX:    41 4d 43 20 20 20 20 20 
+### i= 2  j= 2  value= 4749  len= 8  ###
+ASCII:  D....... 
+HEX:    44 12 8d 00 00 00 00 00 
+### i= 2  j= 3  value= 17  len= 8  ###
+ASCII:  B....... 
+HEX:    42 11 00 00 00 00 00 00 
+### i= 2  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 2  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 3  j= 1  value= AMC  len= 8  ###
+ASCII:  AMC      
+HEX:    41 4d 43 20 20 20 20 20 
+### i= 3  j= 2  value= 3799  len= 8  ###
+ASCII:  C.p..... 
+HEX:    43 ed 70 00 00 00 00 00 
+### i= 3  j= 3  value= 22  len= 8  ###
+ASCII:  B....... 
+HEX:    42 16 00 00 00 00 00 00 
+### i= 3  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 3  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 4  j= 1  value= Audi  len= 8  ###
+ASCII:  Audi     
+HEX:    41 75 64 69 20 20 20 20 
+### i= 4  j= 2  value= 9690  len= 8  ###
+ASCII:  D%...... 
+HEX:    44 25 da 00 00 00 00 00 
+### i= 4  j= 3  value= 17  len= 8  ###
+ASCII:  B....... 
+HEX:    42 11 00 00 00 00 00 00 
+### i= 4  j= 4  value= 5  len= 8  ###
+ASCII:  AP...... 
+HEX:    41 50 00 00 00 00 00 00 
+### i= 4  j= 5  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 5  j= 1  value= Audi  len= 8  ###
+ASCII:  Audi     
+HEX:    41 75 64 69 20 20 20 20 
+### i= 5  j= 2  value= 6295  len= 8  ###
+ASCII:  D....... 
+HEX:    44 18 97 00 00 00 00 00 
+### i= 5  j= 3  value= 23  len= 8  ###
+ASCII:  B....... 
+HEX:    42 17 00 00 00 00 00 00 
+### i= 5  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 5  j= 5  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 6  j= 1  value= BMW  len= 8  ###
+ASCII:  BMW      
+HEX:    42 4d 57 20 20 20 20 20 
+### i= 6  j= 2  value= 9735  len= 8  ###
+ASCII:  D&...... 
+HEX:    44 26 07 00 00 00 00 00 
+### i= 6  j= 3  value= 25  len= 8  ###
+ASCII:  B....... 
+HEX:    42 19 00 00 00 00 00 00 
+### i= 6  j= 4  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 6  j= 5  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 7  j= 1  value= Buick  len= 8  ###
+ASCII:  Buick    
+HEX:    42 75 69 63 6b 20 20 20 
+### i= 7  j= 2  value= 4816  len= 8  ###
+ASCII:  D....... 
+HEX:    44 12 d0 00 00 00 00 00 
+### i= 7  j= 3  value= 20  len= 8  ###
+ASCII:  B....... 
+HEX:    42 14 00 00 00 00 00 00 
+### i= 7  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 7  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 8  j= 1  value= Buick  len= 8  ###
+ASCII:  Buick    
+HEX:    42 75 69 63 6b 20 20 20 
+### i= 8  j= 2  value= 7827  len= 8  ###
+ASCII:  D....... 
+HEX:    44 1e 93 00 00 00 00 00 
+### i= 8  j= 3  value= 15  len= 8  ###
+ASCII:  A....... 
+HEX:    41 f0 00 00 00 00 00 00 
+### i= 8  j= 4  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 8  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 9  j= 1  value= Buick  len= 8  ###
+ASCII:  Buick    
+HEX:    42 75 69 63 6b 20 20 20 
+### i= 9  j= 2  value= 5788  len= 8  ###
+ASCII:  D....... 
+HEX:    44 16 9c 00 00 00 00 00 
+### i= 9  j= 3  value= 18  len= 8  ###
+ASCII:  B....... 
+HEX:    42 12 00 00 00 00 00 00 
+### i= 9  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 9  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 10  j= 1  value= Buick  len= 8  ###
+ASCII:  Buick    
+HEX:    42 75 69 63 6b 20 20 20 
+### i= 10  j= 2  value= 4453  len= 8  ###
+ASCII:  D.e..... 
+HEX:    44 11 65 00 00 00 00 00 
+### i= 10  j= 3  value= 26  len= 8  ###
+ASCII:  B....... 
+HEX:    42 1a 00 00 00 00 00 00 
+### i= 10  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 10  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 11  j= 1  value= Buick  len= 8  ###
+ASCII:  Buick    
+HEX:    42 75 69 63 6b 20 20 20 
+### i= 11  j= 2  value= 5189  len= 8  ###
+ASCII:  D.E..... 
+HEX:    44 14 45 00 00 00 00 00 
+### i= 11  j= 3  value= 20  len= 8  ###
+ASCII:  B....... 
+HEX:    42 14 00 00 00 00 00 00 
+### i= 11  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 11  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 12  j= 1  value= Buick  len= 8  ###
+ASCII:  Buick    
+HEX:    42 75 69 63 6b 20 20 20 
+### i= 12  j= 2  value= 10372  len= 8  ###
+ASCII:  D(...... 
+HEX:    44 28 84 00 00 00 00 00 
+### i= 12  j= 3  value= 16  len= 8  ###
+ASCII:  B....... 
+HEX:    42 10 00 00 00 00 00 00 
+### i= 12  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 12  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 13  j= 1  value= Buick  len= 8  ###
+ASCII:  Buick    
+HEX:    42 75 69 63 6b 20 20 20 
+### i= 13  j= 2  value= 4082  len= 8  ###
+ASCII:  C. ..... 
+HEX:    43 ff 20 00 00 00 00 00 
+### i= 13  j= 3  value= 19  len= 8  ###
+ASCII:  B....... 
+HEX:    42 13 00 00 00 00 00 00 
+### i= 13  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 13  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 14  j= 1  value= Cad.  len= 8  ###
+ASCII:  Cad.     
+HEX:    43 61 64 2e 20 20 20 20 
+### i= 14  j= 2  value= 11385  len= 8  ###
+ASCII:  D,y..... 
+HEX:    44 2c 79 00 00 00 00 00 
+### i= 14  j= 3  value= 14  len= 8  ###
+ASCII:  A....... 
+HEX:    41 e0 00 00 00 00 00 00 
+### i= 14  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 14  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 15  j= 1  value= Cad.  len= 8  ###
+ASCII:  Cad.     
+HEX:    43 61 64 2e 20 20 20 20 
+### i= 15  j= 2  value= 14500  len= 8  ###
+ASCII:  D8...... 
+HEX:    44 38 a4 00 00 00 00 00 
+### i= 15  j= 3  value= 14  len= 8  ###
+ASCII:  A....... 
+HEX:    41 e0 00 00 00 00 00 00 
+### i= 15  j= 4  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 15  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 16  j= 1  value= Cad.  len= 8  ###
+ASCII:  Cad.     
+HEX:    43 61 64 2e 20 20 20 20 
+### i= 16  j= 2  value= 15906  len= 8  ###
+ASCII:  D>"..... 
+HEX:    44 3e 22 00 00 00 00 00 
+### i= 16  j= 3  value= 21  len= 8  ###
+ASCII:  B....... 
+HEX:    42 15 00 00 00 00 00 00 
+### i= 16  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 16  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 17  j= 1  value= Chev.  len= 8  ###
+ASCII:  Chev.    
+HEX:    43 68 65 76 2e 20 20 20 
+### i= 17  j= 2  value= 3299  len= 8  ###
+ASCII:  C.0..... 
+HEX:    43 ce 30 00 00 00 00 00 
+### i= 17  j= 3  value= 29  len= 8  ###
+ASCII:  B....... 
+HEX:    42 1d 00 00 00 00 00 00 
+### i= 17  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 17  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 18  j= 1  value= Chev.  len= 8  ###
+ASCII:  Chev.    
+HEX:    43 68 65 76 2e 20 20 20 
+### i= 18  j= 2  value= 5705  len= 8  ###
+ASCII:  D.I..... 
+HEX:    44 16 49 00 00 00 00 00 
+### i= 18  j= 3  value= 16  len= 8  ###
+ASCII:  B....... 
+HEX:    42 10 00 00 00 00 00 00 
+### i= 18  j= 4  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 18  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 19  j= 1  value= Chev.  len= 8  ###
+ASCII:  Chev.    
+HEX:    43 68 65 76 2e 20 20 20 
+### i= 19  j= 2  value= 4504  len= 8  ###
+ASCII:  D....... 
+HEX:    44 11 98 00 00 00 00 00 
+### i= 19  j= 3  value= 22  len= 8  ###
+ASCII:  B....... 
+HEX:    42 16 00 00 00 00 00 00 
+### i= 19  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 19  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 20  j= 1  value= Chev.  len= 8  ###
+ASCII:  Chev.    
+HEX:    43 68 65 76 2e 20 20 20 
+### i= 20  j= 2  value= 5104  len= 8  ###
+ASCII:  D....... 
+HEX:    44 13 f0 00 00 00 00 00 
+### i= 20  j= 3  value= 22  len= 8  ###
+ASCII:  B....... 
+HEX:    42 16 00 00 00 00 00 00 
+### i= 20  j= 4  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 20  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 21  j= 1  value= Chev.  len= 8  ###
+ASCII:  Chev.    
+HEX:    43 68 65 76 2e 20 20 20 
+### i= 21  j= 2  value= 3667  len= 8  ###
+ASCII:  C.0..... 
+HEX:    43 e5 30 00 00 00 00 00 
+### i= 21  j= 3  value= 24  len= 8  ###
+ASCII:  B....... 
+HEX:    42 18 00 00 00 00 00 00 
+### i= 21  j= 4  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 21  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 22  j= 1  value= Chev.  len= 8  ###
+ASCII:  Chev.    
+HEX:    43 68 65 76 2e 20 20 20 
+### i= 22  j= 2  value= 3955  len= 8  ###
+ASCII:  C.0..... 
+HEX:    43 f7 30 00 00 00 00 00 
+### i= 22  j= 3  value= 19  len= 8  ###
+ASCII:  B....... 
+HEX:    42 13 00 00 00 00 00 00 
+### i= 22  j= 4  value= 3  len= 8  ###
+ASCII:  A0...... 
+HEX:    41 30 00 00 00 00 00 00 
+### i= 22  j= 5  value= 0  len= 8  ###
+ASCII:  ........ 
+HEX:    00 00 00 00 00 00 00 00 
+### i= 23  j= 1  value= Datsun  len= 8  ###
+ASCII:  Datsun   
+HEX:    44 61 74 73 75 6e 20 20 
+### i= 23  j= 2  value= 6229  len= 8  ###
+ASCII:  D.U..... 
+HEX:    44 18 55 00 00 00 00 00 
+### i= 23  j= 3  value= 23  len= 8  ###
+ASCII:  B....... 
+HEX:    42 17 00 00 00 00 00 00 
+### i= 23  j= 4  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 23  j= 5  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 24  j= 1  value= Datsun  len= 8  ###
+ASCII:  Datsun   
+HEX:    44 61 74 73 75 6e 20 20 
+### i= 24  j= 2  value= 4589  len= 8  ###
+ASCII:  D....... 
+HEX:    44 11 ed 00 00 00 00 00 
+### i= 24  j= 3  value= 35  len= 8  ###
+ASCII:  B#...... 
+HEX:    42 23 00 00 00 00 00 00 
+### i= 24  j= 4  value= 5  len= 8  ###
+ASCII:  AP...... 
+HEX:    41 50 00 00 00 00 00 00 
+### i= 24  j= 5  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 25  j= 1  value= Datsun  len= 8  ###
+ASCII:  Datsun   
+HEX:    44 61 74 73 75 6e 20 20 
+### i= 25  j= 2  value= 5079  len= 8  ###
+ASCII:  D....... 
+HEX:    44 13 d7 00 00 00 00 00 
+### i= 25  j= 3  value= 24  len= 8  ###
+ASCII:  B....... 
+HEX:    42 18 00 00 00 00 00 00 
+### i= 25  j= 4  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 25  j= 5  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 26  j= 1  value= Datsun  len= 8  ###
+ASCII:  Datsun   
+HEX:    44 61 74 73 75 6e 20 20 
+### i= 26  j= 2  value= 8129  len= 8  ###
+ASCII:  D....... 
+HEX:    44 1f c1 00 00 00 00 00 
+### i= 26  j= 3  value= 21  len= 8  ###
+ASCII:  B....... 
+HEX:    42 15 00 00 00 00 00 00 
+### i= 26  j= 4  value= 4  len= 8  ###
+ASCII:  A@...... 
+HEX:    41 40 00 00 00 00 00 00 
+### i= 26  j= 5  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+ASCII:   
+HEX:     
+### Done. ###
+### Closing file ... ###
+### Done ###
+> 
+> ## Load both files back in as raw data
+> a.1 <- readBin( con="cars.xpt",  what=raw(), n=1e5)
+> a.2 <- readBin( con="cars2.xpt", what=raw(), n=1e5)
+> 
+> ## Test that the files are identical
+> stopifnot( all(a.1 == a.2) )
+> 
+> proc.time()
+   user  system elapsed 
+  0.507   0.047   0.544 

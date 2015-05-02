@@ -1,0 +1,60 @@
+
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+> ####
+> ## Round-trip test on Theoph data
+> ####
+> 
+> library(SASxport)
+Loading required package: chron
+Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
+Loading required package: survival
+Loading required package: splines
+Loading required package: Formula
+
+Attaching package: 'Hmisc'
+
+The following objects are masked from 'package:base':
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+
+Loaded SASxport version 1.5.0 (2014-07-21).
+
+  Type `?SASxport' for usage information.
+
+> Sys.setenv("TZ"="GMT")
+> 
+> write.xport(Theoph,file="theoph.xpt")
+> Theoph.2 <- read.xport("theoph.xpt")
+> 
+> ## Revert to mixed case names
+> names(Theoph.2) <- names(Theoph)
+> 
+> ## Test equality, handling the ordered factor Subject separately because
+> ## SAS xport files don't provide a mechanism for storing factor orders
+> 
+> stopifnot( all( as.character(Theoph$Subject) == as.character(Theoph.2$Subject) ))
+> stopifnot( all(Theoph[,-1] == Theoph.2[,-1]) )
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  0.652   0.037   0.680 
