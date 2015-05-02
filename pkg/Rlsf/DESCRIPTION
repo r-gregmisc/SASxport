@@ -1,0 +1,11 @@
+Package: Rlsf
+Title: Interface to the LSF Queuing System
+Version: 1.0.2
+Author: Chris Smith <csmith@platform.com> and
+        Gregory Warnes <warnes@bst.rochester.edu>
+Description: This package provides functions for using R with the
+             LSF cluster/grid queuing system.  
+Depends: snow, gdata
+SystemRequirements: Platform LSF development libraries
+Maintainer: Chris Smith <csmith@platform.com>
+License: LGPL (see <http://www.opensource.org/licenses/lgpl-license.php>).

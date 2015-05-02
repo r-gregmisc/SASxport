@@ -1,0 +1,1 @@
+- Rewrite pow, ssize, delta to remove looping and substitute vectorized calculations instead.

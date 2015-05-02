@@ -1,0 +1,75 @@
+<html><head><title>Export data to MS-Excel</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>exportTableToExcel(MSOfficeUtil)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   exportTableToExcel">
+<param name="keyword" value=" Export data to MS-Excel">
+</object>
+
+
+<h2>Export data to MS-Excel</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Export a data frame to MS-Excel.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>exportTableToExcel(df, file.name, sheet=1, range=NULL, overwrite=TRUE)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>df</code></td>
+<td>
+data.frame to be exported. </td></tr>
+<tr valign="top"><td><code>file.name</code></td>
+<td>
+String with full path and Excel file name. </td></tr>
+<tr valign="top"><td><code>sheet</code></td>
+<td>
+Single number or String to denote the Excel sheet.  If
+the sheet does not exist, a new sheet is created. </td></tr>
+<tr valign="top"><td><code>range</code></td>
+<td>
+Optionally, denote the Excel range to target (ADVANCED!) </td></tr>
+<tr valign="top"><td><code>overwrite</code></td>
+<td>
+Boolean to denote whether or not to overwrite the
+Excel file (should it exist).  If FALSE and the Excel file exists, the
+data will be exported below any existing data in the given Excel
+worksheet.</td></tr>
+</table>
+
+<h3>Author(s)</h3>
+
+<p>
+Steven Novick &lt;steven.j.novick@gsk.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  ## Export data.frame (df) to MyDatafile.xls.  Overwrite file if it exists.
+  exportTableToExcel(df, "C:/MyDatafile.xls")
+
+  ## Will export df below any existing data in MyDatafile.xls.
+  exportTableToExcel(df, "C:/MyDatafile.xls", overwrite=FALSE)
+
+  ## Will export df to the second worksheet in MyDatafile.xls.
+  exportTableToExcel(df, "C:/MyDatafile.xls", sheet=2)
+</pre>
+
+
+
+<hr><div align="center"><a href="00Index.html">[Package Contents]</a></div>
+
+</body></html>

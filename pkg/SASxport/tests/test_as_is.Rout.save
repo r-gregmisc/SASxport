@@ -1,0 +1,88 @@
+
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(SASxport)
+Loading required package: chron
+Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
+Loading required package: survival
+Loading required package: splines
+Loading required package: Formula
+
+Attaching package: 'Hmisc'
+
+The following objects are masked from 'package:base':
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+
+Loaded SASxport version 1.5.0 (2014-07-21).
+
+  Type `?SASxport' for usage information.
+
+> Sys.setenv("TZ"="GMT")
+> 
+> lookup.xport('puromycin.xpt')
+
+SAS xport file
+--------------
+Filename: `puromycin.xpt'
+
+Variables in data set `PUROMYCI':
+  dataset  name      type format flength fdigits iformat iflength ifdigits
+ PUROMYCI  CONC   numeric              0       0                0        0
+ PUROMYCI  RATE   numeric              0       0                0        0
+ PUROMYCI STATE character              0       0                0        0
+ label nobs
+         23
+         23
+         23
+
+> 
+> ## By default, character variable "STATE" should be converted into a
+> ## factor
+> x <- read.xport('puromycin.xpt')
+> str(x)
+'data.frame':	23 obs. of  3 variables:
+ $ CONC : num  0.02 0.02 0.06 0.06 0.11 0.11 0.22 0.22 0.56 0.56 ...
+ $ RATE : int  76 47 97 107 123 139 159 152 191 201 ...
+ $ STATE: Factor w/ 2 levels "treated","untreated": 1 1 1 1 1 1 1 1 1 1 ...
+ - attr(*, "label")= chr " "
+ - attr(*, "SAStype")= chr " "
+> 
+> stopifnot( class(x$STATE)=="factor" )
+> 
+> ## When as.is=TRUE, character variable "STATE" should be preserved as
+> ## a character variable.
+> 
+> x <- read.xport('puromycin.xpt',as.is=TRUE)
+> str(x)
+'data.frame':	23 obs. of  3 variables:
+ $ CONC : num  0.02 0.02 0.06 0.06 0.11 0.11 0.22 0.22 0.56 0.56 ...
+ $ RATE : int  76 47 97 107 123 139 159 152 191 201 ...
+ $ STATE: chr  "treated" "treated" "treated" "treated" ...
+ - attr(*, "label")= chr " "
+ - attr(*, "SAStype")= chr " "
+> 
+> stopifnot( class(x$STATE)=="character" )
+> 
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  0.451   0.033   0.474 

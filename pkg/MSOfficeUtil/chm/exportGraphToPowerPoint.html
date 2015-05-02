@@ -1,0 +1,70 @@
+<html><head><title>Export Graph(s) to MS-PowerPoint</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>exportGraphToPowerPoint(MSOfficeUtil)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   exportGraphToPowerPoint">
+<param name="keyword" value=" Export Graph(s) to MS-PowerPoint">
+</object>
+
+
+<h2>Export Graph(s) to MS-PowerPoint</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Export one or more lattice graph(s) to MS-PowerPoint.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>exportGraphToPowerPoint(object, file.name, overwrite=TRUE, ...)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+A list of lattice graphs. </td></tr>
+<tr valign="top"><td><code>file.name</code></td>
+<td>
+String with full path and PowerPoint file name. </td></tr>
+<tr valign="top"><td><code>overwrite</code></td>
+<td>
+If the file exists and overwrite is FALSE, will
+append graphs to the end of the PowerPoint document.  Otherwise, it
+will erase the file (or create it).</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Optional arguments</td></tr>
+</table>
+
+<h3>Author(s)</h3>
+
+<p>
+Steven Novick &lt;steven.j.novick@gsk.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  p1 = xyplot(rnorm(10)~1:10, main="Plot 1")
+  p2 = xyplot(rnorm(10)~(-10:(-1)), col="red", type="l",
+        main="Plot 2", xlab="Hi there")
+
+  exportGraphToPowerPoint(list(p1, p2), "C:/MyTest1.ppt")
+  
+  lset()  ## For a white background.
+  exportGraphToPowerPoint(list(p1, p2), "C:/MyTest2.ppt")
+</pre>
+
+
+
+<hr><div align="center"><a href="00Index.html">[Package Contents]</a></div>
+
+</body></html>

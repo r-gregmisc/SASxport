@@ -1,0 +1,22 @@
+VERSION 1.0.3 (2013-12-06)
+--------------------------
+
+- Remove obsolete .First.lib() function to comply with current CRAN
+  package requirments.
+
+
+VERSION 1.0.2 (2011-09-01)
+--------------------------
+
+- Update Greg's email address.
+
+- Minor changes to comply with new package standards
+
+
+VERSION 1.0.0 (2010-07-22)
+--------------------------
+
+Initial public release.
+
+No known bugs.
+

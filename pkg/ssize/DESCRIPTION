@@ -1,0 +1,10 @@
+Package: ssize
+Title: Estimate Microarry Sample Size
+Version: 1.1.1
+Author: Gregory R. Warnes, Peng Liu, and Fasheng Li
+Description: Functions for computing and displaying sample size
+             information for gene expression arrays.
+Maintainer: Gregory R. Warnes <warnes@bst.rochester.edu>
+Depends: gdata, xtable
+License: LGPL
+

@@ -1,0 +1,371 @@
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+  % or ...
+
+  \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+%\setbeameroption{show notes}
+
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+%\AtBeginSubsection[]
+%{
+%  \begin{frame}<beamer>
+%    \frametitle{Outline}
+%    \tableofcontents[currentsection,currentsubsection]
+%  \end{frame}
+%}
+
+\title{Effective Simulation and Analysis of Biological Systems}
+\subtitle{A Synergistic Combination of Deterministic Mathematical
+  Modeling and Bayesian Statistical Techniques }
+
+\author{Gregory R. Warnes\inst{1,2} \and Robert B. Burrows\inst{3}}
+
+\institute[Pfizer, Yale, and NE Biometrics]
+{
+  \inst{1}%
+  Statistical Applications \\
+  Pfizer, Inc.
+  \and
+  \inst{2}%
+  Department of Computer Science \\
+  Yale University
+  \and
+  \inst{3}%
+  New England Biometrics\\
+  North Scituate, RI
+}
+
+\date{2006-02-16}
+
+\begin{document}
+
+%% Title 
+\frame{\titlepage}
+
+\note{
+\begin{abstract}
+
+  Historically, there are two fundamentally different approaches to
+  modeling biological systems: deterministic models of mechanism, and
+  statistical models of association. Both techniques have played a
+  fundamental role in learning about biology.  Unfortunately, neither
+  technique is well equipped to handle the current deluge of
+  ``high-resolution'' or ``omic'' molecular biology assays.
+  
+  In this presentation, I will briefly discuss why existing
+  mathematical and statistical modeling techniques are individually
+  insufficient for modeling complex biological systems.  I will then
+  propose an approach that ``wraps'' deterministic models of mechanism
+  within a Bayesian statistic model, and discuss the benefits this
+  promises.  I will then describe our initial exploration of this
+  approach, in which we demonstrate that we can effectively model
+  several relatively simple metabolic pathway models which
+  nevertheless defy standard mathematical and statistical approaches.
+  
+  I will conclude with an overview of our future plans, along with
+  some musings on the promises and perils of this approach.
+
+\end{abstract}
+}
+
+\section[]{Outline}
+\frame{\tableofcontents}
+
+\section{Context: Medical Research}
+
+\subsection{Medical Research: Important Questions}
+
+\note{ We have important questions... }
+
+%\frame{
+%  \frametitle{Research Questions:}
+%  \begin{itemize}
+%    \item Cause: What is the underlying cause of disease?
+%    \item Symptoms:  What are the consequences of disease?
+%    \item System Understanding:  How does the biological system work?
+%    \item Diagnosis:  Does this individual have disease? (Biomarkers)
+%    \item Treatment Identification:  What can we do to prevent/treat
+%      disease/symptoms?
+%    \item Treatment Efficacy:  Is the treatment working? (Biomarkers)
+%    \item Predict Treatment Outcome:  What is the future state of an individual? 
+%    \item Predictive Tox:  What is the consequence of exposure to X?
+%    \item Elucidation of Mechanism:  P causes Q. Why?
+%  \end{itemize}
+%}
+
+\frame{
+  \frametitle{Research Questions}
+  \begin{columns}[c]
+    \column{2in}
+
+    \begin{itemize}
+    \item Cause
+    \item Symptoms
+    \item System Understanding
+    \item Diagnosis
+    \end{itemize}
+    
+    \column{2in}
+    \begin{itemize}
+    \item Potential Treatments
+    \item Treatment Efficacy
+    \item Predict Outcomes
+    \item Discover Mechanism
+    \end{itemize}
+
+  \end{columns}
+}
+
+\subsection{Too much data}
+
+\note{ Recent advances now give use huge volumes of data of
+  unprecedented resolution.}
+
+\frame{
+\frametitle{'high-resolution' biology yields too much data}
+\begin{tabular}{llll}
+\hline
+& $\approx$1996 & 2006 & $\approx$2010 \\
+\hline
+DNA & 1-20 Markers & 1E5 - 5E5 SNPs  &  3E9 bases \\
+RNA & 1-20 Probes  & 7E4 'probesets' &  $>$250K? \\
+    &              &                 & splice variants \\
+Proteins         & 1-5          &  5E3 - 1E4      & $>$1E6? \\
+Metabolites      & 1-20 molecules & 50-500 molecules & $>$1E5? \\
+\end{tabular}
+}
+
+\note{ So much so, that we can't keep track in our heads any more! }
+
+\subsection{Systems Biology}
+\frame{
+\frametitle{We need new abstractions : systems biology}
+\begin{description}
+\item[Core idea] Study the system, not the individual components.
+  \item[Potential benefits] 
+    \begin{enumerate}
+      \item Combine diverse data types (RNA, Protein, Metabolites)
+      \item Permits prediction
+      \item Permits search for underlying causes
+      \item Allows abstraction of low-level facts into higher level
+        'systems'.
+    \end{enumerate}
+  \end{description}
+}
+\section[Problem: Model Complex Systems]{What is the {problem}? Modeling complex biological systems}
+\subsection{Model requirements}
+\frame{
+\frametitle{Model requirements:}
+\begin{itemize}
+\item allow use of data of varying quality
+\item allow use of data at varying scales  
+\item allow fitting observed experimental data
+\item allow prediction
+\item easy to understand
+\item reliable
+\item handles and quantifies uncertainly
+\item robust to errors in structure (missing or incorrect relationships)
+\end{itemize} 
+}
+
+\subsection{Traditional Modeling Approaches: Math models \& Stat models}
+\frame{
+\begin{description}
+\item[Deterministic models of mechanism] ~
+  \begin{itemize}
+    \item[+] Captures known relationships
+    \item[+] Easy to construct
+    \item[+] Based on causation
+    \item[+] Direct mechanistic interpretation
+    \item[+] Long history
+    \item[-] Results are very dependent on the structure of the model 
+    \item[-] Not amenable to fitting data
+    \item[-] No support for uncertaintly of inputs
+    \item[-] No support for quantifying uncertaintly of outputs
+    \item[-] Easy to adapt to new relationship structures
+    \item[-] Sometimes impossible to process mathematically
+  \end{itemize}
+\end{description}
+}
+\frame{
+\begin{description}
+\item[(Frequentist) Statistical models of association] ~
+  \begin{itemize}
+    \item[-] Little support for capturing known relationships
+    \item[+] Little information need be provided
+    \item[+] Easy to construct
+    \item[-] Based on association
+    \item Shorter history
+    \item[+] Results tend to be robust to the structure of the model 
+    \item[+] Amenable to fitting data
+    \item[-] Little support for uncertainty of inputs (generally only dependent variable)
+    \item[+] Support for quantifying uncertainty of outputs
+    \item[+] May be difficult to adapt to new relationship structures
+    \item[-] Usually straightforward to process mathematically
+  \end{itemize}
+\end{description}
+}
+
+\section[Idea: Deterministic Models + Bayesian Stats]{What is the
+  {idea}? }
+\frame{
+  
+  \begin{block}{Idea:}
+    ``Wrap'' standard deterministic mathematical model
+    within a Bayesian statistical model 
+  \end{block}
+  
+  This approach promises several benefits:
+  \begin{itemize}
+  \item<2-> Bayesian ``wrapper'' deals with uncertainty, variability, and
+    noise ($\implies$ effective fitting of experimental data)
+  \item<3-> The deterministic mathematical model ``core'' permits
+    components of the system to be explicitly modeled.
+  \item<4-> The Bayesian ``wrapper'' allows quantification of
+    evidence for or against hypothesized relationships
+  \item<5-> Bayesian priors provide a straightforward method for
+    making use of external information
+  \end{itemize}
+
+}
+
+
+
+\section[Implementation]{How was this idea implemented?}
+\frame{
+  \alert{Switch Documents}
+}
+
+
+\section[Discussion]{How does it compare to other solutions?}
+\frame{
+  \frametitle{How does this method compare to other solutions?}
+Other methods
+\begin{itemize}
+\item ODEs
+\item Michelson-Morley equations alone
+\item Statistics alone
+  \begin{itemize}
+  \item Maximum likelihood
+  \item Method of moments
+  \end{itemize}
+\item Manual
+\item[*] Relationship Graph
+\end{itemize}
+}
+
+\section[Future Research]{What next?}
+\frame{
+  \frametitle{What next?}
+  \begin{itemize}
+  \item Apply to polyol pathway (glucose - sorbitol - fructose)
+  \item Improve MCMC fitting methods
+  \item Develop general-purpose software
+  \end{itemize}
+}
+
+\end{document}
+
+\appendix
+
+\note{
+%\section{introduction}
+
+Historically, there are two fundamentally different approaches to
+modeling biological systems: deterministic models of mechanism, and
+statistical models of association. Both techniques have played a
+fundamental role in learning about biology.
+  
+  Deterministic mathematical models (e.g systems of ordinary
+  differential equations - ODEs) excel at representing direct
+  causal/structural relationships and have dominated the study of
+  very low-level systems containing relatively small numbers of
+  relatively well-understood components.  These models have the
+  advantage of being directly interpretable and permit simulation of
+  the studied system to predict behavior, even in the absence of
+  experimental data.
+  
+  Statistical modeling, on the other hand, allows ``black-box''
+  analysis of complicated systems--based on association--when there are
+  many interacting components, where the individual components cannot
+  be measured, or where and the relationships among the components are
+  not understood.  Statistical approaches can be resilient in the face
+  of uncertainty, variability, and noise, provide the ability to
+  quantify uncertainty, and even allow inference in the presence of
+  considerable uncertainty about causal mechanism(s), provided that
+  appropriate experimental data is available.
+  
+  With the advent of ``high-resolution'' or ``-omics'' molecular
+  biology technologies such as RNA expression arrays, whole-genome SNP
+  genotyping, NMR metabanomics, Mass-Spec proteomics, etc., we can now
+  measure the behavior of very large numbers of low-level system
+  components, many of which are directly interacting. Unfortunately,
+  the analysis of these data sets, and the systems from which they are
+  generated, cannot be effectively accomplished using either
+  traditional modeling approach.
+  
+  For example, we know maddeningly little about almost all of the
+  components of our biological systems.  This prevents effective apply
+  standard deterministic modeling approaches to even moderately sized
+  systems.  Even when we have some concrete information about the
+  relationships, e.g. rate constants, there is no clear mechanism for
+  dealing with uncertainty about the values of these constants.  Nor
+  is there a coherent mechanism for fitting realistic data, which
+  necessarily contains noise and unobserved components, to standard
+  deterministic models.
+  
+  In turn, standard frequentist statistical methods are centered
+  around association and not causation, and hence are unable to
+  effectively incorporate known causal relationships, or to
+  effectively infer such relationships.  In addition frequentist
+  techniques are also unable to integrate external information about
+  model components.
+  
+  Further, despite workarounds, both techniques are are essentially
+  overwhelmed by the sheer number of components we can now measure.
+  
+  The sometimes maddening discrepancy between high level of detail on
+  the nature and interactions among some components and almost
+  complete ignorance of the nature and interactions of other
+  components, along with the sheer complexity of the systems we are
+  attempting to study demands that develop methods which combine the
+  traditional strengths of deterministic mathematical and associative
+  statistical models, while overcoming the the weaknesses of each.
+  
+  It this talk, I will present an initial effort to develop a modeling
+  approach that combines the strengths of both existing approaches by
+  ``wrapping'' the components of standard deterministic mathematical
+  models within a Bayesian statistical model. This approach promises
+  several benefits:
+  \begin{itemize}
+  \item The ``Bayesian wrapping'' allows the deterministic
+    mathematical model to be applied effectively in the presence of
+    uncertainty, variability, and noise. I.e., this allows effective
+    fitting of experimental data to the deterministic mathematical
+    model.
+  \item The deterministic mathematical model ``core'' permits
+    components of the system where the true interactions are known to
+    be appropriately modeled.
+  \item The Bayesian approach makes it possible to quantify the
+    evidence for or against hypothesized relationships -- and even to
+    falsify ``known'' relationships!
+  \item Bayesian priors on model parameters provide a straightforward
+    method for making use of external information, even when this
+    information is inconsistent between sources.
+  \end{itemize}
+
+}
+
+\end{document}

@@ -1,0 +1,292 @@
+2013-06-28  warnes
+
+	* [r1686] R/First.R, R/onAttach.R: Rename .First.lib to .onAttach
+
+2012-12-14  warnes
+
+	* [r1638] .Rinstignore, .Rinstingore: Fix typo in filename
+	* [r1637] .Rinstingore: Move file to correct directory
+	* [r1635] NAMESPACE: Add requisite NAMESPACE file.
+	* [r1634] DESCRIPTION: Bump version number.
+	* [r1633] inst/doc/gregmisc.pdf: Add gregmisc.pdf to subversion.
+	* [r1632] man/First.lib.Rd: Update author email address.
+
+2011-09-01  warnes
+
+	* [r1492] R/First.R: Minor rewording of startup message.
+
+2011-08-26  warnes
+
+	* [r1483] R/First.R: Use packageStartupMessage() instead of
+	  warning() to display a startup message on package load.
+	* [r1479] DESCRIPTION: Update Greg's email address
+
+2007-10-22  warnes
+
+	* [r1196] DESCRIPTION: Clarify GPL version
+
+2006-11-29  warnes
+
+	* [r1032] man, man/First.lib.Rd: Add dummy manual page to make 'R
+	  CMD check' happy
+	* [r1031] DESCRIPTION: Update for new release
+	* [r1030] DESCRIPTION, R, TODO, gregmisc: Remove extraneous
+	  subdirectory
+
+2006-08-02  warnes
+
+	* [r977] DESCRIPTION, gregmisc/DESCRIPTION.standalone,
+	  inst/doc/gregmisc.tex: Update my email address
+
+2006-04-20  nj7w
+
+	* [r956] gregmisc/DESCRIPTION.in: Changed the typ of Backword to
+	  Backward
+
+2005-05-11  warnes
+
+	* [r620] DESCRIPTION: Add dependency on gdata::frameApply.
+
+2005-04-04  warnes
+
+	* [r604] NEWS: Update for release 2.0.6.
+
+2005-04-02  warnes
+
+	* [r601] TODO: Update TODO file.
+
+2005-03-31  warnes
+
+	* [r589] DESCRIPTION, NEWS: Update for 2.0.5 release
+
+2005-03-22  warnes
+
+	* [r578] DESCRIPTION, NEWS: Fixes to pass `R CMD check'.
+	* [r575] gregmisc, gregmisc/DESCRIPTION.in,
+	  gregmisc/DESCRIPTION.standalone, gregmisc/R, gregmisc/R/First.R:
+	  Create backwords compatibility sub-package 'gregmisc' which loads
+	  the other packages and warns the user.
+
+2005-02-25  warnes
+
+	* [r560] DESCRIPTION, NEWS: Update for release 2.0.3
+	* [r558] .tnatr:fnmap, DESCRIPTION: Add drop.levels, frameApply to
+	  namespace export.
+
+2005-02-04  nj7w
+
+	* [r537] .tnatr:fnmap: Initial revision
+
+2005-01-28  warnes
+
+	* [r525] DESCRIPTION: Update version number and date.
+
+2004-09-27  warneg
+
+	* [r463] inst, inst/doc, inst/doc/Rnews.dtx, inst/doc/Rnews.sty,
+	  inst/doc/gregmisc.tex: Move gdata/inst/doc/* to inst/doc/*
+	* [r461] .Rhistory, DESCRIPTION: Updated to pass R CMD check.
+
+2004-09-03  warneg
+
+	* [r445] DESCRIPTION, NEWS, TODO: *** empty log message ***
+
+2004-09-02  warneg
+
+	* [r442] .Rhistory: Initial revision
+
+2004-07-16  warnes
+
+	* [r421] TODO: *** empty log message ***
+
+2004-06-09  warnes
+
+	* [r373] NEWS: Belated update for 1.11.2.
+
+2004-06-08  warnes
+
+	* [r368] DESCRIPTION: Add better acknowledgement of authors.
+
+2004-06-05  warnes
+
+	* [r366] NEWS: Update NEWS file for release 1.11.1.
+	* [r361] DESCRIPTION, NEWS: - Merge Makefile.win into Makefile.
+	  Makefile.win now just redirects
+	  to Makefile.
+	  - Update xls2csv.bat and xls2csv shell script to correctly obtain
+	  thier installion path and infer the location of the perl code and
+	  libraries.
+	  - The xls2csv.pl script now assumes that the libraries it needs
+	  are
+	  installed into the same directory where it is.
+
+2004-05-27  warnes
+
+	* [r356] NEWS: Clarify text describing xls2csv scripts.
+	* [r355] DESCRIPTION, NEWS: Updated for release.
+
+2004-05-26  warnes
+
+	* [r348] NEWS: Update for 1.11.0 release.
+
+2004-05-25  warnes
+
+	* [r331] DESCRIPTION: Bump version number to 1.11.0 to reflect the
+	  actual 'production'
+	  status of the package.
+
+2004-04-13  warnes
+
+	* [r316] DESCRIPTION: Update for 0.10.2
+	* [r315] NEWS: Updated for 0.10.2
+
+2004-03-30  warnes
+
+	* [r311] DESCRIPTION: - Fix bug in textplot() reported by Wright,
+	  Kevin <kevin.d.wright@pioneer.com>.
+
+2004-03-26  warnes
+
+	* [r310] NEWS: Updated for release 0.10.0.
+	* [r309] TODO: Change proposed names of new packages.
+	* [r308] DESCRIPTION: - Add Lodewijk Bonebakker to list of authors
+	  - Improve description text
+	  - Note dependency on R 1.9.0.
+
+2004-02-18  warnes
+
+	* [r291] TODO: Add need for split into sub-package.
+
+2004-02-02  warnes
+
+	* [r286] DESCRIPTION: Update version number for new release.
+
+2004-01-21  warnes
+
+	* [r284] TODO: Add TODO to contain 'to do' list.
+	* [r280] DESCRIPTION: Updated for 0.8.8 release.
+
+2003-12-03  warnes
+
+	* [r255] DESCRIPTION: - Updated for version 0.8.7
+
+2003-11-24  warnes
+
+	* [r241] DESCRIPTION: Updated for release.
+
+2003-11-10  warnes
+
+	* [r220] DESCRIPTION: - Add files contributed by Arni Magnusson
+	  <arnima@u.washington.edu>. As well as some of my own.
+
+2003-05-20  warnes
+
+	* [r194] DESCRIPTION: - Added function trim() and assocated docs.
+
+2003-04-22  warnes
+
+	* [r192] DESCRIPTION: - Update version number.
+
+2003-04-04  warnes
+
+	* [r184] DESCRIPTION: - Version 0.8.3
+
+2003-03-08  warnes
+
+	* [r170] DESCRIPTION: - Bumped up version number.
+
+2003-03-07  warnes
+
+	* [r168] DESCRIPTION: - Minor changes to code to allow the package
+	  to be provided as an
+	  S-Plus chapter.
+
+2003-01-30  warnes
+
+	* [r162] DESCRIPTION: - New release.
+
+2003-01-02  warnes
+
+	* [r151] DESCRIPTION: Updated version number and added Kjetil to
+	  list of contributors.
+
+2002-11-04  warnes
+
+	* [r144] DESCRIPTION: - Added dependency on R >= 1.6.0 due to code
+	  in barplot2()
+	  - Since MASS is now a dependency in DESCRIPTION, I removed the
+	  now
+	  redundant check for MASS in .First.lib().
+
+2002-10-30  warnes
+
+	* [r140] DESCRIPTION: Updated version number for 2002-10-29
+	  release.
+
+2002-10-11  warnes
+
+	* [r134] DESCRIPTION: - Updated version number in DESCRIPTION.
+
+2002-09-30  warnes
+
+	* [r129] DESCRIPTION: - Updated version number after adding
+	  rdirichlet() and ddirichlet()
+
+2002-09-24  warnes
+
+	* [r125] DESCRIPTION: Update version number after fixing bugs and
+	  adding regression tests.
+	* [r123] DESCRIPTION: Updated to version 0.6.1, corresponding to
+	  some bug fixes.
+
+2002-09-23  warnes
+
+	* [r116] DESCRIPTION: - Added CrossTable() and barplot2() code and
+	  docs contributed by Marc Schwartz.
+	  - Permit combinations() to be used when r>n provided
+	  repeat.allowed=TRUE
+	  - Bumped up version number
+
+2002-08-01  warnes
+
+	* [r114] DESCRIPTION: - Corrected documentation mismatch for ci,
+	  ci.default.
+	  
+	  - Replaced all occurences of '_' for assignment with '<-'.
+	  
+	  - Replaced all occurences of 'T' or 'F' for 'TRUE' and 'FALSE'
+	  with
+	  the spelled out version.
+	  
+	  - Updaded version number and date.
+
+2002-04-09  warneg
+
+	* [r109] DESCRIPTION: Checkin for version 0.5.3
+
+2002-03-26  warneg
+
+	* [r103] DESCRIPTION: Updated for version 0.5.1
+
+2001-12-17  warneg
+
+	* [r57] DESCRIPTION: Updated to include new functions and thier
+	  contributors.
+
+2001-09-18  warneg
+
+	* [r18] DESCRIPTION: Release 0.3.2
+
+2001-09-01  warneg
+
+	* [r16] DESCRIPTION: Release 0.3.0
+
+2001-06-05  warneg
+
+	* [r5] DESCRIPTION: Updated with addition of concat.R and
+	  concat.Rd.
+
+2001-05-30  warneg
+
+	* [r2] ., DESCRIPTION: Initial revision
+

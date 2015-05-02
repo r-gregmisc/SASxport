@@ -1,0 +1,971 @@
+
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(SASxport)
+Loading required package: chron
+Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
+Loading required package: survival
+Loading required package: splines
+Loading required package: Formula
+
+Attaching package: 'Hmisc'
+
+The following objects are masked from 'package:base':
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+
+Loaded SASxport version 1.5.0 (2014-07-21).
+
+  Type `?SASxport' for usage information.
+
+> Sys.setenv("TZ"="GMT")
+> 
+> # run the examples, comparing output
+> example(SASformat)
+
+SASfrm> ## Examples for vectors
+SASfrm> 
+SASfrm> fail.time <- c(10,20)
+
+SASfrm> # set attributes
+SASfrm> SASformat(fail.time) <- 'Numeric2'
+
+SASfrm> SASiformat(fail.time) <- 'Numeric2'
+
+SASfrm> # display individual attributes
+SASfrm> SASformat(fail.time)
+[1] "Numeric2"
+
+SASfrm> SASiformat(fail.time)
+[1] "Numeric2"
+
+SASfrm> # display all attributes
+SASfrm> attributes(fail.time)
+$SASformat
+[1] "Numeric2"
+
+$SASiformat
+[1] "Numeric2"
+
+
+SASfrm> ## SAStype only applies to data frames
+SASfrm> df <- data.frame( fail.time, day=c("Mon","Tue") )
+
+SASfrm> SAStype(df) <- "USER"
+
+SASfrm> SAStype(df)
+[1] "USER"
+
+SASfrm> ## Example showing specification of default return value
+SASfrm> a <- 70
+
+SASfrm> label(a, default="no label")
+[1] "no label"
+> example(lookup.xport)
+
+lkp.xp> ## Get information about a local file
+lkp.xp> alfFile <- system.file('extdata', 'Alfalfa.xpt', package='SASxport')
+
+lkp.xp> lookup.xport(alfFile)
+
+SAS xport file
+--------------
+Filename: `/Users/warnes/src/r-gregmisc/SASxport.Rcheck/SASxport/extdata/Alfalfa.xpt'
+
+Variables in data set `SPEC':
+ dataset   name      type format flength fdigits iformat iflength ifdigits
+    SPEC    POP character              0       0                0        0
+    SPEC SAMPLE   numeric              0       0                0        0
+    SPEC    REP   numeric              0       0                0        0
+    SPEC SEEDWT   numeric              0       0                0        0
+    SPEC  HARV1   numeric              0       0                0        0
+    SPEC  HARV2   numeric              0       0                0        0
+ label nobs
+         40
+         40
+         40
+         40
+         40
+         40
+
+
+lkp.xp> ## Read a copy of test2.xpt available on the web:
+lkp.xp> ## Not run: 
+lkp.xp> ##D url <- 'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/Hmisc/test2.xpt'
+lkp.xp> ##D w <- lookup.xport(url)
+lkp.xp> ## End(Not run)
+lkp.xp> ## Or use the local copy...
+lkp.xp> testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
+
+lkp.xp> w <- lookup.xport(testFile)
+
+lkp.xp> # display the information (calls 'print.lookup.xport')
+lkp.xp> w
+
+SAS xport file
+--------------
+Filename: `/Users/warnes/src/r-gregmisc/SASxport.Rcheck/SASxport/extdata/test2.xpt'
+
+Variables in data set `TEST':
+ dataset name    type   format flength fdigits iformat iflength ifdigits
+    TEST RACE numeric     RACE       0       0                0        0
+    TEST  AGE numeric                0       0                0        0
+    TEST   D1 numeric   MMDDYY      10       0                0        0
+    TEST  DT1 numeric DATETIME       0       0                0        0
+    TEST   T1 numeric     TIME       0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
+
+Variables in data set `FORMAT':
+ dataset     name      type format flength fdigits iformat iflength ifdigits
+  FORMAT  FMTNAME character              0       0                0        0
+  FORMAT    START character              0       0                0        0
+  FORMAT      END character              0       0                0        0
+  FORMAT    LABEL character              0       0                0        0
+  FORMAT      MIN   numeric              0       0                0        0
+  FORMAT      MAX   numeric              0       0                0        0
+  FORMAT  DEFAULT   numeric              0       0                0        0
+  FORMAT   LENGTH   numeric              0       0                0        0
+  FORMAT     FUZZ   numeric              0       0                0        0
+  FORMAT   PREFIX character              0       0                0        0
+  FORMAT     MULT   numeric              0       0                0        0
+  FORMAT     FILL character              0       0                0        0
+  FORMAT   NOEDIT   numeric              0       0                0        0
+  FORMAT     TYPE character              0       0                0        0
+  FORMAT    SEXCL character              0       0                0        0
+  FORMAT    EEXCL character              0       0                0        0
+  FORMAT      HLO character              0       0                0        0
+  FORMAT   DECSEP character              0       0                0        0
+  FORMAT  DIG3SEP character              0       0                0        0
+  FORMAT DATATYPE character              0       0                0        0
+  FORMAT LANGUAGE character              0       0                0        0
+                     label nobs
+               Format name    3
+ Starting value for format    3
+   Ending value for format    3
+        Format value label    3
+            Minimum length    3
+            Maximum length    3
+            Default length    3
+             Format length    3
+                Fuzz value    3
+         Prefix characters    3
+                Multiplier    3
+            Fill character    3
+ Is picture string noedit?    3
+            Type of format    3
+           Start exclusion    3
+             End exclusion    3
+    Additional information    3
+         Decimal separator    3
+     Three-digit separator    3
+       Date/time/datetime?    3
+ Language for date strings    3
+
+Variables in data set `Z':
+ dataset name    type format flength fdigits iformat iflength ifdigits label
+       Z   X3 numeric              0       0                0        0      
+       Z   X4 numeric              0       0                0        0      
+       Z   X5 numeric              0       0                0        0      
+       Z   X6 numeric              0       0                0        0      
+       Z   X7 numeric              0       0                0        0      
+       Z   X8 numeric              0       0                0        0      
+ nobs
+  100
+  100
+  100
+  100
+  100
+  100
+
+
+lkp.xp> # names of data sets
+lkp.xp> names(w)
+[1] "TEST"   "FORMAT" "Z"     
+
+lkp.xp> # names of variables within data sets
+lkp.xp> w$Z$name
+[1] "X3" "X4" "X5" "X6" "X7" "X8"
+
+lkp.xp> # use summary
+lkp.xp> wS <- summary(w)
+
+lkp.xp> wS # same display
+
+SAS xport file
+--------------
+Filename: `/Users/warnes/src/r-gregmisc/SASxport.Rcheck/SASxport/extdata/test2.xpt'
+
+Variables in data set `TEST':
+ dataset name    type   format flength fdigits iformat iflength ifdigits
+    TEST RACE numeric     RACE       0       0                0        0
+    TEST  AGE numeric                0       0                0        0
+    TEST   D1 numeric   MMDDYY      10       0                0        0
+    TEST  DT1 numeric DATETIME       0       0                0        0
+    TEST   T1 numeric     TIME       0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
+
+Variables in data set `FORMAT':
+ dataset     name      type format flength fdigits iformat iflength ifdigits
+  FORMAT  FMTNAME character              0       0                0        0
+  FORMAT    START character              0       0                0        0
+  FORMAT      END character              0       0                0        0
+  FORMAT    LABEL character              0       0                0        0
+  FORMAT      MIN   numeric              0       0                0        0
+  FORMAT      MAX   numeric              0       0                0        0
+  FORMAT  DEFAULT   numeric              0       0                0        0
+  FORMAT   LENGTH   numeric              0       0                0        0
+  FORMAT     FUZZ   numeric              0       0                0        0
+  FORMAT   PREFIX character              0       0                0        0
+  FORMAT     MULT   numeric              0       0                0        0
+  FORMAT     FILL character              0       0                0        0
+  FORMAT   NOEDIT   numeric              0       0                0        0
+  FORMAT     TYPE character              0       0                0        0
+  FORMAT    SEXCL character              0       0                0        0
+  FORMAT    EEXCL character              0       0                0        0
+  FORMAT      HLO character              0       0                0        0
+  FORMAT   DECSEP character              0       0                0        0
+  FORMAT  DIG3SEP character              0       0                0        0
+  FORMAT DATATYPE character              0       0                0        0
+  FORMAT LANGUAGE character              0       0                0        0
+                     label nobs
+               Format name    3
+ Starting value for format    3
+   Ending value for format    3
+        Format value label    3
+            Minimum length    3
+            Maximum length    3
+            Default length    3
+             Format length    3
+                Fuzz value    3
+         Prefix characters    3
+                Multiplier    3
+            Fill character    3
+ Is picture string noedit?    3
+            Type of format    3
+           Start exclusion    3
+             End exclusion    3
+    Additional information    3
+         Decimal separator    3
+     Three-digit separator    3
+       Date/time/datetime?    3
+ Language for date strings    3
+
+Variables in data set `Z':
+ dataset name    type format flength fdigits iformat iflength ifdigits label
+       Z   X3 numeric              0       0                0        0      
+       Z   X4 numeric              0       0                0        0      
+       Z   X5 numeric              0       0                0        0      
+       Z   X6 numeric              0       0                0        0      
+       Z   X7 numeric              0       0                0        0      
+       Z   X8 numeric              0       0                0        0      
+ nobs
+  100
+  100
+  100
+  100
+  100
+  100
+
+
+lkp.xp> # variable names within all data sets
+lkp.xp> wS$name 
+ [1] RACE     AGE      D1       DT1      T1       FMTNAME  START    END     
+ [9] LABEL    MIN      MAX      DEFAULT  LENGTH   FUZZ     PREFIX   MULT    
+[17] FILL     NOEDIT   TYPE     SEXCL    EEXCL    HLO      DECSEP   DIG3SEP 
+[25] DATATYPE LANGUAGE X3       X4       X5       X6       X7       X8      
+32 Levels: AGE D1 DT1 RACE T1 DATATYPE DECSEP DEFAULT DIG3SEP EEXCL ... X8
+> example(makeSASNames)
+
+mkSASN>   ## Simple example: no duplicates or more than 8 characters
+mkSASN>   makeSASNames( c("height","weight","age","gender"))
+[1] "HEIGHT" "WEIGHT" "AGE"    "GENDER"
+
+mkSASN>   ## Resolve duplicates
+mkSASN>   makeSASNames( c("a","a","b","b","b","c") )
+[1] "A"   "A.1" "B"   "B.1" "B.2" "C"  
+
+mkSASN>   ## Truncate long names
+mkSASN>   makeSASNames( c("alphabetic", "numeric", "alphanumeric", "whitespace"))
+[1] "ALPHABET" "NUMERIC"  "ALPHANUM" "WHITESPA"
+
+mkSASN>   ## Truncate and make unique
+mkSASN>   makeSASNames( rep( c("aaaaaaaaaaa","bbbbbbbbbb"), each=3) )
+[1] "AAAAAA"   "AAAAAA.1" "AAAAAA.2" "BBBBBB"   "BBBBBB.1" "BBBBBB.2"
+
+mkSASN>   ## Now do it quietly!
+mkSASN>   makeSASNames( rep( c("aaaaaaaaaaa","bbbbbbbbbb"), each=3), quiet=TRUE)
+[1] "AAAAAA"   "AAAAAA.1" "AAAAAA.2" "BBBBBB"   "BBBBBB.1" "BBBBBB.2"
+Warning messages:
+1: In makeSASNames(c("a", "a", "b", "b", "b", "c")) :
+  Made 3 duplicate names unique.
+2: In makeSASNames(c("alphabetic", "numeric", "alphanumeric", "whitespace")) :
+  Truncated 3 long names to 8 characters.
+3: In makeSASNames(rep(c("aaaaaaaaaaa", "bbbbbbbbbb"), each = 3)) :
+  Truncated 6 long names to 8 characters.
+4: In makeSASNames(rep(c("aaaaaaaaaaa", "bbbbbbbbbb"), each = 3)) :
+  Made 4 duplicate names unique.
+> example(read.xport)
+
+rd.xpr> ## -------
+rd.xpr> ## SAS code to generate test dataset:
+rd.xpr> ## -------
+rd.xpr> ## libname y SASV5XPT "test2.xpt";
+rd.xpr> ##
+rd.xpr> ## PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
+rd.xpr> ## PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
+rd.xpr> ## data test;
+rd.xpr> ## LENGTH race 3 age 4;
+rd.xpr> ## age=30; label age="Age at Beginning of Study";
+rd.xpr> ## race=2;
+rd.xpr> ## d1='3mar2002'd ;
+rd.xpr> ## dt1='3mar2002 9:31:02'dt;
+rd.xpr> ## t1='11:13:45't;
+rd.xpr> ## output;
+rd.xpr> ##
+rd.xpr> ## age=31;
+rd.xpr> ## race=4;
+rd.xpr> ## d1='3jun2002'd ;
+rd.xpr> ## dt1='3jun2002 9:42:07'dt;
+rd.xpr> ## t1='11:14:13't;
+rd.xpr> ## output;
+rd.xpr> ## format d1 mmddyy10. dt1 datetime. t1 time. race race.;
+rd.xpr> ## run;
+rd.xpr> ## data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
+rd.xpr> ##    DO i=1 TO 100;
+rd.xpr> ##        x3=ranuni(3);
+rd.xpr> ##        x4=ranuni(5);
+rd.xpr> ##        x5=ranuni(7);
+rd.xpr> ##        x6=ranuni(9);
+rd.xpr> ##        x7=ranuni(11);
+rd.xpr> ##        x8=ranuni(13);
+rd.xpr> ##        output;
+rd.xpr> ##        END;
+rd.xpr> ##    DROP i;
+rd.xpr> ##    RUN;
+rd.xpr> ## PROC MEANS; RUN;
+rd.xpr> ## PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
+rd.xpr> ## ------
+rd.xpr> 
+rd.xpr> ## Read this dataset from a local file:
+rd.xpr> testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
+
+rd.xpr> w <- read.xport(testFile)
+
+rd.xpr> class(w)
+[1] "list"
+
+rd.xpr> sapply(w, head)
+$TEST
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+$Z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
+
+
+rd.xpr> ## Not run: 
+rd.xpr> ##D ## Or read a copy of test2.xpt available on the web:
+rd.xpr> ##D url <- 'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/Hmisc/test2.xpt'
+rd.xpr> ##D w <- read.xport(url)
+rd.xpr> ## End(Not run)
+rd.xpr> 
+rd.xpr> ## We can also get the dataset wrapped in a list
+rd.xpr> w <- read.xport(testFile, as.list=TRUE)
+
+rd.xpr> class(w)
+[1] "list"
+
+rd.xpr> sapply(w, head)
+$TEST
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+$Z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
+
+
+rd.xpr> ## And we can ask for the format information to be included as well.
+rd.xpr> w <- read.xport(testFile, as.list=TRUE, include.formats=TRUE)
+
+rd.xpr> class(w)
+[1] "list"
+
+rd.xpr> sapply(w, head)
+$TEST
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+$Z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
+
+$FORMATS
+  FMTNAME            START              END  LABEL MIN MAX DEFAULT LENGTH  FUZZ
+1    RACE                1                1  green   1  40       6      6 1e-12
+2    RACE                2                2   blue   1  40       6      6 1e-12
+3    RACE                3                3 purple   1  40       6      6 1e-12
+  PREFIX MULT FILL NOEDIT TYPE SEXCL EEXCL HLO DECSEP DIG3SEP DATATYPE LANGUAGE
+1           0           0    N     N     N                                     
+2           0           0    N     N     N                                     
+3           0           0    N     N     N                                     
+
+
+rd.xpr> ## Don't show: 
+rd.xpr> stopifnot( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+
+rd.xpr> ## End Don't show
+rd.xpr> 
+rd.xpr> 
+rd.xpr> #### The Hmisc library provides many useful functions for interacting with
+rd.xpr> #### data imported from SAS via read.xport()
+rd.xpr> library(Hmisc)
+
+rd.xpr> describe(w$TEST)   # see labels, format names for dataset test
+w$TEST 
+
+ 5  Variables      2  Observations
+--------------------------------------------------------------------------------
+RACE 
+      n missing  unique   value 
+      1       1       1    blue 
+--------------------------------------------------------------------------------
+AGE : Age at Beginning of Study 
+      n missing  unique    Info    Mean 
+      2       0       2       1    30.5 
+
+30 (1, 50%), 31 (1, 50%) 
+--------------------------------------------------------------------------------
+D1 
+      n missing  unique 
+      2       0       2 
+
+2002-03-03 (1, 50%), 2002-06-03 (1, 50%) 
+--------------------------------------------------------------------------------
+DT1  Format:day mon year h:m:s 
+                     n                missing                 unique 
+                     2                      0                      2 
+                  Info                   Mean 
+                     1 (18 Apr 2002 09:36:35) 
+
+(03 Jun 2002 09:42:07) (1, 50%) 
+(03 Mar 2002 09:31:02) (1, 50%) 
+--------------------------------------------------------------------------------
+T1  Format:h:m:s 
+      n missing  unique    Info    Mean 
+      2       0       2       1    :01: 
+
+11:13:45 (1, 50%), 11:14:13 (1, 50%) 
+--------------------------------------------------------------------------------
+
+rd.xpr> lapply(w, describe)# see descriptive stats in more detail for each variable
+$TEST
+X[[1]] 
+
+ 5  Variables      2  Observations
+--------------------------------------------------------------------------------
+RACE 
+      n missing  unique   value 
+      1       1       1    blue 
+--------------------------------------------------------------------------------
+AGE : Age at Beginning of Study 
+      n missing  unique    Info    Mean 
+      2       0       2       1    30.5 
+
+30 (1, 50%), 31 (1, 50%) 
+--------------------------------------------------------------------------------
+D1 
+      n missing  unique 
+      2       0       2 
+
+2002-03-03 (1, 50%), 2002-06-03 (1, 50%) 
+--------------------------------------------------------------------------------
+DT1  Format:day mon year h:m:s 
+                     n                missing                 unique 
+                     2                      0                      2 
+                  Info                   Mean 
+                     1 (18 Apr 2002 09:36:35) 
+
+(03 Jun 2002 09:42:07) (1, 50%) 
+(03 Mar 2002 09:31:02) (1, 50%) 
+--------------------------------------------------------------------------------
+T1  Format:h:m:s 
+      n missing  unique    Info    Mean 
+      2       0       2       1    :01: 
+
+11:13:45 (1, 50%), 11:14:13 (1, 50%) 
+--------------------------------------------------------------------------------
+
+$Z
+X[[2]] 
+
+ 6  Variables      100  Observations
+--------------------------------------------------------------------------------
+X3 
+      n missing  unique    Info    Mean     .05     .10     .25     .50     .75 
+    100       0     100       1  0.5131 0.05585 0.13304 0.26428 0.51257 0.80719 
+    .90     .95 
+0.93059 0.96426 
+
+lowest : 0.00576 0.01524 0.02380 0.02627 0.05351
+highest: 0.96948 0.97473 0.98010 0.98096 0.99390 
+--------------------------------------------------------------------------------
+X4 
+      n missing  unique    Info    Mean     .05     .10     .25     .50     .75 
+    100       0     100       1  0.5119 0.06694 0.09393 0.22310 0.49638 0.82109 
+    .90     .95 
+0.92206 0.94963 
+
+lowest : 0.02636 0.02890 0.02926 0.03010 0.05395
+highest: 0.95790 0.96828 0.97047 0.97466 0.98267 
+--------------------------------------------------------------------------------
+X5 
+      n missing  unique    Info    Mean     .05     .10     .25     .50     .75 
+    100       0     100       1  0.4888 0.04286 0.06765 0.19898 0.46766 0.77899 
+    .90     .95 
+0.89237 0.91886 
+
+lowest : 0.004134 0.007872 0.008811 0.038577 0.039260
+highest: 0.933789 0.975597 0.984074 0.996114 0.997253 
+--------------------------------------------------------------------------------
+X6 
+      n missing  unique    Info    Mean     .05     .10     .25     .50     .75 
+    100       0     100       1  0.4987 0.09022 0.18649 0.26865 0.46423 0.72667 
+    .90     .95 
+0.85553 0.93149 
+
+lowest : 0.01010 0.01943 0.03064 0.05931 0.08775
+highest: 0.93330 0.96090 0.97310 0.97840 0.99511 
+--------------------------------------------------------------------------------
+X7 
+      n missing  unique    Info    Mean     .05     .10     .25     .50     .75 
+    100       0     100       1  0.5533  0.0850  0.1474  0.3313  0.5666  0.8120 
+    .90     .95 
+ 0.9176  0.9517 
+
+lowest : 0.04201 0.04716 0.04986 0.05864 0.07641
+highest: 0.96377 0.97244 0.97413 0.99318 0.99791 
+--------------------------------------------------------------------------------
+X8 
+      n missing  unique    Info    Mean     .05     .10     .25     .50     .75 
+    100       0     100       1  0.4809 0.04251 0.06831 0.27122 0.49223 0.71333 
+    .90     .95 
+0.87322 0.91886 
+
+lowest : 0.007269 0.010586 0.013044 0.018595 0.039906
+highest: 0.930491 0.935669 0.936941 0.958679 0.959636 
+--------------------------------------------------------------------------------
+
+$FORMATS
+X[[3]] 
+
+ 21  Variables      3  Observations
+--------------------------------------------------------------------------------
+FMTNAME 
+      n missing  unique   value 
+      3       0       1    RACE 
+--------------------------------------------------------------------------------
+START 
+      n missing  unique 
+      3       0       3 
+
+               1 (1, 33%),                2 (1, 33%) 
+               3 (1, 33%) 
+--------------------------------------------------------------------------------
+END 
+      n missing  unique 
+      3       0       3 
+
+               1 (1, 33%),                2 (1, 33%) 
+               3 (1, 33%) 
+--------------------------------------------------------------------------------
+LABEL 
+      n missing  unique 
+      3       0       3 
+
+blue (1, 33%), green (1, 33%), purple (1, 33%) 
+--------------------------------------------------------------------------------
+MIN 
+      n missing  unique    Info    Mean 
+      3       0       1       0       1 
+--------------------------------------------------------------------------------
+MAX 
+      n missing  unique    Info    Mean 
+      3       0       1       0      40 
+--------------------------------------------------------------------------------
+DEFAULT 
+      n missing  unique    Info    Mean 
+      3       0       1       0       6 
+--------------------------------------------------------------------------------
+LENGTH 
+      n missing  unique    Info    Mean 
+      3       0       1       0       6 
+--------------------------------------------------------------------------------
+FUZZ 
+      n missing  unique    Info    Mean 
+      3       0       1       0   1e-12 
+--------------------------------------------------------------------------------
+MULT 
+      n missing  unique    Info    Mean 
+      3       0       1       0       0 
+--------------------------------------------------------------------------------
+NOEDIT 
+      n missing  unique    Info    Mean 
+      3       0       1       0       0 
+--------------------------------------------------------------------------------
+TYPE 
+      n missing  unique   value 
+      3       0       1       N 
+--------------------------------------------------------------------------------
+SEXCL 
+      n missing  unique   value 
+      3       0       1       N 
+--------------------------------------------------------------------------------
+EEXCL 
+      n missing  unique   value 
+      3       0       1       N 
+--------------------------------------------------------------------------------
+
+Variables with all observations missing:
+
+[1] PREFIX   FILL     HLO      DECSEP   DIG3SEP  DATATYPE LANGUAGE
+
+
+rd.xpr> contents(w$TEST)   # another way to see variable attributes
+
+Data frame:w$TEST	2 observations and 5 variables    Maximum # NAs:1
+
+                        Labels Levels   Class Storage NAs
+RACE                                3         integer   1
+AGE  Age at Beginning of Study        integer integer   0
+D1                                       Date  double   0
+DT1                                     chron  double   0
+T1                                      times  double   0
+
++--------+-----------------+
+|Variable|Levels           |
++--------+-----------------+
+|  RACE  |green,blue,purple|
++--------+-----------------+
+
+rd.xpr> lapply(w, contents)# show contents of individual items in more detail
+$TEST
+
+Data frame:X[[1L]]	2 observations and 5 variables    Maximum # NAs:1
+
+                        Labels Levels   Class Storage NAs
+RACE                                3         integer   1
+AGE  Age at Beginning of Study        integer integer   0
+D1                                       Date  double   0
+DT1                                     chron  double   0
+T1                                      times  double   0
+
++--------+-----------------+
+|Variable|Levels           |
++--------+-----------------+
+|  RACE  |green,blue,purple|
++--------+-----------------+
+
+$Z
+
+Data frame:X[[2L]]	100 observations and 6 variables    Maximum # NAs:0
+
+   Storage
+X3  double
+X4  double
+X5  double
+X6  double
+X7  double
+X8  double
+
+$FORMATS
+
+Data frame:X[[3L]]	3 observations and 21 variables    Maximum # NAs:0
+
+           Storage
+FMTNAME  character
+START    character
+END      character
+LABEL    character
+MIN         double
+MAX         double
+DEFAULT     double
+LENGTH      double
+FUZZ        double
+PREFIX   character
+MULT        double
+FILL     character
+NOEDIT      double
+TYPE     character
+SEXCL    character
+EEXCL    character
+HLO      character
+DECSEP   character
+DIG3SEP  character
+DATATYPE character
+LANGUAGE character
+
+
+rd.xpr> options(digits=7)  # compare the following matrix with PROC MEANS output
+
+rd.xpr> t(sapply(w$Z, function(x)
+rd.xpr+  c(Mean=mean(x),SD=sqrt(var(x)),Min=min(x),Max=max(x))))
+        Mean        SD         Min       Max
+X3 0.5131445 0.2944341 0.005760193 0.9938965
+X4 0.5119257 0.3100749 0.026361614 0.9826741
+X5 0.4887739 0.3141976 0.004133753 0.9972528
+X6 0.4986746 0.2710817 0.010095772 0.9951080
+X7 0.5533156 0.2843679 0.042010437 0.9979081
+X8 0.4809487 0.2892945 0.007268806 0.9596358
+> example(toSAS)
+
+toSAS> ####
+toSAS> ## See how an R date/time object will be stored in a SAS xport file:
+toSAS> ####
+toSAS> 
+toSAS> # Date and time
+toSAS> dateTimeObj <- ISOdate(2007,08,01,10,14,37)
+
+toSAS> class(dateTimeObj)
+[1] "POSIXct" "POSIXt" 
+
+toSAS> dateTimeObj
+[1] "2007-08-01 10:14:37 GMT"
+
+toSAS> sasDateTimeObj <- toSAS(dateTimeObj)
+
+toSAS> sasDateTimeObj
+[1] 1501582477
+attr(,"tzone")
+[1] "GMT"
+attr(,"SASformat")
+[1] "DATETIME16."
+
+toSAS> # Now just the date portion
+toSAS> dateObj <- as.Date(dateTimeObj)
+
+toSAS> dateObj
+[1] "2007-08-01"
+
+toSAS> sasDateObj <- toSAS(dateObj)
+
+toSAS> sasDateObj
+[1] 17379
+attr(,"SASformat")
+[1] "DATE9."
+
+toSAS> ####
+toSAS> ## Create a new R object class based on factor to hold color names
+toSAS> ####
+toSAS> colorFactor <- function(x) # constructor
+toSAS+   {
+toSAS+     retval <- factor(x, levels=c("Red","Green","Blue") )
+toSAS+     class(retval) <- c("colorFactor","factor")
+toSAS+     retval
+toSAS+   }
+
+toSAS> ## create one and look at it
+toSAS> cf <- colorFactor( c("Red","Red","Blue",NA) )
+
+toSAS> cf
+[1] Red  Red  Blue <NA>
+Levels: Red Green Blue
+
+toSAS> ## See how it will be represented in a SAS xport file
+toSAS> toSAS(cf)
+[1] "Red"  "Red"  "Blue" NA    
+
+toSAS> ## Create a new conversion function to store as a RGB hex value
+toSAS> toSAS.colorFactor <- function(x, format="")
+toSAS+ {
+toSAS+    retval <- ifelse(x=="Red", "#FF0000",
+toSAS+                     ifelse(x=="Green", "#00FF00", "#0000FF") )
+toSAS+    attr(retval, "SASformat") <- format
+toSAS+    retval
+toSAS+ }
+
+toSAS> ## see it in action
+toSAS> toSAS(cf)
+[1] "#FF0000" "#FF0000" "#0000FF" NA       
+attr(,"SASformat")
+[1] ""
+> example(write.xport)
+
+wrt.xp> #####
+wrt.xp> ## R version of the example given in TS-140
+wrt.xp> #####
+wrt.xp> 
+wrt.xp> ## manually create a data set
+wrt.xp> abc <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )
+
+wrt.xp> ## look at it
+wrt.xp> abc
+   x    y
+1  1    a
+2  2    B
+3 NA <NA>
+4 NA    *
+
+wrt.xp> ## add a format specifier (not used by R)
+wrt.xp> SASformat(abc$x) <- 'date7.'
+
+wrt.xp> ## add a variable label (not used by R)
+wrt.xp> label(abc$y) <- 'character variable'
+
+wrt.xp> ## add a dataset label and type
+wrt.xp> label(abc) <- 'Simple example'
+
+wrt.xp> SAStype(abc) <- 'MYTYPE'
+
+wrt.xp> ## verify the additions
+wrt.xp> str(abc)
+'data.frame':	4 obs. of  2 variables:
+ $ x: atomic  1 2 NA NA
+  ..- attr(*, "SASformat")= chr "date7."
+ $ y: Factor w/ 3 levels "*","B","a": 3 2 NA 1
+  ..- attr(*, "label")= chr "character variable"
+ - attr(*, "label")= chr "Simple example"
+ - attr(*, "SAStype")= chr "MYTYPE"
+
+wrt.xp> # create a SAS XPORT file 
+wrt.xp> write.xport( abc, file="xxx.dat" )
+
+wrt.xp> # list the contents of the file
+wrt.xp> lookup.xport("xxx.dat")
+
+SAS xport file
+--------------
+Filename: `xxx.dat'
+
+Variables in data set `ABC':
+ dataset name    type format flength fdigits iformat iflength ifdigits
+     ABC    X numeric   DATE       7       0                0        0
+     ABC    Y numeric  RFMTA       0       0                0        0
+              label nobs
+                       4
+ character variable    4
+
+Variables in data set `FORMATS':
+ dataset     name      type format flength fdigits iformat iflength ifdigits
+ FORMATS  FMTNAME character              0       0                0        0
+ FORMATS    START character              0       0                0        0
+ FORMATS      END character              0       0                0        0
+ FORMATS    LABEL character              0       0                0        0
+ FORMATS      MIN   numeric              0       0                0        0
+ FORMATS      MAX   numeric              0       0                0        0
+ FORMATS  DEFAULT   numeric              0       0                0        0
+ FORMATS   LENGTH   numeric              0       0                0        0
+ FORMATS     FUZZ   numeric              0       0                0        0
+ FORMATS   PREFIX character              0       0                0        0
+ FORMATS     MULT   numeric              0       0                0        0
+ FORMATS     FILL character              0       0                0        0
+ FORMATS   NOEDIT   numeric              0       0                0        0
+ FORMATS     TYPE character              0       0                0        0
+ FORMATS    SEXCL character              0       0                0        0
+ FORMATS    EEXCL character              0       0                0        0
+ FORMATS      HLO character              0       0                0        0
+ FORMATS   DECSEP character              0       0                0        0
+ FORMATS  DIG3SEP character              0       0                0        0
+ FORMATS DATATYPE character              0       0                0        0
+ FORMATS LANGUAGE character              0       0                0        0
+ label nobs
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+
+
+wrt.xp> ## reload the data
+wrt.xp> xxx.abc <- read.xport("xxx.dat")
+
+wrt.xp> ## and look at it
+wrt.xp> xxx.abc
+           X    Y
+1 1960-01-02    a
+2 1960-01-03    B
+3       <NA> <NA>
+4       <NA>    *
+
+wrt.xp> ## Check the label and type
+wrt.xp> label(xxx.abc)
+                   X                    Y 
+                  "" "character variable" 
+
+wrt.xp> SAStype(xxx.abc)
+[1] "MYTYPE"
+
+wrt.xp> ## Note that the variable names and SAS dataset type have been converted
+wrt.xp> ## to uppercase
+wrt.xp> 
+wrt.xp> 
+wrt.xp> 
+wrt.xp> 
+> 
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  0.753   0.047   0.791 

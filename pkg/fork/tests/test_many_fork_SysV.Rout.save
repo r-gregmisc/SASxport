@@ -1,0 +1,39 @@
+
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## This script starts child processes, and sets the SIGCHLD hander to
+> ## "ignore".  On Sys5 derived systems, this should cause child
+> ## processes to exit and die cleanly without the parent process
+> ## querying the exit state.  IE, no zombie processes will be created.
+> 
+> library(fork)
+> 
+> ## ignore sigchld signals so child processes will die cleanly
+> signal("SIGCHLD","ignore")
+> 
+> source("checkZombies.R")
+> 
+> nZombies <- checkZombies()
+Generating 100 child processes (to become zombies)...
+Give them 10 seconds to die and exit..
+Check the process table to see if there are any zombies...
+Done. No Zombies present.
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  0.240   0.099  10.497 

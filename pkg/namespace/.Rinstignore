@@ -1,0 +1,5 @@
+doc/.*\.tex$
+doc/.*\.sty$
+doc/.*\.dtx$
+\.svn
+.*~$

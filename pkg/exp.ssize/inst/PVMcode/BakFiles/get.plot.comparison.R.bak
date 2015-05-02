@@ -1,0 +1,70 @@
+"get.plot.comparison" <-
+function(nrep.simu, propn.real, propn.est ,evec,
+                       xlab="Sample Size (per group)",
+                       ylab="Proportion of Genes with Power >= 80%", 
+                       marks=c(2,3,4,5,6,8,20),
+                       ...)
+  {
+   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   # input format
+   #
+   # propn.real: power.real$true.propn.80
+   # propn.est: a list of power.est$propn.80
+   #    power.est$propn.80 is a list of 
+   #         propn.80 for each size of n.est
+   #         
+   #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    x <- nrep.simu
+    y <- propn.real
+    n<-length(x)
+    n.est <- length(propn.est)
+    
+    # plot the power result against sample size
+    plot(nrep.simu, propn.real, type="l",
+         xlab=xlab, ylab=ylab, yaxt="n",
+          ..., )
+    # title(paste(names(evec),evec, sep = " = "), font = 1)
+
+
+    lines(nrep.simu, propn.est[[1]], lty = 5, col = "blue")
+    lines(nrep.simu, propn.est[[2]], lty = 5, col = "yellow")
+    lines(nrep.simu, propn.est[[3]], lty = 5, col = "green")
+
+    vals <- pretty(propn.real * 10000)
+    labels <- paste( format(vals/100,digits=2), "%")
+    axis(side=2, at=vals/10000, labels=labels, srt=90, adj=0.5)
+
+    # add line for 80% power
+    xmax <- par("usr")[2]
+    ymax <- par("usr")[4]
+    xmin <- par("usr")[1]
+    ymin <- par("usr")[3]
+    
+    lines( x=rbind( c(xmin, 0.8), c(xmax, 0.8) ),
+                   lty=4, col='black' )
+    text( x=xmax - 10, y=0.8,
+                 label=paste("power =",format(80), "%", sep = " "),
+                 col="black", adj=c(0,0), xpd=TRUE) 
+    if(!is.null(marks))
+      {
+      
+        for(mark in marks)
+          {
+            if(mark < min(x) || mark > max(x))
+             { next} else {  y <- propn.real[ as.character(mark) ]}
+
+            lines( x=rbind( c(mark, ymin),
+                            c(mark, y) ),
+                   lty=2, col='red' )
+            text( x=mark, y=ymin, label=format(mark,2), col="red", adj=c(0,0))
+            lines( x=rbind( c(xmin, y),
+                            c(mark, y) ),
+                   lty=2, col='red' )
+            text( x=xmin, y=y,
+           #      label=paste(format(y*100,digits=2),"%=", y*length(x), sep=''),
+                 label=paste(format(y*100,digits=2), "%"),
+                 col="red", adj=c(0,0), xpd=TRUE)
+          } # end of for
+      }  # end of if
+  }
+

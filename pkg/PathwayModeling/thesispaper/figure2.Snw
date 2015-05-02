@@ -1,0 +1,38 @@
+<<fig2,echo=F,eval=F>>=2
+#source("R/pulse.R")
+#rawdata <- read.table("data/rawdata.dat",header=T)
+#attach(rawdata)
+#pdf(file="figures/tempDir/pulse.pdf",width=9,height=5)
+#pulse()
+#postscript(file="figures/tempDir/pulse.eps",width=9,height=5)
+#pulse()
+#N <- dev.off()
+#N <- dev.off()
+#detach(rawdata)
+
+source("R/pulse_nocolor.R")
+rawdata.trimmed <- read.table("data/rawdata.trimmed.dat",header=T)
+attach(rawdata.trimmed)
+pdf(file="figures/tempDir/pulse_nocolor.pdf",width=9,height=5)
+pulse_nocolor()
+postscript(file="figures/tempDir/pulse_nocolor.eps",width=9,height=5)
+pulse_nocolor()
+N <- dev.off()
+N <- dev.off()
+detach(rawdata.trimmed)
+@
+
+\begin{figure*}
+
+      \centering
+%      \includegraphics[scale=0.5]{figures/tempDir/pulse}
+      \includegraphics[scale=0.5]{figures/tempDir/pulse_nocolor}
+      \caption[Reactant concentrations following a pulse of R1]{
+	Reactant concentrations following a pulse of R1 at
+        $time=20$ for the sequence of reactions $R1\rightarrow
+        R2\rightarrow R3\rightarrow R4\rightarrow R5\rightarrow sink$.
+      }
+      \label{pulse}
+
+\end{figure*}
+

@@ -1,0 +1,88 @@
+\documentclass[a4paper]{article}
+\usepackage[top=25mm,right=25mm,bottom=25mm,left=25mm]{geometry}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage[nogin]{Sweave}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{yfonts}
+\usepackage{amsfonts}
+\usepackage{subfig}
+\usepackage{tabls}
+\usepackage{url}
+\usepackage{pslatex}
+\usepackage{makeidx}
+\usepackage{dchem}
+%\usepackage{color}
+\usepackage{setspace}
+\usepackage{endfloat}
+\bibliographystyle{vancouver}
+
+\newcommand{\deriv}[2]{\ensuremath{\frac{\mathrm{d} #1}{\mathrm{d} #2}}}
+
+\begin{document}
+
+\begin{doublespace}
+
+\title{Statistical Modeling of Biochemical Pathways}
+\author{
+	Robert B. Burrows$\dagger$, 
+	Gregory Warnes$^{\ast}\ddagger$, 
+	and R. Choudary Hanumara$\S$}
+
+\maketitle
+
+%% \begin{verbatim}
+%% $Id$
+%% \end{verbatim}
+ 
+\begin{center}
+  $\dagger$New England Biometrics, North Scituate, RI, rbb@nebiometrics.com\\
+  $\ddagger$Pfizer, Inc., Groton, CT\\
+  $\S$University of Rhode Island, Kingston, RI, rch@cs.uri.edu
+  
+  \bigskip
+
+  \footnotetext[1]{
+        Corresponding author. Current address: 
+	Dept. of Biostatistics and Computational Biology, 
+	University of Rochester Medical Center, 
+	Rochester, NY 14642, 
+	email: gregory.warnes@rochester.edu \emph{and}
+ 	Random Technologies, LLC., 
+	20 Wandering Trail, 
+	Pittsford, NY, 14534
+	email: greg@random-technologies-llc.com
+      }	
+\end{center}
+  
+We examine the usefulness of Bayesian statistical methods for
+the modeling of biochemical reactions. With simulated data, it is
+shown that these methods can effectively fit mechanistic models of
+sequences of enzymatic reactions to experimental data. These methods
+have the advantages of being relatively easy to use and producing
+probability distributions for the model parameters rather than point
+estimates, allowing more informative inferences to be drawn.
+
+Three Markov chain Monte Carlo algorithms are used to fit models to
+data from a sequence of 4 enzymatic reactions. The algorithms are
+evaluated with respect to the goodness-of-fit of the fitted models and
+the time to completion.  It is shown that the algorithms produce
+essentially the same parameter distributions but the time to
+completion varies.
+
+\SweaveInput{introduction}
+
+\SweaveInput{methods}
+
+\SweaveInput{results}
+
+\SweaveInput{discussion}
+
+\SweaveInput{acknowledgment}
+
+%\bibliography{./refs}
+\SweaveInput{bibliography}
+
+\end{doublespace}
+\end{document}

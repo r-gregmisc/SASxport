@@ -1,0 +1,14 @@
+export(
+	exit,
+	fork,
+	getpid,
+	handleSIGCLD,
+	kill,
+	killall,
+	restoreSIGCLD,
+	signal,
+	signame,
+	sigval,
+	siglist,
+	wait
+)

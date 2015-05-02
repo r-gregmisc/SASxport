@@ -1,0 +1,85 @@
+Wiki-Safetybelt: 1141836262.9
+Type: stx
+Log: 
+
+This section lists features and services that should be provided by an commercial R vendor to improve the *current* use of R.
+
+  Essential
+
+    1. Pre-compiled binaries with installers
+
+       Platforms:
+
+       - Linux (32 and 64 bit)
+
+       - Solaris (32 and 64 bit)
+
+       - Windows (2000 + XP, 32 bit)
+
+       Package contents:
+
+       - Base R
+
+       - Recommended pacakges
+
+       - Key additional packages 
+
+    1. Telephone and email support
+
+       - Installation
+
+       - User issues
+
+    1. library() command should display:
+
+       - Package name
+
+       - Package type (Supported, Unsupported)
+
+       - Packate path
+
+       - Package version
+
+    1. Support for bugs found in released versions for a specific time window (3 years?)
+
+       We use R as a component of software systems that are not easy to change from a process point of view.  We 
+       need to be able to get fixes to bugs for the version of R that we used to construct the system for several 
+       years, even if newer versions of R become available.  
+
+
+  Desirable
+
+
+    1. Central source for R documentation.  Wiki?
+
+    1. Generation of a log file, even for interactive use
+
+    1. Categorization of R packages into quality/support groups with clear requirements for each group:
+
+        - development,
+
+        - testing,
+
+        - production, 
+
+        - supported/peer-reviewed/validated
+
+       See "R Package Site Proposal":RForge
+
+     1. 
+
+
+  Wishlist
+
+
+    1. Better handling of large objects
+
+    1. Improved output of multiple graphics formats
+
+    1. Improved SVG support (actions)
+
+    1. *Commercial support for RSOAP*
+
+    1. *Commercial support for RStatServer/WebStat*
+
+    1. 

@@ -1,0 +1,85 @@
+<html><head><title>Read data from MS-Excel</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>getExcelWorksheet(MSOfficeUtil)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   getExcelWorksheet">
+<param name="keyword" value=" Read data from MS-Excel">
+</object>
+
+
+<h2>Read data from MS-Excel</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Import one worksheets from a MS-Excel file
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>getExcelWorksheet(file.name, sheet=1, rows=NULL, cols=NULL)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>file.name</code></td>
+<td>
+String with full path and Excel file name. </td></tr>
+<tr valign="top"><td><code>sheet</code></td>
+<td>
+Vector of either numeric or character values that
+refer to the sheet number of sheet name in the Excel file. </td></tr>
+<tr valign="top"><td><code>rows</code></td>
+<td>
+Optionally denote the rows to import from each worksheet. </td></tr>
+<tr valign="top"><td><code>cols</code></td>
+<td>
+Optionally denote the columns to import from each worksheet. </td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+Returns a list of data.frames.  Names of the returned list are the
+Excel sheet names.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Steven Novick &lt;steven.j.novick@gsk.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+  # Use example MS-Excel File included with the package
+  file.name &lt;- file.path(.path.package("MSOfficeUtil"), "Examples",
+                         "Grades.xls")
+  # ~= C:\Program Files\R\rwNNNN\library\MSOfficeUtil\Examples\Grades.xls
+
+  ## Import the data from the second worksheet in C:/Myfile.xls
+  getExcelWorksheet(file.name, sheet=2)
+
+  ## Import the data from the first and fourth worksheets.    
+  getExcelWorksheet(file.name, sheet=c(1, 4))
+
+  ## Import the data from the sheets named "Sheet1" and "Sheet3"
+  getExcelWorksheet(file.name, sheet=c("Sheet1", "Sheet3"))
+
+  ## Import the data in rows 1-3 and columns 1-2 from the second worksheet.
+  getExcelWorksheet(file.name, sheet=2, rows=1:3, cols=1:2) 
+
+</pre>
+
+
+
+<hr><div align="center"><a href="00Index.html">[Package Contents]</a></div>
+
+</body></html>

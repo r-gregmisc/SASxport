@@ -1,0 +1,71 @@
+#!/bin/sh
+
+if [ -z "$LSF_ENVDIR" ]; then
+    LSF_ENVDIR=/etc
+fi
+
+if [ -f ${LSF_ENVDIR}/profile.lsf ]; then
+    . ${LSF_ENVDIR}/profile.lsf
+fi
+
+if [ -f ${LSF_ENVDIR}/lsf.conf ]; then
+    . ${LSF_ENVDIR}/lsf.conf
+else
+    echo "Cannot find the lsf.conf file in $LSF_ENVDIR"
+    echo "Please set the LSF_ENVDIR variable to the LSF 'conf' directory"
+    exit 1
+fi
+
+LSF_INCLUDE=""
+echo "Try to find lsf/lsf.h ..."
+if [ -f ${LSF_INCLUDEDIR}/lsf/lsf.h ]; then
+    echo "Found in ${LSF_INCLUDEDIR}"
+    LSF_INCLUDE="-I${LSF_INCLUDEDIR}"
+else 
+    echo "Cannot find lsf.h header file"
+    echo "Please check if LSF_ENVDIR is set properly."
+    exit 1
+fi
+
+echo "Try to find lsf/lsbatch.h ..."
+if [ -f ${LSF_INCLUDEDIR}/lsf/lsbatch.h ]; then
+    echo "Found in ${LSF_INCLUDEDIR}"
+else 
+    echo "Cannot find lsbatch.h header file"
+    echo "Please check if LSF_ENVDIR is set properly."
+    exit 1
+fi
+
+LSF_LIBS=""
+echo "Try to find libbat ..."
+if [ -f ${LSF_LIBDIR}/libbat.a ]; then
+    echo "Found in ${LSF_LIBDIR}"
+    LSF_LIBS="-L${LSF_LIBDIR} -lbat"
+else
+    echo "Cannot find liblsf.a"
+    echo "Please check if LSF_ENVDIR is set properly."
+    exit 1
+fi    
+
+echo "Try to find liblsf ..."
+if [ -f ${LSF_LIBDIR}/liblsf.a ]; then
+    echo "Found in ${LSF_LIBDIR}"
+    LSF_LIBS="${LSF_LIBS} -llsf"
+else
+    echo "Cannot find liblsf.a"
+    echo "Please check if LSF_ENVDIR is set properly."
+    exit 1
+fi    
+
+echo "Check for libnsl ..."
+if [ -f /usr/lib/libnsl.so ]; then
+	echo "Found in /usr/lib"
+	LSF_LIBS="${LSF_LIBS} -lnsl"
+else
+	echo "Not found"
+fi
+
+echo "Creating src/Makevars"
+echo "PKG_CPPFLAGS = ${LSF_INCLUDE}" > src/Makevars
+echo "PKG_LIBS = ${LSF_LIBS}" >> src/Makevars
+

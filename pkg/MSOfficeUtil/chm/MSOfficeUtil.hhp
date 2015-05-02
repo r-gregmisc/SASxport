@@ -1,0 +1,20 @@
+[OPTIONS]
+Auto Index=Yes
+Contents file=MSOfficeUtil.toc
+Compatibility=1.1 or later
+Compiled file=MSOfficeUtil.chm
+Default topic=00Index.html
+Display compile progress=No
+Full-text search=Yes
+Full text search stop list file=..\..\..\gnuwin32\help\R.stp
+
+
+[FILES]
+00Index.html
+UtilityFiles.html
+exportGraphToPowerPoint.html
+exportGraphToWord.html
+exportSingleGraph.html
+exportTableToExcel.html
+getExcelSheetName.html
+getExcelWorksheet.html

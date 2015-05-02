@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HEAD></HEAD><HTML><BODY>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package MSOfficeUtil:  Contents">
+<param name="Local" value="00Index.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package MSOfficeUtil:  R objects">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="as.chron.excelDate">
+<param name="Local" value="UtilityFiles.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="as.excelData.chron">
+<param name="Local" value="UtilityFiles.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="exportDataFrame">
+<param name="Local" value="UtilityFiles.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="exportGraphToPowerPoint">
+<param name="Local" value="exportGraphToPowerPoint.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="exportGraphToWord">
+<param name="Local" value="exportGraphToWord.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="exportSingleGraphToPowerPoint">
+<param name="Local" value="exportSingleGraph.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="exportSingleGraphToWord">
+<param name="Local" value="exportSingleGraph.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="exportTableToExcel">
+<param name="Local" value="exportTableToExcel.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="exportVector">
+<param name="Local" value="UtilityFiles.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="getExcelSheetNames">
+<param name="Local" value="getExcelSheetName.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="getExcelWorksheet">
+<param name="Local" value="getExcelWorksheet.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="guessExcelColType">
+<param name="Local" value="UtilityFiles.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="importDataFrame">
+<param name="Local" value="UtilityFiles.html">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package MSOfficeUtil:  Titles">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Excel file utilities">
+<param name="Local" value="UtilityFiles.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Export data to MS-Excel">
+<param name="Local" value="exportTableToExcel.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Export Graph(s) to MS-PowerPoint">
+<param name="Local" value="exportGraphToPowerPoint.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Export Graph(s) to MS-Word">
+<param name="Local" value="exportGraphToWord.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Get MS-Excel sheet names">
+<param name="Local" value="getExcelSheetName.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="MSOfficeUtil utility functions">
+<param name="Local" value="exportSingleGraph.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Read data from MS-Excel">
+<param name="Local" value="getExcelWorksheet.html">
+</OBJECT>
+</UL>
+</UL>
+</BODY></HTML>

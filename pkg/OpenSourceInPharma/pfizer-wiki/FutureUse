@@ -1,0 +1,23 @@
+Wiki-Safetybelt: 1141837702.85
+Type: stx
+Log: 
+
+Future Use of R
+
+  **This section describes how we would like to use R in the *future*.**
+
+  Each entry should consist of a brief title followed by 6 elements:
+
+  Title
+
+    1. Who is the client?
+
+    1. What is the need?
+
+    1. Who does the work?
+
+    1. What technical tasks is R used to accomplish?
+
+    1. What R packages are used?
+
+    1. Who are you? (IE who provided this entry,)

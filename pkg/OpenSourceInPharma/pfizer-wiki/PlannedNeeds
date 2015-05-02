@@ -1,0 +1,35 @@
+Wiki-Safetybelt: 1141836748.84
+Type: stx
+Log: 
+
+This section lists features and services that should be provided by an commercial R vendor to support *planned* uses of R.
+
+  Essential
+
+    1. Documentation of the software development lifecycle for R and supported packages
+
+       - Documentation of R Core Team's processes for developing and maintaining core R
+
+       - Documentation of the commercial vendor's process in validating, regression testing, etc 
+
+    1. Generation of a log file, even for interactive use
+
+    1. Categorization of R packages into quality/support groups with clear requirements for each group:
+
+        - development,
+
+        - testing,
+
+        - production, 
+
+        - supported/peer-reviewed/validated
+
+        See "R Package Site Proposal":RForge
+
+  Desirable
+
+    1.
+
+  Wishlist
+
+    1.

@@ -1,0 +1,81 @@
+# See sources.list(5) for more information, especialy
+# Remember that you can only use http, ftp or file URIs
+# CDROMs are managed through the apt-cdrom tool.
+
+# Security updates for "stable"
+deb http://security.debian.org stable/updates main contrib non-free
+deb http://security.debian.org testing/updates main contrib non-free
+
+# Stable
+deb http://ftp.us.debian.org/pub/debian stable main contrib non-free
+deb http://non-us.debian.org/debian-non-US stable/non-US main contrib non-free
+
+# Sources
+deb-src http://ftp.us.debian.org/pub/debian stable main contrib non-free
+deb-src http://non-us.debian.org/debian-non-US stable/non-US main contrib non-free
+
+# Testing
+deb http://ftp.us.debian.org/pub/debian testing main contrib non-free
+deb http://non-us.debian.org/debian-non-US testing/non-US main contrib non-free
+
+# Sources
+deb-src http://ftp.us.debian.org/pub/debian testing main contrib non-free
+deb-src http://non-us.debian.org/debian-non-US testing/non-US main contrib non-free
+
+# Unstable
+deb http://ftp.us.debian.org/debian unstable main contrib non-free
+deb http://non-us.debian.org/debian-non-US unstable/non-US main contrib non-free
+
+# Sources
+deb-src http://ftp.us.debian.org/debian unstable main contrib non-free
+deb-src http://non-us.debian.org/debian-non-US unstable/non-US main contrib non-free
+
+# Experimental
+deb http://ftp.us.debian.org/debian ../project/experimental main contrib non-free
+deb-src http://ftp.us.debian.org/debian ../project/experimental main contrib non-free
+
+# Mozilla
+# deb http://non-us.debian.org/~kitame/mozilla ./
+# deb-src http://non-us.debian.org/~kitame/mozilla ./
+
+# GNOME 2.0
+# deb http://www.gnome.de/debian/ ./
+
+# KDE 3
+# deb http://ktown.kde.org/~nolden/kde stable main
+# deb-src http://ktown.kde.org/~nolden/kde stable main
+# We get packages from testing/unstable for now
+
+# cdbakeoven
+# deb http://coyote.asoc.euitt.upm.es/mud/debian/ ./
+
+# XFree 4.2/4.3
+# deb http://people.debian.org/~branden/packages sid/i386/
+# deb-src http://people.debian.org/~branden/packages sid/source/
+# deb http://www.penguinppc.org/~daniels/sid/i386 ./
+# deb-src http://www.penguinppc.org/~daniels/sid/source ./
+
+# Java
+deb ftp://ftp.gwdg.de/pub/languages/java/linux/debian woody main non-free
+deb-src ftp://ftp.gwdg.de/pub/languages/java/linux/debian woody main non-free
+deb ftp://ftp.gwdg.de/pub/languages/java/linux/debian unstable main non-free
+deb-src ftp://ftp.gwdg.de/pub/languages/java/linux/debian unstable main non-free
+# deb http://people.debian.org/~sgybas/jdk13
+
+# LyX & others (now in debian/unstable)
+# deb ftp://ntama.uni-mainz.de/pub/debian unofficial/
+# deb-src ftp://ntama.uni-mainz.de/pub/debian unofficial/
+
+# Evolution
+#deb ftp://ftp.ximian.com/pub/debian stable main
+#deb-src ftp://ftp.ximian.com/pub/debian stable main
+
+# Blades Repository (pppoeconf & co)
+# deb http://people.debian.org/~blade/testing ./
+# deb-src http://people.debian.org/~blade/testing ./
+
+# Wine CVS snapshot
+# deb http://people.debian.org/~andreas/debian wine main
+# deb-src http://people.debian.org/~andreas/debian wine main
+
+# deb cdrom:[Debian GNU/Linux 2.2 r3 _Potato_ - Official i386 Binary-1 (20010427)]/ unstable contrib main non-US/contrib non-US/main

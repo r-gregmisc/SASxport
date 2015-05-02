@@ -1,0 +1,372 @@
+\documentclass{asaproc}
+\usepackage{inputenc}
+\usepackage{graphics}
+
+\usepackage{times} \usepackage{fontenc}
+
+\title{Open Source Software in Pharmaceutical Research}
+
+\author{
+  Gregory R. Warnes$^{1,2,3}$, James A. Rogers$^4$ Max Kuhn$^4$ 
+\\
+  Center for Biodefense Immune Modeling, University of Rochester $^1$ \\
+  Department of Biostatistics and Computational Biology, 
+  University of Rochester $^2$ \\
+  REvolution Computing, Inc. $^3$ \\
+  Research Statistics, Pfizer, Inc. $^4$
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  
+Open-Source statistical software is being used with increasing
+frequency for the analysis of pharmaceutical data, particularly in
+support of ``omics'' technologies within discovery. While it is
+relatively straightforward to employ open-source tools for basic
+research, software used in any regulatory context must
+meet more rigorous requirements for documentation, training,
+software life-cycle management, and technical support.
+
+\vspace{1em}
+
+We will focus on \textsc{R}, a full-featured open-source statistical
+software package. We'll briefly outline the benefits it provides, as
+seen from the perspective of a discovery statistician, show some
+example areas in which it may be used, and then discuss the
+documentation, training, and support required for this class of use.
+
+\vspace{1em}
+
+Next we will discuss what is needed for organizations to be
+comfortable with employing open-source statistical software for
+regulatory use within clinical, safety, or manufacturing. We will
+then talk about how well or poorly \textsc{R} meets these requirements,
+highlighting current issues.  Finally, we will discuss options for
+third-party commercial support for \textsc{R}, and evaluate how well they
+meet the requirements for use of \textsc{R} within both regulated and
+non-regulated contexts.
+
+\vskip6pt
+
+
+{{\bf \noindent Keywords}: Text, Text.}
+
+
+\end{abstract}
+
+\section{Introduction}
+
+  Open-Source statistical software is being used with increasing
+  frequency for the analysis of pharmaceutical data, particularly in
+  support of ``omics'' technologies within discovery. While it is
+  relatively straightforward to employ open-source tools for basic
+  research, software used in any regulatory context must meet more
+  rigorous requirements for documentation, training, software
+  life-cycle management, and technical support.
+
+\section{Requirements}
+
+  Software used in mission critical and regulated contexts must
+  exhibit 7 key attributes:
+
+\begin{description}
+
+\item Performs the required tasks
+
+\item Demonstrate that computer output is correct, or at least consistent..
+
+\item Given the same data, the same results can be
+  obtained, potentially much later in time.
+
+\item Documentation is available or can easily be
+  generated for the entire software life-cycle: Specification, Design,
+  Development. Testing, Deployment, Change Management
+
+\item Track everything done to data and the system
+
+\item Doesn't change too fast, so that there is enough time to
+  develop required documentation
+  
+\item Guaranteed (by \$\$) availability of external expense
+  for installation, problem resolution, bug fixes, feature
+  development, training, application development, consulting
+
+\end{description}
+
+\section{What is \textsc{R}?}
+
+  \begin{itemize}
+
+    \item System for statistical computing and graphics
+
+    \item Language is very similar to the S-Plus
+      
+    \item Full featured support for statistical and graphical techniques:
+
+      \begin{itemize}
+      \item linear and nonlinear modeling,
+      \item classical statistical tests,
+      \item time-series analysis,
+      \item classification,
+      \item clustering
+      \item ...
+      \end{itemize}
+
+    \item Highly extensible with good development tools
+      
+    \item \emph{Huge} library of user-contributed add-on packages: $>850$ ! 
+      
+    \item Source code is freely available
+
+\end{itemize}
+
+\section{Status of \textsc{R}}
+
+\begin{description}
+
+\item +++ This is \textsc{R}'s strength. Largely provided by
+  the $>850$ user-supplied add-on packages.  \textsc{R} currently provides more
+  functionality than any other statistical software system and is
+  growing rapidly.
+
+\item --- Most of the functionality of \textsc{R} comes from
+  user-developed add-on packages ($>850$!), but there is currently no formal
+  mechanism for evaluating the level of quality of these packages (e.g.:
+  development, test, production, peer reviewed, validated) or
+  documentation that they accomplish the required tasks.
+  
+\item --- Currently, add on packages do not display
+  version information when loaded, making it difficult to know what
+  versions were utilized for a given analysis, and thus impossible to
+  reliably replicated.
+
+\item --- While the \textsc{R} core team has a well defined and
+  managed process for design, development, testing, release, and
+  change management, no formal documentation of this process appears
+  to exists (aside from the specifications of the language itself).
+  No centrally defined or managed process appears to exist for add-on
+  packages.
+
+\item --- \textsc{R} has no built-in no audit log, either for data
+  analysis steps or for changes to the system (e.g.: package updates,
+  patches)
+  
+\item --- The \textsc{R} core team releases minor (major.minor.patch)
+  versions twice a year.  Since bug fixes are currently applied only
+  to the latest released version of the system, it is difficult to
+  properly support embedded and validated systems where one may need
+  to resolve bugs in \textsc{R}, but must constrain the \textsc{R}
+  version to remain constant for long periods due to the burden of
+  documentation and testing that must be performed.
+
+\item --- While there is an increasingly large pool of
+  statisticians and statistical consulting groups that have \textsc{R}
+  expertise, no organization formally supports \textsc{R} at this time.
+
+\end{description}
+
+\section{Moving Forward}
+
+\begin{description}
+  \item[Functional] Already a strength. Continue!
+  \item[Verifiable] \textsc{RForge} proposal
+    \begin{enumerate}
+      \item Develop a SourceForge-like system for contributed packages: 
+%        \begin{itemize}
+%        \item version control system (subversion)
+%        \item issue tracking system
+%        \item file release area
+%        \item web page
+%        \item news lists
+%        \end{itemize} for each individual package.
+      \item Support package status categories, including clear standards
+        \begin{itemize}
+        \item development,
+        \item testing,
+        \item production, or
+        \item peer-reviewed/validated.
+        \end{itemize}
+      \end{enumerate}
+  \item[Repeatable] Display versions of packages on load
+  \item[Documentable] ~ 
+    \begin{enumerate}
+    \item Formally document the development process used for \textsc{R}
+    \item Provide tools to perform and document this process for
+      add-on packages
+    \item Develop validation templates for use by organizations
+    \item Encourage commercial vendors to support \textsc{R} and to provide
+      additional validation effort and associated documentation.
+    \end{enumerate}
+  \item[Auditable] Add an audit-log facility
+  \item[Stable] Establish a system for back-porting bug fixes to
+    previous versions.
+  \item[Supported] Encourage commercial vendors to formally support \textsc{R}.
+\end{description}
+
+\section{News Flash! \textsc{RPro} from \emph{REvolution Computing} }
+
+\begin{quote}
+  2006-08-01 {\bf New Haven, CT}: \emph{REvolution Computing}
+  announces the immediate availability of \textsc{RPro}, an enterprise-strength
+  statistical computing environment providing the strengths of the
+  open source \textsc{R} statistical software system from the R-Project coupled
+  with the enterprise-level support and high-performance computing
+  expertise of \emph{REvolution Computing}.
+\end{quote}
+
+  \vspace{1em}
+
+  Additions to \textsc{R}:
+      
+      \begin{itemize}
+        
+      \item Technical Support
+        
+      \item Simple Installation and Maintenance
+        
+      \item Performance Tuning
+        
+      \item Documentation and Training
+        
+      \item Validation Materials
+        
+      \item Consulting and Services
+        
+      \end{itemize}
+    
+\begin{quote}
+
+  2006-08-01 {\bf New Haven, CT}: \emph{REvolution Computing}
+  announces the immediate availability of \textsc{NetWorkSpaces} for
+  \textsc{RPro} (\textsc{NWS}). \textsc{NWS} enables calculations to
+  be automatically distributed across multiple processors in clusters.
+  Distributing the data and/or work across multiple processors permits
+  a dramatic decrease in time to completion of large computational
+  tasks or permits a dramatic increase in those calculations size,
+  length or complexity.  \textsc{NWS} fully supports Microsoft Windows
+  Compute Cluster Server 2003 (\textsc{CCS}), which provides a
+  security enhanced and affordable high performance computing
+  solution.
+
+\end{quote}
+
+  \includegraphics*{MicrosoftWindowsClusterComputeServer2003.pdf}
+  \includegraphics*{RevolutionComputingInfo.pdf}
+
+\section{More Information}
+
+\begin{itemize}
+  \item Personal:
+    \begin{description}
+    \item greg@warnes.net
+    \item http://www.warnes.net/Research
+    \end{description}
+    \vspace{1em}
+
+  \item University of Rochester:
+    \begin{description}
+    \item warnes@bst.rochester.edu
+    \item http://www.urmc.rochester.edu/smd/biostat
+    \end{description}
+    \vspace{1em}
+    
+  \item REvolution Computing:
+    \begin{description}
+    \item greg@revolution-computing.com
+    \item http://www.revolution-computing.com
+    \end{description}
+    \vspace{1em}
+
+  \end{itemize}
+
+\section*{References}
+\end{document}
+{\footnotesize\begin{description}\itemsep=3pt
+
+\item {\em Annual Book of ASTM Standards, Volume 4.10}, Committee D-7,
+
+American Society for Testing and Materials, West Conshohocken, Pennsylvania.
+
+\item Cochran, W.G. (1957),  ``Analysis of Covariance: Its Nature and Uses,''
+
+{\em Biometrics}, {\bf 13}, 261-281.
+
+\item Cox, D.R. (1957),  ``The Use of a Concomitant Variable in Selecting an
+
+Experimental Design,''  {\em Biometrika}, {\bf 44}, 150-158.
+
+\item David, H.A. and Gunnik, J.L. (1997), ``The Paired {\em t} Test
+
+Under Artificial Pairing,'' {\em The American Statistician}, {\bf 51},
+
+9--12.
+
+\item Gibbons, R.D. (1994), {\em Statistical Methods for Groundwater
+
+Monitoring},
+
+John Wiley and Sons, New York.
+
+\item Guttman, I. (1970), {\em Statistical Tolerance Regions:
+
+Classical and Bayesian}, Hafner Publishing Company, Darien,
+
+Connecticut.
+
+\item Michigan DEQ (1994), {\em Guidance Document, Verification of
+
+Soil Remediation}, Hazardous Waste Program Section, Waste Management
+
+Division, Michigan Department of Environmental Quality, Lansing, Michigan.
+
+\item Owen, D.B. (1963), {\em Factors for one-sided tolerance limits
+
+and for variable sampling plans}, Sandia Corporation Monograph No.
+
+SCR-607 (19th edn).
+
+\item {\em MIL-HDBK-17-1, Composite Materials Handbook, Volume 1,
+
+Guidelines for Characterization of Structural Materials}, Department
+
+of Defense Single Stock Point, Philadelphia, Pennsylvania
+
+(http://www.dodssp.daps.mil).
+
+\item Verrill, S.P. (1993),  ``Predictor Sort Sampling, Tight
+
+{\em T}'s, and the Analysis of Covariance,'' {\em Journal of the American
+
+Statistical Association}, {\bf 88}, 119--124.
+
+\item Verrill, S.P. (1999),  ``When Good Confidence Intervals Go Bad:
+
+Predictor Sort Experiments and ANOVA,'' {\em The American
+
+Statistician}, {\bf 53}, 38--42.
+
+\item Verrill, S.P., Herian, V.L., and Green, D.W. (2002a), ``Predictor
+
+Sort Sampling and Confidence Bounds on Quantiles I: Asymptotic Theory,''
+
+under review.
+
+\item Verrill, S.P., Herian, V.L., and Green, D.W. (2002b), ``Predictor
+
+Sort Sampling and Confidence Bounds on Quantiles II: $k$'s for Small
+
+Samples,'' in preparation.
+
+\item Warren, W.G., and Madsen, B. (1977),  ``Computer-Assisted Experimental Design
+
+in Forest Products Research: A Case Study Based on Testing the 
+
+Duration-of-Load Effect,''  {\em Forest Products Journal}, {\bf 27}, 45-50.
+
+\end{description}}
+
+\end{document}
+

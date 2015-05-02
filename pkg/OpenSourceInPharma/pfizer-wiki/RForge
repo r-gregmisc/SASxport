@@ -1,0 +1,28 @@
+Wiki-Safetybelt: 1141836616.98
+Type: stx
+Log: 
+
+Abstract:
+
+The RForge project proposes to develop an internet portal that provides
+add-on package developers with the same types of tools that are
+available to the developers of the core R environment, and to
+institute a system for clearly categorizing packages according to
+their development status.  This will encourage package developers to
+utilize a standard software lifecycle, which will increase the overall
+quality of contributed R packages, will make it easier to determine
+which package may be appropriately used in specific circumstances, and
+will ultimately make it possible to validate a set of well-supported
+packages for use in regulated environments.
+
+
+Document:  
+
+  - PDF <a href="R_Package_Site_Proposal.pdf">R_Package_Site_Proposal.pdf</a>
+
+  - Latex source code is available via Subversion::
+
+      svn co https://svn.sourceforge.net/svnroot/r-gregmisc/trunk/RForge
+
+Contact "Greg Warnes":email://greg@warnes.net with commments/corrections/changes
+

@@ -1,0 +1,6 @@
+\begin{figure*}
+  \centering
+  \includegraphics[scale=0.9]{figures/glycolysis}
+  \caption{Production of methylglyoxal in hyperglycemia}
+  \label{glycolysis}
+\end{figure*}

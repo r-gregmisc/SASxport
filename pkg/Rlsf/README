@@ -1,0 +1,21 @@
+README
+------
+
+The Rlsf package provides a functions for using R with the LSF
+cluster/grid queuing system.  Consequently, LSF must be installed
+and available in order to build and use the Rlsf package.
+
+The following environment variables must be properly set in order to
+successfully build the Rlsf package:
+
+	LSF_ENVDIR
+	LSF_INCLUDEDIR
+	LSF_LIBDIR
+	
+Provided that these are properly set, the package can be built and
+installed via the standard R mechananism:
+
+	R CMD INSTALL Rlsf
+
+========
+$Id$

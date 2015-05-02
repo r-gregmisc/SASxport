@@ -1,0 +1,37 @@
+What: Outline of paper for JCGS (Journal of computational and graphical statistics) or 
+American Statistician
+(Note: Which journal to publish in, has not been finalized as yet, 
+and the format in LaTeX will depend on it – maybe simply inclusion of a 
+style file of the paper, if there exists one)
+
+Authors: Nitin Jain, Klaus F. Ley (prof @ Univ. of Virginia), Gregory R. Warnes 
+(Note: Order of authors can be changed – I think Greg should be senior (last) author)
+
+Title: Different methods of displaying heatmaps for gene-expression data 
+	(Note:  Above title is just temporary – would be revised)
+
+Paper length: Approximately 2-3 pages or in which the content can fit in appropriately.
+
+Contents: Will cover three types of displays of heatmaps:
+		1) Effects (pros and cons) of displaying ratio statistics with Red and green 
+colors as over- and under-expressed genes. (Traditional way)
+2) Effects (pros + cons) of displaying absolute numbers (here gene expression) with red and green colors.
+3) Effects (pros + cons) of displaying data on ordinal scale
+	
+		It will lead to a conclusion that all three displays are important for gene-expression data and must be taken into account together to get an unbiased picture.
+
+Another important component of the paper will be regarding the modifications in heatmap.2.R (of gplots bundle) over traditional heatmap.R function – regarding the legend, color separation by lines, and other modifications.
+
+Figures:  Three figures can be shown for each of the heatmap types, and then one improved figure (of any of the above 3 approaches) using heatmap.2
+	(Note: Data for the heatmap can be obtained from publically published 
+ 	Gene-expression data by Prof. Klaus Ley (9 chips – 3 conditions, 3 reps each) or
+	A subset of well-known genes from 22-chip experiment (11 conditions, 2 reps) 
+from Prof. Ley, or any other publically available source.)
+
+Limitations: Limitations of heatmaps can be described as simply that they are not good for visualizing data set of more than 50 – 60 genes.
+
+Paper writers: 
+·	Nitin Jain (to write three approaches) and 
+·	Greg Warnes (to write improvements in heatmap.2  and overall grammar/structure of the paper).
+(Note: Should we include any biological conclusions? For example, if we decide to include some well known genes of 22-chip experiment (above), then it may be a good idea to include some biology – but that may not be in the scope of JCGS or AS.)
+

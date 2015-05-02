@@ -1,0 +1,240 @@
+
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(SASxport)
+Loading required package: chron
+Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
+Loading required package: survival
+Loading required package: splines
+Loading required package: Formula
+
+Attaching package: 'Hmisc'
+
+The following objects are masked from 'package:base':
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+
+Loaded SASxport version 1.5.0 (2014-07-21).
+
+  Type `?SASxport' for usage information.
+
+> Sys.setenv("TZ"="GMT")
+> 
+> ## manually create a data set
+> abc <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )
+> 
+> ## add a format specifier (not used by R)
+> SASformat(abc$x) <- 'date7.'
+> 
+> ## add a variable label (not used by R)
+> label(abc$y)  <- 'character variable'
+> 
+> ## create a SAS XPORT file from our local data frame
+> write.xport(abc,
++             file="xxx2.xpt",
++             cDate=strptime("28JUL07:21:08:06 ", format="%d%b%y:%H:%M:%S"),
++             osType="SunOS",
++             sasVer="9.1",
++             autogen.formats=FALSE
++             )
+> 
+> # display for diff
+> write.xport(abc,
++             file="",
++             cDate=strptime("28JUL07:21:08:06 ", format="%d%b%y:%H:%M:%S"),
++             osType="SunOS",
++             sasVer="9.1",
++             autogen.formats=FALSE,
++             verbose=TRUE
++             )
+### Ensure all objects to be stored are data.frames...
+ ###
+### Ensure object names are valid and unique...
+ ###
+### opening file ... ###
+### Done ###
+### Write file header ... ###
+ASCII:  HEADER RECORD*******LIBRARY HEADER RECORD!!!!!!!000000000000000000000000000000  SAS     SAS     SASLIB  9.1     SunOS...                        28JUL07:21:08:0628JUL07:21:08:06                                                                 
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4c 49 42 52 41 52 59 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 53 41 53 20 20 20 20 20 53 41 53 20 20 20 20 20 53 41 53 4c 49 42 20 20 39 2e 31 20 20 20 20 20 53 75 6e 4f 53 00 00 00 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 32 38 4a 55 4c 30 37 3a 32 31 3a 30 38 3a 30 36 32 38 4a 55 4c 30 37 3a 32 31 3a 30 38 3a 30 36 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+### Done. ###
+### Write data frame header ... ###
+ASCII:  HEADER RECORD*******MEMBER  HEADER RECORD!!!!!!!000000000000000001600000000140  HEADER RECORD*******DSCRPTR HEADER RECORD!!!!!!!000000000000000000000000000000  SAS     ABC     SASDATA 9.1     SunOS...                        28JUL07:21:08:0628JUL07:21:08:06                                                                 
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4d 45 4d 42 45 52 20 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 31 36 30 30 30 30 30 30 30 30 31 34 30 20 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 44 53 43 52 50 54 52 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 53 41 53 20 20 20 20 20 41 42 43 20 20 20 20 20 53 41 53 44 41 54 41 20 39 2e 31 20 20 20 20 20 53 75 6e 4f 53 00 00 00 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 32 38 4a 55 4c 30 37 3a 32 31 3a 30 38 3a 30 36 32 38 4a 55 4c 30 37 3a 32 31 3a 30 38 3a 30 36 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+### Done. ###
+### Write variable information block header ... ###
+ASCII:  HEADER RECORD*******NAMESTR HEADER RECORD!!!!!!!000000000200000000000000000000   
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4e 41 4d 45 53 54 52 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 32 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 
+### Done. ###
+### Write entries for variable information block ... ###
+###  X ... ###
+ASCII:  ........X                                               DATE    ........        ............................................................ 
+HEX:    00 01 00 00 00 08 00 01 58 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 44 41 54 45 20 20 20 20 00 07 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+###  Y ... ###
+ASCII:  ........Y       character variable                              ........        ............................................................ 
+HEX:    00 02 00 00 00 08 00 02 59 20 20 20 20 20 20 20 63 68 61 72 61 63 74 65 72 20 76 61 72 69 61 62 6c 65 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+### Done. ###
+ASCII:                                           
+HEX:    20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+### Write header for data block ... ###
+ASCII:  HEADER RECORD*******OBS     HEADER RECORD!!!!!!!000000000000000000000000000000   
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4f 42 53 20 20 20 20 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 
+### Done ###
+### Write data ...  ###
+### i= 1  j= 1  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 1  j= 2  value= a  len= 8  ###
+ASCII:  a        
+HEX:    61 20 20 20 20 20 20 20 
+### i= 2  j= 1  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 2  j= 2  value= B  len= 8  ###
+ASCII:  B        
+HEX:    42 20 20 20 20 20 20 20 
+### i= 3  j= 1  value= NA  len= 8  ###
+ASCII:  ........ 
+HEX:    2e 00 00 00 00 00 00 00 
+### i= 3  j= 2  value= NA  len= 8  ###
+ASCII:           
+HEX:    20 20 20 20 20 20 20 20 
+### i= 4  j= 1  value= NA  len= 8  ###
+ASCII:  ........ 
+HEX:    2e 00 00 00 00 00 00 00 
+### i= 4  j= 2  value= *  len= 8  ###
+ASCII:  *        
+HEX:    2a 20 20 20 20 20 20 20 
+ASCII:                   
+HEX:    20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+### Done. ###
+### Closing file ... ###
+### Done ###
+> 
+> 
+> ## read the original SAS data file
+> abc.SAS <- read.xport("xxx.xpt", names.tolower=FALSE)
+> 
+> ## read.xport currently doesn't properly load the format attribute *length*...
+> ##SASformat(abc.SAS$X) <- 'date7.'
+> 
+> ## create a SAS XPORT file from the SAS data
+> write.xport(abc=abc.SAS,
++             file="xxx3.xpt",
++             cDate=strptime("28JUL07:21:08:06 ", format="%d%b%y:%H:%M:%S"),
++             osType="SunOS",
++             sasVer="9.1",
++             autogen.formats=FALSE
++             )
+> 
+> 
+> ## display for diff
+> write.xport(abc=abc.SAS,
++             file="",
++             cDate=strptime("28JUL07:21:08:06 ", format="%d%b%y:%H:%M:%S"),
++             osType="SunOS",
++             sasVer="9.1",
++             autogen.formats=FALSE,
++             verbose=TRUE
++             )
+### Ensure all objects to be stored are data.frames...
+ ###
+### Ensure object names are valid and unique...
+ ###
+### opening file ... ###
+### Done ###
+### Write file header ... ###
+ASCII:  HEADER RECORD*******LIBRARY HEADER RECORD!!!!!!!000000000000000000000000000000  SAS     SAS     SASLIB  9.1     SunOS...                        28JUL07:21:08:0628JUL07:21:08:06                                                                 
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4c 49 42 52 41 52 59 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 53 41 53 20 20 20 20 20 53 41 53 20 20 20 20 20 53 41 53 4c 49 42 20 20 39 2e 31 20 20 20 20 20 53 75 6e 4f 53 00 00 00 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 32 38 4a 55 4c 30 37 3a 32 31 3a 30 38 3a 30 36 32 38 4a 55 4c 30 37 3a 32 31 3a 30 38 3a 30 36 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+### Done. ###
+### Write data frame header ... ###
+ASCII:  HEADER RECORD*******MEMBER  HEADER RECORD!!!!!!!000000000000000001600000000140  HEADER RECORD*******DSCRPTR HEADER RECORD!!!!!!!000000000000000000000000000000  SAS     ABC     SASDATA 9.1     SunOS...                        28JUL07:21:08:0628JUL07:21:08:06                                                                 
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4d 45 4d 42 45 52 20 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 31 36 30 30 30 30 30 30 30 30 31 34 30 20 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 44 53 43 52 50 54 52 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 53 41 53 20 20 20 20 20 41 42 43 20 20 20 20 20 53 41 53 44 41 54 41 20 39 2e 31 20 20 20 20 20 53 75 6e 4f 53 00 00 00 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 32 38 4a 55 4c 30 37 3a 32 31 3a 30 38 3a 30 36 32 38 4a 55 4c 30 37 3a 32 31 3a 30 38 3a 30 36 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+### Done. ###
+### Write variable information block header ... ###
+ASCII:  HEADER RECORD*******NAMESTR HEADER RECORD!!!!!!!000000000200000000000000000000   
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4e 41 4d 45 53 54 52 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 32 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 
+### Done. ###
+### Write entries for variable information block ... ###
+###  X ... ###
+ASCII:  ........X                                               DATE    ........        ............................................................ 
+HEX:    00 01 00 00 00 08 00 01 58 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 44 41 54 45 20 20 20 20 00 07 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+###  Y ... ###
+ASCII:  ........Y       character variable                              ........        ............................................................ 
+HEX:    00 02 00 00 00 08 00 02 59 20 20 20 20 20 20 20 63 68 61 72 61 63 74 65 72 20 76 61 72 69 61 62 6c 65 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 00 20 20 20 20 20 20 20 20 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+### Done. ###
+ASCII:                                           
+HEX:    20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+### Write header for data block ... ###
+ASCII:  HEADER RECORD*******OBS     HEADER RECORD!!!!!!!000000000000000000000000000000   
+HEX:    48 45 41 44 45 52 20 52 45 43 4f 52 44 2a 2a 2a 2a 2a 2a 2a 4f 42 53 20 20 20 20 20 48 45 41 44 45 52 20 52 45 43 4f 52 44 21 21 21 21 21 21 21 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 
+### Done ###
+### Write data ...  ###
+### i= 1  j= 1  value= 1  len= 8  ###
+ASCII:  A....... 
+HEX:    41 10 00 00 00 00 00 00 
+### i= 1  j= 2  value= a  len= 8  ###
+ASCII:  a        
+HEX:    61 20 20 20 20 20 20 20 
+### i= 2  j= 1  value= 2  len= 8  ###
+ASCII:  A ...... 
+HEX:    41 20 00 00 00 00 00 00 
+### i= 2  j= 2  value= B  len= 8  ###
+ASCII:  B        
+HEX:    42 20 20 20 20 20 20 20 
+### i= 3  j= 1  value= NA  len= 8  ###
+ASCII:  ........ 
+HEX:    2e 00 00 00 00 00 00 00 
+### i= 3  j= 2  value=   len= 8  ###
+ASCII:           
+HEX:    20 20 20 20 20 20 20 20 
+### i= 4  j= 1  value= NA  len= 8  ###
+ASCII:  ........ 
+HEX:    2e 00 00 00 00 00 00 00 
+### i= 4  j= 2  value= *  len= 8  ###
+ASCII:  *        
+HEX:    2a 20 20 20 20 20 20 20 
+ASCII:                   
+HEX:    20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
+### Done. ###
+### Closing file ... ###
+### Done ###
+> 
+> 
+> ## Load both files back in as raw data
+> a.1 <- readBin( con="xxx.xpt",  what=raw(), n=1e5 )
+> a.2 <- readBin( con="xxx2.xpt", what=raw(), n=1e5 )
+> a.3 <- readBin( con="xxx3.xpt", what=raw(), n=1e5 )
+> 
+> ## R doesn't have multiple NA types, while SAS does.  The original
+> ## file contains a SAS '.A' missing value, while what we've created
+> ## contains an ordinary '.' missing value, so mash this one byte to
+> ## avoid a comparison error for this known limitation.
+> 
+> a.1[1089] <- as.raw("0x2e")
+> 
+> ## Test that the files are otherwise identical
+> stopifnot( all(a.1 == a.2) )
+> stopifnot( all(a.1 == a.3) )
+> 
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  0.470   0.043   0.501 

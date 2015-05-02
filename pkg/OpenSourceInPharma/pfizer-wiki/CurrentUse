@@ -1,0 +1,54 @@
+Wiki-Safetybelt: 1141837679.9
+Type: stx
+Log: 
+
+Current Use of R
+
+  **This section describes how we are *currently* using R.**
+
+  Each entry should consist of a brief title followed by 6 elements:
+
+  Title
+
+    1. Who is the client?
+
+    1. What is the need?
+
+    1. Who does the work?
+
+    1. What technical tasks is R used to accomplish?
+
+    1. What R packages are used?
+
+    1. Who are you? (IE who provided this entry,)
+
+  Pharmacogenomics
+
+    1. Molecular Profiling
+
+    2. Analysis of genetic data, including whole-genome SNP profiling (100K+ SNPs)
+
+    3. Statistical Applications
+
+    4. Exploritory data analysis (EDA), visualization, report generation, hypothesis testing, data manipulation 
+     linear modeling, prediction
+
+    5. genetics, GeneticsBase, nws, Rlsf, qvalue
+
+    6. Greg Warnes
+
+  Gene Expression Microarrays
+
+    1. Discovery Scientists
+
+    2. Pre-processing (normalization, summarization, scaling) and analysis of gene expression data
+
+    3. Genomic and Proteomics Sciences (Discovery) and Research Statistics
+
+    4. Exploritory data analysis (EDA), visualization, report generation, hypothesis testing, data manipulation 
+       linear modeling, prediction, mostly via MiDAS (Microarray Data Analysis System)
+
+    5. RAffyTool (internal), Biobase, Design, multcomp, gtools (>= 2.1.1), gplots, multtest, Design, MASS
+       Rlsf, affy, gdata, gmodels, gplots, gtools, multcomp, multtest, nlme, stats
+
+    6. Greg Warnes

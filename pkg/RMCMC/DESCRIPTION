@@ -1,0 +1,15 @@
+Package: RMCMC
+Title: General-purpose Markov Chain Monte Carlo for R
+Version: 0.1.0
+Author: Gregory R. Warnes <warnes@bst.rochester.edu>
+Description: 
+	This package allows users to easily specify and fit
+	Bayesian models via Markov Chain Monte Carlo (MCMC). Models
+	may be specified using standard Bayesian model
+	"twiddle" notation.  Functions are provided to convert these
+	models into density functions and random generators, and to
+	use these estimate the posterior density using a variety of
+	MCMC algorithms, including the general Metropolis-Hastings and
+	Metropolis algorithms.
+Maintainer: Gregory R. Warnes <warnes@bst.rochester.edu>
+License: GPL-2

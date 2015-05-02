@@ -1,0 +1,87 @@
+
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(SASxport)
+Loading required package: chron
+Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
+Loading required package: survival
+Loading required package: splines
+Loading required package: Formula
+
+Attaching package: 'Hmisc'
+
+The following objects are masked from 'package:base':
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+
+Loaded SASxport version 1.5.0 (2014-07-21).
+
+  Type `?SASxport' for usage information.
+
+> Sys.setenv("TZ"="GMT")
+> 
+> ## Read example dataset from a local file
+> testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
+> w <- read.xport(testFile, names.tolower=TRUE)
+> 
+> # Duplicate df names
+> write.xport("AA"=w$test,"Aa"=w$test,"aA"=w$test,"aa"=w$test, file="dn.a.xpt") #1.a
+Warning message:
+In makeSASNames(dfNames) : Made 3 duplicate names unique.
+> read.xport("dn.a.xpt")
+$AA
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+$AA.1
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+$AA.2
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+$AA.3
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+> 
+> # Duplicate column names
+> a = w$test
+> b = w$test
+> colnames(b) <- tolower(colnames(b))
+> write.xport("combined"=cbind(a, b), file="dn.b.xpt")
+Warning message:
+In makeSASNames(colnames(df)) : Made 5 duplicate names unique.
+> read.xport("dn.b.xpt")
+  RACE AGE         D1                    DT1       T1 RACE.1 AGE.1       D1.1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45   blue    30 2002-03-03
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13           31 2002-06-03
+                   DT1.1     T1.1
+1 (03 Mar 2002 09:31:02) 11:13:45
+2 (03 Jun 2002 09:42:07) 11:14:13
+> 
+> proc.time()
+   user  system elapsed 
+  0.515   0.037   0.542 

@@ -1,0 +1,9 @@
+Package: bwRF
+Version: 0.1.1
+Title: Efficent Random Forests models
+Author: Baolin Wu <baolin@biostat.umn.edu>, 
+        R port by warnes@bst.rochester.edu>
+Maintainer: Gregory R. Warnes <warnes@bst.rochester.edu>
+Description: Efficent code for fitting Random Forests models
+License: LGPL (see <http://www.opensource.org/licenses/lgpl-license.php>).
+

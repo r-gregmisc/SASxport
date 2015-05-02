@@ -1,0 +1,63 @@
+
+Windows
+=======
+
+The instructions below relate to Windows only and are not relevant to other
+platforms.
+
+On Windows, the perl based routines (read.xls, xls2sep, xls2csv, xls2tab,
+xls2tsv, sheetNames, sheetCount) will work with ActiveState perl but not with
+Rtools perl.
+
+If you have ActiveState perl installed and the pl extension is associated with
+it (which the ActiveState installer associates automatically) then read.xls and
+other perl based routines in gdata will automatically locate ActiveState perl
+if you omit the perl= argument on these commands even if Rtools perl is ahead 
+of it on your path. e.g.
+
+	read.xls("mysheet.xls")
+
+Alternately you can use the perl= argument with a path to ActiveState perl to
+ensure it uses the right one. e.g.
+
+	read.xls("mysheet.xls", perl = "C:\\Perl\\bin\\perl.exe")
+
+Also ensure that gdata was built with ActiveState Perl and not Rtools perl.
+This may require rebuilding gdata yourself like this:
+
+1. Download and install the following (which all have automatic Windows 
+   installers and are therefore very easy to install):
+
+   R (you likely already have R so you can likely skip this one)
+   http://www.r-project.org
+
+   Rtools
+   http://www.murdoch-sutherland.com/Rtools/
+
+   ActiveState perl (ActivePerl)
+   http://www.activestate.com/activeperl/
+
+2. If simply installing gdata in the usual way from within R results in
+   read.xls and associated perl-based routines not working then re-install
+   gdata yourself like this:
+
+   Download gdata_*.tar.gz from:
+   http://cran.r-project.org/web/packages/gdata/index.html
+
+   and install it at the Windows console (not from within R):
+   Rcmd INSTALL --build gdata_*.tar.gz
+
+   Note: Rcmd is normally found in C:\Program Files\R\R-*\bin and if that 
+   is not on your path the above command should be written:
+   "C:\Program Files\R\R-*\bin\Rcmd.exe" INSTALL --build gdata_*.tar.gz
+
+   where the the path to Rcmd.exe should be replaced with the output of this 
+   R command:
+	   normalizePath(file.path(R.home(), "bin", "Rcmd.exe"))
+
+   Note: On Vista and above you may need to run Rcmd as Administrator.
+
+   Note: In the above the * in gdata_*.tar.gz should be replaced with the 
+   current version of gdata as found on:
+   http://cran.r-project.org/web/packages/gdata/index.html
+

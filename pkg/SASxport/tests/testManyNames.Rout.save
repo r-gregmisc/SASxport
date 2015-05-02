@@ -1,0 +1,112 @@
+
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(SASxport)
+Loading required package: chron
+Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
+Loading required package: survival
+Loading required package: splines
+Loading required package: Formula
+
+Attaching package: 'Hmisc'
+
+The following objects are masked from 'package:base':
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+
+Loaded SASxport version 1.5.0 (2014-07-21).
+
+  Type `?SASxport' for usage information.
+
+> Sys.setenv("TZ"="GMT")
+> 
+> data(iris)
+> 
+> # to 'stress test' use 200 instead of 20
+> ncopies <- 20
+> 
+> ## create a data file containing ncopies separate copies of the iris *dataframe*
+> manyDF.out <- rep(list(iris),ncopies)
+> names(manyDF.out) <- rep("iris", ncopies)
+> manyDF.out$file <- "manyDF.xport"
+> 
+> do.call(write.xport, manyDF.out)
+There were 21 warnings (use warnings() to see them)
+> manyDF.in <- read.xport(file="manyDF.xport")
+> names(manyDF.in)
+ [1] "IRIS"    "IRIS.1"  "IRIS.2"  "IRIS.3"  "IRIS.4"  "IRIS.5"  "IRIS.6" 
+ [8] "IRIS.7"  "IRIS.8"  "IRIS.9"  "IRIS.10" "IRIS.11" "IRIS.12" "IRIS.13"
+[15] "IRIS.14" "IRIS.15" "IRIS.16" "IRIS.17" "IRIS.18" "IRIS.19"
+> head(manyDF.in[[ncopies]])
+  SEPAL.LE SEPAL.WI PETAL.LE PETAL.WI SPECIES
+1      5.1      3.5      1.4      0.2  setosa
+2      4.9      3.0      1.4      0.2  setosa
+3      4.7      3.2      1.3      0.2  setosa
+4      4.6      3.1      1.5      0.2  setosa
+5      5.0      3.6      1.4      0.2  setosa
+6      5.4      3.9      1.7      0.4  setosa
+> tail(manyDF.in[[ncopies]])
+    SEPAL.LE SEPAL.WI PETAL.LE PETAL.WI   SPECIES
+145      6.7      3.3      5.7      2.5 virginica
+146      6.7      3.0      5.2      2.3 virginica
+147      6.3      2.5      5.0      1.9 virginica
+148      6.5      3.0      5.2      2.0 virginica
+149      6.2      3.4      5.4      2.3 virginica
+150      5.9      3.0      5.1      1.8 virginica
+> stopifnot( all( sapply(manyDF.in, dim)==c(150,5) ) )
+> stopifnot( all( sapply(manyDF.in, colnames) == colnames(manyDF.in[[ncopies]]) ) )
+> 
+> ## create a data file containing a single dataframe that holds ncopies copies of
+> ## the *columns* of the iris dataframe
+> manyCols.out <- do.call(cbind, rep(list(iris),ncopies))
+> dim(manyCols.out)
+[1] 150 100
+> write.xport(manyCols.out, file="manyCols.xport")
+Warning messages:
+1: In makeSASNames(dfNames) : Truncated 1 long names to 8 characters.
+2: In makeSASNames(colnames(df)) :
+  Truncated 80 long names to 8 characters.
+3: In makeSASNames(colnames(df)) : Made 95 duplicate names unique.
+> 
+> manyCols.in <- read.xport("manyCols.xport")
+> names(manyCols.in)
+  [1] "SEPAL"    "SEPAL.1"  "PETAL"    "PETAL.1"  "SPECI"    "SEPAL.2" 
+  [7] "SEPAL.3"  "PETAL.2"  "PETAL.3"  "SPECI.1"  "SEPAL.4"  "SEPAL.5" 
+ [13] "PETAL.4"  "PETAL.5"  "SPECI.2"  "SEPAL.6"  "SEPAL.7"  "PETAL.6" 
+ [19] "PETAL.7"  "SPECI.3"  "SEPAL.8"  "SEPAL.9"  "PETAL.8"  "PETAL.9" 
+ [25] "SPECI.4"  "SEPAL.10" "SEPAL.11" "PETAL.10" "PETAL.11" "SPECI.5" 
+ [31] "SEPAL.12" "SEPAL.13" "PETAL.12" "PETAL.13" "SPECI.6"  "SEPAL.14"
+ [37] "SEPAL.15" "PETAL.14" "PETAL.15" "SPECI.7"  "SEPAL.16" "SEPAL.17"
+ [43] "PETAL.16" "PETAL.17" "SPECI.8"  "SEPAL.18" "SEPAL.19" "PETAL.18"
+ [49] "PETAL.19" "SPECI.9"  "SEPAL.20" "SEPAL.21" "PETAL.20" "PETAL.21"
+ [55] "SPECI.10" "SEPAL.22" "SEPAL.23" "PETAL.22" "PETAL.23" "SPECI.11"
+ [61] "SEPAL.24" "SEPAL.25" "PETAL.24" "PETAL.25" "SPECI.12" "SEPAL.26"
+ [67] "SEPAL.27" "PETAL.26" "PETAL.27" "SPECI.13" "SEPAL.28" "SEPAL.29"
+ [73] "PETAL.28" "PETAL.29" "SPECI.14" "SEPAL.30" "SEPAL.31" "PETAL.30"
+ [79] "PETAL.31" "SPECI.15" "SEPAL.32" "SEPAL.33" "PETAL.32" "PETAL.33"
+ [85] "SPECI.16" "SEPAL.34" "SEPAL.35" "PETAL.34" "PETAL.35" "SPECI.17"
+ [91] "SEPAL.36" "SEPAL.37" "PETAL.36" "PETAL.37" "SPECI.18" "SEPAL.38"
+ [97] "SEPAL.39" "PETAL.38" "PETAL.39" "SPECI.19"
+> stopifnot(dim(manyCols.in)==dim(manyCols.out))
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  4.509   0.056   4.571 

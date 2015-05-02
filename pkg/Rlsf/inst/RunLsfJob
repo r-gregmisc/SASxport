@@ -1,0 +1,56 @@
+#!/bin/sh 
+
+if [ $# != 1 ]; then
+    echo "Usage: $0 <data file>"
+    exit 1
+fi
+
+if [ -z "$LSB_JOBID" ]; then
+    echo "Not running under LSF ... aborting."
+    exit 1
+fi
+
+lsfenvfile=$1; shift
+lsfreturnfile=${lsfenvfile}.lsf.ret
+
+numhosts=0
+for i in $LSB_HOSTS; do
+    numhosts=`expr $numhosts + 1`
+done
+
+if [ $numhosts -gt 1 ]; then
+    bhostfile="Rlsf_bhosts.$LSB_JOBID"
+    rm -f $bhostfile
+    for i in $LSB_HOSTS; do
+	echo $i >> $bhostfile
+    done
+    lamboot -v $bhostfile
+fi
+
+R --vanilla <<EOF
+
+lsf.ret <- try({
+  newenv <- environment()
+  load("${lsfenvfile}", envir=newenv)
+  for(package.name in rev(packages))
+    {
+	cat("loading package", package.name, "\n")
+	library(package.name, character.only=TRUE)
+    }
+
+  eval(get("lsf.call", env=newenv), envir=newenv)
+})
+
+save(lsf.ret, file = "${lsfreturnfile}")
+
+EOF
+
+rc=$?
+
+if [ $numhosts -gt 1 ]; then
+    lamhalt -v
+    rm -f $bhostfile
+fi
+
+exit $rc
+

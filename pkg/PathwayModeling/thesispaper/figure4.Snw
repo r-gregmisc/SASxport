@@ -1,0 +1,59 @@
+<<fig4,echo=F,eval=F>>=3
+source("R/paperSSQ.R")
+source("R/getModes.R")
+source("R/do.optim.R")
+# source("R/plotDensities.R")
+source("R/plotDensities_nocolor.R")
+output16 <- read.table("data/output16.AllComp.thinned")
+input16 <- read.table("data/input16.dat", header=T)
+attach(input16)
+temp<-output16[sample(1:20000,5000),]
+temp2<-numeric(5000)
+for (i in 1:5000) temp2[i]<-paperSSQ(temp[i,])
+temp<-temp[order(temp2),]
+write.table(temp[1:4750,],file="figures/tempDir/Dsamp.dat",row.names=F,col.names=F)
+mcmcML <- as.numeric(temp[1,-10])
+write.table(mcmcML,file="figures/tempDir/mcmcML.dat",row.names=F,col.names=F)
+modes<-getModes(output16)
+temp<-do.optim(start=modes[-10],scail=modes[-10])
+temp<-do.optim(start=temp$par,scail=temp$par)
+optimML<-temp$par
+write.table(optimML,file="figures/tempDir/optimML.dat",row.names=F,col.names=F)
+SD <- numeric(9)
+for (i in 1:9) SD[i] <- sd(output16[,i])
+# pdf(file="figures/tempDir/densities.pdf",width=6,height=6)
+pdf(file="figures/tempDir/densities_nocolor.pdf",width=6,height=6)
+par(mfrow=c(3,3), mar=c(5,4,1,1)+0.1)
+# plotDensities(output16)
+plotDensities_nocolor(output16)
+# postscript(file="figures/tempDir/densities.eps",width=6,height=6)
+postscript(file="figures/tempDir/densities_nocolor.eps",width=6,height=6)
+par(mfrow=c(3,3), mar=c(5,4,1,1)+0.1)
+# plotDensities(output16)
+plotDensities_nocolor(output16)
+N <- dev.off()
+N <- dev.off()
+par(mfrow=c(1,1))
+detach(input16)
+@
+
+\begin{figure*}
+
+  \centering
+%  \includegraphics[scale=0.8]{figures/tempDir/densities}
+  \includegraphics[scale=0.8]{figures/tempDir/densities_nocolor}
+  \caption[Histograms of the marginal probability distributions]{
+
+    Histograms of the marginal probability distributions for
+    the 5-reaction model generated with the all-components Metropolis
+    algorithm and the 16-point dataset. The curves are normal
+    densities with means equal to the medians of the distributions and
+    variances equal to the variances of the distributions. Broken 
+  % Red 
+    vertical lines indicate the parameters values that minimize the
+    mean squared residuals.
+  }
+  \label{densities}
+
+\end{figure*}
+

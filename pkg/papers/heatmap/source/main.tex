@@ -1,0 +1,191 @@
+\documentclass[12pt, oneside, letterpaper]{article}
+\usepackage{geometry}
+\usepackage[dvips]{graphicx}
+
+\begin{document}
+
+
+\title{Visualizing Gene-Expression data using Heatmaps}
+\author{Nitin Jain,  Klaus F. Ley, Gregory Warnes}
+
+\maketitle
+
+\section*{Abstract}
+Heatmaps are
+effective in displaying a intermediate-size data set (200-250
+genes). 
+
+\section*{Background}
+
+The gene expression data table can be displayed graphically by
+coloring each cell (expression value) with the shades of colors
+depending on its intensity. The dendogram is appended to the colored
+table to indicate the nature of computed relationships among
+genes. Traditionally, the highest expression value (or ratio) is
+displayed with the brightest red, the lowest expression value is
+displayed with brightest shade of green, and all the intermediate
+values with the intermediate shades of red, green or
+black~\cite{Eisen1998}.  Originally, the colors used in heatmap were
+shades of red (hot) and blue (cold), and hence such graphical displays were
+named heatmaps. 
+
+Recently, heatmaps have been extensively used in displaying
+gene-expression data. 
+
+\section*{Scales of display:}
+Data can be displayed in three formats thru heatmaps:
+
+\begin{itemize}
+
+\item \textbf{Log transformed intensities:} 
+	This display is useful in finding which genes are expressed
+	and which are not. However, this diplay has a drawback that
+	if a few genes are expressed in very high amounts, they
+	affect the display of rest of the genes by making them
+	appear in similar shades of color.  Therefore, the visual
+	interpretation of the clusters for most of the genes becomes
+	difficult.
+ 
+\item \textbf{Scaled intensities:} 
+	In this display, the expression intensities of each gene is
+	normalized across all the conditions (i.e. subtracted by
+	mean and divided by the standard deviation). This display is
+	useful in finding the patterns of the gene epression
+	data. However, this method is also unable to differentially
+	display the genes, if one gene is dominant in any one of the
+	conditions.
+
+\item \textbf{Ordinal Scale:}
+	In this approach, each gene is ordered according to its
+	expression values across different conditions. Hence each
+	gene is assigned numbers from 1 to n (number of conditions)
+	in different conditions, where 1 corresponds to the
+	condition in which gene has lowest expression and n
+	corresponds to the condition with highest expression. In
+	heatmap, for each gene, the lowest order (i.e. 1) is
+	displayed by brightest green, and highest order
+	(i.e. `\textit{n}', where \textit{n} is the number of
+	conditions) by brighest red, then the overall display
+	becomes independent of the amount of expression of the gene.
+	We name this display as `ordinal-scale'. This display is
+	quite useful in finding the patterns of gene expression, as
+	every gene possesses the same shades of color irrespective
+	of the intensity.
+
+\end{itemize}
+
+	All the three approaches mentioned above have pros and cons
+	and heatmaps from the above approaches should be interpreted
+	together to get clear understanding.  While heatmaps based
+	on $\log_2$ intensities give the overall picture of which
+	genes are over/under expressed, they often fail to visually
+	convey the pattern of expression due to a few highly
+	over-expressed genes. Heatmaps based on normalized intensity
+	values are better in displaying the patterns, but they may
+	also be misleading in conveying the information due to
+	presence of highly over-expressed genes.  The heatmaps based
+	on the proposed ordinal scale method effectively capture the
+	patterns of gene expression, and are un-effected due to the
+	presence of highly expressed genes. However, heatmaps based
+	on ordinal scale especially overestimate small differences
+	in gene expression.  Therefore, all heatmaps (especially
+	$\log_2$ and ordinal scale) should be investigated
+	carefully.
+
+\section*{Heatmap extensions}
+
+	In order to differentiate between different shades of color,
+	we hae developed ``heatmap.2'', which provides some
+	additional features. One of the most common problems in the
+	original heatmap is the difficulty to distinguish bewtween
+	different shades of color. To address this issue,
+	\textit{heatmap.2} provides an option of drawing a trace
+	line across rows or columns or both. The distance of the
+	line from the center of each color-cell is proportional to
+	the size of the emasurement. Default color of the trace line
+	is cyan.
+
+Heatmap.2 also provides and option to draw a color-key. Density plot
+or histogram can be added to the color-key in order to improve the
+legibility of the key.
+
+Heatmap.2 also provides an option to display statistically
+significant objects by different characters such as *, and different
+models used by other symbols..
+	
+There are a large number of choices available in heatmap:
+
+\section*{Treatment effect estimates vs Raw data}
+        Often people wonder about the relative merits of plotting
+        treatment effects by combining the similar experimental
+        conditions as one group and taking mean/median to represent
+        the expression levels in that group vs plotting individual
+        conditions separately. The advantage of pkotting the raw
+        data is that one can see the variability in the data but it
+        is difficult to visualize the patterns.
+
+\section*{Color scheme}
+	Shades or red, green and black have been accepted as
+	`de-facto' colors in heatmap. However, many people are color
+	blind in differentiating between red and green. Red and
+	green also sometimes give a false impression that elements
+	indicated by red color are more important as red seems to be
+	an eye-catcher. Alternative color combinations are to use
+	shades of red and blue, or blue and yellow. Many people
+	prefer shades of gray to convey the message, as it is
+	independet of choice of colors.
+
+\section*{Element, shape and separator}
+	The elements in heatmap can be circle, rectangles, square or
+	other shape, but typically the most common ones are
+	rectangles.
+
+\section*{Limitations of heatmaps}
+	Hierarchical clustering suffers from a number of pitfalls -
+	depending on the choice of distance metric, different
+	results are obtained. It is not unique, and may give
+	different results in case of ties (i.e. same correlation
+	between more than two groups).
+
+	Sometimes people mistake the proximity between the
+	dendrograms for their closeness in the cluster. However, one
+	must understand that the two branches from a parent node in
+	a heatmap act like hinge, they can be flipped easily without
+	any change in menaning. Distance between two objects in a
+	heatmap is directly proportional to the height of the
+	dendrograms by which they are joined.
+
+
+\section*{Recommendataions}
+
+	The choice of scale is quite important - we believe that
+	ordinal scale is best suited for displaying the patterns. If
+	the aim of the heatmap is to visualize variability in the
+	data, then all the experimental conditions should be used to
+	display the heatmap. However, if the aim is to identify the
+	patterns in the data, then similar groups should be combined
+	in one by mean or median statistics.
+
+   	We believe that blue-white-yellow color scheme
+   	is better than red-black-green or black-grey-white
+   	scheme. 
+
+	The contiguous rectangles are most traditional and common
+	ways for displays in heatmap and are just fine. Further
+	research is needed for effects of shape, elements and
+	separator on human perception.
+
+
+\section*{Discussions}
+
+	Despite some of the pitfalls of displaying gene-expression
+	data by heatmaps, they are one of the most common choices
+	currently available. All the three methods of display (based
+	on absolute intensity, scaled intensity or ordinal scale)
+	should be considered together to make inferences from the
+	data.
+
+\end{document}
+
+
+

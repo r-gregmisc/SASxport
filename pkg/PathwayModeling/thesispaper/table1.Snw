@@ -1,0 +1,25 @@
+\begin{table}
+ \begin{center}
+    \caption{Rate constants used in the Gillespie simulator}
+    \begin{tabular}{c|r}
+      rate constant & value \\
+      \hline
+      $k_1$ & 1.600 \\
+      $k_2$ & 0.540 \\
+      $k_3$ & 19.500 \\
+      $k_4$ & 2.125 \\
+      $k_5$ & 0.190 \\
+      $k_6$ & 8.460 \\
+      $k_7$ & 2.077 \\
+      $k_8$ & 0.090 \\
+      $k_9$ & 4.560 \\
+      $k_{10}$ & 1.400 \\
+      $k_{11}$ & 0.106 \\
+      $k_{12}$ & 3.670 \\
+      $k_{13}$ & 1.640 \\
+      $k_{14}$ & 0.400 \\
+      \hline
+    \end{tabular}
+    \label{ki}
+  \end{center}
+\end{table}

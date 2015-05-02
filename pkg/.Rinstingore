@@ -1,0 +1,4 @@
+doc/.*[.]sty
+doc/.*[.]tex
+doc/.*[.]log
+doc/.*[.]aux

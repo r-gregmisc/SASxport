@@ -1,0 +1,73 @@
+<html><head><title>Export Graph(s) to MS-Word</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>exportGraphToWord(MSOfficeUtil)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   exportGraphToWord">
+<param name="keyword" value=" Export Graph(s) to MS-Word">
+</object>
+
+
+<h2>Export Graph(s) to MS-Word</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Export Graph(s) to Word.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>exportGraphToWord(object, file.name, overwrite=TRUE)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+A list of lattice graphs. </td></tr>
+<tr valign="top"><td><code>file.name</code></td>
+<td>
+String with full path and Word file name. </td></tr>
+<tr valign="top"><td><code>overwrite</code></td>
+<td>
+If the file exists and overwrite is FALSE, will
+append graphs to the beginning of the Word document.  Otherwise, the
+file will be overwritten.</td></tr>
+</table>
+
+<h3>Author(s)</h3>
+
+<p>
+Steven Novick &lt;steven.j.novick@gsk.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  library(lattice)
+  p1 = xyplot(rnorm(10)~1:10, main="Plot 1")
+  p2 = xyplot(rnorm(10)~(-10:(-1)), col="red", type="l", main="Plot 2",
+              xlab="Hi there")
+
+  exportGraphToWord(list(p1, p2), "C:/MyTest1.doc")
+  
+  lset()  ## For a white background.
+  exportGraphToWord(list(p1, p2), "C:/MyTest2.doc")
+  
+  p3 = xyplot(rnorm(10)~1:10, main="Plot 3")
+  p4 = xyplot(rnorm(10)~(-10:(-1)), col="red", type="l", main="Plot 4",
+              xlab="Hi there")
+  exportGraphToWord(list(p1, p2), "C:/MyTest2.doc", overwrite=FALSE)
+</pre>
+
+
+
+<hr><div align="center"><a href="00Index.html">[Package Contents]</a></div>
+
+</body></html>

@@ -1,0 +1,12 @@
+export(
+       sii,
+       plot.SII,
+       print.SII,
+       summary.SII
+       )
+
+importFrom("utils", "data")
+
+S3method(plot, SII)
+S3method(print, SII)
+S3method(summary, SII)

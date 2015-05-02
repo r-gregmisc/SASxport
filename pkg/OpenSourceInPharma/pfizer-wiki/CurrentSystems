@@ -1,0 +1,19 @@
+Wiki-Safetybelt: 1141838672.17
+Type: stx
+Log: 
+
+This page lists current software systems that depend on R.
+
+  - **Name (Description) URL**
+ 
+  - MiDAS (MIcroarray Data Analysis System) http://rstatserver.pfizer.com/ExpressionProfilingTools/StandardAffymetrixAnalysis 
+
+  - WebStat/RStatServer (System for deploying statistical calculations to the web) http://rstatserver.pfizer.com/
+
+  - PG Genetics Database (Database for Pharmocogenomics genetic information) 
+
+  - PharmaMatrix 
+
+  - ePharm (PK/PD Analysis workflow tool)
+
+  - 

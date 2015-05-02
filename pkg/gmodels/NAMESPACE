@@ -1,0 +1,37 @@
+
+export(
+       CrossTable,
+       ci,
+       ci.binom,
+       coefFrame,
+       estimable,
+       fast.prcomp,
+       fast.svd,
+       fit.contrast,
+       glh.test,
+       make.contrasts,
+       print.glh.test,
+       summary.glh.test
+)
+
+S3method(ci, default)
+S3method(ci, binom)
+S3method(ci, lm)
+S3method(ci, lme)
+S3method(ci, mer)
+S3method(ci, estimable)
+
+S3method(fit.contrast, lm)
+S3method(fit.contrast, lme)
+S3method(fit.contrast, mer)
+
+S3method(estimable, default)
+S3method(estimable, mer)
+S3method(estimable, mlm)
+
+S3method(print, glh.test)
+S3method(summary, glh.test)
+
+importFrom(MASS, ginv)
+importFrom(gdata, frameApply)
+importFrom(gdata, nobs)

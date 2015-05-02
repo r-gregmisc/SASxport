@@ -1,0 +1,9 @@
+Wiki-Safetybelt: 1141837623.94
+Type: stx
+Log: 
+
+This section lists feature enhancements that would improve the utility of R for *current* projects.
+
+  - Improved support for Mixed models.
+
+  - Improved support for exporting image formats (w/o requiring X11!), in particular windows meta-files (WMF) on Unix.

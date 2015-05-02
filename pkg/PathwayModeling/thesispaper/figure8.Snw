@@ -1,0 +1,41 @@
+<<fig8, echo=F,eval=F>>=7
+source("R/getMSDvsEvals.R")
+# source("R/plotMSD16.R")
+source("R/plotMSD16_nocolor.R")
+source('R/paperSSQ.R')
+input16 <- read.table('data/input16.dat',header=T)
+attach(input16)
+OneComp.MSD.dat <- read.table("data/1comp.MSD.dat")
+AllComp.MSD.dat <- read.table("data/AllComp.MSD.dat")
+for (i in 1:10) {
+file <- sub('#',as.character(i),'NKC.MSD.dat#')
+assign(file, read.table(paste("data/",file,sep="")))
+}
+temp1 <- getMSDvsEvals(OneComp.MSD.dat,20,250)
+temp2 <- getMSDvsEvals(AllComp.MSD.dat,20,1)
+temp3 <- getMSDvsEvals(NKC.MSD.dat1,2,20)
+for (i in 2:10) {
+    file <- sub('#',as.character(i),'NKC.MSD.dat#')
+    temp3 <- temp3 + getMSDvsEvals(eval(as.name(file)),2,20)
+}
+temp3 <- temp3/10
+# pdf(file="figures/tempDir/MSR16.pdf",width=9,height=6)
+# postscript(file="figures/tempDir/MSR16.eps",width=9,height=6)
+pdf(file="figures/tempDir/MSR16_nocolor.pdf",width=9,height=6)
+plotMSD16_nocolor()
+N <- dev.off()
+postscript(file="figures/tempDir/MSR16_nocolor.eps",width=9,height=6)
+# plotMSD16()
+plotMSD16_nocolor()
+N <- dev.off()
+detach(input16)
+@
+\begin{figure*}
+  \centering
+%    \includegraphics[scale=0.5]{figures/tempDir/MSR16}
+    \includegraphics[scale=0.5]{figures/tempDir/MSR16_nocolor}
+  \caption[Mean squared residuals vs. number of likelihood
+  evaluations]{Mean squared residuals vs. number of likelihood
+    evaluations for the 5-reaction model}
+  \label{SSQvsIter}
+\end{figure*}

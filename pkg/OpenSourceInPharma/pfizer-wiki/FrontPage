@@ -1,0 +1,65 @@
+Wiki-Safetybelt: 1141838638.48
+Type: stx
+Log: 
+
+**Commercial R Support Wiki!** 
+
+  The purpose of this site is to find out what we want from a commercially supported version of R.  IE, what   
+  features, what documentation, what support options, etc. in order to make the best use of R.  I have been 
+  talking with both Insightful and Scientific Computing Associates, Inc (SCAI) about this for a couple of years, 
+  and both have expressed an interest in providing this service, provided that we can outline exactly what we 
+  want.
+
+  I expect that once we have outlined our desires, this information will get propagated to them via three 
+  mechanisms:
+
+  1. An explicit "Request for Proposals"
+
+  2. A talk at JSM 2006  in August (Abstract is in GDAS as 2006-1254743 "Open Source Software in Pharmaceutical 
+     Research")
+
+  3. Direct discussion with SCAI and Insightful.
+
+**Sections**
+
+  How is R Used? - Client + Need + R Tasks + R Packages Used
+
+  - CurrentUse
+
+  - PlannedUse
+
+  - FutureUse
+
+  What Software Systems are using R? 
+
+  - CurrentSystems 
+
+  - PlannedSystems 
+
+  - FutureSystems 
+
+  What should commercial support provide?'
+
+  - CurrentNeeds
+
+  - PlannedNeeds
+
+  - FutureNeeds
+
+  What additional features or packages would be helpful?
+
+  - CurrentFeatureRequests
+
+  - PlannedFeatureRequests
+
+  - FutureFeatureRequestsNeeds
+
+Information on using this Wiki
+
+   - To add a comment, use the text box at the bottom of each page.
+
+   - To edit the contents of a page, click on the 'edit' button at the upper right of the text area.
+
+   - Here is the HelpPage.
+
+   - "Additional Zwiki documentation": http://zwiki.org .

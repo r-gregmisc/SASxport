@@ -1,0 +1,90 @@
+\section{Introduction}
+
+%% \begin{verbatim}
+%% $Id$
+%% \end{verbatim}
+
+We know a great deal about the individual components of living
+organisms but much less about the properties of the systems of which
+they are a part. Our ignorance in this regard prevents us from
+developing a deeper theoretical understanding of living systems and
+from developing more effective methods for altering the system
+behavior in beneficial ways.
+
+In order to gain some insight into the properties of biological
+systems, we would like to use quantitative models that describe the
+processes at the molecular level.  Specifically, we would like to
+develop methods that can be used to deduce the kinetic parameters of
+enzyme-catalyzed reactions. With this information, it should be
+possible to identify the most effective control points in a pathway
+and modify the pathway behavior in predictable ways.
+
+An example of how a model of a biochemical pathway could be used is in
+the elucidation of a mechanism for the pathology seen with diabetes.
+There are thought to be four mechanisms that explain hyperglycemic
+toxicity in diabetes \cite{Oates02,Brownlee01}. One mechanism is
+illustrated in Figure~\ref{glycolysis}.
+
+\SweaveInput{figure1}
+
+Some of the damage to tissue components seen in diabetes is thought to
+be the result of reactions with glycolytic intermediates such as
+methylglyoxal. Nishikawa et al. \cite{Nishikawa00} have hypothesized
+that this is caused by the increased catabolism of glucose in diabetes
+which leads to an increase of superoxide anion ($O_2^-$). Superoxide
+is known to inhibit the enzyme glyceraldehyde-3-phosphate
+dehydrogenase (G3PDH) by about 50\% under these conditions. The
+inhibition of this enzyme then increases the concentration of
+glyceraldehyde-3-phosphate (G3P) and dihydroxyacetone phosphate (DHAP)
+which breaks down to form methylglyoxal, an active aldehyde which
+readily reacts with and inactivates proteins. To test this hypothesis
+we need to be able to answer questions such as: Is the observed
+inhibition of glyceraldehyde-3-phosphate dehydrogenase by 50\%
+sufficient to explain the observed increase in methylglyoxal
+concentration? If not, then what other mechanisms might be operative?
+What is the most effective way to modulate these reactions?  We
+address these questions by developing analytical methods that will
+allow us to characterize these types of biochemical systems at the
+molecular level.
+
+We used a Bayesian modeling approach with fitting via Markov
+chain Monte Carlo (MCMC) methods \cite{Metropolis53,Gilks95} to
+estimate the kinetic parameters of the enzymes in a metabolic pathway.
+With this approach we can combine known information about the pathway
+with newly-generated experimental data to produce the joint
+probability density of all of the parameters. This joint probability
+density can then be used to answer various questions about the
+behavior of the system.
+
+We explored the utility of the Bayesian approach using a
+simulation technique: First we generated data for hypothetical
+sequences of enzymatic reactions, and then we fit models to this data
+using Bayesian methods.  The biochemical data is generated using
+Gillespie's stochastic simulation algorithm \cite{Gillespie77}. This
+algorithm is based on well-established chemical kinetic theory and
+thus has a firmer physical basis than alternative methods based on
+differential equations. It also naturally incorporates the
+fluctuations that result from the probabilistic nature of chemical
+reactions.  The algorithm has been validated with data from many
+chemical reactions and has been used in many biochemical simulators,
+e.g., \cite{Vcell,Arkin98}. While the algorithm appears to give good
+results with biochemical reactions, it should be borne in mind that
+the underlying kinetic theory assumes well-mixed, freely diffusing
+reactants, an assumption that will not always be valid with
+biochemical systems.
+
+We simulate perturbation experiments. In these experiments, the
+concentration of the first reactant in a pathway is transiently
+increased and the concentrations of all the reactants is monitored as
+they return to a steady state. This type of experiment is quite
+feasible with cultured animal cells or suspensions of microbial cells
+such as yeast, and it yields information on the behavior of the
+pathway as a single system.
+
+MCMC simulation was found to be a very useful method for fitting
+systems of equations to data. It is capable of fitting several
+equations simultaneously, and does not require an excessive number of
+data points. A very attractive feature of the method is that it
+produces realistic estimates of the variance and covariance of the
+parameters which are useful for inference.
+

@@ -1,0 +1,138 @@
+%
+%  dchem.sty   Donald Arseneau       asnd@reg.triumf.ca
+%
+%  To typeset chemical equations, use $\chem...$, or for displays
+%  use \begin{reaction}...\end{reaction}, \begin{chemarray} ... 
+%  \end{chemarray}, or \begin{chemarray*}...\end{chemarray*}: these
+%  correspond to {equation} and {eqnarray}.
+%  To switch to regular math inside chemistry, \cit (chemistry italic):
+%  \begin{reaction}
+%    H + O_2 \eqbm^{\cit k\sub{a}}_{\cit k\sub{-a}} HO_2 
+%  \end{reaction}
+%
+\def\chem{\fam\z@\everymath{\fam\z@}}% like \rm but don't have to repeat 
+\def\cit{\fam\m@ne}% brings back regular math in \rm math mode.
+%
+\catcode`\*=11 % make * letter for easy definition of * environment
+\newenvironment{chemarray}{\chem
+ \@ifundefined{thereaction}{}{\let\theequation\thereaction}%
+ \@ifundefined{c@reaction}{}{\let\c@equation\c@reaction}%
+ \@ifundefined{p@reaction}{}{\let\p@equation\p@reaction}%
+\eqnarray}{\endeqnarray\global\@ignoretrue}
+\newenvironment{chemarray*}{\chem
+ \@ifundefined{thereaction}{}{\let\theequation\thereaction}%
+ \@ifundefined{c@reaction}{}{\let\c@equation\c@reaction}%
+ \@ifundefined{p@reaction}{}{\let\p@equation\p@reaction}%
+\eqnarray*}{\endeqnarray*\global\@ignoretrue}
+\newenvironment{reaction}{\chem
+ \@ifundefined{thereaction}{}{\let\theequation\thereaction}%
+ \@ifundefined{c@reaction}{}{\let\c@equation\c@reaction}%
+ \@ifundefined{p@reaction}{}{\let\p@equation\p@reaction}%
+\equation}{\endequation\global\@ignoretrue}
+\catcode`\*=12 % make * other again
+% 
+%  chemarray reactions are labeled as equations unless you redefine
+%  \thereaction (to change the format, but use the same counter),
+%  and/or create the new counter: \newcounter{reaction}.
+%  e.g.:  \newcommand\thereaction{R\arabic{reaction}}
+%         \newcounter{reaction}
+%-------
+%
+%  Roman subscripts: \sub 
+%
+\def\sub#1{_{\fam\z@#1}}
+% 
+%From: asnd@reg.triumf.ca (Donald Arseneau)
+%Newsgroups: comp.text.tex
+%Subject: Re: long version of \rightleftharpoons
+%Date: 16 Aug 1993 02:03 PST
+%Keywords: \rightleftharpoons \yields \eqbm
+%
+%mroussel@alchemy.chem.utoronto.ca (Marc Roussel) posted my macros
+%for \yields and \eqbm (equilibrium).  Seeing them that way made me
+%notice a mistake I have learned to avoid:
+%
+%>\def\teStSS{\ifcat\noexpand\next_\let\next\aPPscriPt  % Use \noexpand in case
+%>      \else \ifcat\noexpand\next^\let\next\aPPscriPt  % \next is a macro.
+%>            \else \let\next\egroup
+%>      \fi   \fi   \next}
+%
+%The problem is if "\next" is \if__, \else, \or \fi, where it is not
+%safe to have "\next" visible in text being skipped over.  (This has
+%come up in the recent "HOWIF" thread.)  I have replaced this definition
+%in my (LaTeX version) files with:
+%
+%\def\teStSS{\@ifnextchar^{\aPPscriPt}{\@ifnextchar_{\aPPscriPt}{\egroup}}}
+%
+%which is also simpler (but a bit slower).
+%
+%Just for completeness, here are the whole set of definitions for the 
+%labelled yields and equilibrium symbols
+%
+%  Chemical relations that take labels (scripts) above and below
+%  like mathops.
+%  \eqbm   -- long equilibrium sign with forward (^) and backward (_) labels.
+%  \Eqbm   -- longer... , can optionally specify length in [ ].
+%  \yields -- long right arrow with a labels above (^) and below (_).
+%  \Yields -- longer... , can optionally specify length in [ ].
+%
+\def\yields{\labeledrel\longrightarrow}
+\def\Yields{\@ifnextchar[{\YieldS}{\YieldS[1cm]}}
+\def\YieldS[#1]{\labeledrel{\hbox to #1{$\m@th \mathsm@sh{}-\b@rfill
+    \mathord\rightarrow$}}} % partly smashed \rightarrowfill
+\def\eqbm{\labeledrel{\mathrel{\mathpalette\rlPOON{}}}}
+\def\Eqbm{\@ifnextchar[{\EqbM}{\EqbM[1cm]}}
+\def\EqbM[#1]{\labeledrel{\mathrel{\let\joinrel\b@rfill
+   \rlPOON{\textstyle}{to#1}}}}
+%
+\def\labeledrel#1{\mathrel\bgroup\mathop{#1}\limits\teStSS}
+\def\teStSS{\@ifnextchar^{\aPPscriPt}{\@ifnextchar_{\aPPscriPt}{\egroup}}}
+\def\aPPscriPt#1#2{#1{#2}\teStSS}
+%
+\def\rlPOON#1#2{\vcenter{\hbox{\ooalign{\raise2.3\p@
+        \hbox#2{$\m@th#1\relbar\joinrel\rightharpoonup$}\cr
+        \hbox#2{$\m@th#1\leftharpoondown\joinrel\relbar$}}}}}
+\def\b@rfill{\setbox\z@\hbox{$\mkern-2mu\mathord-\mkern-2mu$}\ht\z@\z@\dp\z@\z@
+        \mkern-6mu\cleaders\copy\z@\hfill\mkern-6mu}
+%
+%Donald Arseneau                         asnd@reg.triumf.ca
+%
+\def\excited{\mbox{$^{\textstyle *}$}}
+\def\eV{\mbox{e\kern-.05emV}}
+%%%%%%%%%
+\endinput
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  the following is the original one but may be wrong. corrections
+%         are set above.......
+%
+%  ====== Unstretchable labeled Yields and Eqbm =======
+%
+%  Chemical relations that take labels (scripts) above and below
+%  like mathops.
+%  \eqbm   -- long equilibrium sign with forward (^) and backward (_) labels.
+%  \Eqbm   -- longer... , can optionally specify length in [ ].
+%  \yields -- long right arrow with a labels above (^) and below (_).
+%  \Yields -- longer... , can optionally specify length in [ ].
+%
+\def\yields{\labeledrel\longrightarrow}
+\def\Yields{\@ifnextchar[{\YieldS}{\YieldS[1cm]}}
+\def\YieldS[#1]{\labeledrel{\hbox to #1{$\m@th \mathsm@sh{}-\b@rfill
+    \mathord\rightarrow$}}} % partly smashed \rightarrowfill
+\def\eqbm{\labeledrel{\mathrel{\mathpalette\rlPOON{}}}}
+\def\Eqbm{\@ifnextchar[{\EqbM}{\EqbM[1cm]}}
+\def\EqbM[#1]{\labeledrel{\mathrel{\let\joinrel\b@rfill
+   \rlPOON{\textstyle}{to#1}}}}
+%
+\def\labeledrel#1{\mathrel\bgroup\mathop{#1}\limits\futurelet\next\teStSS}
+\def\teStSS{\ifcat\noexpand\next_\let\next\aPPscriPt  % Use \noexpand in case
+      \else \ifcat\noexpand\next^\let\next\aPPscriPt  % \next is a macro.
+            \else \let\next\egroup
+      \fi   \fi   \next}
+\def\aPPscriPt#1#2{#1{#2}\futurelet\next\teStSS}
+%
+\def\rlPOON#1#2{\vcenter{\hbox{\ooalign{\raise2.3\p@
+        \hbox#2{$\m@th#1\relbar\joinrel\rightharpoonup$}\cr
+        \hbox#2{$\m@th#1\leftharpoondown\joinrel\relbar$}}}}}
+\def\b@rfill{\setbox\z@\hbox{$\mkern-2mu\mathord-\mkern-2mu$}\ht\z@\z@\dp\z@\z@
+        \mkern-6mu\cleaders\copy\z@\hfill\mkern-6mu}

@@ -1,0 +1,123 @@
+
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(SASxport)
+Loading required package: chron
+Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
+Loading required package: survival
+Loading required package: splines
+Loading required package: Formula
+
+Attaching package: 'Hmisc'
+
+The following objects are masked from 'package:base':
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+
+Loaded SASxport version 1.5.0 (2014-07-21).
+
+  Type `?SASxport' for usage information.
+
+> Sys.setenv("TZ"="GMT")
+> 
+> lookup.xport("Alfalfa.xpt")
+
+SAS xport file
+--------------
+Filename: `Alfalfa.xpt'
+
+Variables in data set `SPEC':
+ dataset   name      type format flength fdigits iformat iflength ifdigits
+    SPEC    POP character              0       0                0        0
+    SPEC SAMPLE   numeric              0       0                0        0
+    SPEC    REP   numeric              0       0                0        0
+    SPEC SEEDWT   numeric              0       0                0        0
+    SPEC  HARV1   numeric              0       0                0        0
+    SPEC  HARV2   numeric              0       0                0        0
+ label nobs
+         40
+         40
+         40
+         40
+         40
+         40
+
+> 
+> Alfalfa <- read.xport("Alfalfa.xpt")
+> 
+> summary(Alfalfa)
+  POP         SAMPLE         REP           SEEDWT          HARV1      
+ MAX:20   Min.   :0.0   Min.   :1.00   Min.   :35.00   Min.   :120.6  
+ min:20   1st Qu.:2.0   1st Qu.:1.75   1st Qu.:47.75   1st Qu.:148.3  
+          Median :4.5   Median :2.50   Median :59.00   Median :165.8  
+          Mean   :4.5   Mean   :2.50   Mean   :56.08   Mean   :163.0  
+          3rd Qu.:7.0   3rd Qu.:3.25   3rd Qu.:62.25   3rd Qu.:176.4  
+          Max.   :9.0   Max.   :4.00   Max.   :75.00   Max.   :193.4  
+     HARV2      
+ Min.   :129.1  
+ 1st Qu.:150.6  
+ Median :163.2  
+ Mean   :167.1  
+ 3rd Qu.:179.6  
+ Max.   :235.3  
+> 
+> ## test data provided by FRohde@birchdavis.com
+> 
+> lookup.xport("test.xpt")
+
+SAS xport file
+--------------
+Filename: `test.xpt'
+
+Variables in data set `W.TEST':
+ dataset name      type format flength fdigits iformat iflength ifdigits
+  W.TEST RACE character   RACE       0       0                0        0
+  W.TEST  AGE   numeric              0       0                0        0
+  W.TEST   D1   numeric              0       0                0        0
+  W.TEST  DT1   numeric              0       0                0        0
+  W.TEST   T1   numeric              0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
+
+> testdata <- read.xport("test.xpt")
+> summary(testdata)
+     RACE                AGE              D1             DT1           
+ Length:2           Min.   :30.00   Min.   :15402   Min.   :1.331e+09  
+ Class :character   1st Qu.:30.25   1st Qu.:15425   1st Qu.:1.333e+09  
+ Mode  :character   Median :30.50   Median :15448   Median :1.335e+09  
+                    Mean   :30.50   Mean   :15448   Mean   :1.335e+09  
+                    3rd Qu.:30.75   3rd Qu.:15471   3rd Qu.:1.337e+09  
+                    Max.   :31.00   Max.   :15494   Max.   :1.339e+09  
+       T1       
+ Min.   :40425  
+ 1st Qu.:40432  
+ Median :40439  
+ Mean   :40439  
+ 3rd Qu.:40446  
+ Max.   :40453  
+> 
+> q()
+> proc.time()
+   user  system elapsed 
+  0.592   0.041   1.087 

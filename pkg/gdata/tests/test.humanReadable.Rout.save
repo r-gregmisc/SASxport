@@ -1,0 +1,238 @@
+
+R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(gdata)
+gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
+
+gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
+
+Attaching package: 'gdata'
+
+The following object is masked from 'package:stats':
+
+    nobs
+
+The following object is masked from 'package:utils':
+
+    object.size
+
+> 
+> options(humanReadable=FALSE)
+> 
+> set.seed(123456)
+> 
+> baseSI <- 10
+> powerSI <- seq(from=0, to=27, by=3)
+> SI0 <- (baseSI)^powerSI
+> k <- length(SI0) - 1
+> SI1 <- SI0 - SI0 / c(2, runif(n=k, min=1.01, max=5.99))
+> SI2 <- SI0 + SI0 / c(2, runif(n=k, min=1.01, max=5.99))
+> 
+> baseIEC <- 2
+> powerIEC <- seq(from=0, to=90, by=10)
+> IEC0 <- (baseIEC)^powerIEC
+> IEC1 <- IEC0 - IEC0 / c(2, runif(n=k, min=1.01, max=5.99))
+> IEC2 <- IEC0 + IEC0 / c(2, runif(n=k, min=1.01, max=5.99))
+> 
+> # Auto units, specify width
+> cbind(humanReadable(x=SI2,  standard="SI",   width=7),
++       humanReadable(x=SI2,  standard="SI",   width=5),
++       humanReadable(x=SI2,  standard="SI",   width=3),
++       humanReadable(x=IEC2, standard="IEC",  width=7),
++       humanReadable(x=IEC2, standard="IEC",  width=5),
++       humanReadable(x=IEC2, standard="IEC",  width=3),
++       humanReadable(x=IEC2, standard="Unix", width=7),
++       humanReadable(x=IEC2, standard="Unix", width=5),
++       humanReadable(x=IEC2, standard="Unix", width=3))
+      [,1]         [,2]       [,3]      [,4]          [,5]        [,6]      
+ [1,] "      2 B " "    2 B " "   2 B " "      2 B  " "    2 B  " "   2 B  "
+ [2,] "1.54215 kB" "1.542 kB" " 1.5 kB" "1.18582 KiB" "1.186 KiB" " 1.2 KiB"
+ [3,] "1.20064 MB" "1.201 MB" " 1.2 MB" "1.19003 MiB" " 1.19 MiB" " 1.2 MiB"
+ [4,] "1.25207 GB" "1.252 GB" " 1.3 GB" "1.54448 GiB" "1.544 GiB" " 1.5 GiB"
+ [5,] "1.18121 TB" "1.181 TB" " 1.2 TB" "1.27667 TiB" "1.277 TiB" " 1.3 TiB"
+ [6,] " 1.1853 PB" "1.185 PB" " 1.2 PB" "1.18733 PiB" "1.187 PiB" " 1.2 PiB"
+ [7,] " 1.1678 EB" "1.168 EB" " 1.2 EB" "1.46271 EiB" "1.463 EiB" " 1.5 EiB"
+ [8,] "1.18275 ZB" "1.183 ZB" " 1.2 ZB" "1.62382 ZiB" "1.624 ZiB" " 1.6 ZiB"
+ [9,] "1.18568 YB" "1.186 YB" " 1.2 YB" "1.19557 YiB" "1.196 YiB" " 1.2 YiB"
+[10,] "1501.49 YB" " 1501 YB" "1501 YB" "1750.35 YiB" " 1750 YiB" "1750 YiB"
+      [,7]        [,8]      [,9]    
+ [1,] "      2 B" "    2 B" "   2 B"
+ [2,] "1.18582 K" "1.186 K" " 1.2 K"
+ [3,] "1.19003 M" " 1.19 M" " 1.2 M"
+ [4,] "1.54448 G" "1.544 G" " 1.5 G"
+ [5,] "1.27667 T" "1.277 T" " 1.3 T"
+ [6,] "1.18733 P" "1.187 P" " 1.2 P"
+ [7,] "1.46271 E" "1.463 E" " 1.5 E"
+ [8,] "1.62382 Z" "1.624 Z" " 1.6 Z"
+ [9,] "1.19557 Y" "1.196 Y" " 1.2 Y"
+[10,] "1750.35 Y" " 1750 Y" "1750 Y"
+> 
+> # Auto units, specify digits
+> cbind(humanReadable(x=SI2,  standard="SI",   width=NULL, digits=7),
++       humanReadable(x=SI2,  standard="SI",   width=NULL, digits=3),
++       humanReadable(x=SI2,  standard="SI",   width=NULL, digits=2),
++       humanReadable(x=SI2,  standard="SI",   width=NULL, digits=1),
++       humanReadable(x=IEC2, standard="IEC",  width=NULL, digits=7),
++       humanReadable(x=IEC2, standard="IEC",  width=NULL, digits=3),
++       humanReadable(x=IEC2, standard="IEC",  width=NULL, digits=2),
++       humanReadable(x=IEC2, standard="IEC",  width=NULL, digits=1),
++       humanReadable(x=IEC2, standard="Unix", width=NULL, digits=7),
++       humanReadable(x=IEC2, standard="Unix", width=NULL, digits=3),
++       humanReadable(x=IEC2, standard="Unix", width=NULL, digits=2),
++       humanReadable(x=IEC2, standard="Unix", width=NULL, digits=1))
+      [,1]              [,2]          [,3]         [,4]       
+ [1,] "   1.5000000 B " "   1.500 B " "   1.50 B " "   1.5 B "
+ [2,] "   1.5421535 kB" "   1.542 kB" "   1.54 kB" "   1.5 kB"
+ [3,] "   1.2006426 MB" "   1.201 MB" "   1.20 MB" "   1.2 MB"
+ [4,] "   1.2520737 GB" "   1.252 GB" "   1.25 GB" "   1.3 GB"
+ [5,] "   1.1812105 TB" "   1.181 TB" "   1.18 TB" "   1.2 TB"
+ [6,] "   1.1853010 PB" "   1.185 PB" "   1.19 PB" "   1.2 PB"
+ [7,] "   1.1678048 EB" "   1.168 EB" "   1.17 EB" "   1.2 EB"
+ [8,] "   1.1827531 ZB" "   1.183 ZB" "   1.18 ZB" "   1.2 ZB"
+ [9,] "   1.1856788 YB" "   1.186 YB" "   1.19 YB" "   1.2 YB"
+[10,] "1501.4852409 YB" "1501.485 YB" "1501.49 YB" "1501.5 YB"
+      [,5]               [,6]           [,7]          [,8]        
+ [1,] "   1.5000000 B  " "   1.500 B  " "   1.50 B  " "   1.5 B  "
+ [2,] "   1.1858248 KiB" "   1.186 KiB" "   1.19 KiB" "   1.2 KiB"
+ [3,] "   1.1900302 MiB" "   1.190 MiB" "   1.19 MiB" "   1.2 MiB"
+ [4,] "   1.5444791 GiB" "   1.544 GiB" "   1.54 GiB" "   1.5 GiB"
+ [5,] "   1.2766723 TiB" "   1.277 TiB" "   1.28 TiB" "   1.3 TiB"
+ [6,] "   1.1873270 PiB" "   1.187 PiB" "   1.19 PiB" "   1.2 PiB"
+ [7,] "   1.4627144 EiB" "   1.463 EiB" "   1.46 EiB" "   1.5 EiB"
+ [8,] "   1.6238214 ZiB" "   1.624 ZiB" "   1.62 ZiB" "   1.6 ZiB"
+ [9,] "   1.1955693 YiB" "   1.196 YiB" "   1.20 YiB" "   1.2 YiB"
+[10,] "1750.3547972 YiB" "1750.355 YiB" "1750.35 YiB" "1750.4 YiB"
+      [,9]             [,10]        [,11]       [,12]     
+ [1,] "   1.5000000 B" "   1.500 B" "   1.50 B" "   1.5 B"
+ [2,] "   1.1858248 K" "   1.186 K" "   1.19 K" "   1.2 K"
+ [3,] "   1.1900302 M" "   1.190 M" "   1.19 M" "   1.2 M"
+ [4,] "   1.5444791 G" "   1.544 G" "   1.54 G" "   1.5 G"
+ [5,] "   1.2766723 T" "   1.277 T" "   1.28 T" "   1.3 T"
+ [6,] "   1.1873270 P" "   1.187 P" "   1.19 P" "   1.2 P"
+ [7,] "   1.4627144 E" "   1.463 E" "   1.46 E" "   1.5 E"
+ [8,] "   1.6238214 Z" "   1.624 Z" "   1.62 Z" "   1.6 Z"
+ [9,] "   1.1955693 Y" "   1.196 Y" "   1.20 Y" "   1.2 Y"
+[10,] "1750.3547972 Y" "1750.355 Y" "1750.35 Y" "1750.4 Y"
+> 
+> # Single unit, specify width
+> cbind(humanReadable(x=SI1,  units="GB",  standard="SI",   width=7),
++       humanReadable(x=SI1,  units="GB",  standard="SI",   width=5),
++       humanReadable(x=SI1,  units="GB",  standard="SI",   width=3),
++       humanReadable(x=IEC1, units="GiB", standard="IEC",  width=7),
++       humanReadable(x=IEC1, units="GiB", standard="IEC",  width=5),
++       humanReadable(x=IEC1, units="GiB", standard="IEC",  width=3),
++       humanReadable(x=IEC1, units="G",   standard="Unix", width=7),
++       humanReadable(x=IEC1, units="G",   standard="Unix", width=5),
++       humanReadable(x=IEC1, units="G",   standard="Unix", width=3)
++       )
+      [,1]       [,2]       [,3]       [,4]        [,5]        [,6]       
+ [1,] "5e-10 GB" "5e-10 GB" "5e-10 GB" "5e-10 GiB" "5e-10 GiB" "5e-10 GiB"
+ [2,] "8e-07 GB" "8e-07 GB" "8e-07 GB" "6e-07 GiB" "6e-07 GiB" "6e-07 GiB"
+ [3,] "8e-04 GB" "8e-04 GB" "8e-04 GB" "8e-04 GiB" "8e-04 GiB" "8e-04 GiB"
+ [4,] "7e-01 GB" "7e-01 GB" "7e-01 GB" "4e-01 GiB" "4e-01 GiB" "4e-01 GiB"
+ [5,] "6e+02 GB" "6e+02 GB" "6e+02 GB" "3e+02 GiB" "3e+02 GiB" "3e+02 GiB"
+ [6,] "6e+05 GB" "6e+05 GB" "6e+05 GB" "4e+05 GiB" "4e+05 GiB" "4e+05 GiB"
+ [7,] "5e+08 GB" "5e+08 GB" "5e+08 GB" "5e+08 GiB" "5e+08 GiB" "5e+08 GiB"
+ [8,] "7e+11 GB" "7e+11 GB" "7e+11 GB" "8e+11 GiB" "8e+11 GiB" "8e+11 GiB"
+ [9,] "3e+14 GB" "3e+14 GB" "3e+14 GB" "9e+14 GiB" "9e+14 GiB" "9e+14 GiB"
+[10,] "8e+17 GB" "8e+17 GB" "8e+17 GB" "9e+17 GiB" "9e+17 GiB" "9e+17 GiB"
+      [,7]      [,8]      [,9]     
+ [1,] "5e-10 G" "5e-10 G" "5e-10 G"
+ [2,] "6e-07 G" "6e-07 G" "6e-07 G"
+ [3,] "8e-04 G" "8e-04 G" "8e-04 G"
+ [4,] "4e-01 G" "4e-01 G" "4e-01 G"
+ [5,] "3e+02 G" "3e+02 G" "3e+02 G"
+ [6,] "4e+05 G" "4e+05 G" "4e+05 G"
+ [7,] "5e+08 G" "5e+08 G" "5e+08 G"
+ [8,] "8e+11 G" "8e+11 G" "8e+11 G"
+ [9,] "9e+14 G" "9e+14 G" "9e+14 G"
+[10,] "9e+17 G" "9e+17 G" "9e+17 G"
+> 
+> # Single unit, specify digits
+> cbind(humanReadable(x=SI1, units="GB", standard="SI", width=NULL, digits=7),
++       humanReadable(x=SI1, units="GB", standard="SI", width=NULL, digits=3),
++       humanReadable(x=SI1, units="GB", standard="SI", width=NULL, digits=2),
++       humanReadable(x=SI1, units="GB", standard="SI", width=NULL, digits=1),
++       humanReadable(x=IEC1, units="GiB", standard="IEC", width=NULL, digits=7),
++       humanReadable(x=IEC1, units="GiB", standard="IEC", width=NULL, digits=3),
++       humanReadable(x=IEC1, units="GiB", standard="IEC", width=NULL, digits=2),
++       humanReadable(x=IEC1, units="GiB", standard="IEC", width=NULL, digits=1),
++       humanReadable(x=IEC1, units="G", standard="Unix", width=NULL, digits=7),
++       humanReadable(x=IEC1, units="G", standard="Unix", width=NULL, digits=3),
++       humanReadable(x=IEC1, units="G", standard="Unix", width=NULL, digits=2),
++       humanReadable(x=IEC1, units="G", standard="Unix", width=NULL, digits=1)
++       )
+      [,1]              [,2]          [,3]         [,4]      
+ [1,] "5.000000e-10 GB" "5.00e-10 GB" "5.0e-10 GB" "5e-10 GB"
+ [2,] "7.993163e-07 GB" "7.99e-07 GB" "8.0e-07 GB" "8e-07 GB"
+ [3,] "7.900375e-04 GB" "7.90e-04 GB" "7.9e-04 GB" "8e-04 GB"
+ [4,] "6.619855e-01 GB" "6.62e-01 GB" "6.6e-01 GB" "7e-01 GB"
+ [5,] "6.311259e+02 GB" "6.31e+02 GB" "6.3e+02 GB" "6e+02 GB"
+ [6,] "6.440324e+05 GB" "6.44e+05 GB" "6.4e+05 GB" "6e+05 GB"
+ [7,] "4.994386e+08 GB" "4.99e+08 GB" "5.0e+08 GB" "5e+08 GB"
+ [8,] "7.277869e+11 GB" "7.28e+11 GB" "7.3e+11 GB" "7e+11 GB"
+ [9,] "3.291745e+14 GB" "3.29e+14 GB" "3.3e+14 GB" "3e+14 GB"
+[10,] "8.313511e+17 GB" "8.31e+17 GB" "8.3e+17 GB" "8e+17 GB"
+      [,5]               [,6]           [,7]          [,8]       
+ [1,] "4.656613e-10 GiB" "4.66e-10 GiB" "4.7e-10 GiB" "5e-10 GiB"
+ [2,] "5.975956e-07 GiB" "5.98e-07 GiB" "6.0e-07 GiB" "6e-07 GiB"
+ [3,] "7.764672e-04 GiB" "7.76e-04 GiB" "7.8e-04 GiB" "8e-04 GiB"
+ [4,] "4.459146e-01 GiB" "4.46e-01 GiB" "4.5e-01 GiB" "4e-01 GiB"
+ [5,] "2.985889e+02 GiB" "2.99e+02 GiB" "3.0e+02 GiB" "3e+02 GiB"
+ [6,] "4.209112e+05 GiB" "4.21e+05 GiB" "4.2e+05 GiB" "4e+05 GiB"
+ [7,] "4.983449e+08 GiB" "4.98e+08 GiB" "5.0e+08 GiB" "5e+08 GiB"
+ [8,] "7.751081e+11 GiB" "7.75e+11 GiB" "7.8e+11 GiB" "8e+11 GiB"
+ [9,] "8.756173e+14 GiB" "8.76e+14 GiB" "8.8e+14 GiB" "9e+14 GiB"
+[10,] "9.390947e+17 GiB" "9.39e+17 GiB" "9.4e+17 GiB" "9e+17 GiB"
+      [,9]             [,10]        [,11]       [,12]    
+ [1,] "4.656613e-10 G" "4.66e-10 G" "4.7e-10 G" "5e-10 G"
+ [2,] "5.975956e-07 G" "5.98e-07 G" "6.0e-07 G" "6e-07 G"
+ [3,] "7.764672e-04 G" "7.76e-04 G" "7.8e-04 G" "8e-04 G"
+ [4,] "4.459146e-01 G" "4.46e-01 G" "4.5e-01 G" "4e-01 G"
+ [5,] "2.985889e+02 G" "2.99e+02 G" "3.0e+02 G" "3e+02 G"
+ [6,] "4.209112e+05 G" "4.21e+05 G" "4.2e+05 G" "4e+05 G"
+ [7,] "4.983449e+08 G" "4.98e+08 G" "5.0e+08 G" "5e+08 G"
+ [8,] "7.751081e+11 G" "7.75e+11 G" "7.8e+11 G" "8e+11 G"
+ [9,] "8.756173e+14 G" "8.76e+14 G" "8.8e+14 G" "9e+14 G"
+[10,] "9.390947e+17 G" "9.39e+17 G" "9.4e+17 G" "9e+17 G"
+> 
+> 
+> stopifnot( is.object_sizes(as.object_sizes( 2^(1:30) ) ) )
+> stopifnot( format(as.object_sizes(124)) == "124 bytes")
+> stopifnot( format(as.object_sizes(124e8), units="auto") == "11.5 GiB")
+> stopifnot( format(as.object_sizes(124e8), humanReadable=TRUE) == "11.5 GiB")
+> stopifnot( format(as.object_sizes(124e8), units="bytes") == "1.24e+10 bytes")
+> 
+> tools::assertError( as.object_sizes(-1) )
+> tools::assertError( as.object_sizes('a') )
+> tools::assertError( as.object_sizes(list()) )
+> tools::assertError( as.object_sizes(NULL) )
+> tools::assertError( as.object_sizes(0+1i) )
+> 
+> stopifnot( format(as.object_sizes(1e40)               ) == "1e+40 bytes"     )
+> stopifnot( format(as.object_sizes(1e40), units="auto" ) == "8.271806e+15 YiB")
+> stopifnot( format(as.object_sizes(1e40), units="bytes") == "1e+40 bytes"     )
+> stopifnot( format(as.object_sizes(1e40), humanReadable=TRUE) == "8.271806e+15 YiB")
+> stopifnot( format(as.object_sizes(1e40), humanReadable=FALSE) ==  "1e+40 bytes")
+> 
+> options(humanReadable=TRUE)
+> stopifnot( format(as.object_sizes(1e40) ) == "8.271806e+15 YiB")
+> options(humanReadable=FALSE)
+> 
+> proc.time()
+   user  system elapsed 
+  0.390   0.049   0.431 

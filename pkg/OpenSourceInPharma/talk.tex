@@ -1,0 +1,434 @@
+%\documentclass[10pt,handout]{beamer}   %% One slide per page (no animation)
+\documentclass[10pt]{beamer}           %% Multi-slides per page for animation
+\usepackage{beamerthemesplit}
+\mode<presentation> { \usetheme{Warsaw}
+  % or ...
+
+  \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+%\setbeameroption{show notes}
+
+\newcommand{\numpackages}{1200}
+
+
+\usepackage[english]{babel} \usepackage[latin1]{inputenc}
+
+\usepackage{times} \usepackage[T1]{fontenc}
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+%\AtBeginSubsection[]
+%{
+%  \begin{frame}<beamer>
+%    \frametitle{Outline}
+%    \tableofcontents[currentsection,currentsubsection]
+%  \end{frame}
+%}
+
+\setbeamersize{text margin left=0.5cm}
+\setbeamersize{text margin right=0.5cm}
+
+
+\title{Open Source Software in Pharmaceutical Research}
+
+\author{
+  Gregory R. Warnes\inst{1}\inst{2}\inst{3} \and 
+  James A. Rogers\inst{2} \and
+  Max Kuhn\inst{2}
+}
+
+\institute{
+ \inst{1}%
+  Center for Biodefense Immune Modeling, University of Rochester
+  %\includegraphics*[width=0.8\textwidth]{CBIM.jpg}
+  \vspace{-5pt}
+  \and
+ \inst{2}%
+  Department of Biostatistics and Computational Biology, 
+  University of Rochester
+  \vspace{-5pt}
+  \and
+ \inst{3}%
+  Random Technologies LLC
+  %\includegraphics*[width=0.2\textwidth]{RandomTechLogoNarrow.jpg}
+  \vspace{-5pt}
+  \and
+ \inst{4}%
+  Research Statistics, Pfizer, Inc. \vspace{-5pt}
+}
+
+
+\date[2007 MBSW]{Midwest Biopharmaceutical Statistics Workshop, May 21-23, 2007, Ball State University, Muncie, Indiana}
+%\date[UseR! 2006]{UseR! 2006, Vienna, Austria, June 15-19, 2006}
+
+\begin{document}
+\frame{\titlepage}
+
+\frame{
+\begin{abstract}
+\setbeamerfont{small}{size=\tiny}
+\usebeamerfont{small}
+  
+Open-Source statistical software is being used with increasing
+frequency for data mining of pharmaceutical data, particularly in
+support of ``omics'' technologies within discovery. While it is
+relatively straightforward to employ open-source tools for basic
+research, software used in any regulatory context must
+meet more rigorous requirements for documentation, training,
+software life-cycle management, and technical support.
+
+\vspace{1em}
+
+We will focus on \textsc{R}, a full-featured open-source statistical
+software package. We'll briefly outline the benefits it provides, as
+seen from the perspective of a discovery statistician, show some
+example areas in which it may be used, and then discuss the
+documentation, training, and support required for this class of use.
+
+\vspace{1em}
+
+Next we will discuss what is needed for organizations to be
+comfortable with employing open-source statistical software for
+regulatory use within clinical, safety, or manufacturing. We will
+then talk about how well or poorly \textsc{R} meets these requirements,
+highlighting current issues.  Finally, we will discuss options for
+third-party commercial support for \textsc{R}, and evaluate how well they
+meet the requirements for use of \textsc{R} within both regulated and
+non-regulated contexts.
+
+\end{abstract}
+}
+
+\frame{
+  \frametitle{Outline}
+  \tableofcontents%[pausesections] 
+
+}
+
+\section{Introduction}
+
+\frame{
+  \frametitle{Introduction}
+
+  Open-Source statistical software is being used with increasing
+  frequency for the analysis of pharmaceutical data, particularly in
+  support of ``omics'' technologies within discovery. While it is
+  relatively straightforward to employ open-source tools for basic
+  research, software used in any regulatory context must meet more
+  rigorous requirements for documentation, training, software
+  life-cycle management, and technical support.
+}
+
+\section{Requirements}
+
+\frame{
+  \frametitle{Requirements}
+
+  Software used in mission critical and regulated contexts must
+  exhibit 7 key attributes:
+
+  \begin{enumerate}
+  \item Functional
+  \item Verifiable
+  \item Repeatable
+  \item Documentable
+  \item Auditable
+  \item Stable
+  \item Supported
+  \end{enumerate}
+}
+
+\frame{
+\frametitle{Requirements: Details (I)}
+
+\begin{description}[<+->]
+
+\item[Functional] Performs the required tasks
+
+\item[Verifiable] Demonstrate that computer output is correct, or at least consistent..
+
+\item[Repeatable] Given the same data, the same results can be
+  obtained, potentially much later in time.
+
+\item[Documentable] Documentation is available or can easily be
+  generated for the entire software life-cycle: Specification, Design,
+  Development. Testing, Deployment, Change Management
+
+
+\end{description}
+}
+
+\frame{
+\frametitle{Requirements: Details (II)}
+
+\begin{description}[<+->]
+
+\item[Auditable] Track everything done to data and the system
+
+\item[Stable] Doesn't change too fast, so that there is enough time to
+  develop required documentation
+  
+\item[Supported] Guaranteed (by \$\$) availability of external expense
+  for installation, problem resolution, bug fixes, feature
+  development, training, application development, consulting
+
+\end{description}
+}
+
+\section{What is \textsc{R}?}
+
+\frame{
+  \frametitle{What is \textsc{R}?}
+  
+  \begin{itemize}[<+->]
+
+    \item System for statistical computing and graphics
+
+    \item Language is very similar to the S-Plus
+      
+    \item Full featured support for statistical and graphical techniques:
+
+      \begin{itemize}[<1->]
+      \item linear and nonlinear modeling,
+      \item classical statistical tests,
+      \item time-series analysis,
+      \item classification,
+      \item clustering
+      \item ...
+      \end{itemize}
+
+    \item Highly extensible with good development tools
+      
+    \item \emph{Huge} library of user-contributed add-on packages: $>\numpackages$ ! 
+      
+    \item Source code is freely available
+
+\end{itemize}
+}
+
+\section{Status of \textsc{R}}
+
+\frame{
+  \frametitle{Status of \textsc{R} (I)}
+
+\begin{description}[<+->]
+
+\item[Functional] +++ This is \textsc{R}'s strength. Largely provided by
+  the $>\numpackages$ user-supplied add-on packages.  \textsc{R} currently provides more
+  functionality than any other statistical software system and is
+  growing rapidly.
+
+\item[Verifiable] --- Most of the functionality of \textsc{R} comes from
+  user-developed add-on packages ($>\numpackages$!), but there is currently no formal
+  mechanism for evaluating the level of quality of these packages (e.g.:
+  development, test, production, peer reviewed, validated) or
+  documentation that they accomplish the required tasks.
+  
+\item[Repeatable] --- Currently, add on packages do not display
+  version information when loaded, making it difficult to know what
+  versions were utilized for a given analysis, and thus impossible to
+  reliably replicated.
+
+\end{description}
+}
+\frame{
+\frametitle{Status of \textsc{R} (II)}
+
+\begin{description}[<+->]
+
+\item[Documentable] --- While the \textsc{R} core team has a well defined and
+  managed process for design, development, testing, release, and
+  change management, no formal documentation of this process appears
+  to exists (aside from the specifications of the language itself).
+  No centrally defined or managed process appears to exist for add-on
+  packages.
+
+\item[Auditable] --- \textsc{R} has no built-in no audit log, either for data
+  analysis steps or for changes to the system (e.g.: package updates,
+  patches)
+
+\end{description}
+}
+\frame{
+\frametitle{Status of \textsc{R} (III)}
+
+\begin{description}[<+->]
+
+\item[Stable] --- The \textsc{R} core team releases minor (major.minor.patch)
+  versions twice a year.  Since bug fixes are currently applied only
+  to the latest released version of the system, it is difficult to
+  properly support embedded and validated systems where one may need
+  to resolve bugs in \textsc{R}, but must constrain the \textsc{R} version to remain
+  constant for long periods due to the burden of documentation and
+  testing that must be performed.
+
+\item[Supported] --- While there is an increasingly large pool of
+  statisticians and statistical consulting groups that have \textsc{R}
+  expertise, no organization formally supports \textsc{R} at this time.
+
+\end{description}
+}
+
+\section{Moving Forward}
+
+\frame{
+  \frametitle{Moving Forward (I)}
+
+\begin{description}[<+->]
+  \item[Functional] Already a strength. Continue!
+  \item[Verifiable] \textsc{RForge} proposal
+    \begin{enumerate}
+      \item Develop a SourceForge-like system for contributed packages: 
+%        \begin{itemize}
+%        \item version control system (subversion)
+%        \item issue tracking system
+%        \item file release area
+%        \item web page
+%        \item news lists
+%        \end{itemize} for each individual package.
+      \item Support package status categories, including clear standards
+        \begin{itemize}[<1->]
+        \item development,
+        \item testing,
+        \item production, or
+        \item peer-reviewed/validated.
+        \end{itemize}
+      \end{enumerate}
+  \item[Repeatable] Display versions of packages on load
+
+\end{description}
+}
+
+\frame{
+  \frametitle{Moving Forward (II)}
+
+\begin{description}[<+->]
+
+  \item[Documentable] ~ 
+    \begin{enumerate}
+    \item Formally document the development process used for \textsc{R}
+    \item Provide tools to perform and document this process for
+      add-on packages
+    \item Develop validation templates for use by organizations
+    \item Encourage commercial vendors to support \textsc{R} and to provide
+      additional validation effort and associated documentation.
+    \end{enumerate}
+  \item[Auditable] Add an audit-log facility
+  \item[Stable] Establish a system for back-porting bug fixes to
+    previous versions.
+  \item[Supported] Encourage commercial vendors to formally support \textsc{R}.
+\end{description}
+}
+
+\section{News Flash!}
+
+\frame{
+  \frametitle{News Flash!: \textsc{RPro} from \emph{Random Technologies} }
+
+  \setbeamerfont{small}{size=\small}
+  \usebeamerfont{small}
+  
+  
+  \emph{Random Technologies LLC}
+  announces the immediate availability of \textsc{RPro}, an enterprise-strength
+  statistical computing environment providing the strengths of the
+  open source \textsc{R} statistical software system from the R-Project coupled
+  with the enterprise-level support and high-performance computing
+  expertise of \emph{Random Technologies LLC}. 
+
+  \vspace{1em}
+
+  \begin{columns}[c] 
+    \begin{column}{0.50\textwidth} 
+      Additions to \textsc{R}:
+      
+      \begin{itemize}
+        
+      \item Technical Support
+        
+      \item Simple Installation and Maintenance
+        
+      \item Performance Tuning
+        
+      \item Documentation and Training
+        
+      \item Validation Materials
+        
+      \item Consulting and Services
+        
+      \end{itemize}
+      
+    \end{column} 
+    \begin{column}{0.50\textwidth} 
+      \begin{center}
+        \includegraphics*[width=1in]{RPRo.jpg} \\
+        \includegraphics*[width=1in]{RandomTechLogoNarrow.jpg}
+      \end{center}
+    \end{column} 
+  \end{columns} 
+  
+}
+
+\section{More Information}
+
+\frame{
+  \frametitle<presentation>{Contact Information}
+
+\begin{itemize}
+  \item Personal:
+    \begin{description}
+    \item[Email] greg@warnes.net
+    \item[Web] http://www.warnes.net/Research
+    \end{description}
+    \vspace{1em}
+
+  \item University of Rochester:
+    \begin{description}
+    \item[Email] warnes@bst.rochester.edu
+    \item[Web] http://www.urmc.rochester.edu/smd/biostat
+    \end{description}
+    \vspace{2em}
+  \item ~ \\%Random Technologies:
+    \vspace{-2.0em} 
+    \includegraphics*[height=0.15\textheight]{RandomTechLogoNarrow.jpg} \\
+    \vspace{-2.5em} ~\hspace{10em}~:
+
+    \vspace{1em}
+
+    \begin{description}
+    \item[Email] greg@random-technologies-llc.com
+    \item[Web] http://www.random-technologies-llc.com
+    \end{description}
+
+    \vspace{1em}
+
+  \end{itemize}
+  
+}
+
+% \frame{
+%  \begin{thebibliography}{10}
+    
+%  \beamertemplatebookbibitems
+%  % Start with overview books.
+
+%  \bibitem{Warnes2006}
+%    G.~Warnes.
+%    \newblock {\em Handbook of Everything}.
+%    \newblock Some Press, 1990.
+ 
+    
+%  \beamertemplatearticlebibitems
+%  % Followed by interesting articles. Keep the list short. 
+
+%  \bibitem{Someone2000}
+%    S.~Someone.
+%    \newblock On this and that.
+%    \newblock {\em Journal of This and That}, 2(1):50--100,
+%    2000.
+%  \end{thebibliography}
+%
+% }
+
+\end{document}

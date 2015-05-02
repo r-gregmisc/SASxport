@@ -1,0 +1,29 @@
+
+\begin{figure*}
+
+  \centering
+
+<<priorPlot,echo=F,eval=T,fig=T,width=6,height=3>>=
+par(mfrow=c(1,2))
+f20 <- function(x, mu=20) dchisq(3*x/mu, df=5)
+plot(f20, from=0, to=150, xlab=expression(mu[i] ~~ (mu * M )), 
+     ylab="density", lwd=2)
+abline(v=20,lty=2,lwd=2)
+mtext(text="20", side=1, at=20, line=0.5)
+
+
+f3 <- function(x, mu=3) dchisq(3*x/mu, df=5)
+plot( f3, from=0, to=25, xlab=expression(sigma ~~ (mu * M )), 
+      ylab="density", lwd=2)
+abline(v=3,lty=2,lwd=2)
+mtext(text="3", side=1, at=3, line=0.5)
+@
+
+\caption{
+  Prior density (scaled $\chi^2 <- 5$) for $\mu_i$ and $\sigma$
+  model parameters.
+}
+\label{priorPlot}
+
+\end{figure*}
+

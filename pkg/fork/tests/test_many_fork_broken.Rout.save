@@ -1,0 +1,38 @@
+
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## This script starts child processes, but doesn't do anything about
+> ## collecting or ignoring child process return status. Consequently, it should 
+> ## generate zombie child processes.
+> 
+> library(fork)
+> 
+> source("checkZombies.R")
+> 
+> nZombies <- checkZombies()
+Generating 100 child processes (to become zombies)...
+Give them 10 seconds to die and exit..
+Check the process table to see if there are any zombies...
+100  Zombie Processes Present!
+Warning message:
+In checkZombies() : 100 Zombie Processes Present!
+
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  0.326   0.350  10.436 

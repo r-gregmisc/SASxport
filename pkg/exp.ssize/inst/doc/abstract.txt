@@ -1,0 +1,11 @@
+Motivation: 
+
+Microarray technology is widely applied in biomedical and pharmaceutical research. An accurate method for determining the effect of sample size on power is essential for balancing statistical power against experiment cost.  
+
+Method:   
+
+We propose a simple and reliable sample size method for microarray experiments. Our method uses variance information estimated from existing control samples to perform a standard sample size calculation for each gene at a Bonferroni-adjusted significance level.  Plotting the cumulative number of genes achieving a specified power produces a plot which clearly displays the tradeoff between sample size and power.  
+
+Results:   
+
+We provide simulation results which show that the level of dependency among genes and the proportion of differentially expressed genes do not affect our method's accuracy.  While departure from equal variance and substitution of an alternative multiplicity adjustment do effect the accuracy, the method can easily be extended to overcome both issues. 

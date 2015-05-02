@@ -1,0 +1,64 @@
+-- ------------
+-- Open the most recent archived Glenn Beck/Rush Limbaugh audio/video stream 
+-- ------------
+
+--
+-- Construct appropriate date strings
+--
+set myDate to (current date)
+
+-- Substract up to two days 
+if (weekday of myDate is Saturday) then
+	set myDate to myDate - 1 * days
+end if
+if (weekday of myDate is Sunday) then
+	set myDate to myDate - 2 * days
+end if
+
+set twoDigitDay to text -2 thru -1 of ("00" & ((day of myDate) + 0))
+set twoDigitMonth to text -2 thru -1 of ("00" & ((month of myDate) + 0))
+set twoDigitYear to text -2 thru -1 of ("00" & ((year of myDate) - 2000))
+set fourDigitYear to text -4 thru -1 of ("0000" & ((year of myDate) + 0))
+
+set audioCode to fourDigitYear * 10000 + twoDigitMonth * 100 + twoDigitDay
+set videoCode to twoDigitYear * 10000 + twoDigitMonth * 100 + twoDigitDay
+
+--
+-- Target URLs
+--
+
+set GLENN_AUDIO_ARCHIVE to "\"http://www.premiereinteractive.com/cgi-bin/members.cgi?stream=shows/GLENNBECKREAL" & audioCode & "&site=glennbeck&type=real_show&ikey=http%3A%2F%2Fwww.premiereinteractive.com%2Fcgi-bin%2Fmembers.cgi%3Fstream%3Dshows%2FGLENNBECKREAL" & audioCode & "%26site%3Dglennbeck%26type%3Dreal_show\""
+
+set GLENN_VIDEO_ARCHIVE to "\"http://www.premiereinteractive.com/cgi-bin/members.cgi?stream=video/" & twoDigitYear & "/" & twoDigitMonth & "/glenncam" & videoCode & "-120b.rm&site=glennbeck&type=real_od&ikey=http%3A%2F%2Fwww.premiereinteractive.com%2Fcgi-bin%2Fmembers.cgi%3Fstream%3Dvideo%2F" & twoDigitYear & "%2F" & twoDigitMonth & "%2Fglenncam" & videoCode & "-120b.rm%26site%3Dglennbeck%26type%3Dreal_od\""
+
+set GLENN_AUDIO_LIVE to ""
+set GLENN_VIDEO_LIVE to ""
+
+set RUSH_AUDIO_ARCHIVE to "\"http://stream.rushlimbaugh.com/cgi-bin/members.cgi?stream=shows/RUSHLIMBREAL" & audioCode & "&site=rushlimb&type=real_show\""
+set RUSH_VIDEO_ARCHIVE to "\"http://stream.rushlimbaugh.com/cgi-bin/members.cgi?stream=dittocam/rushlimb" & videoCode & "-128.rm&site=rushlimb&type=real_od\""
+
+set RUSH_AUDIO_LIVE to ""
+set RUSH_VIDEO_LIVE to ""
+
+set TARGET_URL to RUSH_AUDIO_ARCHIVE
+
+--
+-- Launch Web Browser with target URL
+--
+
+set WebApp to "Firefox"
+
+do shell script "open -a " & WebApp & " " & TARGET_URL
+
+delay 3
+
+tell application WebApp to activate
+
+tell application "System Events"
+	keystroke "w" using command down -- Command-w to close the current tab.
+end tell
+
+TARGET_URL
+
+
+

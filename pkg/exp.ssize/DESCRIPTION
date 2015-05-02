@@ -1,0 +1,12 @@
+Package: ssize.sim
+Title: Estimate Effectivenes of Microarry Sample Size Estimation via Simulation
+Version: 1.0.1
+Author: Peng Liu and Gregory R. WarneS
+Description: Functions for evaluating the performance microarray
+             sample size estimation procedures via simulation, as used in
+	     Warnes GR, Liu P, "Microarray Sample Size Estimation", submitted to
+             Bioinformatics, Jan 2005
+Maintainer: Peng Liu <peng_liu@groton.pfizer.com>
+Depends: gdata, ssize
+License: GPL-2
+

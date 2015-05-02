@@ -1,0 +1,64 @@
+\begin{thebibliography}{99}
+  \bibitem{Oates02}%1
+    Oates,~P.J., 2002, Polyol pathway and diabetic peripheral
+    neuropathy, \emph{Int. Rev. Neurobiol.},
+    \textbf{50}, 325--392.
+  \bibitem{Brownlee01}%2
+    Brownlee,~M., 2001, Biochemistry and molecular biology of diabetic
+    complications, \emph{Nature}, \textbf{414}, 813--820.
+  \bibitem{Nishikawa00}%3
+    Nishikawa,~T., Edelstein,~D., Du, ~X.~L., Yamagishi,~S.,
+    Matsumura,~Y.,Kaneda,~Y., Yorek,~M.A., Beebe,~D., Oates,~P.J.,
+    Hammes,~H-P., Giardino,~I., and Brownlee,~M., 2000, Normalizing
+    mitochondrial superoxide production blocks three pathways of
+    hyperglycaemic damage, \emph{Nature}, \textbf{404}, 787--790.
+  \bibitem{Metropolis53}%4
+    Metropolis,~N., Rosenbluth,~A.W., Rosenbluth,~M.N., Teller,~A.,
+    and Teller,~E., 1953, Equation of state calculations by fast
+    computing machines, \emph{J. Chem. Physics}, \textbf{21},
+    1087--1092.
+  \bibitem{Gilks95} %5
+    Gilkes,~W.R., Richardson,~S., and Spiegelhalter,~D.J. (Ed.),
+    \emph{Markov Chain Monte Carlo in Practice} (Boca Raton, FL:
+    Chapman \& Hall/CRC)
+  \bibitem{Gillespie77} %6
+    Gillespie, D.T., 1977, Exact Stochastic Simulation of Coupled
+    Chemical Reactions, \emph{J. Phys. Chem.},
+    \textbf{81}, 2340--2361.
+  \bibitem{Vcell}%7
+    Loew,~L., \emph{Virtual Cell Modeling and Simulation Environment},
+    http://vcell.org (accessed 29 Sep 06)
+  \bibitem{Arkin98}%8
+    Arkin,~A., Ross,~J., and McAdams,~H.H., 1998, Stochastic kinetic
+    analysis of developmental pathway bifurcation in phage
+    $\lambda$-infected \emph{Escherichia coli} cells, \emph{Genetics},
+    \textbf{149}, 1633--1648.
+  \bibitem{R}%9
+    R Development Team, \emph{R: A Language and Environment for
+    Statistical Computing}, http://www.r-project.org (accessed 7 Nov 06)
+  \bibitem{Michaelis13} %10
+    Michaelis, L. and Menten, M.L., 1913, Die kinetic der
+    invertinwirkung, \emph{Biochem. Zeit.}, \textbf{49},
+    333--369.
+  \bibitem{Briggs25} %11
+    Briggs, G.E. and Haldane, J.B.S., 1925, A note on the kinetics of
+    enzyme action, \emph{Biochem. J.}, \textbf{19}, 338--339.
+  \bibitem{Hastings70} %12
+    Hastings, W.K., 1970, Monte {C}arlo sampling methods using
+    {M}arkov chains and their applications, \emph{Biometrika},
+    \textbf{57}, 97--109.
+  \bibitem{Hydra}%13
+    Warnes, G.R., Hydra {MCMC} {L}ibrary,
+    http://www.sourceforge.net/projects/hydra-mcmc 
+  \bibitem{Warnes00} %14
+    Warnes, G.R., 2000, The {N}ormal {K}ernel {C}oupler: {A}n adaptive
+    {M}arkov chain {M}onte {C}arlo method for efficiently sampling
+    from multi-modal distributions, thesis, University of Washington.
+  \bibitem{Byrd95}%15
+    Byrd, R.H., Lu, P., Nocedal, J., and Zhu, C., 1995, A limited
+    memory algorithm for bound constrained optimization, \emph{SIAM J.
+    Sci. Comput.}, \textbf{16}, 1190--1208.
+  \bibitem{projo}%16
+    OBITUARIES-SCITUATE-BURROWS. \emph{The Providence Journal/Evening
+      Bulletin} 2006 Dec. 31; Sec. B5
+\end{thebibliography}

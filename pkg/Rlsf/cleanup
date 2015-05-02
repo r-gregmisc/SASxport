@@ -1,0 +1,5 @@
+#!/bin/sh
+
+rm -f src/*.so src/*.o
+rm -f src/Makevars
+

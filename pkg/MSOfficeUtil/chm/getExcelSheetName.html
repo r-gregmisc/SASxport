@@ -1,0 +1,63 @@
+<html><head><title>Get MS-Excel sheet names</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>getExcelSheetNames(MSOfficeUtil)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   getExcelSheetNames">
+<param name="keyword" value=" Get MS-Excel sheet names">
+</object>
+
+
+<h2>Get MS-Excel sheet names</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Get the names of the worksheets in a MS-Excel file.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>getExcelSheetNames(file.name)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>file.name</code></td>
+<td>
+String with full path and Excel file name. </td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+Returns a String vector.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Steven Novick &lt;steven.j.novick@gsk.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+  # Use example MS-Excel File included with the package
+  file.name &lt;- file.path(.path.package("MSOfficeUtil"), "Examples",
+                         "Grades.xls")
+  # ~= C:\Program Files\R\rwNNNN\library\MSOfficeUtil\Examples\Grades.xls
+
+  getExcelSheetNames(file.name)
+</pre>
+
+
+
+<hr><div align="center"><a href="00Index.html">[Package Contents]</a></div>
+
+</body></html>

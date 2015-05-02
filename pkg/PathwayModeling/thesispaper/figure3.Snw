@@ -1,0 +1,22 @@
+\begin{figure*}
+
+      \centering
+      \subfloat[1-component]{\includegraphics[scale=0.45]{figures/1comp}
+      \label{1comp}}
+      \qquad
+      \subfloat[all-components]{\includegraphics[scale=0.45]{figures/allcomp}
+      \label{allComp}}
+      \qquad
+      \subfloat[NKC]{\includegraphics[scale=0.45]{figures/nkc}\label{nkc}}
+      \qquad
+      \caption[Movement of Markov chains with the Metropolis algorithms]{
+         Movement of Markov chains with the component-wise and
+         all-components Metropolis algorithms. Movement in a
+         2-dimensional space is illustrated, so each point has 2
+         components. The dotted lines are contours of equal probability
+         density for the proposal distributions and the dashed lines are
+         probability contours of the target distribution.
+       }
+      \label{1comp_vs_all}
+
+\end{figure*}

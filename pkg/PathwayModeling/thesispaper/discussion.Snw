@@ -1,0 +1,79 @@
+\section{Discussion}
+
+%% \begin{verbatim}
+%% $Id$
+%% \end{verbatim}
+
+We are interested in assessing the usefulness of Markov chain Monte
+Carlo (MCMC) methods for the fitting of models of metabolic
+pathways. Fitting metabolic pathway models can be difficult because
+pathways are described by sets of reaction rate equations with
+overlapping sets of parameters. We have found that the MCMC algorithms
+handle this situation well, and produce reasonable joint probability
+densities for the model parameters.  This output can be used for the
+estimation of confidence intervals for the parameters and the
+detection of correlations and multimodality.  Thus MCMC compares
+favorably with maximum likelihood methods that produce point estimates
+of the parameters and nonlinear regression methods that find
+approximations of the parameters and their variances.
+
+MCMC methods and Bayesian statistics are particularly useful for
+modeling networks of biological reactions. These networks typically
+are modeled by large numbers of parameters and frequentist methods
+require at least as many observations as there are parameters to fit a
+model. In contrast, Bayesian methods incorporate our prior knowledge
+of the system and use the experimental data to refine the estimates
+(Figure~\ref{converged}). Thus the model fitting procedure described
+here lends itself to iterative experimentation where the experimental
+results, even if they consist of a single datum, can be used to update
+the prior for the next experiment.
+
+The models used here have the form of the Hill function,
+$\frac{x^n}{\theta^n+x^n}$, with an exponent of 1. This form was
+chosen because the functions exhibit two of the characteristics of
+enzyme-catalyzed reactions: linearity at low concentrations of
+substrate and saturability. This, of course, is also the form of the
+Michaelis-Menten equation. These functions have the reactant
+concentrations as the independent variables since they are quantities
+that are relatively easy to measure. A drawback with these models is
+that they describe irreversible reactions whereas most enzymatic
+reactions are reversible. We have tried using a model of reversible
+reactions, the Haldane equation, but it does not fit the data from a
+perturbation equation very well. It can be used with MCMC simulation
+for multiple steady states, a situation we will continue to examine.
+
+Three algorithms from the Hydra library were used. Two of the algorithms, 
+the component-wise Metropolis and the all-components Metropolis 
+algorithms, are conceptually simple and execute fairly quickly when there 
+is not too much structure in the joint density. The third algorithm, the 
+Normal Kernel Coupler, is more computationally intensive but it can sample 
+from complex densities more efficiently than the other two algorithms.
+
+All three algorithms produced very similar results but the execution
+times varied considerably depending on the size of the model.  The
+all-component Metropolis and NKC algorithms converged quickly while
+the 1-component algorithm was quite slow to converge. This is
+undoubtedly due to the high correlations between some parameters (see
+Figure~\ref{scatter}). The 1-component algorithm has trouble sampling
+from this density because it is restricted to moves parallel to the
+coordinate axes.  This is less of a problem for the all-components and
+NKC algorithms since they can move diagonally.
+
+Each of the algorithms produced essentially identical results. The
+mean squared residuals are very similar, as are the calculated values
+for $R_{adj}^2$. These values are indicative of a useful fit of the
+models to the data, demonstrating the usefulness of the MCMC
+approach. The derived probability densities can be used both to obtain
+good parameter estimates as well as reveal the joint covariance of the
+parameters.  The result is a well-fitted model with realistic
+confidence intervals (Figure~\ref{fits}).
+
+In this paper we have developed models of linear sequences of irreversible 
+biochemical reactions and shown that several Markov chain methods can be 
+used to generate useful fits of the models to simulated data. We also have 
+shown that the results so obtained are unique in that they provide 
+probability density estimates as opposed to simple point estimates for the 
+parameters. The probability densities are useful for inference since they 
+make evident the correlations between parameters. Lastly, we outlined 
+areas for further research. Thus, this paper provides a starting point for 
+the future development of tools for modeling complex biochemical pathways.

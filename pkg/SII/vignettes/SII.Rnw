@@ -1,0 +1,912 @@
+% \VignetteIndexEntry{Calculate ANSI S3.5-1997 Speech Intelligibility Index}
+% \VignetteDepends{SII, gdata, xtable, splines} 
+% \VignetteKeyword{Speech Intelligibility Index} 
+%
+\documentclass[letterpaper]{article}
+\usepackage{Rd}
+\usepackage{Sweave}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{hyperref}
+\parskip=11pt
+\parindent=0mm
+\usepackage{graphicx}
+
+%\usepackage{makeidx}
+%\makeindex{}
+
+%------------------------------------------------------------
+% newcommand
+%------------------------------------------------------------
+\newcommand{\scscst}{\scriptscriptstyle}
+\newcommand{\scst}{\scriptstyle}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Rclass}[1]{\textit{#1}}
+\newcommand{\Rpackage}[1]{\textit{#1}}
+\newcommand{\Rexpression}[1]{\texttt{#1}}
+\newcommand{\Rmethod}[1]{{\texttt{#1}}}
+\newcommand{\Rfunarg}[1]{{\texttt{#1}}}
+%---
+
+
+\setkeys{Gin}{width=\textwidth} 
+
+\title{
+  Calculating Speech Intelligibility Index (SII) using R
+}
+\author{
+  Gregory R. Warnes, Ph.D. \\
+  Gregory R. Warnes Consulting
+  }
+
+\begin{document}
+\maketitle
+
+This document describes the calculation of Speech Intelligibility
+Index (SII) using R.  The core calculations have been encapsulated as
+an R add-on package named ``SII'', which, once installed, can be
+loaded thusly:
+
+<<load.package>>=
+library(SII)
+@ 
+
+\section{SII constant tables}
+
+The R package includes constant tables 1 -- 4 from the ANSI S3.5-1997
+text.  These can be loaded via
+<<load.data>>=
+## Table 1: Critical band SII procedure constants
+data("critical")
+head(critical)
+
+## Table 2:Equally contributing (17 band) critical band SII 
+## procedure constants
+data("equal")
+  
+## Table 3: One-third octave band SII procedure constants
+data("onethird")
+
+## Table 4: Octave band SII procedure constants
+data("octave")
+      
+## Overall SPL constants
+data("overall.spl")
+overall.spl
+@
+
+It also includes constant tables for alternative transfer functions
+corresponding to different types of message content, tables B.1 --
+B.3.  These tables have been augmented with the corresponding values
+for the Connected Speech Test (CST) as given by
+\url{http://www.sii.to/CSTdata.txt}. These tables can be loaded via:
+<<load.alternative.data>>=
+## Table B.1: Critical band importance functions for various speech tests.
+data(sic.critical)
+head(sic.critical)
+
+## Table B.2: One-third octave band importance functions for various speech tests.
+data(sic.onethird)
+
+## Table B.3: Octave band importance functions for various speech tests.
+data(sic.octave)
+@ 
+
+With the alternative transfer functions available, it becomes easy to
+generate a nice graphical comparison of the functions:
+<<sicplot,fig=TRUE,width=12,height=6>>=
+data(sic.critical)
+ngroup <- ncol(sic.critical)
+matplot(x=sic.critical[,1], y=sic.critical[,-1],
+        type="o",
+        xlab="Frequency, Hz",
+        ylab="Weight",
+        log="x",
+        lty=1:ngroup,
+        col=rainbow(ngroup)
+)
+legend(
+       "topright",
+       legend=names(sic.critical)[-1],
+       pch=as.character(1:ngroup),
+       lty=1:ngroup,
+       col=rainbow(ngroup)
+       )
+
+@ 
+
+\section{Calculating SII}
+
+The \code{sii} function implements ANSI S3.5-1997 as described in the
+standard, without any attempt to optimize the performance. The
+implementation does, however, include the extension for handling
+conductive hearing loss from Annex A (utilizing the optional
+\code{loss} argument, and for utilizing alternative band weights (i.e.
+transfer function) appropriate for differing message contents (e.g.
+types of speech) as described in Annex B or user-specified band
+weights (utilizing the optional argument \code{importance}).
+
+Further, this implementation provides a mechanism for
+interpolating/extrapolating available measurements to those required
+for the specified procedure (via the argument
+\code{interpolate=TRUE}).  Interpolation is accomplished using linear
+interpolation (on log-scaled data) to the frequencies required for the
+specified SII procedure.  Interpolation is performed (if necessary)
+for \code{speech}, \code{noise}, \code{threshold}, and \code{loss}.
+
+The \code{sii} function has the following header:
+<<header>>=
+args(sii)
+@ 
+
+Where the arguments are:
+\begin{description}
+ \item[speech] Speech spectrum level, as a standard level name
+   ("normal", "raised", "loud", or "shout")or a vector of values, in dB
+ \item[noise] Noise spectrum level, in dB
+ \item[threshold] Hearing threshold level, in dB
+ \item[loss] Conductive hearing loss level, in dB
+ \item[freq] Frequencies at which values are provided (required if
+   interpolate=TRUE)
+ \item[method] SII calculation method, one of "critical",
+   "equal-contributing", "one-third octave", "octave".
+ \item[importance] Transfer function (importance weights), as a
+   standard SII measurement name ("SII", "NNS", "CID22", "NU6", "DRT", 
+   "ShortPassage", "SPIN", or "CST")
+ \item[interpolate] Flag indicating whether to interpolate 
+    from the provide measurement values and frequencies to those 
+    required by the specified method
+\end{description}
+
+For a detailed description of the arguments see the \Rfunction{sii}
+manual page in appendix \ref{man.pages}.
+
+\subsection{Example C.1 from ANSI S3.5-1997 Annex C}
+
+<<ExampleC.1>>=
+sii.C1 <- sii(
+              speech   = c(50.0, 40.0, 40.0, 30.0, 20.0,  0.0),
+              noise    = c(70.0, 65.0, 45.0, 25.0,  1.0,-15.0),
+              threshold= c( 0.0,  0.0,  0.0,  0.0,  0.0,  0.0),
+              method="octave"
+              #, importance="SII"
+              #, importance=octave$Ii
+              , importance="CST"
+              )
+round(sii.C1$table[,-c(5:7,13)],2)
+sii.C1$sii
+@ 
+
+The value given in the Standard is $0.504$.
+
+\subsection{Example C.2 from ANSI S3.5-1997 Annex C}
+
+<<ExampleC.1>>=
+sii.C2 <- sii(
+              speech   = rep(54.0, 18),
+              noise    = c(40.0, 30.0, 20.0, rep(0, 18-3) ),
+              threshold= rep(0.0,  18),
+              method="one-third"
+              )
+sii.C2$table[1:3,1:8]
+sii.C2$sii
+@ 
+
+The standard shows the first three rows in the table as 
+
+\begin{center}
+\begin{tabular}{rrrrrrrrr}
+  \hline
+ & Fi & E'i & N'i & T'i & Vi & Bi & Ci & Zi \\
+  \hline
+  1 & 160 & 54.00 & 40.00 & 0.00 & 30.00 & 40.00 & $-$46.59\footnote{Typo in the standard document} & 40.00 \\
+  2 & 200 & 54.00 & 30.00 & 0.00 & 30.00 & 30.00 & $-$52.01 & 34.66 \\
+  3 & 250 & 54.00 & 20.00 & 0.00 & 30.00 & 30.00 & $-$51.42 & 25.04 \\
+   \hline
+\end{tabular}
+\end{center}
+
+
+\subsection{Interpolation Example}
+
+<<ExampleC.1>>=
+sii.C1 <- sii(
+              speech   = c(50.0, 40.0, 40.0, 30.0, 20.0,  0.0),
+              noise    = c(70.0, 65.0, 45.0, 25.0,  1.0,-15.0),
+              threshold= c( 0.0,  0.0,  0.0,  0.0,  0.0,  0.0),
+              method="octave"
+              #, importance="SII"
+              #, importance=octave$Ii
+              , importance="CST"
+              )
+round(sii.C1$table[,-c(5:7,13)],2)
+sii.C1$sii
+@ 
+
+The value given in the Standard is $0.504$.
+
+
+\subsection{Calculating SII for a set of patients}
+
+First, we need to load the patient information table
+<<LoadData, eval=FALSE>>=
+library(gdata)
+patInfo <- read.xls("../AI subject list.xls")
+@ 
+
+Check that we got the data properly read in:
+<<ExamineData, eval=FALSE>>=
+## Information about variables
+str(patInfo)
+@ 
+
+<<ExamineData, eval=FALSE>>=
+## First 6 rows
+head(patInfo)
+@ 
+
+Create some useful variables:
+<<vars, eval=FALSE>>=
+## measured frequencies
+freq <- c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000)
+
+## columns containing frequencies for the right/left ear
+rt.cols <- paste("PTR",freq, sep="")
+lt.cols <- paste("PTL",freq, sep="")
+
+rt.vals <- patInfo[,rt.cols]
+lt.vals <- patInfo[,lt.cols]
+@
+
+Handle missing value encoding
+<<missing, eval=FALSE>>=
+rt.vals[rt.vals==-888] <- NA
+lt.vals[rt.vals==-888] <- NA
+@ 
+
+Now, construct a utility function to handle an individual patient's
+SII calculation using the arguments we want.
+<<fun, eval=FALSE>>=
+fun <- function(X)
+  {
+    ret <- try( 
+               sii(X, 
+                   speech="raised",
+                   threshold=c(15,15,20,25,35,35,45,50), 
+                   freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000),
+                   importance="SII",
+                   interpolate=TRUE
+                   )$sii
+               )
+  if("try-error" %in% class(ret))
+    return(NA)
+  else
+    return(ret)
+  }
+
+## Test it
+fun( rt.vals[1,] )
+@ 
+
+
+Now apply it for the right and left ears:
+<<CalculateSII, eval=FALSE>>=
+sii.right <- apply(rt.vals, 1, fun )
+
+sii.left  <- apply(lt.vals, 1, fun )
+@ 
+
+Now add theses back onto our table:
+<<AddSIIToTable, eval=FALSE>>=
+patInfo$"SII.right" <- sii.right
+patInfo$"SII.left" <- sii.left
+
+tail(patInfo)
+@ 
+
+And save to a file:
+<<SavePatInfo, eval=FALSE>>=
+write.table(patInfo, 
+            file="../AI subject list-SII.xls",
+            row.names=FALSE, 
+            sep="\t"
+            )
+@ 
+
+Now define a function to do all of this with a single call
+
+<<SIIFileFun, eval=FALSE>>=
+sii.dina <- function(infile, outfile, verbose=TRUE) 
+  {
+    if(verbose)
+      cat("\nLoading data file '", infile, "'...\n", sep="")
+    ## Load the data
+    library(gdata)
+    patInfo <- read.xls(infile)
+    
+    ## measured frequencies
+    freq <- c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000)
+
+    if(verbose)
+      cat("\nExtracting hearing thresholds...\n")
+
+    ## columns containing frequencies for the right/left ear
+    rt.cols <- paste("PTR",freq, sep="")
+    lt.cols <- paste("PTL",freq, sep="")
+    
+    rt.vals <- patInfo[,rt.cols]
+    lt.vals <- patInfo[,lt.cols]
+    
+    ## Handle missing code '-888'
+    rt.vals[rt.vals==-888] <- NA
+    lt.vals[rt.vals==-888] <- NA
+    
+    ## define function to compute SII with our defaults
+    fun <- function(X)
+      {
+        ret <- try( 
+                   sii(X, 
+                       speech="raised",
+                       threshold=c(15,15,20,25,35,35,45,50), 
+                       freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000),
+                       importance="SII",
+                       interpolate=TRUE
+                       )$sii #$
+                   )
+      if("try-error" %in% class(ret))
+        return(NA)
+      else
+        return(ret)
+      }
+    
+    ## Calculate SII
+    if(verbose)
+      cat("\nCalculating right ear SII...\n")
+    sii.right <- apply(rt.vals, 1, fun )
+    if(verbose)
+      cat("\nCalculating left ear SII...\n")
+    sii.left  <- apply(lt.vals, 1, fun )
+    
+    ## Add back onto the table
+    patInfo$"SII.right" <- sii.right
+    patInfo$"SII.left" <- sii.left
+
+    if(verbose)
+      cat("\nWriting new data table as '", outfile, "'...\n", sep="")
+
+    ## Save file
+    write.table(patInfo, 
+                file=outfile,
+                row.names=FALSE, 
+                sep="\t"
+                )
+
+    if(verbose)
+      cat("\nDone.\n\n")
+  }
+@ 
+
+Try it out:
+
+<<RunFun, eval=FALSE>>=
+sii.dina(infile="../AI subject list.xls",
+         outfile="../AI subject list-SII.xls") 
+@ 
+
+
+Just for kicks, compare the original AI, and our computed sii values:
+<<CompareAItoSII,results=tex, eval=FALSE>>=
+library(xtable)
+xt <- xtable(patInfo[,c("AI","SII.right","SII.left")], 
+             caption="Comparison of original AI and new right and left SII values \\label{table}", 
+             digits=2)
+print(xt)
+@ 
+
+<<PlotAIandSII,fig=TRUE, eval=FALSE>>=
+## put histograms on the diagonal
+panel.hist <- function(x, ...)
+  {
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(usr[1:2], 0, 1.5) )
+    h <- hist(x, plot = FALSE)
+    breaks <- h$breaks; nB <- length(breaks)
+    y <- h$counts; y <- y/max(y)
+    rect(breaks[-nB], 0, breaks[-1], y, col="cyan", ...)
+  }
+pairs.2 <- function(x)
+  pairs(x, 
+      panel=panel.smooth,
+      cex = 1.5, 
+      pch = 24, 
+      bg="light blue",
+      diag.panel=panel.hist, 
+      cex.labels = 2, 
+      font.labels=2
+      )
+
+
+pairs.2(patInfo[,c("AI","SII.right","SII.left")])
+@ 
+
+
+\clearpage
+\appendix
+
+\section{SII Help Pages}\label{man.pages}
+
+<<echo=FALSE,results=tex>>=
+latexhelp <- function(topics, package=NULL)
+  {
+    if(missing(topics) && missing(package))
+      stop("Help on what?")
+    else if (missing(topics))
+      {
+        callObj <- call("library", help=package)
+        topicStrings <- eval(callObj)$info[[2]]
+        topicStrings <- lapply( topicStrings, strsplit, split=" ")
+        topicStrings <- sapply( topicStrings, function(x) x[[1]][1])
+        topicStrings <- topicStrings[topicStrings > " "]
+        topics <- topicStrings
+        }
+    
+    for(topic in topics)
+      {
+        if(!is.character(topic))
+          topic <- deparse(substitute(topic))
+       
+        callObj <- call("help", topic=topic, package=package)
+        
+        ## Get the file path
+        help.file<- as.character(eval(callObj))
+
+        ## Get R to translate it to latex and display it
+        tools::Rd2latex(utils:::.getHelpFile(help.file))
+        
+        ## new page
+        cat("\n")
+        cat("\\clearpage")
+        cat("\n")
+      }
+  }
+
+
+tmp <- function (x, ...) 
+{
+}
+
+latexhelp(package="SII")
+
+@ 
+
+\clearpage
+
+\section{Interpolation}
+
+Do some experimentation to determine how to best perform
+interpolation/extrapolation from the small set of frequencies where
+hearing sensitivity was measured to the set of frequencies necessary
+for the calculation of SII:
+<<splineFit>>=
+
+THDI=c(25,25,30,35,45,45,55,60)
+freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000)
+
+sii.freqs <- SII:::sii.constants[,1]
+
+xlist <- sort(c(SII:::sii.constants[, 1], freq))
+ylist <- rep(NA, length=length(xlist))
+names(ylist) <- xlist
+ylist[ as.character(freq) ] <- THDI
+@ 
+
+<<interSpline>>=
+library(splines)
+ispl <- interpSpline( THDI ~ freq )
+ispl <- predict(ispl, sii.freqs)$y
+      
+ispl.l <- interpSpline( THDI ~ log(freq) )
+ispl.l <- predict(ispl.l, log(sii.freqs) )$y
+
+approx.l <- function(x,y,xout,...)
+  { 
+    retval <- approx(log(x), y, log(xout), ...)
+    retval$x <- xout
+    retval
+  }
+
+@
+
+<<Spline_comparison_function, echo=FALSE>>=
+doplot <- function(logx=FALSE, separate=FALSE)
+  {
+    if(separate)
+      layout( cbind( c(1,2,3,7), c(4,5,6,7) ))
+    tmp <- function() {
+      plot(x=freq, y=THDI, col="black", cex=2, log=if(logx) "x" else "", 
+           xlab="Frequency (Herz)", ylab="Threshhold of Detection (dB)",
+           xlim=range(sii.freqs), ylim=c(20,60) )
+      lines(SII:::sii.constants[, 1], SII:::sii.constants[, "Ti'.THDN"], col="red", lwd=3)
+      abline(v=sii.freqs,lty=3)
+    }
+    
+    tmp()
+    lines( x=SII:::sii.constants[, 1], y=ispl, col="blue", lwd=2)
+    
+    if(separate) tmp()
+    lines( x=SII:::sii.constants[, 1], y=ispl.l, col="cyan", lwd=2)
+    
+    if(separate) tmp()
+    lines( spline  (x=freq, y=THDI), col="green", lwd=2)
+    
+    if(separate) tmp()
+    lines( spline  (x=freq, y=THDI, method="natural", xout=sii.freqs), col="orange", lwd=2)
+    
+    if(separate) tmp()
+    lines( approx  (x=freq, y=THDI, method="linear",  xout=sii.freqs, rule=2), col="magenta", lwd=2)
+    
+    if(separate) tmp()
+    lines( approx.l(x=freq, y=THDI, method="linear",  xout=sii.freqs, rule=2), col="brown",   lwd=3)
+
+    if(separate) plot.new()
+    legend(if(separate) "center" else { if(logx)  "topleft" else "bottomright"  },
+           legend=c(
+             "Measured data",
+             "Matlab INTERP1(X, Y, XI, 'spline', 'extrap')",
+             "R's predict( interSpline(X,Y), XI )",
+             "R's predict( interSpline(log(X),Y), log(XI) )",
+             "R's spline(x, y)",
+             "R's spline(x, y, method='natural')",
+             "R's approx(x, y, method='linear')",
+             "R's approx(x, y, method='linear') (on log scale)",
+             "Frequencies used for SII calculation"
+             ),
+           col=c("black", "red", "blue","cyan","green","orange","magenta","brown", "black"),
+           pch=c(      1,    NA,    NA,    NA,     NA,      NA,       NA,      NA,     NA),
+           lty=c(     NA,     1,     1,     1,      1,       1,        1,       1,      3),
+           lwd=c(     NA,     3,     2,     2,      2,       2,        2,       2,      1),
+           bg="white",
+           cex=if(separate) 1.25 else 0.75,
+           ncol=if(separate)   2 else 1
+           )
+    if(separate)
+      layout( 1 )
+    title(paste("Spline method comparison\n", if(logx)"(log scale)"else"(natural scale)", "\n"))
+    
+  }
+@ 
+
+<<natural_scale_one_plot, fig=TRUE, width=8, height=8>>=
+doplot(FALSE, FALSE)
+@ 
+
+<<natural_scale_separate_plots, fig=TRUE, width=8, height=11>>=
+doplot(FALSE, TRUE)
+@ 
+
+<<log_scale_one_plot, fig=TRUE, width=8, height=8>>=
+doplot(TRUE, FALSE)
+@ 
+
+
+<<log_scale_separate_plots, fig=TRUE, width=8, height=11>>=
+doplot(TRUE, TRUE)
+@ 
+
+
+
+\section{SII function definition}
+
+\subsection{Excel to R translation}
+
+First, I have defined an R function that simply translates the Excel
+code into R:
+
+<<SII:::sii.excel>>=
+args(SII:::sii.excel)
+@
+
+\subsection{R code written from the ANSI S3.5-1997}
+
+
+Second, I implemented the SII calculation following the text of the
+standard.  This code is more general and quite a bit more complex.
+
+<<sii>>=
+args(sii)
+@ 
+
+\subsection{Utility functions}
+
+I also defined a utility function to nicely print the output.
+
+<<sii.print>>=
+
+@ 
+
+In order to make it easy to maintain the SII contants.  A single
+Microsoft Excel file, \verb+\data\SII_Constants.xls+ is included in the
+SII \verb+data+ directory containing the complete set of SII contants,
+where each tab corresponds to one Table from the standard.
+
+<<show.reload.constants>>= 
+SII:::reload.constants 
+@
+
+The package mainainer may use it as :
+<<run.reload.constants, eval=FALSE>>=
+SII:::reload.constants(xls.path="./SII/extdata")
+@ 
+
+The SII package must then be rebuilt and reinstalled for the updated
+contants to become available.
+
+
+\section{Tests}
+
+
+\subsection{Compare interpolation details for example data}
+
+
+\subsubsection{Left Ear}
+
+<<ComparisonTable1>>=
+sii.left <- sii(
+                speech="raised",
+                threshold=c(25,25,30,35,45,45,55,60),
+                freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000),
+                importance="NU6",
+                interpolate=TRUE
+                )
+
+
+## comparison of our interpolation and matlab's
+tab <- cbind(
+             matlab=SII:::sii.constants[,"Ti'.THDN"],
+             R     =sii.left$table[,"T'i"],
+             delta =NA
+             )
+tab[,3] <- tab[,1] - tab[,2]
+rownames(tab) <- SII:::sii.constants[,".NFreqLin"]
+t(round(tab,2))
+@ 
+
+<<<plot.sii, show=FALSE>>=
+compare.plot <- function(x, matlab, title)
+  {
+    plot(x)
+    lines(SII:::sii.constants[,".NFreqLin"],
+          matlab,
+          type="l", col="red", lwd=3)
+
+    legend("topleft",
+           legend=c(
+             "Measured data",
+             "Matlab INTERP1(X, Y, XI, 'spline', 'extrap')",
+             "R's approx(X,Y, XI, xout=XI,\n method='linear', rule=2)"  
+             ),
+           col=c("black", "red","blue","green","orange","magenta"),
+           pch=c(      1,    NA,    2,     NA,      NA,       NA),
+           lty=c(     NA,     1,    1,      1,       1,        1),
+           lwd=c(     NA,     3,    2,      2,       2,        2),
+           bg="white"
+           )
+    title(title)
+  }
+@ 
+
+<<ComparisonFigure1,fig=TRUE>>=
+
+compare.plot(sii.left, matlab=SII:::sii.constants[, "Ti'.THDN"], title="Spline method comparison, Left Ear")
+      
+@ 
+
+\subsubsection{Right Ear}
+
+<<ComparisonTable2>>=
+# comparison of our interpolation and matlab's
+
+matlab <- c(15.00, 15.00, 13.34, 14.27, 16.06, 17.82, 19.18, 20.00,
+            20.26, 20.54, 21.44, 23.36, 26.93, 31.38, 34.63, 35.13, 
+            35.00, 38.29, 43.98, 48.80, 49.58)
+
+sii.right <- sii( 
+                 speech="raised",
+                 threshold=c(15,15,20,25,35,35,45,50), 
+                 freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000),
+                 importance="NU6",
+                 interpolate=TRUE
+                 )
+
+tab <- cbind(
+             matlab=matlab,
+             R     =sii.right$table    [,"T'i"],
+             delta =NA
+             )
+tab[,3] <- tab[,1] - tab[,2]
+rownames(tab) <- SII:::sii.constants[,".NFreqLin"]
+t(round(tab,2))
+@ 
+
+<<ComparisonFigure2,fig=TRUE>>=
+compare.plot(sii.right, matlab=matlab, title="Spline method comparison, Right Ear")
+@ 
+
+
+\subsection{Comparison with Excel implementation}
+
+Test the SII function using the example data from the Excel worksheet:
+
+\begin{itemize}
+  \item Left ear example
+
+    Excel code: $0.43$.    
+    
+    ``Translated'' R code: 
+<<<sii.left.old>>=    
+SII:::sii.excel( 
+          c(25,25,30,35,45,45,55,60),
+          c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000) 
+          )
+@ 
+    
+    
+    New R code:
+<<sii.left>>=
+sii.left <- sii(
+                speech="raised",
+                threshold=c(25,25,30,35,45,45,55,60),
+                freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000),
+                importance="NU6",
+                interpolate=TRUE
+                )
+sii.left
+@ 
+   
+
+  \item Right ear example
+
+    Excel worksheet: $0.72$.  
+  
+    ``Translated'' R code: 
+<<<sii.right.old>>=    
+SII:::sii.excel( 
+          c(15,15,20,25,35,35,45,50), 
+          c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000) 
+          )
+@ 
+  
+    New R code:
+<<sii.right>>=
+sii.right <- sii( 
+                 speech="raised",
+                 threshold=c(15,15,20,25,35,35,45,50), 
+                 freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000),
+                 importance="NU6",
+                 interpolate=TRUE
+                 )
+sii.right
+@ 
+
+  \item Best possible score (No detectible threshold)
+
+    Excel Spreadsheet:  $0.9887$
+    
+    ``Translated'' R code: 
+<<<sii.best.old>>=    
+SII:::sii.excel( 
+          rep(0,8),
+          freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000) 
+          )
+@ 
+  
+  
+    New R code:
+<<sii.best>>=
+sii.best <- sii( 
+                threshold=rep(0,8),
+                freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000),
+                interpolate=TRUE 
+                )
+sii.best
+@ 
+
+  \item Worst possible score (No detectible threshold)
+
+    Excel Spreadsheet:  $0.00$
+    
+    ``Translated'' R code: 
+<<<sii.worst.old>>=    
+SII:::sii.excel( 
+          rep(100,8),
+          c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000) 
+          )
+@ 
+  
+  
+    New R code:
+<<sii.worst>>=
+sii.worst <- sii( 
+                 threshold=rep(100,8),
+                 freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000),
+                 interpolate=TRUE
+                )
+sii.worst
+@ 
+
+
+\end{itemize}
+
+\subsection{Test handling of missing values}
+
+<<sii.missing>>=
+sii.worst <- sii( 
+                 threshold=c(NA, rep(100,7)),
+                 freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000),
+                 interpolate=TRUE
+                )
+sii.worst
+@ 
+
+<<sii.missing>>=
+sii.right <- sii( 
+                 speech="raised",
+                 threshold=c(0,15,15,20,25,35,35,45,50), 
+                 freq=c(NA, 250, 500, 1000, 2000, 3000, 4000, 6000, 8000),
+                 importance="NU6",
+                 interpolate=TRUE
+                 )
+sii.right
+@ 
+
+<<sii.all.missing>>=
+## This should fail, because there is no data!
+sii.NONE <- try(
+             sii( 
+                 threshold=rep(NA,8),
+                 freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000),
+                 interpolate=TRUE
+                )
+            )
+sii.NONE
+@ 
+
+
+
+<<sii.missing>>=
+sii.right <- sii( 
+                 speech="raised",
+                 threshold=c(15,15,20,NA,35,35,45,50), 
+                 freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000),
+                 importance="NU6",
+                 interpolate=TRUE
+                 )
+sii.right
+@ 
+
+<<missing.C.1>>=
+sii.C1.NA <- sii(
+              speech   = c(50.0, 40.0, 40.0, NA,   20.0,  0.0),
+              noise    = c(70.0, 65.0, 45.0, 25.0,  1.0,-15.0),
+              threshold= c( 0.0,  0.0,  0.0,  0.0,   NA,  0.0),
+              freq     = c( 250,  500, 1000, 2000, 4000, 8000),
+              method="octave",
+              importance="CST",
+              interpolate=TRUE
+              )
+sii.C1
+sii.C1.NA
+@ 
+
+
+
+\section{Final cleanup}
+
+Save the data we created here for debugging purposes:
+<<save data>>=
+save.image("SII-Code.Rda")
+@ 
+
+%\printindex{}
+
+\end{document}

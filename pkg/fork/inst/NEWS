@@ -1,0 +1,35 @@
+Version 1.2.4 - 2011-09-01
+==========================
+
+- Fix bug in loading dynamic library.
+
+- Update Greg's email address.
+
+
+Version 1.2.3 - 2009-07-17
+==========================
+
+- Add NAMESPACE file
+
+Version 1.2.2 - 2009-05-09
+===========================
+
+- Correct Greg's email address
+- Fix syntax error in man page for wait()
+
+Version 1.2.1 - 2007-10-22 
+===========================
+
+- Clarify GPL version
+
+Version: 1.2.0 - 2007-03-22
+===========================
+
+- Added new function handleSIGCLD/restoreSIGCLD for setting
+  up/removing a SIGCLD handler so that fork'ed processes can safely be
+  ignored without becoming zombies.  See ?handleSIGCLD for details.  
+
+- Added regression tests for SysV and BSD style signal handling that
+  checks for zombie process creation & tests that signal("SIGCHLD","ignore")
+  and/or handleSIGCLD() prevents zombie process creation.
+    

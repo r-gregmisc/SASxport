@@ -1,0 +1,16 @@
+Package: gregmisc
+Title: Greg's Miscellaneous Functions
+Description: Various functions to manipulate data.
+Depends:  gdata, gmodels, gplots, gtools
+Description: The former gregmisc bundle is a repository for a variety
+             of useful functions.  The gregmisc package has been split
+             into a set of more focused packages: gdata, gmodels,
+             gplots, gtools.  The purpose of this 'new' gregmisc is to
+             provide an easy way to access the original combined
+             functionality.  To this end, it simply depends on all of
+             the new packages so that these will installed/loaded when
+             this package is installed/loaded.
+Version: 2.1.5
+Author: Gregory R. Warnes.
+Maintainer: Gregory R. Warnes <greg@warnes.net>
+License: GPL-2

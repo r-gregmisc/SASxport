@@ -1,0 +1,16 @@
+Package: namespace
+Type: Package
+Title: Provide namespace managment functions not (yet) present in base R
+Version: 0.9.1
+Date: 2012-09-19
+Author: Winston Chang, Daniel Adler, Hadley Wickham, Gregory
+	R. Warnes, R Core Team
+Maintainer: Gregory R. Warnes <greg@warnes.net>
+Description: This package provides user-level functions to manage
+	     namespaces not (yet) available in base R:
+	     'registerNamespace', 'unregisterNamespace',
+	     'makeNamespace', and 'getRegisteredNamespace'
+	     .
+	     ('makeNamespaces' is extracted from the R 'base' package
+	     source code: src/library/base/R/namespace.R)
+License: GPL-2

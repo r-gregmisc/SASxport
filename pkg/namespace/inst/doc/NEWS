@@ -1,0 +1,11 @@
+namespace - 0.9.1 - 2012-09-19
+------------------------------
+
+- Improve package description in 'DESCRIPTION'
+- Move 'makeNamespace' to a separate file and include the original
+  copyright notice.
+
+namespace - 0.9.0 - 2012-09-13
+------------------------------
+
+Initial version. 

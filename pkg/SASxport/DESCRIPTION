@@ -1,0 +1,42 @@
+Package: SASxport
+Type: Package
+Title: Read and Write SAS XPORT Files
+Version: 1.5.0
+Date: 2014-07-21
+Description: This package provides functions for reading, listing
+  the contents of, and writing SAS xport format files.
+  The functions support reading and writing of either
+  individual data frames or sets of data frames.  Further,
+  a mechanism has been provided for customizing how
+  variables of different data types are stored.
+Author:
+  Unless otherwise noted, the contents of this package were written by
+  Gregory R. Warnes <greg@warnes.net> and are provided under the
+  terms of the GNU General Public License, version 2.0 or later.
+  --
+  The files 'src/ieee2ibm.c' and 'src/ibm2ieee.c' were extracted from
+  BRL-CAD file /brlcad/src/libbu/htond.c written by Michael John
+  Muuss, Copyright (c) 2004-2007 United States Government as
+  represented by the U.S. Army Research Laboratory, and is utilized
+  and redistributed under the terms of the GNU Lesser General Public
+  License, version 2.1.
+  --
+  The files 'R/AFirst.lib.s', 'R/all.is.numeric.R',
+  'R/importConvertDateTime.R', 'R/in.opererator.R', 'R/makeNames.R',
+  'R/read.xport.R', and 'R/testDateTime.R' are copied or adapted from the
+  'Hmisc' package created by Frank E. Harrell, Jr.
+  <f.harrell@vanderbilt.edu>, and are utilized and redistributed under
+  the terms of the GNU General Public License, version 2.0 or later.
+  --
+  The files 'R/xport.R', 'src/SASxport.c', 'src/SASxport.h', and
+  'src/foreign.h' are copied or adapted from the R 'foreign' package
+  created by Douglas M. Bates <bates@stat.wisc.edu> and Saikat DebRoy
+  <saikat@stat.wisc.edu>, and are utilized and redistributed under the
+  terms of the GNU General Public License, version 2.0 or later.
+  --
+  The creation of this package was partially funded by Metrum Institute
+  <http://metruminstitute.org>.
+Maintainer: Gregory R. Warnes <greg@warnes.net>
+License: GPL-2
+Depends: R (>= 2.4.0), chron, Hmisc
+URL: http://www.warnes.net, http://metruminstitute.org

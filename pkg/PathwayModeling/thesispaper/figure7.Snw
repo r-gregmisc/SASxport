@@ -1,0 +1,45 @@
+<<fig7, echo=F, eval=T>>=6
+source("R/paperSSQ.R")
+source("R/getModes.R")
+source("R/do.optim.R")
+source("R/fitPaper.R")
+source("R/get95CI.R")
+# source("R/plotVi.R")
+source("R/plotVi_nocolor.R")
+mcmcML <-scan("figures/tempDir/mcmcML.dat")
+optimML <-scan("figures/tempDir/optimML.dat")
+output16 <- read.table("data/output16.AllComp.thinned")
+input16 <- read.table("data/input16.dat",header=T)
+attach(input16)
+Dsamp <- as.matrix(read.table("figures/tempDir/Dsamp.dat"))
+# pdf(file="figures/tempDir/V%dfitted.pdf",onefile=FALSE,width=10,height=5.5)
+# postscript(file="figures/tempDir/V%dfitted.eps",onefile=FALSE,width=10,height=5.5)
+pdf(file="figures/tempDir/V%dfitted_nocolor.pdf",onefile=FALSE,width=10,height=5.5)
+plotVi_nocolor(Dsamp,input16)
+N <- dev.off()
+postscript(file="figures/tempDir/V%dfitted_nocolor.eps",onefile=FALSE,width=10,height=5.5)
+# plotVi(Dsamp,input16)
+plotVi_nocolor(Dsamp,input16)
+N <- dev.off()
+detach(input16)
+@
+\begin{figure*}
+  \centering
+%  \subfloat[v2]{\includegraphics[scale=0.30]{figures/tempDir/V1fitted}}
+%  \subfloat[v3]{\includegraphics[scale=0.30]{figures/tempDir/V2fitted}}\\
+%  \subfloat[v4]{\includegraphics[scale=0.30]{figures/tempDir/V3fitted}}
+%  \subfloat[v5]{\includegraphics[scale=0.30]{figures/tempDir/V4fitted}}
+  \subfloat[v2]{\includegraphics[scale=0.30]{figures/tempDir/V1fitted_nocolor}}
+  \subfloat[v3]{\includegraphics[scale=0.30]{figures/tempDir/V2fitted_nocolor}}\\
+  \subfloat[v4]{\includegraphics[scale=0.30]{figures/tempDir/V3fitted_nocolor}}
+  \subfloat[v5]{\includegraphics[scale=0.30]{figures/tempDir/V4fitted_nocolor}}
+  \caption{ 
+    Maximum Posterior Density and 95\% Posterior Credible
+    Region Curves obtained for the 16-point data using the
+    all-components algorithm.  The solid curve shows the maximum
+    likelihood estimate for the same model obtained with the L-BFGS-B
+    algorithm \cite{Byrd95} as implemented in the \textit{R optim()}
+    function.  
+  }
+  \label{fits}
+\end{figure*}

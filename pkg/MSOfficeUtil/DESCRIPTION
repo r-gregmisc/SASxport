@@ -1,0 +1,14 @@
+Package: MSOfficeUtil
+Title: Read from and write to Excel, Save graphs into PowerPoint
+Version: 0.8.3
+Author: Steven Novick <steven.j.novick@gsk.com> with some packaging help from 
+            Gregory R. Warnes <warnes@bst.rochester.edu>
+Maintainer: Steven Novick <steven.j.novick@gsk.com>
+Depends: RDCOMClient, lattice
+Description: Functions for reading and writing data stored by Excel
+	     and for saving lattice graphs into PowerPoint.  
+             NOTE:
+	       These functions depend on Duncan Temple Lang's
+	       DCOMClient package, which is available from 
+	       http://www.omegahat.org/RDCOMClient.
+License: GPL-2

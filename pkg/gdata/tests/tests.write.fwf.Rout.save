@@ -1,0 +1,234 @@
+
+R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ### tests.write.fwf.R
+> ###------------------------------------------------------------------------
+> ### What: Tests for write.fwf
+> ### $Id: tests.write.fwf.R 1300 2008-08-05 11:47:18Z ggorjan $
+> ### Time-stamp: <2008-08-05 12:25:05 ggorjan>
+> ###------------------------------------------------------------------------
+> 
+> library(gdata)
+gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
+
+gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
+
+Attaching package: 'gdata'
+
+The following object is masked from 'package:stats':
+
+    nobs
+
+The following object is masked from 'package:utils':
+
+    object.size
+
+> 
+> ## --- Test data ---
+> 
+> num <- round(c(733070.345678, 1214213.78765456, 553823.798765678,
++                1085022.8876545678,  571063.88765456, 606718.3876545678,
++                1053686.6, 971024.187656, 631193.398765456, 879431.1),
++              digits=3)
+> 
+> testData <- data.frame(num1=c(1:10, NA),
++                        num2=c(NA, seq(from=1, to=5.5, by=0.5)),
++                        num3=c(NA, num),
++                        int1=c(as.integer(1:4), NA, as.integer(4:9)),
++                        fac1=factor(c(NA, letters[1:9], "hjh")),
++                        fac2=factor(c(letters[6:15], NA)),
++                        cha1=c(letters[17:26], NA),
++                        cha2=c(NA, "longer", letters[25:17]),
++                        stringsAsFactors=FALSE)
+> levels(testData$fac1) <- c(levels(testData$fac1), "unusedLevel")
+> testData$Date <- as.Date("1900-1-1")
+> testData$Date[2] <- NA
+> testData$POSIXt <- as.POSIXct(strptime("1900-1-1 01:01:01", format="%Y-%m-%d %H:%M:%S"))
+> testData$POSIXt[5] <- NA
+> 
+> ## --- Tests ---
+> 
+> ## Default
+> write.fwf(testData)
+num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
+ 1               1     f q        1900-01-01 1900-01-01 01:01:01
+ 2 1.0  733070.3 2 a   g r longer            1900-01-01 01:01:01
+ 3 1.5 1214213.8 3 b   h s y      1900-01-01 1900-01-01 01:01:01
+ 4 2.0  553823.8 4 c   i t x      1900-01-01 1900-01-01 01:01:01
+ 5 2.5 1085022.9   d   j u w      1900-01-01                    
+ 6 3.0  571063.9 4 e   k v v      1900-01-01 1900-01-01 01:01:01
+ 7 3.5  606718.4 5 f   l w u      1900-01-01 1900-01-01 01:01:01
+ 8 4.0 1053686.6 6 g   m x t      1900-01-01 1900-01-01 01:01:01
+ 9 4.5  971024.2 7 h   n y s      1900-01-01 1900-01-01 01:01:01
+10 5.0  631193.4 8 i   o z r      1900-01-01 1900-01-01 01:01:01
+   5.5  879431.1 9 hjh     q      1900-01-01 1900-01-01 01:01:01
+> 
+> ## NA should be -
+> write.fwf(x=testData, na="-")
+num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
+ 1   -         - 1 -   f q -      1900-01-01 1900-01-01 01:01:01
+ 2 1.0  733070.3 2 a   g r longer -          1900-01-01 01:01:01
+ 3 1.5 1214213.8 3 b   h s y      1900-01-01 1900-01-01 01:01:01
+ 4 2.0  553823.8 4 c   i t x      1900-01-01 1900-01-01 01:01:01
+ 5 2.5 1085022.9 - d   j u w      1900-01-01 -                  
+ 6 3.0  571063.9 4 e   k v v      1900-01-01 1900-01-01 01:01:01
+ 7 3.5  606718.4 5 f   l w u      1900-01-01 1900-01-01 01:01:01
+ 8 4.0 1053686.6 6 g   m x t      1900-01-01 1900-01-01 01:01:01
+ 9 4.5  971024.2 7 h   n y s      1900-01-01 1900-01-01 01:01:01
+10 5.0  631193.4 8 i   o z r      1900-01-01 1900-01-01 01:01:01
+ - 5.5  879431.1 9 hjh - - q      1900-01-01 1900-01-01 01:01:01
+> ## NA should be -NA-
+> write.fwf(x=testData, na="-NA-")
+num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
+   1 -NA-      -NA-    1 -NA- f    q    -NA-   1900-01-01 1900-01-01 01:01:01
+   2  1.0  733070.3    2 a    g    r    longer -NA-       1900-01-01 01:01:01
+   3  1.5 1214213.8    3 b    h    s    y      1900-01-01 1900-01-01 01:01:01
+   4  2.0  553823.8    4 c    i    t    x      1900-01-01 1900-01-01 01:01:01
+   5  2.5 1085022.9 -NA- d    j    u    w      1900-01-01 -NA-               
+   6  3.0  571063.9    4 e    k    v    v      1900-01-01 1900-01-01 01:01:01
+   7  3.5  606718.4    5 f    l    w    u      1900-01-01 1900-01-01 01:01:01
+   8  4.0 1053686.6    6 g    m    x    t      1900-01-01 1900-01-01 01:01:01
+   9  4.5  971024.2    7 h    n    y    s      1900-01-01 1900-01-01 01:01:01
+  10  5.0  631193.4    8 i    o    z    r      1900-01-01 1900-01-01 01:01:01
+-NA-  5.5  879431.1    9 hjh  -NA- -NA- q      1900-01-01 1900-01-01 01:01:01
+> 
+> ## Some other separator than space
+> write.fwf(testData[, 1:4], sep="-mySep-")
+num1-mySep-num2-mySep-num3-mySep-int1
+ 1-mySep-   -mySep-         -mySep-1
+ 2-mySep-1.0-mySep- 733070.3-mySep-2
+ 3-mySep-1.5-mySep-1214213.8-mySep-3
+ 4-mySep-2.0-mySep- 553823.8-mySep-4
+ 5-mySep-2.5-mySep-1085022.9-mySep- 
+ 6-mySep-3.0-mySep- 571063.9-mySep-4
+ 7-mySep-3.5-mySep- 606718.4-mySep-5
+ 8-mySep-4.0-mySep-1053686.6-mySep-6
+ 9-mySep-4.5-mySep- 971024.2-mySep-7
+10-mySep-5.0-mySep- 631193.4-mySep-8
+  -mySep-5.5-mySep- 879431.1-mySep-9
+> 
+> ## Justify right for character columns
+> write.fwf(testData, justify="right")
+num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
+ 1               1     f q        1900-01-01 1900-01-01 01:01:01
+ 2 1.0  733070.3 2   a g r longer            1900-01-01 01:01:01
+ 3 1.5 1214213.8 3   b h s      y 1900-01-01 1900-01-01 01:01:01
+ 4 2.0  553823.8 4   c i t      x 1900-01-01 1900-01-01 01:01:01
+ 5 2.5 1085022.9     d j u      w 1900-01-01                    
+ 6 3.0  571063.9 4   e k v      v 1900-01-01 1900-01-01 01:01:01
+ 7 3.5  606718.4 5   f l w      u 1900-01-01 1900-01-01 01:01:01
+ 8 4.0 1053686.6 6   g m x      t 1900-01-01 1900-01-01 01:01:01
+ 9 4.5  971024.2 7   h n y      s 1900-01-01 1900-01-01 01:01:01
+10 5.0  631193.4 8   i o z      r 1900-01-01 1900-01-01 01:01:01
+   5.5  879431.1 9 hjh          q 1900-01-01 1900-01-01 01:01:01
+> 
+> ## Justify right for character columns, track na values
+> write.fwf(testData, justify="right", na="!")
+num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
+ 1   !         ! 1   ! f q      ! 1900-01-01 1900-01-01 01:01:01
+ 2 1.0  733070.3 2   a g r longer          ! 1900-01-01 01:01:01
+ 3 1.5 1214213.8 3   b h s      y 1900-01-01 1900-01-01 01:01:01
+ 4 2.0  553823.8 4   c i t      x 1900-01-01 1900-01-01 01:01:01
+ 5 2.5 1085022.9 !   d j u      w 1900-01-01                   !
+ 6 3.0  571063.9 4   e k v      v 1900-01-01 1900-01-01 01:01:01
+ 7 3.5  606718.4 5   f l w      u 1900-01-01 1900-01-01 01:01:01
+ 8 4.0 1053686.6 6   g m x      t 1900-01-01 1900-01-01 01:01:01
+ 9 4.5  971024.2 7   h n y      s 1900-01-01 1900-01-01 01:01:01
+10 5.0  631193.4 8   i o z      r 1900-01-01 1900-01-01 01:01:01
+ ! 5.5  879431.1 9 hjh ! !      q 1900-01-01 1900-01-01 01:01:01
+> 
+> ## With quotes
+> write.fwf(testData, quote=TRUE)
+"num1" "num2" "num3" "int1" "fac1" "fac2" "cha1" "cha2" "Date" "POSIXt"
+" 1" "   " "         " "1" "   " "f" "q" "      " "1900-01-01" "1900-01-01 01:01:01"
+" 2" "1.0" " 733070.3" "2" "a  " "g" "r" "longer" "          " "1900-01-01 01:01:01"
+" 3" "1.5" "1214213.8" "3" "b  " "h" "s" "y     " "1900-01-01" "1900-01-01 01:01:01"
+" 4" "2.0" " 553823.8" "4" "c  " "i" "t" "x     " "1900-01-01" "1900-01-01 01:01:01"
+" 5" "2.5" "1085022.9" " " "d  " "j" "u" "w     " "1900-01-01" "                   "
+" 6" "3.0" " 571063.9" "4" "e  " "k" "v" "v     " "1900-01-01" "1900-01-01 01:01:01"
+" 7" "3.5" " 606718.4" "5" "f  " "l" "w" "u     " "1900-01-01" "1900-01-01 01:01:01"
+" 8" "4.0" "1053686.6" "6" "g  " "m" "x" "t     " "1900-01-01" "1900-01-01 01:01:01"
+" 9" "4.5" " 971024.2" "7" "h  " "n" "y" "s     " "1900-01-01" "1900-01-01 01:01:01"
+"10" "5.0" " 631193.4" "8" "i  " "o" "z" "r     " "1900-01-01" "1900-01-01 01:01:01"
+"  " "5.5" " 879431.1" "9" "hjh" " " " " "q     " "1900-01-01" "1900-01-01 01:01:01"
+> 
+> ## With rownames
+> write.fwf(testData, rownames=TRUE)
+num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
+1   1               1     f q        1900-01-01 1900-01-01 01:01:01
+2   2 1.0  733070.3 2 a   g r longer            1900-01-01 01:01:01
+3   3 1.5 1214213.8 3 b   h s y      1900-01-01 1900-01-01 01:01:01
+4   4 2.0  553823.8 4 c   i t x      1900-01-01 1900-01-01 01:01:01
+5   5 2.5 1085022.9   d   j u w      1900-01-01                    
+6   6 3.0  571063.9 4 e   k v v      1900-01-01 1900-01-01 01:01:01
+7   7 3.5  606718.4 5 f   l w u      1900-01-01 1900-01-01 01:01:01
+8   8 4.0 1053686.6 6 g   m x t      1900-01-01 1900-01-01 01:01:01
+9   9 4.5  971024.2 7 h   n y s      1900-01-01 1900-01-01 01:01:01
+10 10 5.0  631193.4 8 i   o z r      1900-01-01 1900-01-01 01:01:01
+11    5.5  879431.1 9 hjh     q      1900-01-01 1900-01-01 01:01:01
+> 
+> ## Without colnames
+> write.fwf(testData, colnames=FALSE)
+ 1               1     f q        1900-01-01 1900-01-01 01:01:01
+ 2 1.0  733070.3 2 a   g r longer            1900-01-01 01:01:01
+ 3 1.5 1214213.8 3 b   h s y      1900-01-01 1900-01-01 01:01:01
+ 4 2.0  553823.8 4 c   i t x      1900-01-01 1900-01-01 01:01:01
+ 5 2.5 1085022.9   d   j u w      1900-01-01                    
+ 6 3.0  571063.9 4 e   k v v      1900-01-01 1900-01-01 01:01:01
+ 7 3.5  606718.4 5 f   l w u      1900-01-01 1900-01-01 01:01:01
+ 8 4.0 1053686.6 6 g   m x t      1900-01-01 1900-01-01 01:01:01
+ 9 4.5  971024.2 7 h   n y s      1900-01-01 1900-01-01 01:01:01
+10 5.0  631193.4 8 i   o z r      1900-01-01 1900-01-01 01:01:01
+   5.5  879431.1 9 hjh     q      1900-01-01 1900-01-01 01:01:01
+> 
+> ## Without colnames, with rownames
+> write.fwf(testData, colnames=FALSE, rownames=TRUE)
+1   1               1     f q        1900-01-01 1900-01-01 01:01:01
+2   2 1.0  733070.3 2 a   g r longer            1900-01-01 01:01:01
+3   3 1.5 1214213.8 3 b   h s y      1900-01-01 1900-01-01 01:01:01
+4   4 2.0  553823.8 4 c   i t x      1900-01-01 1900-01-01 01:01:01
+5   5 2.5 1085022.9   d   j u w      1900-01-01                    
+6   6 3.0  571063.9 4 e   k v v      1900-01-01 1900-01-01 01:01:01
+7   7 3.5  606718.4 5 f   l w u      1900-01-01 1900-01-01 01:01:01
+8   8 4.0 1053686.6 6 g   m x t      1900-01-01 1900-01-01 01:01:01
+9   9 4.5  971024.2 7 h   n y s      1900-01-01 1900-01-01 01:01:01
+10 10 5.0  631193.4 8 i   o z r      1900-01-01 1900-01-01 01:01:01
+11    5.5  879431.1 9 hjh     q      1900-01-01 1900-01-01 01:01:01
+> 
+> ## With rownames and colnames and rowCol
+> write.fwf(testData, rownames=TRUE, rowCol="HI!")
+HI! num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
+1   1               1     f q        1900-01-01 1900-01-01 01:01:01
+2   2 1.0  733070.3 2 a   g r longer            1900-01-01 01:01:01
+3   3 1.5 1214213.8 3 b   h s y      1900-01-01 1900-01-01 01:01:01
+4   4 2.0  553823.8 4 c   i t x      1900-01-01 1900-01-01 01:01:01
+5   5 2.5 1085022.9   d   j u w      1900-01-01                    
+6   6 3.0  571063.9 4 e   k v v      1900-01-01 1900-01-01 01:01:01
+7   7 3.5  606718.4 5 f   l w u      1900-01-01 1900-01-01 01:01:01
+8   8 4.0 1053686.6 6 g   m x t      1900-01-01 1900-01-01 01:01:01
+9   9 4.5  971024.2 7 h   n y s      1900-01-01 1900-01-01 01:01:01
+10 10 5.0  631193.4 8 i   o z r      1900-01-01 1900-01-01 01:01:01
+11    5.5  879431.1 9 hjh     q      1900-01-01 1900-01-01 01:01:01
+> 
+> ## formatInfo is tested with unit tests
+> 
+> ###------------------------------------------------------------------------
+> ### tests.write.fwf.R ends
+> 
+> proc.time()
+   user  system elapsed 
+  0.423   0.048   0.462 

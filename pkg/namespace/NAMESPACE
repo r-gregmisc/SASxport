@@ -1,0 +1,7 @@
+useDynLib(namespace)
+
+export(getRegisteredNamespace)
+export(makeNamespace)
+export(registerNamespace)
+export(unregisterNamespace)
+
