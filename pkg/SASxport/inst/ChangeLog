@@ -1,0 +1,463 @@
+2015-05-02  warnes
+
+	* [r2018] Rename 'trunk' to 'pkg' for compatibility with R-forge
+
+2014-09-13  warnes
+
+	* [r1886] Update for changes in latest version of Hmisc (3.14-5).
+
+2014-07-21  warnes
+
+	* [r1865] Add missing comment terminators.
+	* [r1864] Use conditional compilation to map-out byte-swapping code
+	  on bigendian systems, where it is not needed.
+	* [r1863] Remove never-used conditional code and un-needed #include
+	  statements
+	* [r1862] Update version number in test script output comparison
+	  files.
+	* [r1861] Change version number to 1.5.0 and update NEWS file.
+	* [r1860] Test commit from ppc-vm
+	* [r1859] Add .Rout.save file matching changes to Alfalfa_Test.R
+	* [r1858] add display output of read.xport in Alafalfa_Test.R test
+	  script
+	* [r1857] Minor code reformatting.
+	* [r1856] Mark constants as long ints.
+	* [r1855] Avoid infinte loop in case of IBM exponent overflow. If
+	  this occurs,
+	  and can't be fixed in a single pass, generate a warning message
+	  and
+	  return NA.
+	* [r1854] Move comments about system functions to implement
+	  TO_BIGEND{SHORT,INT}
+	  to to_bigend.h.
+	* [r1853] Add comments about system functions to do same task.
+	* [r1852] Call TO_BIGEND_DOUBLE on the pointed to value, not the
+	  pointed.
+	* [r1851] - Return to using get_IBM_double, but add reverse_double
+	  before the
+	  call if running on BIGENDIAN machine.
+
+2014-07-20  warnes
+
+	* [r1850] Finish rename of 'HTOBE' to 'TO_BIGEND'
+	* [r1849] Add dummy code to avoid compile warnings about unneeded
+	  variables
+	* [r1848] Rename 'host_to_be' to 'to_bigend' to be more transparent
+	  about purpose
+	* [r1847] Rename 'host_to_be' to 'to_bigend' to be more transparent
+	  about purpose
+
+2014-07-19  warnes
+
+	* [r1846] Minor change in spacing
+	* [r1845] Change byte-order detection code
+	* [r1844] Fix copy-paste error
+
+2014-07-18  warnes
+
+	* [r1843] Update NEWS for SASxport 1.4.2
+	* [r1842] - Rename function and file 'reverse' to 'host_to_be'
+	  (short for
+	  host-endian to big-endian') to clarify purpose of the function.
+	  - Remove pre-processeor definition of REVERSE, and add
+	  definitions of
+	  HTOBE_SHORT, HTOBE_INT, and HTOBE_DOUBLE.
+	* [r1841] Make sure all left shifts are explicitly typed as
+	  unsigned in to avoid
+	  undefined behavior.
+	* [r1840] Update test output
+	* [r1839] minor code formatting changes
+	* [r1838] Re-ename optimization on BIG_ENDIAN systems
+	* [r1837] Update .save files
+	* [r1836] Write file data as hex bytes so R CMD check's diff can
+	  display up differences.
+	* [r1835] Remove SASxport:::assert() and replace all uses with
+	  stopifnot()
+	* [r1834] Remove SASxport:::assert() and replace all uses with
+	  stopifnot()
+	* [r1833] Explicitly cast left shifts in ibm2ieee.c to avoid
+	  undefined behavior. (Reported by Brian Ripley)
+	* [r1832] Add default label method to Hmisc import to resolve
+	  problem if SASxport::read.xport is called without loading
+	  SASxport
+
+2014-07-17  warnes
+
+	* [r1831] Updated read.xport man page exampls to match new behavior
+	  of names.toupper
+	* [r1830] Modfy tests to directly call 'read.xport' instead of
+	  relying on 'examples(read.xport)'. Add test files to run
+	  'examples(read.xport)' separately.
+	* [r1829] Enable examples that use Hmisc, since it is now a
+	  dependency.
+	* [r1828] Update DESCRIPTION and NEWS for SASxport 1.4.1.
+	* [r1827] Minor code reformatting.
+	* [r1826] Rename former 'label.Rd' file to 'SASformatRd' and remove
+	  references
+	  to label() and "label<-"() (checkin missed from previous
+	  release).
+	* [r1825] read.xport: Preserve '$' at the beginning of SAS
+	  character format strings.
+	* [r1824] read.xport() argument names.tolower was not being honored
+	  for dataset
+	  names.
+
+2014-04-10  warnes
+
+	* [r1807] Oops. Correct over-zealous paste.
+	* [r1806] Update test to use new 'self' argument for label
+	  data.frame method.
+	* [r1805] Update for SASxport 1.4.0.
+	* [r1804] Remove definitions of labels in favor of those coming
+	  from Hmisc. Modify read.xport and write.xport to use appropriate
+	  arguments for label method for data.frames.
+	* [r1803] Remove definitions of labels in favor of those coming
+	  from Hmisc. Modify read.xport and write.xport to use appropriate
+	  arguments for label method for data.frames.
+
+2013-10-09  warnes
+
+	* [r1722] Remove duplicate Imports field
+	* [r1721] Update examples
+	* [r1720] Change to camelcase
+	* [r1719] Update for SASxport 1.3.6 release
+	* [r1718] Issue: URL test2.xpt file has moved. Solution: (1) Use
+	  local copy of file for executed examples, (2) update URL for
+	  displayed examples.
+	* [r1717] Add local copy of test2.xpt SAS file
+
+2013-06-14  warnes
+
+	* [r1672] Update .save files for 1.3.5
+	* [r1671] Updates for SASxport 1.3.5
+	* [r1670] Complete changes to handle empty datasets in xport files.
+	* [r1669] Properly handle empty datasets
+	* [r1668] Fix bug when xpt file contains an empty data set
+
+2013-05-31  warnes
+
+	* [r1667] Update test Rout.save files to match new version
+	* [r1666] Update for SASxport 1.3.4
+	* [r1665] Explicitly specify timezone in tests/*.R to avoid
+	  extraneous warnings
+	* [r1664] Update build date.
+	* [r1663] Update for SASxport 1.3.3
+	* [r1662] Update for SASxport 1.3.3
+	* [r1661] Correct error in write.xport when a factor contains only
+	  NA entries.
+
+2013-05-12  warnes
+
+	* [r1660] Update NEWS for release
+	* [r1659] Complete work to handle dataframe label and type
+
+2013-05-11  warnes
+
+	* [r1658] Add support for dataset labels and types
+	* [r1657] Fix spelling error
+	* [r1656] Update for version 1.3.2
+	* [r1655] Update for release 1.3.2
+	* [r1654] Fix spelling error.
+	* [r1653] Carry bug fix forward to handle loading xport data when a
+	  dataset ends on exactly 80 byte block boundry.
+	* [r1652] Replace file.path(path.package(...)) with
+	  system.file(...)
+	* [r1651] Carry bug fix forward to handle loading xport data when a
+	  dataset ends on exactly 80 byte block boundry.
+	* [r1650] Remove obsolete .First.lib()
+
+2013-03-24  warnes
+
+	* [r1649] Update for release 1.3.1
+	* [r1648] Replace obsolete use of .path.package() with
+	  path.package()
+
+2012-06-29  warnes
+
+	* [r1593] Create inst/extdata directory to hold example file
+	  Alfalfa.xpt.
+	* [r1592] Update SASxport version number
+	* [r1591] Fix capitalization of extension from .Rda to .rda
+	* [r1590] Convert Alfalfa data set to an R data file instead of R
+	  code + xpt file
+	* [r1589] Add makeSASNames() to the package manual page.
+	* [r1588] Update DESCRIPTION and NEWS for SASxport 1.3.0
+	* [r1587] Add makeSASNames() to exported functions.
+	* [r1586] Add documentation for the 'quiet' argument of
+	  makeSASNames().
+
+2012-06-28  warnes
+
+	* [r1585] Changelong shouldn't be stored in svn
+	* [r1584] Fix see also reference for make.names().
+	* [r1583] Remove references to Random Technologies.
+	* [r1582] Add man page for makeSASNames() function.
+	* [r1581] Fixed bug when only some names are duplicated.
+	* [r1580] New makeSASNames() function creates valid SAS names from
+	  a list of R
+	  object or column names, properly handling case conversion (all
+	  converted to upper-case), length restructions (8 characters), and
+	  making duplicate names unique. This is not as obvious as it
+	  appears,
+	  since the process of shortening names can render cause name to
+	  become
+	  duplicates, and adding digits to the end of names to make them
+	  unique
+	  can make them too long, so a few iterations may be requireed to
+	  ensure
+	  valid and unique names.
+	* [r1579] Update saved test output files.
+	* [r1578] Remove references to Random Technologies LLC and update
+	  email address.
+
+2012-06-21  warnes
+
+	* [r1572] Standardize file capitalization
+	* [r1571] Standardize file capitalization
+
+2010-11-12  warnes
+
+	* [r1458] Update reference test output for TestUnnamedComponents.R
+	* [r1457] Update for SASxport release 1.2.4
+	* [r1456] Update Greg's email address
+	* [r1455] Fix bug: 'as.is=TRUE' argument to read.xport was being
+	  ignored.
+	* [r1454] Add test for proper function of as.is flag to read.xport
+
+2008-02-29  warnes
+
+	* [r1245] Update for release 1.2.3
+	* [r1244] Correct typo in write.xport man page
+
+2007-11-09  warnes
+
+	* [r1227] Update NEWS and ChangeLog for 1.2.2
+	* [r1226] Apply patches to fix problems on 64 bit platforms, as
+	  sumitted by Brian Ripley.
+
+2007-11-07  warnes
+
+	* [r1225] Update version number
+	* [r1224] Bump version number
+	* [r1223] Apply patches to fix problems on 64 bit platforms, as
+	  sumitted by Brian Ripley, and to replace assert() calls with
+	  calls a macro that maps to error() unless standalone testing is
+	  being done, in which case assert() is used.
+
+2007-11-05  warnes
+
+	* [r1220] Remove extraneous ';' characters after function closing
+	  brace
+
+2007-11-01  warnes
+
+	* [r1211] Remove dependency on foreign, since the necessary
+	  functionality is now provided internally.
+	* [r1210] Update TODO file
+	* [r1209] Update to match changes to functions
+	* [r1208] Update to match package changes
+	* [r1207] Update stored test output to match package changes
+	* [r1206] Update for new release
+	* [r1205] Remove dependency on foreign
+	* [r1204] Copy code from foreign for lookup.xport() and
+	  read.xport(), extend lookup.xport() to show information about SAS
+	  format and iformat
+	* [r1203] - Use of the attribute named 'format' caused problems
+	  with chron
+	  objects. Consequently, the format information is now stored in
+	  the
+	  'SASformat' attribute. For consistency, the input format
+	  information
+	  is now stored in the 'SASiformat' attribute.
+	  
+	  - The functions for extracting and setting the format and iformat
+	  information have been renamed to 'SASformat' and 'SASiformat',
+	  etc.
+	  
+	  - In order to properly handle SAS format information, we now use
+	  a
+	  locally modified version of foreign::lookup.xport and
+	  foreign::read.xport.
+	  
+	  - Various typo corrections
+	  
+	  - Creation of a new function fstr() to generate sas format name
+	  strings
+	  using name, length, and digits information.
+	  
+	  - Addion of a toSAS method for chron() objects
+	* [r1202] Copy code from foreign for lookup.xport() and
+	  read.xport(), extend lookup.xport() to show information about SAS
+	  format and iformat
+	* [r1201] Improve handling of SAS data and time formats, simplify
+	  code
+
+2007-10-29  warnes
+
+	* [r1200] Fixes to correct handling storage of negative numbers
+	* [r1199] Belatedly commit change to startup message to give path
+	  to SASxport product page rather than contact page
+	* [r1198] Comment out debugging message in reverse()
+	* [r1197] Commit changes to stored output to match changed package
+	  load message
+
+2007-10-22  warnes
+
+	* [r1196] Clarify GPL version
+
+2007-10-02  warnes
+
+	* [r1195] Add information on how to get help to the startup message
+	* [r1194] Add information on how to get help to the startup message
+	* [r1193] Add dependenct on utils::packageDescription
+
+2007-10-01  warnes
+
+	* [r1192] Update saved R output to include startup message
+
+2007-09-25  warnes
+
+	* [r1191] Update version number and date
+	* [r1190] Indicate that Metrum partially funded development
+	* [r1189] Display version and support information on package load
+
+2007-09-18  warnes
+
+	* [r1188] Spent more time than Metrum paid for
+
+2007-09-15  warnes
+
+	* [r1187] Improve formatting for pdf output
+	* [r1186] Update changelog
+	* [r1185] Changes so test TestUnnamedCompontents.R runs under R
+	  2.4.1 on Win32
+	* [r1184] Add support for auto-generating SAS formats for factor
+	  objects. Refactor argument name handling to improve code clarity.
+
+2007-09-14  warnes
+
+	* [r1183] Add option to read.xport() that permits inclusion of PROC
+	  CONTENTS format information in the returned list
+
+2007-09-13  warnes
+
+	* [r1180] Ensure 'names.tolower' applies to dataset names
+	* [r1179] Update test output to match recent changes.
+	* [r1178] Add checking and handling for unnamed data frames or
+	  variables
+	* [r1177] Update tests now that 'units' and 'units<-' functions no
+	  longer are included
+
+2007-09-12  warnes
+
+	* [r1176] Remove units() and units<-() functions since they arene't
+	  ever used.
+	* [r1175] Remove units() and units<-() functions since they arene't
+	  ever used.
+	* [r1174] Remove units from manual page
+
+2007-09-11  warnes
+
+	* [r1173] Add assertion to test that read.xport(.., as.list=TRUE)
+	  works properly
+	* [r1172] Forgot to save buffer before svn commit.
+	* [r1171] Correct error in handling 'verbose' argument, error when
+	  more than one dataset has the same name, and add 'as.list'
+	  argument to ensure return value is a list, even if there is only
+	  one dataset in the file
+	* [r1170] Improve handling of list argument. Also check that names
+	  are proper and unique.
+
+2007-09-07  warnes
+
+	* [r1167] Add round-trip test for Theoph data set
+	* [r1166] Change argument name in write.xport from 'filename' to
+	  'file' to match read.xport
+	* [r1165] Change argument name in write.xport from 'filename' to
+	  'file' to match read.xport
+	* [r1164] Change argument name in write.xport from 'filename' to
+	  'file' to match read.xport
+	* [r1163] Fix typo
+
+2007-08-29  warnes
+
+	* [r1161] Update Version to 1.0, depend on current version of
+	  foreign
+
+2007-08-22  warnes
+
+	* [r1160] Update ChangeLog and NEWS files
+	* [r1159] Modify read.xport to preserve case of SAS names by
+	  default, as well as updating the example code.
+	* [r1158] sprintf() was being used where printf() was intended.
+
+2007-08-21  warnes
+
+	* [r1157] Slight improvement to credits for BRL-CAD
+	* [r1156] Commit previous updates
+	* [r1155] Commit previous updates
+
+2007-08-15  warnes
+
+	* [r1146] Remove dependency on SAS code
+	* [r1145] Fix reverse.c because we need to swap everything to match
+	  Big-Endian, rather than Little-Endian. Also, dont' call the
+	  macro.
+	* [r1144] Restore reverse.c
+	* [r1143] Minor reformatting
+	* [r1142] Make corrections for typos noted by Metrum folks
+
+2007-08-12  warnes
+
+	* [r1138] More updates
+	* [r1137] Remove new stuff... use SAS's code instead
+	* [r1136] 1st attempt at rewriting cnxptiee.[ch]
+
+2007-08-11  warnes
+
+	* [r1135] Explicitly check file header
+	* [r1134] Improve package description
+
+2007-08-09  warnes
+
+	* [r1133] More changes, esp to lookup.xport() and friends
+	* [r1132] More changes, esp to lookup.xport() and friends
+	* [r1131] More changes, esp to lookup.xport() and friends
+	* [r1130] Remove unused swap_bytes.h
+	* [r1129] Add package description page
+	* [r1128] Add comment header indicating the source of code from
+	  Hmisc
+	* [r1127] Update saved output of test scripts
+
+2007-08-08  warnes
+
+	* [r1126] Updates
+	* [r1125] Updates
+	* [r1124] Updates
+	* [r1123] Updates
+	* [r1122] Updates.
+
+2007-08-03  warnes
+
+	* [r1119] Add code from package foreign and gtools to make SASxport
+	  stand alone
+	* [r1118] Remove stray .Rhistory file
+	* [r1117] Acknowledge MetrumI support
+	* [r1116] Add "assert" function
+	* [r1115] Add "assert" function to avoid dependenct on gtools.
+	* [r1114] Correct some typos.
+	* [r1113] Drop version number to 0.99 until testing integration and
+	  is complete
+	* [r1112] Add R test file to run c-level tests
+	* [r1111] Remove .so from svn
+	* [r1110] More modifications. Should now work for most R data types
+	* [r1109] Add more tests
+
+2007-07-29  warnes
+
+	* [r1107] Add SAS code to create xport data files for testing
+
+2007-07-28  warnes
+
+	* [r1106] Add SVNxport package
+
