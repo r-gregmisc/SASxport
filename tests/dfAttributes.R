@@ -9,7 +9,8 @@ label(abc.out, self=TRUE) <- "xxxx data set xxxxx"
 SAStype(abc.out) <- "normal"
 
 ## add a format specifier (not used by R)
-SASformat(abc.out$x) <- 'date7.'
+SASformat(abc.out$x)  <- 'DATE7.'
+SASiformat(abc.out$x) <- 'DATE7.'
 
 ## add a variable label (not used by R)
 label(abc.out$y)  <- 'character variable'
@@ -25,20 +26,30 @@ write.xport(abc.out,
 
 # read the SAS data back in
 abc.in <- read.xport("dfAttributes.xpt",
-                     names.tolower=FALSE,
+                     names.tolower=TRUE,
                      verbose=TRUE)
 
 ## Test that the files are otherwise identical
 label(abc.out, self=TRUE, "MISSING!")
 label(abc.in , self=TRUE, "MISSING!")
 
+stopifnot( label(abc.out, self=TRUE, "MISSING!") ==
+           label(abc.in, self=TRUE, "MISSING!")
+          )
+
 SAStype(abc.out, "MISSING!")
 SAStype(abc.in , "MISSING!")
-
-stopifnot( label  (abc.out, self=TRUE, "MISSING!") ==
-           label  (abc.in,  self=TRUE, "MISSING!") )
 
 stopifnot( SAStype(abc.out, "MISSING!") ==
            SAStype(abc.in,  "MISSING!") )
 
+SASformat(abc.out)
+SASformat(abc.in)
+
+stopifnot( unlist(SASformat(abc.out)) == unlist(SASformat(abc.in))  )
+
+SASiformat(abc.out)
+SASiformat(abc.in)
+
+stopifnot( unlist(SASiformat(abc.out)) == unlist(SASiformat(abc.in))  )
 
