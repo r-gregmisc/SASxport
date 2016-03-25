@@ -1,10 +1,18 @@
+Version 1.5.4 - 2016-03-25
+--------------------------
+
+Other changes:
+
+- Updated nchar() calls to specify type="byte" for clarity.
+
+
 Version 1.5.0 - 2014-07-21
 --------------------------
 
 Bug fixes:
 
 - Now works properly on big-endian systems such as the PowerPC,
-  Spark. (Reported by Brian Ripley )x
+  Spark. (Reported by Brian Ripley )
 
 - Explicitly cast left bit shifts to avoid undefined C language
   behavior. (Reported by Brian Ripley)
