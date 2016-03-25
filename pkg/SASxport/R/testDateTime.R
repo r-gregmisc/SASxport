@@ -1,5 +1,5 @@
 ##
-## Code originally from Frank Harrell's 'Hmisc' library: 
+## Code originally from Frank Harrell's 'Hmisc' library:
 ##   http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/Hmisc
 ## Copied with permission on 2007-08-04
 ##
@@ -14,28 +14,32 @@ testDateTime <- function(x, what=c('either','both','timeVaries'))
   if(!length(cl))
     return(FALSE)
 
-  dc <- if(.R.)
-          c('Date', 'POSIXt','POSIXct','dates','times','chron')
-        else
-          c('timeDate','date','dates','times','chron')
-  
-  dtc <- if(.R.)
-           c('POSIXt','POSIXct','chron')
-         else
-           c('timeDate','chron')
-  
+  # dc <- if(.R.)
+  #         c('Date', 'POSIXt','POSIXct','dates','times','chron')
+  #       else
+  #         c('timeDate','date','dates','times','chron')
+  dc <- c('Date', 'POSIXt','POSIXct','dates','times','chron')
+
+  # dtc <- if(.R.)
+  #          c('POSIXt','POSIXct','chron')
+  #        else
+  #          c('timeDate','chron')
+  dtc <- c('POSIXt','POSIXct','chron')
+
   switch(what,
          either = any(cl %in% dc),
          both   = any(cl %in% dtc),
          timeVaries = {
-           if('chron' %in% cl || 'Date' %in% cl || !.R.) { 
+           #if('chron' %in% cl || 'Date' %in% cl || !.R.) {
+           if('chron' %in% cl || 'Date' %in% cl) {
              ## chron or S+ timeDate
              y <- as.numeric(x)
              length(unique(round(y - floor(y),13))) > 1
            }
-           else if(.R.)
-             length(unique(format(x,'%H%M%S'))) > 1
+           # else if(.R.)
            else
-             FALSE
+             length(unique(format(x,'%H%M%S'))) > 1
+           # else
+           #   FALSE
          })
 }
