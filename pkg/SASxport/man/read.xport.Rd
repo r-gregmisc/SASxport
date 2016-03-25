@@ -200,7 +200,7 @@ stopifnot( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 library(Hmisc)
 
 describe(w$TEST)   # see labels, format names for dataset test
-lapply(w, describe)# see descriptive stats in more detail for each variable
+lapply(w, describe, "")# see descriptive stats in more detail for each variable
 
 contents(w$TEST)   # another way to see variable attributes
 lapply(w, contents)# show contents of individual items in more detail
