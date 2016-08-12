@@ -3,8 +3,8 @@ Type: Package
 Title: Read and Write SAS XPORT Files
 Version: 1.5.4
 Date: 2016-03-25
-Description: This package provides functions for reading, listing
-  the contents of, and writing SAS xport format files.
+Description: Functions for reading, listing
+    the contents of, and writing SAS xport format files.
   The functions support reading and writing of either
   individual data frames or sets of data frames.  Further,
   a mechanism has been provided for customizing how

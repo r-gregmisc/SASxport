@@ -3,6 +3,7 @@ useDynLib(SASxport, .registration=TRUE)
 importFrom(chron, chron, times)
 importFrom(utils, packageDescription)
 importFrom(Hmisc, label, label.default, "label<-", "label<-.default")
+importFrom(utils, download.file)
 
 export(
        toSAS,
