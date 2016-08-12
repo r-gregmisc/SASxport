@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "useDynLib(SASxport, .registration=TRUE)\n\nimportFrom(chron, chron, times)\nimportFrom(utils, packageDescription)\nimportFrom(Hmisc, label, label.default, \"label<-\", \"label<-.default\")\nimportFrom(utils, download.file)\n\nexport(\n       toSAS,\n       lookup.xport,\n       read.xport,\n       write.xport,\n       ## \"label\",\n       ## \"label<-\",\n\n       makeSASNames,\n\n       \"SASformat\",\n       \"SASformat<-\",\n\n       \"SASiformat\",\n       \"SASiformat<-\",\n\n       \"SAStype\",\n       \"SAStype<-\"\n)\n\nS3method(toSAS, numeric)\nS3method(toSAS, logical)\nS3method(toSAS, character)\nS3method(toSAS, factor)\nS3method(toSAS, chron)\nS3method(toSAS, POSIXt)\nS3method(toSAS, Date)\nS3method(toSAS, default)\n\n## S3method(label, default)\nS3method(SASformat,  default)\nS3method(SASiformat, default)\nS3method(SAStype,    default)\n\n## S3method(label,   data.frame)\nS3method(SASformat,  data.frame)\nS3method(SASiformat, data.frame)\n##S3method(SAStype,    data.frame)\n\n## S3method(\"label<-\", default)\nS3method(\"SASformat<-\",  default)\nS3method(\"SASiformat<-\", default)\nS3method(\"SAStype<-\",    default)\n\n## S3method(\"label<-\", data.frame)\nS3method(\"SASformat<-\",  data.frame)\nS3method(\"SASiformat<-\", data.frame)\n##S3method(\"SAStype<-\",    data.frame)\n\nS3method(print, lookup.xport)\nS3method(summary, lookup.xport)\nS3method(print, summary.lookup.xport)\n\n",
+    "created" : 1458944711911.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1759035676",
+    "id" : "B97C53CF",
+    "lastKnownWriteTime" : 1458944725,
+    "last_content_update" : 1458944725295,
+    "path" : "~/src/r-gregmisc/SASxport/NAMESPACE",
+    "project_path" : "NAMESPACE",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_namespace"
+}
