@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "Package: SASxport\nType: Package\nTitle: Read and Write SAS XPORT Files\nVersion: 1.5.4\nDate: 2016-03-25\nDescription: Functions for reading, listing\n    the contents of, and writing SAS xport format files.\n  The functions support reading and writing of either\n  individual data frames or sets of data frames.  Further,\n  a mechanism has been provided for customizing how\n  variables of different data types are stored.\nAuthor:\n  Unless otherwise noted, the contents of this package were written by\n  Gregory R. Warnes <greg@warnes.net> and are provided under the\n  terms of the GNU General Public License, version 2.0 or later.\n  --\n  The files 'src/ieee2ibm.c' and 'src/ibm2ieee.c' were extracted from\n  BRL-CAD file /brlcad/src/libbu/htond.c written by Michael John\n  Muuss, Copyright (c) 2004-2007 United States Government as\n  represented by the U.S. Army Research Laboratory, and is utilized\n  and redistributed under the terms of the GNU Lesser General Public\n  License, version 2.1.\n  --\n  The files 'R/AFirst.lib.s', 'R/all.is.numeric.R',\n  'R/importConvertDateTime.R', 'R/in.opererator.R', 'R/makeNames.R',\n  'R/read.xport.R', and 'R/testDateTime.R' are copied or adapted from the\n  'Hmisc' package created by Frank E. Harrell, Jr.\n  <f.harrell@vanderbilt.edu>, and are utilized and redistributed under\n  the terms of the GNU General Public License, version 2.0 or later.\n  --\n  The files 'R/xport.R', 'src/SASxport.c', 'src/SASxport.h', and\n  'src/foreign.h' are copied or adapted from the R 'foreign' package\n  created by Douglas M. Bates <bates@stat.wisc.edu> and Saikat DebRoy\n  <saikat@stat.wisc.edu>, and are utilized and redistributed under the\n  terms of the GNU General Public License, version 2.0 or later.\n  --\n  The creation of this package was partially funded by Metrum Institute\n  <http://metruminstitute.org>.\nMaintainer: Gregory R. Warnes <greg@warnes.net>\nLicense: GPL-2\nDepends: R (>= 2.4.0), chron, Hmisc\nURL: http://www.warnes.net, http://metruminstitute.org\n",
+    "created" : 1458935959194.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1001061882",
+    "id" : "3B443731",
+    "lastKnownWriteTime" : 1459443295,
+    "last_content_update" : 1459443295456,
+    "path" : "~/src/r-gregmisc/SASxport/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "dcf"
+}
