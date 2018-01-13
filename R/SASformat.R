@@ -1,6 +1,9 @@
+#' @export
 SASformat <- function(x, default)
   UseMethod("SASformat")
 
+
+#' @export
 SASformat.default <- function(x, default=NULL)
 {
   lab <- attr(x,"SASformat")
@@ -10,14 +13,20 @@ SASformat.default <- function(x, default=NULL)
   lab
 }
 
+
+#' @export
 SASformat.data.frame <- function(x, default=NULL)
 {
   sapply( x, SASformat)
 }
 
+
+#' @export
 "SASformat<-" <- function(x, value)
   UseMethod("SASformat<-")
 
+
+#' @export
 "SASformat<-.default" <- function(x, value)
 {
   attr(x,'SASformat') <- value
@@ -25,6 +34,7 @@ SASformat.data.frame <- function(x, default=NULL)
 }
 
 
+#' @export
 "SASformat<-.data.frame" <- function(x, value)
 {
   if( ncol(x) != length(value) )

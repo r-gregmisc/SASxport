@@ -1,14 +1,15 @@
-loadMessage <- function()
+.onAttach <- function(libname, pkgname)
 {
-  cat("\n")
-  ver <-packageDescription("SASxport", fields="Version") 
-  date <- packageDescription("SASxport", fields="Date") 
-  cat("Loaded SASxport version ", ver,  " (", date ,").\n", sep="")
-  cat("\n")
-  cat("  Type `?SASxport' for usage information.\n")
-  cat("\n")
-}
+  ver  <- utils::packageDescription("SASxport", fields="Version")
+  date <- utils::packageDescription("SASxport", fields="Date")
 
-.onLoad <- function(lib, pkg) {
-  loadMessage()
+  base::packageStartupMessage(
+    c(
+      "\n",
+      "Loaded SASxport version ", ver,  " (", date ,").\n",
+      "\n",
+      "  Type `?SASxport' for usage information.\n",
+      "\n"
+      )
+  )
 }

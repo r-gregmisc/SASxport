@@ -1,7 +1,7 @@
 
-R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
-Copyright (C) 2014 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin13.1.0 (64-bit)
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -16,28 +16,71 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(SASxport)
-Loading required package: chron
-Loading required package: Hmisc
-Loading required package: grid
-Loading required package: lattice
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
 
-Attaching package: 'Hmisc'
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
-
-Loaded SASxport version 1.5.0 (2014-07-21).
+Loaded SASxport version 1.5.4 (2017-05-22).
 
   Type `?SASxport' for usage information.
 
+
 > Sys.setenv("TZ"="GMT")
 > 
+> set.seed(42)
+> 
 > # run the examples, comparing output
+> example(Alfalfa)
+
+Alfalf> data(Alfalfa)
+
+Alfalf> # go were the data is...
+Alfalf> here <- getwd()
+
+Alfalf> setwd(system.file("extdata",package="SASxport"))
+
+Alfalf> # Description of the file contents
+Alfalf> lookup.xport("Alfalfa.xpt")
+
+SAS xport file
+--------------
+Filename: `Alfalfa.xpt'
+
+Variables in data set `SPEC':
+ dataset   name      type format flength fdigits iformat iflength ifdigits
+    SPEC    POP character              0       0                0        0
+    SPEC SAMPLE   numeric              0       0                0        0
+    SPEC    REP   numeric              0       0                0        0
+    SPEC SEEDWT   numeric              0       0                0        0
+    SPEC  HARV1   numeric              0       0                0        0
+    SPEC  HARV2   numeric              0       0                0        0
+ label nobs
+         40
+         40
+         40
+         40
+         40
+         40
+
+
+Alfalf> # Load the file contents
+Alfalf> Alfalfa <- read.xport("Alfalfa.xpt")
+
+Alfalf> head(Alfalfa)
+  POP SAMPLE REP SEEDWT HARV1 HARV2
+1 min      0   1     64 171.7 180.3
+2 min      1   1     54 138.2 150.7
+3 min      2   1     40 145.6 129.1
+4 min      3   1     45 170.4 191.2
+5 min      4   1     64 124.8 172.6
+6 MAX      5   1     75 179.0 235.3
+
+Alfalf> # return home
+Alfalf> setwd(here)
+
+Alfalf> # Just for fun, plot the data
+Alfalf> par(mfrow=c(1,2))
+
+Alfalf> plot( HARV1 ~ POP, data=Alfalfa)
+
+Alfalf> plot( HARV2 ~ POP, data=Alfalfa)
 > example(SASformat)
 
 SASfrm> ## Examples for vectors
@@ -87,7 +130,7 @@ lkp.xp> lookup.xport(alfFile)
 
 SAS xport file
 --------------
-Filename: `/Users/warnes/src/r-gregmisc/SASxport.Rcheck/SASxport/extdata/Alfalfa.xpt'
+Filename: `/Users/gwarnes/Google Drive/src/SASxport_clean.Rcheck/SASxport/extdata/Alfalfa.xpt'
 
 Variables in data set `SPEC':
  dataset   name      type format flength fdigits iformat iflength ifdigits
@@ -121,7 +164,7 @@ lkp.xp> w
 
 SAS xport file
 --------------
-Filename: `/Users/warnes/src/r-gregmisc/SASxport.Rcheck/SASxport/extdata/test2.xpt'
+Filename: `/Users/gwarnes/Google Drive/src/SASxport_clean.Rcheck/SASxport/extdata/test2.xpt'
 
 Variables in data set `TEST':
  dataset name    type   format flength fdigits iformat iflength ifdigits
@@ -215,7 +258,7 @@ lkp.xp> wS # same display
 
 SAS xport file
 --------------
-Filename: `/Users/warnes/src/r-gregmisc/SASxport.Rcheck/SASxport/extdata/test2.xpt'
+Filename: `/Users/gwarnes/Google Drive/src/SASxport_clean.Rcheck/SASxport/extdata/test2.xpt'
 
 Variables in data set `TEST':
  dataset name    type   format flength fdigits iformat iflength ifdigits
@@ -383,9 +426,9 @@ rd.xpr> class(w)
 
 rd.xpr> sapply(w, head)
 $TEST
-  RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+  RACE AGE         D1                 DT1       T1
+1 blue  30 2002-03-03 2002-03-03 09:31:02 11:13:45
+2 <NA>  31 2002-06-03 2002-06-03 09:42:07 11:14:13
 
 $Z
          X3        X4         X5        X6        X7         X8
@@ -411,9 +454,9 @@ rd.xpr> class(w)
 
 rd.xpr> sapply(w, head)
 $TEST
-  RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+  RACE AGE         D1                 DT1       T1
+1 blue  30 2002-03-03 2002-03-03 09:31:02 11:13:45
+2 <NA>  31 2002-06-03 2002-06-03 09:42:07 11:14:13
 
 $Z
          X3        X4         X5        X6        X7         X8
@@ -433,9 +476,9 @@ rd.xpr> class(w)
 
 rd.xpr> sapply(w, head)
 $TEST
-  RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+  RACE AGE         D1                 DT1       T1
+1 blue  30 2002-03-03 2002-03-03 09:31:02 11:13:45
+2 <NA>  31 2002-06-03 2002-06-03 09:42:07 11:14:13
 
 $Z
          X3        X4         X5        X6        X7         X8
@@ -460,12 +503,22 @@ $FORMATS
 rd.xpr> ## Don't show: 
 rd.xpr> stopifnot( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 
-rd.xpr> ## End Don't show
-rd.xpr> 
+rd.xpr> ## End(Don't show)
 rd.xpr> 
 rd.xpr> #### The Hmisc library provides many useful functions for interacting with
 rd.xpr> #### data imported from SAS via read.xport()
 rd.xpr> library(Hmisc)
+Loading required package: lattice
+Loading required package: survival
+Loading required package: Formula
+Loading required package: ggplot2
+
+Attaching package: 'Hmisc'
+
+The following objects are masked from 'package:base':
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
 
 rd.xpr> describe(w$TEST)   # see labels, format names for dataset test
 w$TEST 
@@ -488,25 +541,25 @@ D1
 
 2002-03-03 (1, 50%), 2002-06-03 (1, 50%) 
 --------------------------------------------------------------------------------
-DT1  Format:day mon year h:m:s 
-                     n                missing                 unique 
-                     2                      0                      2 
-                  Info                   Mean 
-                     1 (18 Apr 2002 09:36:35) 
+DT1 
+                  n             missing              unique                Info 
+                  2                   0                   2                   1 
+               Mean 
+2002-04-18 09:36:34 
 
-(03 Jun 2002 09:42:07) (1, 50%) 
-(03 Mar 2002 09:31:02) (1, 50%) 
+2002-03-03 09:31:02 (1, 50%) 
+2002-06-03 09:42:07 (1, 50%) 
 --------------------------------------------------------------------------------
-T1  Format:h:m:s 
-      n missing  unique    Info    Mean 
-      2       0       2       1    :01: 
+T1 
+       n  missing   unique     Info     Mean 
+       2        0        2        1 11:13:59 
 
 11:13:45 (1, 50%), 11:14:13 (1, 50%) 
 --------------------------------------------------------------------------------
 
-rd.xpr> lapply(w, describe)# see descriptive stats in more detail for each variable
+rd.xpr> lapply(w, describe, "")# see descriptive stats in more detail for each variable
 $TEST
-X[[1]] 
+ 
 
  5  Variables      2  Observations
 --------------------------------------------------------------------------------
@@ -526,24 +579,24 @@ D1
 
 2002-03-03 (1, 50%), 2002-06-03 (1, 50%) 
 --------------------------------------------------------------------------------
-DT1  Format:day mon year h:m:s 
-                     n                missing                 unique 
-                     2                      0                      2 
-                  Info                   Mean 
-                     1 (18 Apr 2002 09:36:35) 
+DT1 
+                  n             missing              unique                Info 
+                  2                   0                   2                   1 
+               Mean 
+2002-04-18 09:36:34 
 
-(03 Jun 2002 09:42:07) (1, 50%) 
-(03 Mar 2002 09:31:02) (1, 50%) 
+2002-03-03 09:31:02 (1, 50%) 
+2002-06-03 09:42:07 (1, 50%) 
 --------------------------------------------------------------------------------
-T1  Format:h:m:s 
-      n missing  unique    Info    Mean 
-      2       0       2       1    :01: 
+T1 
+       n  missing   unique     Info     Mean 
+       2        0        2        1 11:13:59 
 
 11:13:45 (1, 50%), 11:14:13 (1, 50%) 
 --------------------------------------------------------------------------------
 
 $Z
-X[[2]] 
+ 
 
  6  Variables      100  Observations
 --------------------------------------------------------------------------------
@@ -603,7 +656,7 @@ highest: 0.930491 0.935669 0.936941 0.958679 0.959636
 --------------------------------------------------------------------------------
 
 $FORMATS
-X[[3]] 
+ 
 
  21  Variables      3  Observations
 --------------------------------------------------------------------------------
@@ -681,12 +734,13 @@ rd.xpr> contents(w$TEST)   # another way to see variable attributes
 
 Data frame:w$TEST	2 observations and 5 variables    Maximum # NAs:1
 
-                        Labels Levels   Class Storage NAs
-RACE                                3         integer   1
-AGE  Age at Beginning of Study        integer integer   0
-D1                                       Date  double   0
-DT1                                     chron  double   0
-T1                                      times  double   0
+
+                        Labels Levels      Class Storage NAs
+RACE                                3            integer   1
+AGE  Age at Beginning of Study           integer integer   0
+D1                                          Date  double   0
+DT1                                      POSIXct  double   0
+T1                                    timePOSIXt  double   0
 
 +--------+-----------------+
 |Variable|Levels           |
@@ -697,14 +751,15 @@ T1                                      times  double   0
 rd.xpr> lapply(w, contents)# show contents of individual items in more detail
 $TEST
 
-Data frame:X[[1L]]	2 observations and 5 variables    Maximum # NAs:1
+Data frame:X[[i]]	2 observations and 5 variables    Maximum # NAs:1
 
-                        Labels Levels   Class Storage NAs
-RACE                                3         integer   1
-AGE  Age at Beginning of Study        integer integer   0
-D1                                       Date  double   0
-DT1                                     chron  double   0
-T1                                      times  double   0
+
+                        Labels Levels      Class Storage NAs
+RACE                                3            integer   1
+AGE  Age at Beginning of Study           integer integer   0
+D1                                          Date  double   0
+DT1                                      POSIXct  double   0
+T1                                    timePOSIXt  double   0
 
 +--------+-----------------+
 |Variable|Levels           |
@@ -714,7 +769,8 @@ T1                                      times  double   0
 
 $Z
 
-Data frame:X[[2L]]	100 observations and 6 variables    Maximum # NAs:0
+Data frame:X[[i]]	100 observations and 6 variables    Maximum # NAs:0
+
 
    Storage
 X3  double
@@ -726,7 +782,8 @@ X8  double
 
 $FORMATS
 
-Data frame:X[[3L]]	3 observations and 21 variables    Maximum # NAs:0
+Data frame:X[[i]]	3 observations and 21 variables    Maximum # NAs:0
+
 
            Storage
 FMTNAME  character
@@ -763,6 +820,28 @@ X5 0.4887739 0.3141976 0.004133753 0.9972528
 X6 0.4986746 0.2710817 0.010095772 0.9951080
 X7 0.5533156 0.2843679 0.042010437 0.9979081
 X8 0.4809487 0.2892945 0.007268806 0.9596358
+Warning messages:
+1: In structure(NULL, class = "describe") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+2: In structure(NULL, class = "describe") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+3: In structure(NULL, class = "describe") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+4: In structure(NULL, class = "describe") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+5: In structure(NULL, class = "describe") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+6: In structure(NULL, class = "describe") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
+7: In structure(NULL, class = "describe") :
+  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
+  Consider 'structure(list(), *)' instead.
 > example(toSAS)
 
 toSAS> ####
@@ -873,15 +952,17 @@ wrt.xp> str(abc)
  - attr(*, "label")= chr "Simple example"
  - attr(*, "SAStype")= chr "MYTYPE"
 
-wrt.xp> # create a SAS XPORT file 
-wrt.xp> write.xport( abc, file="xxx.dat" )
+wrt.xp> # create a SAS XPORT file
+wrt.xp> tmp <- tempfile(fileext = ".dat")
+
+wrt.xp> write.xport( abc, file = tmp )
 
 wrt.xp> # list the contents of the file
-wrt.xp> lookup.xport("xxx.dat")
+wrt.xp> lookup.xport(tmp)
 
 SAS xport file
 --------------
-Filename: `xxx.dat'
+Filename: `/var/folders/gc/c3c2p5_d4td159rblkqbp4s1xjhdh_/T//RtmpW3Tudl/file15b6d760f3618.dat'
 
 Variables in data set `ABC':
  dataset name    type format flength fdigits iformat iflength ifdigits
@@ -939,7 +1020,7 @@ Variables in data set `FORMATS':
 
 
 wrt.xp> ## reload the data
-wrt.xp> xxx.abc <- read.xport("xxx.dat")
+wrt.xp> xxx.abc <- read.xport(tmp)
 
 wrt.xp> ## and look at it
 wrt.xp> xxx.abc
@@ -965,7 +1046,6 @@ wrt.xp>
 wrt.xp> 
 > 
 > 
-> 
 > proc.time()
    user  system elapsed 
-  0.753   0.047   0.791 
+  2.371   0.121   2.545 

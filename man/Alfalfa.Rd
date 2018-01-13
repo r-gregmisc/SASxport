@@ -46,9 +46,5 @@ setwd(here)
 par(mfrow=c(1,2))
 plot( HARV1 ~ POP, data=Alfalfa)
 plot( HARV2 ~ POP, data=Alfalfa)
-
-
-
-
 }
 \keyword{datasets}

@@ -18,21 +18,10 @@
 
 void to_bigend( unsigned char *intp, size_t size);
 
-#ifdef WORDS_BIGENDIAN
-
-  /* This is a big-endian system, so conversion is NOOP */
-# define TO_BIGEND_SHORT(a)  ( a )
-# define TO_BIGEND_INT(a)    ( a )
-# define TO_BIGEND_DOUBLE(a) ( a )
-
-#else
-
-  /* We're on little-endian so use to_bigend to convert */
-# define TO_BIGEND_SHORT(a)  to_bigend( (unsigned char*) &a, sizeof(short)  )
-# define TO_BIGEND_INT(a)    to_bigend( (unsigned char*) &a, sizeof(int)    )
-# define TO_BIGEND_DOUBLE(a) to_bigend( (unsigned char*) &a, sizeof(double) )
-
-#endif /* WORDS_BIGENDIAN */
+/* Convert (if necessary) to Big-Endian  */
+#define TO_BIGEND_SHORT(a)  to_bigend( (unsigned char*) &a, sizeof(short)  )
+#define TO_BIGEND_INT(a)    to_bigend( (unsigned char*) &a, sizeof(int)    )
+#define TO_BIGEND_DOUBLE(a) to_bigend( (unsigned char*) &a, sizeof(double) )
 
 /* Alternative definition using system functions: */
 /* #define TO_BIGEND_SHORT(a) (a) = htons( a ) */

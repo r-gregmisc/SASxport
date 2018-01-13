@@ -1,6 +1,4 @@
-# $Id: scat.R 625 2005-06-09 14:20:30Z nj7w $
-
-# cat to stdout and immediately flush
+# Write message to stdout and immediately flush
 scat <- function(...)
   {
     DEBUG <- options()$DEBUG

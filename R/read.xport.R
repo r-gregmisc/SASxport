@@ -4,6 +4,11 @@
 ## Copied with permission on 2007-08-04
 ##
 
+#' @importFrom Hmisc label label<- makeNames
+#' @importFrom Hmisc importConvertDateTime importConvertDateTime
+#' @importFrom utils download.file
+#' @export
+
 read.xport <- function(file,
                        force.integer=TRUE,
                        formats=NULL,
@@ -157,13 +162,13 @@ read.xport <- function(file,
 
           if(is.numeric(x)) {
             if(fi %in% sasdateform) {
-              x <- importConvertDateTime(x, 'date', 'sas')
+              x <- importConvertDateTime(x, type='date', input='sas')
               changed <- TRUE
             } else if(fi %in% sastimeform) {
-              x <- importConvertDateTime(x, 'time', 'sas')
+              x <- importConvertDateTime(x, type='time', input='sas')
               changed <- TRUE
             } else if(fi %in% sasdatetimeform) {
-              x <- importConvertDateTime(x, 'datetime', 'sas')
+              x <- importConvertDateTime(x, type='datetime', input='sas')
               changed <- TRUE
             } else if(force.integer) {
               if(all(is.na(x))) {

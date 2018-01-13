@@ -1,7 +1,7 @@
 
-R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
-Copyright (C) 2014 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin13.1.0 (64-bit)
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -21,24 +21,11 @@ Type 'q()' to quit R.
 > ####
 > 
 > library(SASxport)
-Loading required package: chron
-Loading required package: Hmisc
-Loading required package: grid
-Loading required package: lattice
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
 
-Attaching package: 'Hmisc'
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
-
-Loaded SASxport version 1.5.0 (2014-07-21).
+Loaded SASxport version 1.5.4 (2017-05-22).
 
   Type `?SASxport' for usage information.
+
 
 > Sys.setenv("TZ"="GMT")
 > 
@@ -57,4 +44,4 @@ Loaded SASxport version 1.5.0 (2014-07-21).
 > 
 > proc.time()
    user  system elapsed 
-  0.652   0.037   0.680 
+  1.714   0.103   1.834 

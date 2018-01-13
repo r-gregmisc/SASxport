@@ -1,6 +1,7 @@
 ## Transform SAS 'PROC CONTENTS' dataset into a form useful for
 ## converting raw SAS objects to/from the appropriate R objects.
 
+#' @importFrom Hmisc all.is.numeric
 process.formats <- function(finfo)
   {
     if(is.null(finfo)) return( list() )

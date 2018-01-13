@@ -18,7 +18,7 @@ write.xport(...,
  )
 }
 \arguments{
-  \item{\dots}{One or more data frames to be stored}  
+  \item{\dots}{One or more data frames to be stored}
   \item{list}{A list containing data frames to be stored.}
   \item{file}{File name or connection object. Use "" to view the raw data}
   \item{verbose}{Logical flag controlling whether status is reported
@@ -48,7 +48,7 @@ write.xport(...,
       point format (see the reference).
     \item Date and time variables are either converted to number of days since
       1960-01-01 (date only), or number of seconds since
-      1960-01-01:00:00:00 GMT (date-time variables).  
+      1960-01-01:00:00:00 GMT (date-time variables).
     \item Missing values are converted to the standard SAS missing value
       '.'
   }
@@ -72,12 +72,12 @@ write.xport(...,
 \references{
   SAS Technical Support document TS-140: ``The Record Layout of a
   Data Set in SAS Transport (XPORT) Format'' available at
-  \url{http://ftp.sas.com/techsup/download/technote/ts140.html}.
+  \url{https://support.sas.com/techsup/technote/ts140.pdf}
 }
 \author{Gregory R. Warnes \email{greg@warnes.net}}
 \note{
    This package was created with partial funding by Metrum Institute
-   \url{http://metruminstitute.org}. 
+   \url{http://metruminstitute.org}.
 }
 \seealso{
   \code{\link{toSAS}},
@@ -86,7 +86,7 @@ write.xport(...,
   \code{\link{label}},
   \code{\link{SAStype}},
   \code{\link{SASformat}},
-  and \code{\link{SASiformat}}  
+  and \code{\link{SASiformat}}
 }
 \examples{
 
@@ -113,14 +113,15 @@ SAStype(abc) <- 'MYTYPE'
 ## verify the additions
 str(abc)
 
-# create a SAS XPORT file 
-write.xport( abc, file="xxx.dat" )
+# create a SAS XPORT file
+tmp <- tempfile(fileext = ".dat")
+write.xport( abc, file = tmp )
 
 # list the contents of the file
-lookup.xport("xxx.dat")
+lookup.xport(tmp)
 
 ## reload the data
-xxx.abc <- read.xport("xxx.dat")
+xxx.abc <- read.xport(tmp)
 
 ## and look at it
 xxx.abc

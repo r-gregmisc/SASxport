@@ -1,6 +1,7 @@
+# Construct a SAS format string for a specified (vector of) type names, lengths, and digits.
 fstr <- function(name, length, digits)
   {
-    invalid <- function(x) is.null(x) | ( length(x)<1 ) | ( nchar(x, "bytes") < 1 ) | x==0
+    invalid <- function(x) is.null(x) | ( length(x)<1 ) | ( nchar(x) < 1 ) | x==0
     inner <- function(i)
       {
         if( invalid(name[i]) )

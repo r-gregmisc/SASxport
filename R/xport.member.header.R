@@ -1,6 +1,10 @@
-`xport.member.header` <- 
-function(dfName, cDate=Sys.time(), mDate=cDate, sasVer="7.00", osType="Unknown",
-         dfLabel="", dfType="" )
+xport.member.header <- function(dfName, 
+                                cDate=Sys.time(), 
+                                mDate=cDate, 
+                                sasVer="7.00", 
+                                osType="Unknown",
+                                dfLabel="", 
+                                dfType="" )
   {
     .C("fill_member_header",
        dfName = toupper(as.character(dfName)), # Name of data set

@@ -29,7 +29,7 @@ xport.namestr <- function(
 
   if(missing(varLength))
     if(isChar)
-      varLength <- max(nchar(var, "bytes"))
+      varLength <- max(nchar(var, "bytes", keepNA=FALSE))
     else
       varLength <- 8
 

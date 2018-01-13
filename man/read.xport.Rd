@@ -105,7 +105,7 @@ read.xport(file,
   functions.
 }
 \author{ Gregory R. Warnes \email{greg@warnes.net}
-  based on \code{Hmisc:::sasxport.get} by Frank E. Harrell, Jr.}
+  based on \code{Hmisc::sasxport.get} by Frank E. Harrell, Jr.}
 \section{Note}{
   This code provides a subset of the functionality of the
   \code{sasxport.get} function in the Hmisc library.
@@ -193,7 +193,6 @@ sapply(w, head)
 \dontshow{
 stopifnot( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 }
-
 
 #### The Hmisc library provides many useful functions for interacting with
 #### data imported from SAS via read.xport()

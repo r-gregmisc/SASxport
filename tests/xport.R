@@ -12,5 +12,3 @@ summary(Alfalfa)
 lookup.xport("test.xpt")
 testdata <- read.xport("test.xpt")
 summary(testdata)
-
-q()
