@@ -6,11 +6,11 @@ makeSASNames <- function(names, nchar=8, maxPasses=10, quiet=FALSE)
     ## variable names and converts them into *unique* 8-character
     ## names.
 
-    # Step -2: convert to ASCII
-    names <- stri_trans_general(names, "Any-Latin; Latin-ASCII")
+    #!# # Step -2: convert to ASCII
+    #!# names <- stri_trans_general(names, "Any-Latin; Latin-ASCII")
 
-    # Step -1: strip all whitespace
-    names <- gsub("[[:space:]]+", "", names)
+    #!# # Step -1: strip all whitespace
+    #!# names <- gsub("[[:space:]]+", "", names)
 
     # Step 0: converce to uppercase
     names <- toupper(names)
