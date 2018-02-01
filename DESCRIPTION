@@ -8,8 +8,7 @@ Description: Functions for reading, listing
     individual data frames or sets of data frames.  Further,
     a mechanism has been provided for customizing how
     variables of different data types are stored.
-Author: Gregory R. Warnes <greg@warnes.net>
-    Unless otherwise noted, the contents of this package were written by
+Author: Unless otherwise noted, the contents of this package were written by
     Gregory R. Warnes <greg@warnes.net> and are provided under the
     terms of the GNU General Public License, version 2.0 or later.
     --
