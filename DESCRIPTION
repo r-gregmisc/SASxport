@@ -1,7 +1,7 @@
 Package: SASxport
 Title: Read and Write 'SAS' 'XPORT' Files
-Version: 1.5.4
-Date: 2017-05-22
+Version: 1.5.5
+Date: 2018-01-13
 Description: Functions for reading, listing
     the contents of, and writing 'SAS' 'xport' format files.
     The functions support reading and writing of either
@@ -34,8 +34,7 @@ Author: Unless otherwise noted, the contents of this package were written by
     <http://metruminstitute.org>.
 Maintainer: Gregory R. Warnes <greg@warnes.net>
 License: GPL-2
-Depends: R (>= 2.4.0)
+Depends: R (>= 3.3.0)
 Imports: Hmisc, utils, stringi
 URL: https://github.com/warnes/SASxport
 BugReports: https://github.com/warnes/SASxport/issues
-RoxygenNote: 6.0.1
