@@ -19,8 +19,16 @@ variables of different data types are stored.
 
 ## Installation
 
+### From CRAN
+
 ```r
-devtools::install_github("mangothecat/SASxport")
+install.packages("SASxport")
+```
+
+### From GitHub 
+
+```r
+devtools::install_github("warnes/SASxport")
 ```
 
 ## Usage
