@@ -36,5 +36,7 @@ Maintainer: Gregory R. Warnes <greg@warnes.net>
 License: GPL-2
 Depends: R (>= 3.3.0)
 Imports: Hmisc, utils, stringi
+Suggests: chron
 URL: https://github.com/warnes/SASxport
 BugReports: https://github.com/warnes/SASxport/issues
+RoxygenNote: 6.0.1
