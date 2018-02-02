@@ -1,0 +1,5 @@
+## Travis CI configuration
+## See https://docs.travis-ci.com/user/languages/r/ for details
+
+language: r
+cache: packages
