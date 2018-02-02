@@ -1,5 +1,4 @@
-`xport.file.header` <-
-  function( cDate=Sys.time(), mDate=cDate, sasVer="7.00", osType="Unknown" )
+xport.file.header <- function( cDate=Sys.time(), mDate=cDate, sasVer="7.00", osType="Unknown" )
   {
     .C("fill_file_header",
        cDate = xport.dateFMT(cDate),           # Creation date
@@ -10,6 +9,5 @@
        )
 
     .Call("getRawBuffer", PACKAGE="SASxport")
-
   }
 

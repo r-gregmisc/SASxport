@@ -1,4 +1,7 @@
 ## Simply make this accessible here as a convenience to the user
+
+#' @export
+#' @importFrom utils download.file
 lookup.xport <- function(file)
   {
     fname <- file
@@ -18,6 +21,8 @@ lookup.xport <- function(file)
     ret
   }
 
+
+#' @export
 print.lookup.xport <- function(x, ...)
   {
     Sinfo <- summary(x, ...)
@@ -25,6 +30,7 @@ print.lookup.xport <- function(x, ...)
   }
 
 
+#' @export
 summary.lookup.xport <- function(object, ...)
   {
     subFun <- function(XX)
@@ -52,6 +58,7 @@ summary.lookup.xport <- function(object, ...)
     singleFrame
   }
 
+#' @export
 print.summary.lookup.xport <- function(x, ...)
 {
   cat("\n")

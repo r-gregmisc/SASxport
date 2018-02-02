@@ -692,7 +692,6 @@ xport_read(SEXP xportFile, SEXP xportInfo)
   char *record, *tmpchar, *c;
   FILE *fp;
   SEXP ans, names, data, dataInfo, dataName;
-  double dbl;
 
   ansLength = LENGTH(xportInfo);
   PROTECT(ans = allocVector(VECSXP, ansLength));
@@ -741,6 +740,10 @@ xport_read(SEXP xportFile, SEXP xportInfo)
 	tmpchar = record + dataPosition[k];
 	if(dataType[k] == REALSXP)
 	  {
+#ifdef BIGENDIAN
+	    reverse_double(tmpchar);
+#endif
+
 	    REAL(VECTOR_ELT(data, k))[j] =
 	      get_IBM_double(tmpchar, dataWidth[k]);
 	  }

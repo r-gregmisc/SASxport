@@ -21,11 +21,12 @@
 ### License along with this program; if not, a copy is available at
 ### http://www.r-project.org/Licenses/
 
-lookup.xport.inner <- function(file) .Call(xport_info, file)
+lookup.xport.inner <- function(file) .Call('xport_info', file, PACKAGE = "SASxport")
 
-read.xport.inner <- function(file, stringsAsFactors=FALSE) {
+read.xport.inner <- function(file, stringsAsFactors=FALSE)
+{
     data.info <- lookup.xport.inner(file)
-    ans <- .Call(xport_read, file, data.info)
+    ans <- .Call('xport_read', file, data.info, PACKAGE = "SASxport")
     if (length(ans) == 1L)
       as.data.frame(ans[[1L]], stringsAsFactors=stringsAsFactors)
     else

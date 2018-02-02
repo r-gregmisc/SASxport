@@ -5,196 +5,335 @@
 2014-09-13  warnes
 
 	* [r1886] Update for changes in latest version of Hmisc (3.14-5).
-
 2014-07-21  warnes
 
-	* [r1865] Add missing comment terminators.
-	* [r1864] Use conditional compilation to map-out byte-swapping code
-	  on bigendian systems, where it is not needed.
-	* [r1863] Remove never-used conditional code and un-needed #include
-	  statements
-	* [r1862] Update version number in test script output comparison
-	  files.
-	* [r1861] Change version number to 1.5.0 and update NEWS file.
-	* [r1860] Test commit from ppc-vm
-	* [r1859] Add .Rout.save file matching changes to Alfalfa_Test.R
-	* [r1858] add display output of read.xport in Alafalfa_Test.R test
-	  script
-	* [r1857] Minor code reformatting.
-	* [r1856] Mark constants as long ints.
-	* [r1855] Avoid infinte loop in case of IBM exponent overflow. If
-	  this occurs,
+	* [r1859] tests/Alfalfa_Test.Rout.save: Add .Rout.save file
+	  matching changes to Alfalfa_Test.R
+	* [r1858] tests/Alfalfa_Test.R: add display output of read.xport in
+	  Alafalfa_Test.R test script
+	* [r1857] tests/dfAttributes.R: Minor code reformatting.
+	* [r1856] R/xport.R: Mark constants as long ints.
+	* [r1855] src/ibm2ieee.c: Avoid infinte loop in case of IBM
+	  exponent overflow. If this occurs,
 	  and can't be fixed in a single pass, generate a warning message
 	  and
 	  return NA.
-	* [r1854] Move comments about system functions to implement
-	  TO_BIGEND{SHORT,INT}
+	* [r1854] src/writeSAS.h: Move comments about system functions to
+	  implement TO_BIGEND{SHORT,INT}
 	  to to_bigend.h.
-	* [r1853] Add comments about system functions to do same task.
-	* [r1852] Call TO_BIGEND_DOUBLE on the pointed to value, not the
-	  pointed.
-	* [r1851] - Return to using get_IBM_double, but add reverse_double
-	  before the
+	* [r1853] src/to_bigend.h: Add comments about system functions to
+	  do same task.
+	* [r1852] src/writeSAS.c: Call TO_BIGEND_DOUBLE on the pointed to
+	  value, not the pointed.
+	* [r1851] src/SASxport.c: - Return to using get_IBM_double, but add
+	  reverse_double before the
 	  call if running on BIGENDIAN machine.
 
 2014-07-20  warnes
 
-	* [r1850] Finish rename of 'HTOBE' to 'TO_BIGEND'
-	* [r1849] Add dummy code to avoid compile warnings about unneeded
-	  variables
-	* [r1848] Rename 'host_to_be' to 'to_bigend' to be more transparent
-	  about purpose
-	* [r1847] Rename 'host_to_be' to 'to_bigend' to be more transparent
-	  about purpose
+	* [r1850] src/writeSAS.c, src/writeSAS.h: Finish rename of 'HTOBE'
+	  to 'TO_BIGEND'
+	* [r1849] src/test_fields.c: Add dummy code to avoid compile
+	  warnings about unneeded variables
+	* [r1848] src/SASxport.c, src/SASxport.h, src/ibm2ieee.c,
+	  src/ibm2ieee.h, src/ieee2ibm.c: Rename 'host_to_be' to
+	  'to_bigend' to be more transparent about purpose
+	* [r1847] src/host_to_be.c, src/to_bigend.c, src/to_bigend.h:
+	  Rename 'host_to_be' to 'to_bigend' to be more transparent about
+	  purpose
 
 2014-07-19  warnes
 
-	* [r1846] Minor change in spacing
-	* [r1845] Change byte-order detection code
-	* [r1844] Fix copy-paste error
+	* [r1846] src/writeSAS.h: Minor change in spacing
+	* [r1845] src/host_to_be.c: Change byte-order detection code
+	* [r1844] src/writeSAS.h: Fix copy-paste error
 
 2014-07-18  warnes
 
-	* [r1843] Update NEWS for SASxport 1.4.2
-	* [r1842] - Rename function and file 'reverse' to 'host_to_be'
-	  (short for
+	* [r1843] inst/NEWS: Update NEWS for SASxport 1.4.2
+	* [r1842] src/host_to_be.c, src/reverse.c, src/writeSAS.c,
+	  src/writeSAS.h: - Rename function and file 'reverse' to
+	  'host_to_be' (short for
 	  host-endian to big-endian') to clarify purpose of the function.
 	  - Remove pre-processeor definition of REVERSE, and add
 	  definitions of
 	  HTOBE_SHORT, HTOBE_INT, and HTOBE_DOUBLE.
-	* [r1841] Make sure all left shifts are explicitly typed as
-	  unsigned in to avoid
+	* [r1841] src/ieee2ibm.c: Make sure all left shifts are explicitly
+	  typed as unsigned in to avoid
 	  undefined behavior.
-	* [r1840] Update test output
-	* [r1839] minor code formatting changes
-	* [r1838] Re-ename optimization on BIG_ENDIAN systems
-	* [r1837] Update .save files
-	* [r1836] Write file data as hex bytes so R CMD check's diff can
-	  display up differences.
-	* [r1835] Remove SASxport:::assert() and replace all uses with
-	  stopifnot()
-	* [r1834] Remove SASxport:::assert() and replace all uses with
-	  stopifnot()
-	* [r1833] Explicitly cast left shifts in ibm2ieee.c to avoid
-	  undefined behavior. (Reported by Brian Ripley)
-	* [r1832] Add default label method to Hmisc import to resolve
-	  problem if SASxport::read.xport is called without loading
+	* [r1840] tests/Alfalfa_Test.R, tests/Alfalfa_Test.Rout.save,
+	  tests/Theoph.Rout.save, tests/cars.R, tests/cars.Rout.save,
+	  tests/testDates.Rout.save, tests/testDuplicateNames.Rout.save,
+	  tests/testEmpty.Rout.save, tests/testExamples.Rout.save,
+	  tests/testManyNames.Rout.save, tests/testNegative.Rout.save,
+	  tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.R, tests/xxx.Rout.save: Update
+	  test output
+	* [r1839] src/SASxport.c, src/ibm2ieee.c, src/writeSAS.c: minor
+	  code formatting changes
+	* [r1838] src/writeSAS.h: Re-ename optimization on BIG_ENDIAN
+	  systems
+	* [r1837] tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testDuplicateNames.Rout.save, tests/testEmpty.Rout.save,
+	  tests/testExamples.Rout.save, tests/testManyNames.Rout.save,
+	  tests/testNegative.Rout.save, tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update .save files
+	* [r1836] tests/Alfalfa_Test.R, tests/cars.R, tests/xxx.R: Write
+	  file data as hex bytes so R CMD check's diff can display up
+	  differences.
+	* [r1835] tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testDuplicateNames.Rout.save, tests/testEmpty.Rout.save,
+	  tests/testExamples.Rout.save, tests/testManyNames.Rout.save,
+	  tests/testNegative.Rout.save, tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Remove
+	  SASxport:::assert() and replace all uses with stopifnot()
+	* [r1834] DESCRIPTION, R/assert.R, inst/NEWS, tests/Alfalfa_Test.R,
+	  tests/Theoph.R, tests/cars.R, tests/testNegative.R,
+	  tests/testNumeric.R, tests/testUnnamedComponents.R,
+	  tests/test_as_is.R, tests/test_fields.R, tests/xxx.R: Remove
+	  SASxport:::assert() and replace all uses with stopifnot()
+	* [r1833] src/ibm2ieee.c: Explicitly cast left shifts in ibm2ieee.c
+	  to avoid undefined behavior. (Reported by Brian Ripley)
+	* [r1832] NAMESPACE: Add default label method to Hmisc import to
+	  resolve problem if SASxport::read.xport is called without loading
 	  SASxport
 
 2014-07-17  warnes
 
-	* [r1831] Updated read.xport man page exampls to match new behavior
-	  of names.toupper
-	* [r1830] Modfy tests to directly call 'read.xport' instead of
-	  relying on 'examples(read.xport)'. Add test files to run
+	* [r1831] man/read.xport.Rd: Updated read.xport man page exampls to
+	  match new behavior of names.toupper
+	* [r1830] tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testDuplicateNames.R, tests/testDuplicateNames.Rout.save,
+	  tests/testEmpty.Rout.save, tests/testExamples.R,
+	  tests/testExamples.Rout.save, tests/testManyNames.Rout.save,
+	  tests/testNegative.Rout.save, tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.R,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Modfy tests to
+	  directly call 'read.xport' instead of relying on
+	  'examples(read.xport)'. Add test files to run
 	  'examples(read.xport)' separately.
-	* [r1829] Enable examples that use Hmisc, since it is now a
-	  dependency.
-	* [r1828] Update DESCRIPTION and NEWS for SASxport 1.4.1.
-	* [r1827] Minor code reformatting.
-	* [r1826] Rename former 'label.Rd' file to 'SASformatRd' and remove
-	  references
+	* [r1829] man/read.xport.Rd: Enable examples that use Hmisc, since
+	  it is now a dependency.
+	* [r1828] DESCRIPTION, inst/NEWS: Update DESCRIPTION and NEWS for
+	  SASxport 1.4.1.
+	* [r1827] R/parseFormat.R, R/write.xport.R: Minor code
+	  reformatting.
+	* [r1826] man/SASformat.Rd: Rename former 'label.Rd' file to
+	  'SASformatRd' and remove references
 	  to label() and "label<-"() (checkin missed from previous
 	  release).
-	* [r1825] read.xport: Preserve '$' at the beginning of SAS
-	  character format strings.
-	* [r1824] read.xport() argument names.tolower was not being honored
-	  for dataset
+	* [r1825] R/read.xport.R: read.xport: Preserve '$' at the beginning
+	  of SAS character format strings.
+	* [r1824] R/read.xport.R: read.xport() argument names.tolower was
+	  not being honored for dataset
 	  names.
 
 2014-04-10  warnes
 
-	* [r1807] Oops. Correct over-zealous paste.
-	* [r1806] Update test to use new 'self' argument for label
-	  data.frame method.
-	* [r1805] Update for SASxport 1.4.0.
-	* [r1804] Remove definitions of labels in favor of those coming
-	  from Hmisc. Modify read.xport and write.xport to use appropriate
-	  arguments for label method for data.frames.
-	* [r1803] Remove definitions of labels in favor of those coming
-	  from Hmisc. Modify read.xport and write.xport to use appropriate
-	  arguments for label method for data.frames.
+	* [r1807] tests/dfAttributes.R: Oops. Correct over-zealous paste.
+	* [r1806] tests/dfAttributes.R: Update test to use new 'self'
+	  argument for label data.frame method.
+	* [r1805] DESCRIPTION, inst/NEWS: Update for SASxport 1.4.0.
+	* [r1804] DESCRIPTION, NAMESPACE: Remove definitions of labels in
+	  favor of those coming from Hmisc. Modify read.xport and
+	  write.xport to use appropriate arguments for label method for
+	  data.frames.
+	* [r1803] R/label.R, R/read.xport.R, R/write.xport.R, man/label.Rd:
+	  Remove definitions of labels in favor of those coming from Hmisc.
+	  Modify read.xport and write.xport to use appropriate arguments
+	  for label method for data.frames.
 
 2013-10-09  warnes
 
-	* [r1722] Remove duplicate Imports field
-	* [r1721] Update examples
-	* [r1720] Change to camelcase
-	* [r1719] Update for SASxport 1.3.6 release
-	* [r1718] Issue: URL test2.xpt file has moved. Solution: (1) Use
-	  local copy of file for executed examples, (2) update URL for
-	  displayed examples.
-	* [r1717] Add local copy of test2.xpt SAS file
+	* [r1722] DESCRIPTION: Remove duplicate Imports field
+	* [r1721] tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testDuplicateNames.Rout.save, tests/testEmpty.Rout.save,
+	  tests/testManyNames.Rout.save, tests/testNegative.Rout.save,
+	  tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update examples
+	* [r1720] man/read.xport.Rd: Change to camelcase
+	* [r1719] DESCRIPTION, inst/NEWS: Update for SASxport 1.3.6 release
+	* [r1718] man/lookup.xport.Rd, man/read.xport.Rd: Issue: URL
+	  test2.xpt file has moved. Solution: (1) Use local copy of file
+	  for executed examples, (2) update URL for displayed examples.
+	* [r1717] inst/extdata/test2.xpt: Add local copy of test2.xpt SAS
+	  file
 
 2013-06-14  warnes
 
-	* [r1672] Update .save files for 1.3.5
-	* [r1671] Updates for SASxport 1.3.5
-	* [r1670] Complete changes to handle empty datasets in xport files.
-	* [r1669] Properly handle empty datasets
-	* [r1668] Fix bug when xpt file contains an empty data set
+	* [r1672] tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testDuplicateNames.Rout.save, tests/testEmpty.Rout.save,
+	  tests/testManyNames.Rout.save, tests/testNegative.Rout.save,
+	  tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update .save files
+	  for 1.3.5
+	* [r1671] DESCRIPTION, inst/NEWS: Updates for SASxport 1.3.5
+	* [r1670] R/fstr.R, R/read.xport.R, src/SASxport.c, src/writeSAS.c,
+	  tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testDuplicateNames.Rout.save, tests/testEmpty.R,
+	  tests/testEmpty.Rout.save, tests/testManyNames.Rout.save,
+	  tests/testNegative.Rout.save, tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Complete changes to
+	  handle empty datasets in xport files.
+	* [r1669] R/write.xport.R: Properly handle empty datasets
+	* [r1668] R/lookup.xport.R, src/SASxport.c: Fix bug when xpt file
+	  contains an empty data set
 
 2013-05-31  warnes
 
-	* [r1667] Update test Rout.save files to match new version
-	* [r1666] Update for SASxport 1.3.4
-	* [r1665] Explicitly specify timezone in tests/*.R to avoid
-	  extraneous warnings
-	* [r1664] Update build date.
-	* [r1663] Update for SASxport 1.3.3
-	* [r1662] Update for SASxport 1.3.3
-	* [r1661] Correct error in write.xport when a factor contains only
-	  NA entries.
+	* [r1667] tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testDuplicateNames.Rout.save,
+	  tests/testManyNames.Rout.save, tests/testNegative.Rout.save,
+	  tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update test Rout.save
+	  files to match new version
+	* [r1666] DESCRIPTION, inst/NEWS: Update for SASxport 1.3.4
+	* [r1665] tests/Alfalfa_Test.R, tests/Alfalfa_Test.Rout.save,
+	  tests/Theoph.R, tests/Theoph.Rout.save, tests/cars.R,
+	  tests/cars.Rout.save, tests/dfAttributes.R,
+	  tests/testBlockBoundary.R, tests/testDates.R,
+	  tests/testDates.Rout.save, tests/testDuplicateNames.R,
+	  tests/testDuplicateNames.Rout.save, tests/testFactorAllNA.R,
+	  tests/testManyNames.R, tests/testManyNames.Rout.save,
+	  tests/testNegative.R, tests/testNegative.Rout.save,
+	  tests/testNumeric.R, tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.R,
+	  tests/testUnnamedComponents.Rout.save, tests/test_as_is.R,
+	  tests/test_as_is.Rout.save, tests/test_fields.R,
+	  tests/test_fields.Rout.save, tests/xport.R,
+	  tests/xport.Rout.save, tests/xxx.R, tests/xxx.Rout.save:
+	  Explicitly specify timezone in tests/*.R to avoid extraneous
+	  warnings
+	* [r1664] tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testDuplicateNames.Rout.save,
+	  tests/testManyNames.Rout.save, tests/testNegative.Rout.save,
+	  tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update build date.
+	* [r1663] tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testDuplicateNames.Rout.save,
+	  tests/testManyNames.Rout.save, tests/testNegative.Rout.save,
+	  tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update for SASxport
+	  1.3.3
+	* [r1662] DESCRIPTION, inst/NEWS: Update for SASxport 1.3.3
+	* [r1661] R/make.formats.R, tests/testFactorAllNA.R: Correct error
+	  in write.xport when a factor contains only NA entries.
 
 2013-05-12  warnes
 
-	* [r1660] Update NEWS for release
-	* [r1659] Complete work to handle dataframe label and type
+	* [r1660] DESCRIPTION, R/SAStype.R, R/read.xport.R, inst/NEWS,
+	  man/SASxport-package.Rd, man/label.Rd, man/read.xport.Rd,
+	  man/write.xport.Rd, tests/Alfalfa_Test.Rout.save,
+	  tests/Theoph.Rout.save, tests/cars.Rout.save,
+	  tests/testDates.Rout.save, tests/testDuplicateNames.Rout.save,
+	  tests/testManyNames.Rout.save, tests/testNegative.Rout.save,
+	  tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update NEWS for
+	  release
+	* [r1659] NAMESPACE, R/SAStype.R, R/read.xport.R, src/SASxport.c,
+	  tests/dfAttributes.R: Complete work to handle dataframe label and
+	  type
 
 2013-05-11  warnes
 
-	* [r1658] Add support for dataset labels and types
-	* [r1657] Fix spelling error
-	* [r1656] Update for version 1.3.2
-	* [r1655] Update for release 1.3.2
-	* [r1654] Fix spelling error.
-	* [r1653] Carry bug fix forward to handle loading xport data when a
-	  dataset ends on exactly 80 byte block boundry.
-	* [r1652] Replace file.path(path.package(...)) with
-	  system.file(...)
-	* [r1651] Carry bug fix forward to handle loading xport data when a
-	  dataset ends on exactly 80 byte block boundry.
-	* [r1650] Remove obsolete .First.lib()
+	* [r1658] NAMESPACE, R/SAStype.R, R/write.xport.R,
+	  R/xport.member.header.R, man/label.Rd, src/SASxport.c,
+	  src/SASxport.h, src/init.c, src/writeSAS.c, src/writeSAS.h: Add
+	  support for dataset labels and types
+	* [r1657] tests/dfAttributes.R, tests/xxx.R: Fix spelling error
+	* [r1656] inst/NEWS: Update for version 1.3.2
+	* [r1655] DESCRIPTION: Update for release 1.3.2
+	* [r1654] R/write.xport.R, R/zzz.R: Fix spelling error.
+	* [r1653] src/SASxport.c, src/SASxport.h, src/foreign.h: Carry bug
+	  fix forward to handle loading xport data when a dataset ends on
+	  exactly 80 byte block boundry.
+	* [r1652] man/Alfalfa.Rd, man/lookup.xport.Rd: Replace
+	  file.path(path.package(...)) with system.file(...)
+	* [r1651] tests/events.csv, tests/exposure.csv,
+	  tests/testBlockBoundary.R: Carry bug fix forward to handle
+	  loading xport data when a dataset ends on exactly 80 byte block
+	  boundry.
+	* [r1650] R/zzz.R: Remove obsolete .First.lib()
 
 2013-03-24  warnes
 
-	* [r1649] Update for release 1.3.1
-	* [r1648] Replace obsolete use of .path.package() with
-	  path.package()
+	* [r1649] DESCRIPTION, inst/NEWS: Update for release 1.3.1
+	* [r1648] man/Alfalfa.Rd, man/lookup.xport.Rd: Replace obsolete use
+	  of .path.package() with path.package()
 
 2012-06-29  warnes
 
-	* [r1593] Create inst/extdata directory to hold example file
-	  Alfalfa.xpt.
-	* [r1592] Update SASxport version number
-	* [r1591] Fix capitalization of extension from .Rda to .rda
-	* [r1590] Convert Alfalfa data set to an R data file instead of R
-	  code + xpt file
-	* [r1589] Add makeSASNames() to the package manual page.
-	* [r1588] Update DESCRIPTION and NEWS for SASxport 1.3.0
-	* [r1587] Add makeSASNames() to exported functions.
-	* [r1586] Add documentation for the 'quiet' argument of
-	  makeSASNames().
+	* [r1593] inst/extdata, inst/extdata/Alfalfa.xpt, man/Alfalfa.Rd,
+	  man/lookup.xport.Rd: Create inst/extdata directory to hold
+	  example file Alfalfa.xpt.
+	* [r1592] tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testDuplicateNames.Rout.save,
+	  tests/testManyNames.Rout.save, tests/testNegative.Rout.save,
+	  tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update SASxport
+	  version number
+	* [r1591] data/Alfalfa.Rda, data/Alfalfa.rda: Fix capitalization of
+	  extension from .Rda to .rda
+	* [r1590] data/Alfalfa.R, data/Alfalfa.Rda, data/Alfalfa.xpt:
+	  Convert Alfalfa data set to an R data file instead of R code +
+	  xpt file
+	* [r1589] man/SASxport-package.Rd: Add makeSASNames() to the
+	  package manual page.
+	* [r1588] DESCRIPTION, inst/NEWS: Update DESCRIPTION and NEWS for
+	  SASxport 1.3.0
+	* [r1587] NAMESPACE: Add makeSASNames() to exported functions.
+	* [r1586] man/makeSASNames.Rd: Add documentation for the 'quiet'
+	  argument of makeSASNames().
 
 2012-06-28  warnes
 
-	* [r1585] Changelong shouldn't be stored in svn
-	* [r1584] Fix see also reference for make.names().
-	* [r1583] Remove references to Random Technologies.
-	* [r1582] Add man page for makeSASNames() function.
-	* [r1581] Fixed bug when only some names are duplicated.
-	* [r1580] New makeSASNames() function creates valid SAS names from
-	  a list of R
+	* [r1585] inst/ChangeLog: Changelong shouldn't be stored in svn
+	* [r1584] man/makeSASNames.Rd: Fix see also reference for
+	  make.names().
+	* [r1583] man/label.Rd, man/write.xport.Rd: Remove references to
+	  Random Technologies.
+	* [r1582] man/makeSASNames.Rd: Add man page for makeSASNames()
+	  function.
+	* [r1581] R/makeSASNames.R: Fixed bug when only some names are
+	  duplicated.
+	* [r1580] R/makeSASNames.R, R/write.xport.R,
+	  tests/testDuplicateNames.R, tests/testDuplicateNames.Rout.save,
+	  tests/testManyNames.R, tests/testManyNames.Rout.save: New
+	  makeSASNames() function creates valid SAS names from a list of R
 	  object or column names, properly handling case conversion (all
 	  converted to upper-case), length restructions (8 characters), and
 	  making duplicate names unique. This is not as obvious as it
@@ -206,64 +345,104 @@
 	  can make them too long, so a few iterations may be requireed to
 	  ensure
 	  valid and unique names.
-	* [r1579] Update saved test output files.
-	* [r1578] Remove references to Random Technologies LLC and update
-	  email address.
+	* [r1579] tests/Alfalfa_Test.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testNegative.Rout.save, tests/testNumeric.Rout.save,
+	  tests/testUnnamedComponents.Rout.save,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update saved test
+	  output files.
+	* [r1578] R/zzz.R, man/SASxport-package.Rd, src/ibm2ieee.c,
+	  src/ieee2ibm.c, src/init.c, src/test_fields.c, src/writeSAS.c,
+	  src/writeSAS.h: Remove references to Random Technologies LLC and
+	  update email address.
 
 2012-06-21  warnes
 
-	* [r1572] Standardize file capitalization
-	* [r1571] Standardize file capitalization
+	* [r1572] tests/TestUnnamedComponents.Rout.save,
+	  tests/testUnnamedComponents.Rout.save: Standardize file
+	  capitalization
+	* [r1571] tests/TestUnnamedComponents.R,
+	  tests/testUnnamedComponents.R: Standardize file capitalization
 
 2010-11-12  warnes
 
-	* [r1458] Update reference test output for TestUnnamedComponents.R
-	* [r1457] Update for SASxport release 1.2.4
-	* [r1456] Update Greg's email address
-	* [r1455] Fix bug: 'as.is=TRUE' argument to read.xport was being
-	  ignored.
-	* [r1454] Add test for proper function of as.is flag to read.xport
+	* [r1458] tests/TestUnnamedComponents.Rout.save: Update reference
+	  test output for TestUnnamedComponents.R
+	* [r1457] DESCRIPTION, inst/ChangeLog, inst/NEWS: Update for
+	  SASxport release 1.2.4
+	* [r1456] man/SASxport-package.Rd, man/read.xport.Rd, man/toSAS.Rd,
+	  man/write.xport.Rd: Update Greg's email address
+	* [r1455] R/read.xport.R, R/xport.R: Fix bug: 'as.is=TRUE' argument
+	  to read.xport was being ignored.
+	* [r1454] tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/datetime.xpt, tests/puromycin.xpt,
+	  tests/testDates.Rout.save, tests/testNegative.Rout.save,
+	  tests/testNumeric.Rout.save, tests/test_as_is.R,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Add test for proper
+	  function of as.is flag to read.xport
 
 2008-02-29  warnes
 
-	* [r1245] Update for release 1.2.3
-	* [r1244] Correct typo in write.xport man page
+	* [r1245] DESCRIPTION, inst/ChangeLog, inst/NEWS: Update for
+	  release 1.2.3
+	* [r1244] man/write.xport.Rd: Correct typo in write.xport man page
 
 2007-11-09  warnes
 
-	* [r1227] Update NEWS and ChangeLog for 1.2.2
-	* [r1226] Apply patches to fix problems on 64 bit platforms, as
-	  sumitted by Brian Ripley.
+	* [r1227] inst/ChangeLog, inst/NEWS: Update NEWS and ChangeLog for
+	  1.2.2
+	* [r1226] src/ibm2ieee.c, src/ieee2ibm.c: Apply patches to fix
+	  problems on 64 bit platforms, as sumitted by Brian Ripley.
 
 2007-11-07  warnes
 
-	* [r1225] Update version number
-	* [r1224] Bump version number
-	* [r1223] Apply patches to fix problems on 64 bit platforms, as
-	  sumitted by Brian Ripley, and to replace assert() calls with
-	  calls a macro that maps to error() unless standalone testing is
-	  being done, in which case assert() is used.
+	* [r1225] tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testNegative.Rout.save, tests/testNumeric.Rout.save,
+	  tests/test_fields.Rout.save, tests/xport.Rout.save,
+	  tests/xxx.Rout.save: Update version number
+	* [r1224] DESCRIPTION: Bump version number
+	* [r1223] src/ibm2ieee.c, src/reverse.c, src/writeSAS.c,
+	  src/writeSAS.h: Apply patches to fix problems on 64 bit
+	  platforms, as sumitted by Brian Ripley, and to replace assert()
+	  calls with calls a macro that maps to error() unless standalone
+	  testing is being done, in which case assert() is used.
 
 2007-11-05  warnes
 
-	* [r1220] Remove extraneous ';' characters after function closing
-	  brace
+	* [r1220] DESCRIPTION, inst/NEWS, src/writeSAS.c: Remove extraneous
+	  ';' characters after function closing brace
 
 2007-11-01  warnes
 
-	* [r1211] Remove dependency on foreign, since the necessary
-	  functionality is now provided internally.
-	* [r1210] Update TODO file
-	* [r1209] Update to match changes to functions
-	* [r1208] Update to match package changes
-	* [r1207] Update stored test output to match package changes
-	* [r1206] Update for new release
-	* [r1205] Remove dependency on foreign
-	* [r1204] Copy code from foreign for lookup.xport() and
-	  read.xport(), extend lookup.xport() to show information about SAS
-	  format and iformat
-	* [r1203] - Use of the attribute named 'format' caused problems
-	  with chron
+	* [r1211] DESCRIPTION: Remove dependency on foreign, since the
+	  necessary functionality is now provided internally.
+	* [r1210] TODO, inst/ChangeLog: Update TODO file
+	* [r1209] man/SASxport-package.Rd, man/label.Rd, man/read.xport.Rd,
+	  man/toSAS.Rd, man/write.xport.Rd: Update to match changes to
+	  functions
+	* [r1208] DESCRIPTION: Update to match package changes
+	* [r1207] tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.R,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testNegative.Rout.save, tests/testNumeric.R,
+	  tests/testNumeric.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.R, tests/xxx.Rout.save: Update
+	  stored test output to match package changes
+	* [r1206] inst/NEWS: Update for new release
+	* [r1205] NAMESPACE: Remove dependency on foreign
+	* [r1204] src/ieee2ibm.c, src/init.c, src/swap_bytes.h: Copy code
+	  from foreign for lookup.xport() and read.xport(), extend
+	  lookup.xport() to show information about SAS format and iformat
+	* [r1203] R/SASformat.R, R/SASiformat.R, R/formats.R, R/fstr.R,
+	  R/iformat.R, R/lookup.xport.R, R/make.formats.R, R/read.xport.R,
+	  R/toSAS.R, R/write.xport.R: - Use of the attribute named 'format'
+	  caused problems with chron
 	  objects. Consequently, the format information is now stored in
 	  the
 	  'SASformat' attribute. For consistency, the input format
@@ -286,178 +465,284 @@
 	  using name, length, and digits information.
 	  
 	  - Addion of a toSAS method for chron() objects
-	* [r1202] Copy code from foreign for lookup.xport() and
-	  read.xport(), extend lookup.xport() to show information about SAS
-	  format and iformat
-	* [r1201] Improve handling of SAS data and time formats, simplify
-	  code
+	* [r1202] R/xport.R, src/SASxport.c, src/SASxport.h: Copy code from
+	  foreign for lookup.xport() and read.xport(), extend
+	  lookup.xport() to show information about SAS format and iformat
+	* [r1201] R/importConvertDateTime.R: Improve handling of SAS data
+	  and time formats, simplify code
 
 2007-10-29  warnes
 
-	* [r1200] Fixes to correct handling storage of negative numbers
-	* [r1199] Belatedly commit change to startup message to give path
-	  to SASxport product page rather than contact page
-	* [r1198] Comment out debugging message in reverse()
-	* [r1197] Commit changes to stored output to match changed package
-	  load message
+	* [r1200] DESCRIPTION, R/xport.numeric.R, inst/ChangeLog,
+	  src/ibm2ieee.c, src/ieee2ibm.c, tests/testNegative.R: Fixes to
+	  correct handling storage of negative numbers
+	* [r1199] R/zzz.R: Belatedly commit change to startup message to
+	  give path to SASxport product page rather than contact page
+	* [r1198] src/reverse.c: Comment out debugging message in reverse()
+	* [r1197] tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/test_fields.Rout.save, tests/xport.Rout.save,
+	  tests/xxx.Rout.save: Commit changes to stored output to match
+	  changed package load message
 
 2007-10-22  warnes
 
-	* [r1196] Clarify GPL version
+	* [r1196] DESCRIPTION: Clarify GPL version
 
 2007-10-02  warnes
 
-	* [r1195] Add information on how to get help to the startup message
-	* [r1194] Add information on how to get help to the startup message
-	* [r1193] Add dependenct on utils::packageDescription
+	* [r1195] inst/ChangeLog, tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/test_fields.Rout.save, tests/xport.Rout.save,
+	  tests/xxx.Rout.save: Add information on how to get help to the
+	  startup message
+	* [r1194] R/zzz.R: Add information on how to get help to the
+	  startup message
+	* [r1193] NAMESPACE: Add dependenct on utils::packageDescription
 
 2007-10-01  warnes
 
-	* [r1192] Update saved R output to include startup message
+	* [r1192] tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/test_fields.Rout.save, tests/xport.Rout.save,
+	  tests/xxx.Rout.save: Update saved R output to include startup
+	  message
 
 2007-09-25  warnes
 
-	* [r1191] Update version number and date
-	* [r1190] Indicate that Metrum partially funded development
-	* [r1189] Display version and support information on package load
+	* [r1191] DESCRIPTION, inst/ChangeLog: Update version number and
+	  date
+	* [r1190] man/SASxport-package.Rd, man/write.xport.Rd: Indicate
+	  that Metrum partially funded development
+	* [r1189] R/zzz.R: Display version and support information on
+	  package load
 
 2007-09-18  warnes
 
-	* [r1188] Spent more time than Metrum paid for
+	* [r1188] DESCRIPTION: Spent more time than Metrum paid for
 
 2007-09-15  warnes
 
-	* [r1187] Improve formatting for pdf output
-	* [r1186] Update changelog
-	* [r1185] Changes so test TestUnnamedCompontents.R runs under R
-	  2.4.1 on Win32
-	* [r1184] Add support for auto-generating SAS formats for factor
-	  objects. Refactor argument name handling to improve code clarity.
+	* [r1187] man/SASxport-package.Rd, man/lookup.xport.Rd,
+	  man/read.xport.Rd, man/toSAS.Rd,
+	  tests/TestUnnamedComponents.Rout.save: Improve formatting for pdf
+	  output
+	* [r1186] inst/ChangeLog: Update changelog
+	* [r1185] tests/TestUnnamedComponents.R: Changes so test
+	  TestUnnamedCompontents.R runs under R 2.4.1 on Win32
+	* [r1184] DESCRIPTION, R/make.formats.R, R/toSAS.R,
+	  R/write.xport.R, R/xport.character.R, man/Alfalfa.Rd,
+	  man/lookup.xport.Rd, man/toSAS.Rd, man/write.xport.Rd,
+	  tests/Alfalfa_Test.R, tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.R, tests/cars.Rout.save, tests/test.xpt,
+	  tests/testDates.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.R, tests/xxx.Rout.save: Add
+	  support for auto-generating SAS formats for factor objects.
+	  Refactor argument name handling to improve code clarity.
 
 2007-09-14  warnes
 
-	* [r1183] Add option to read.xport() that permits inclusion of PROC
-	  CONTENTS format information in the returned list
+	* [r1183] R/process.formats.R, R/read.xport.R, data,
+	  data/Alfalfa.R, data/Alfalfa.xpt, inst/ChangeLog, man/Alfalfa.Rd,
+	  man/lookup.xport.Rd, man/read.xport.Rd,
+	  tests/TestUnnamedComponents.Rout.save: Add option to read.xport()
+	  that permits inclusion of PROC CONTENTS format information in the
+	  returned list
 
 2007-09-13  warnes
 
-	* [r1180] Ensure 'names.tolower' applies to dataset names
-	* [r1179] Update test output to match recent changes.
-	* [r1178] Add checking and handling for unnamed data frames or
-	  variables
-	* [r1177] Update tests now that 'units' and 'units<-' functions no
-	  longer are included
+	* [r1180] R/read.xport.R: Ensure 'names.tolower' applies to dataset
+	  names
+	* [r1179] tests/TestUnnamedComponents.Rout.save: Update test output
+	  to match recent changes.
+	* [r1178] R/write.xport.R: Add checking and handling for unnamed
+	  data frames or variables
+	* [r1177] tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.R,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/test_fields.Rout.save, tests/xport.Rout.save,
+	  tests/xxx.Rout.save: Update tests now that 'units' and 'units<-'
+	  functions no longer are included
 
 2007-09-12  warnes
 
-	* [r1176] Remove units() and units<-() functions since they arene't
-	  ever used.
-	* [r1175] Remove units() and units<-() functions since they arene't
-	  ever used.
-	* [r1174] Remove units from manual page
+	* [r1176] NAMESPACE: Remove units() and units<-() functions since
+	  they arene't ever used.
+	* [r1175] R/units.R, man/label.Rd, man/units.Rd: Remove units() and
+	  units<-() functions since they arene't ever used.
+	* [r1174] man/units.Rd: Remove units from manual page
 
 2007-09-11  warnes
 
-	* [r1173] Add assertion to test that read.xport(.., as.list=TRUE)
-	  works properly
-	* [r1172] Forgot to save buffer before svn commit.
-	* [r1171] Correct error in handling 'verbose' argument, error when
-	  more than one dataset has the same name, and add 'as.list'
-	  argument to ensure return value is a list, even if there is only
-	  one dataset in the file
-	* [r1170] Improve handling of list argument. Also check that names
-	  are proper and unique.
+	* [r1173] man/read.xport.Rd: Add assertion to test that
+	  read.xport(.., as.list=TRUE) works properly
+	* [r1172] R/write.xport.R: Forgot to save buffer before svn commit.
+	* [r1171] R/read.xport.R, man/read.xport.Rd: Correct error in
+	  handling 'verbose' argument, error when more than one dataset has
+	  the same name, and add 'as.list' argument to ensure return value
+	  is a list, even if there is only one dataset in the file
+	* [r1170] R/write.xport.R, man/write.xport.Rd: Improve handling of
+	  list argument. Also check that names are proper and unique.
 
 2007-09-07  warnes
 
-	* [r1167] Add round-trip test for Theoph data set
-	* [r1166] Change argument name in write.xport from 'filename' to
-	  'file' to match read.xport
-	* [r1165] Change argument name in write.xport from 'filename' to
-	  'file' to match read.xport
-	* [r1164] Change argument name in write.xport from 'filename' to
-	  'file' to match read.xport
-	* [r1163] Fix typo
+	* [r1167] tests/Theoph.R, tests/Theoph.Rout.save: Add round-trip
+	  test for Theoph data set
+	* [r1166] tests/Alfalfa_Test.Rout.save, tests/cars.Rout.save,
+	  tests/testDates.Rout.save, tests/xxx.Rout.save: Change argument
+	  name in write.xport from 'filename' to 'file' to match read.xport
+	* [r1165] man/write.xport.Rd: Change argument name in write.xport
+	  from 'filename' to 'file' to match read.xport
+	* [r1164] R/write.xport.R, man/read.xport.Rd, man/write.xport.Rd,
+	  tests/Alfalfa_Test.R, tests/cars.R, tests/testDates.R,
+	  tests/xxx.R: Change argument name in write.xport from 'filename'
+	  to 'file' to match read.xport
+	* [r1163] DESCRIPTION: Fix typo
 
 2007-08-29  warnes
 
-	* [r1161] Update Version to 1.0, depend on current version of
-	  foreign
+	* [r1161] DESCRIPTION: Update Version to 1.0, depend on current
+	  version of foreign
 
 2007-08-22  warnes
 
-	* [r1160] Update ChangeLog and NEWS files
-	* [r1159] Modify read.xport to preserve case of SAS names by
-	  default, as well as updating the example code.
-	* [r1158] sprintf() was being used where printf() was intended.
+	* [r1160] ChangeLog, NEWS, inst/ChangeLog, inst/NEWS: Update
+	  ChangeLog and NEWS files
+	* [r1159] R/read.xport.R, man/read.xport.Rd, tests/xport.Rout.save:
+	  Modify read.xport to preserve case of SAS names by default, as
+	  well as updating the example code.
+	* [r1158] src/reverse.c: sprintf() was being used where printf()
+	  was intended.
 
 2007-08-21  warnes
 
-	* [r1157] Slight improvement to credits for BRL-CAD
-	* [r1156] Commit previous updates
-	* [r1155] Commit previous updates
+	* [r1157] DESCRIPTION: Slight improvement to credits for BRL-CAD
+	* [r1156] TODO, man/lookup.xport.Rd, man/read.xport.Rd: Commit
+	  previous updates
+	* [r1155] src/htond.c, src/ibm2ieee.c, src/ieee2ibm.c, src/init.c,
+	  src/reverse.c, src/test_fields.c: Commit previous updates
 
 2007-08-15  warnes
 
-	* [r1146] Remove dependency on SAS code
-	* [r1145] Fix reverse.c because we need to swap everything to match
-	  Big-Endian, rather than Little-Endian. Also, dont' call the
-	  macro.
-	* [r1144] Restore reverse.c
-	* [r1143] Minor reformatting
-	* [r1142] Make corrections for typos noted by Metrum folks
+	* [r1146] DESCRIPTION, man/SASxport-package.Rd, src/cnxptiee.c,
+	  src/cnxptiee.h, src/htond.c, src/init.c, src/reverse.c,
+	  src/test_fields.c, src/writeSAS.c, src/writeSAS.h: Remove
+	  dependency on SAS code
+	* [r1145] src/reverse.c: Fix reverse.c because we need to swap
+	  everything to match Big-Endian, rather than Little-Endian. Also,
+	  dont' call the macro.
+	* [r1144] src/reverse.c: Restore reverse.c
+	* [r1143] DESCRIPTION: Minor reformatting
+	* [r1142] DESCRIPTION, inst/doc/SAS_TS140.txt, inst/doc/index.html,
+	  inst/doc/r2xpt.doc, man/SASxport-package.Rd, man/lookup.xport.Rd,
+	  man/read.xport.Rd, man/toSAS.Rd, man/units.Rd,
+	  man/write.xport.Rd: Make corrections for typos noted by Metrum
+	  folks
 
 2007-08-12  warnes
 
-	* [r1138] More updates
-	* [r1137] Remove new stuff... use SAS's code instead
-	* [r1136] 1st attempt at rewriting cnxptiee.[ch]
+	* [r1138] DESCRIPTION, man/lookup.xport.Rd, src/cnxptiee.h,
+	  src/test_fields.c, src/writeSAS.h: More updates
+	* [r1137] src/B8.h, src/IEEEtoIBM.c, src/MASKS.h, src/main.c,
+	  src/reverse.c: Remove new stuff... use SAS's code instead
+	* [r1136] src/B8.h, src/IEEEtoIBM.c, src/MASKS.h, src/cnxptiee.h,
+	  src/main.c, src/reverse.c, src/test_fields.c, src/writeSAS.h: 1st
+	  attempt at rewriting cnxptiee.[ch]
 
 2007-08-11  warnes
 
-	* [r1135] Explicitly check file header
-	* [r1134] Improve package description
+	* [r1135] R/read.xport.R: Explicitly check file header
+	* [r1134] DESCRIPTION, man/SASxport-package.Rd: Improve package
+	  description
 
 2007-08-09  warnes
 
-	* [r1133] More changes, esp to lookup.xport() and friends
-	* [r1132] More changes, esp to lookup.xport() and friends
-	* [r1131] More changes, esp to lookup.xport() and friends
-	* [r1130] Remove unused swap_bytes.h
-	* [r1129] Add package description page
-	* [r1128] Add comment header indicating the source of code from
-	  Hmisc
-	* [r1127] Update saved output of test scripts
+	* [r1133] DESCRIPTION, NAMESPACE, TODO, man/lookup.xport.Rd,
+	  man/read.xport.Rd, man/units.Rd: More changes, esp to
+	  lookup.xport() and friends
+	* [r1132] tests/Alfalfa_Test.Rout.save, tests/cars.Rout.save,
+	  tests/xport.Rout.save: More changes, esp to lookup.xport() and
+	  friends
+	* [r1131] R/AFirst.lib.s, R/all.is.numeric.R, R/in.opererator.R,
+	  R/lookup.xport.R, R/read.xport.R, R/write.xport.R: More changes,
+	  esp to lookup.xport() and friends
+	* [r1130] src/swap_bytes.h: Remove unused swap_bytes.h
+	* [r1129] man/SASxport-package.Rd: Add package description page
+	* [r1128] R/importConvertDateTime.R, R/makeNames.R, R/read.xport.R,
+	  R/testDateTime.R: Add comment header indicating the source of
+	  code from Hmisc
+	* [r1127] tests/testDates.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update saved output
+	  of test scripts
 
 2007-08-08  warnes
 
-	* [r1126] Updates
-	* [r1125] Updates
-	* [r1124] Updates
-	* [r1123] Updates
-	* [r1122] Updates.
+	* [r1126] DESCRIPTION, NAMESPACE: Updates
+	* [r1125] tests/Alfalfa_Test.R, tests/Alfalfa_Test.Rout.save,
+	  tests/cars.R, tests/cars.Rout.save, tests/datetime.xpt,
+	  tests/testDates.R, tests/test_fields.R,
+	  tests/test_fields.Rout.save, tests/xport.R, tests/xxx.R,
+	  tests/xxx.Rout.save: Updates
+	* [r1124] src/SASxport.c, src/SASxport.h, src/foreign.h,
+	  src/init.c: Updates
+	* [r1123] R/AFirst.lib.s, R/formats.R, R/iformat.R,
+	  R/importConvertDateTime.R, R/label.R, R/lookup.xport.R,
+	  R/makeNames.R, R/read.xport.R, R/testDateTime.R, R/units.R,
+	  R/xport.R: Updates
+	* [r1122] man/assert.Rd, man/read.xport.Rd, man/units.Rd: Updates.
 
 2007-08-03  warnes
 
-	* [r1119] Add code from package foreign and gtools to make SASxport
-	  stand alone
-	* [r1118] Remove stray .Rhistory file
-	* [r1117] Acknowledge MetrumI support
-	* [r1116] Add "assert" function
-	* [r1115] Add "assert" function to avoid dependenct on gtools.
-	* [r1114] Correct some typos.
-	* [r1113] Drop version number to 0.99 until testing integration and
-	  is complete
-	* [r1112] Add R test file to run c-level tests
-	* [r1111] Remove .so from svn
-	* [r1110] More modifications. Should now work for most R data types
-	* [r1109] Add more tests
+	* [r1119] DESCRIPTION, NAMESPACE, R/scat.R, R/xport.R, R/zzz.R,
+	  man/lookup.xport.Rd, man/read.xport.Rd, src/SASxport.c,
+	  src/SASxport.h, src/cnxptiee.c, src/cnxptiee.h, src/foreign.h,
+	  src/init.c, src/swap_bytes.h, src/test_fields.c, src/writeSAS.c,
+	  src/writeSAS.h, tests/Alfalfa_Test.Rout.save,
+	  tests/cars.Rout.save, tests/datetime.xpt, tests/test.xpt,
+	  tests/testDates.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.R, tests/xport.Rout.save, tests/xxx.Rout.save: Add
+	  code from package foreign and gtools to make SASxport stand alone
+	* [r1118] R/.Rhistory: Remove stray .Rhistory file
+	* [r1117] DESCRIPTION: Acknowledge MetrumI support
+	* [r1116] NAMESPACE: Add "assert" function
+	* [r1115] R/assert.R, man/assert.Rd: Add "assert" function to avoid
+	  dependenct on gtools.
+	* [r1114] man/toSAS.Rd, src/cnxptiee.c, src/writeSAS.c: Correct
+	  some typos.
+	* [r1113] DESCRIPTION: Drop version number to 0.99 until testing
+	  integration and is complete
+	* [r1112] tests/test_fields.R: Add R test file to run c-level tests
+	* [r1111] src/SASxport.so: Remove .so from svn
+	* [r1110] NAMESPACE, R/fromSASDate.R, R/parseFormat.R, R/toSAS.R,
+	  R/write.xport.R, R/xport.character.R, R/xport.file.header.R,
+	  R/xport.member.header.R, R/xport.namestr.R, man/toSAS.Rd,
+	  src/SASxport.so, src/writeSAS.c: More modifications. Should now
+	  work for most R data types
+	* [r1109] tests/cars.R, tests/datetime.xpt, tests/testDates.R,
+	  tests/xxx.R: Add more tests
 
 2007-07-29  warnes
 
-	* [r1107] Add SAS code to create xport data files for testing
+	* [r1107] tests/Alfalfa2.xpt, tests/cars.sas, tests/cars.xpt,
+	  tests/xxx.sas, tests/xxx.xpt: Add SAS code to create xport data
+	  files for testing
 
 2007-07-28  warnes
 
-	* [r1106] Add SVNxport package
+	* [r1106] ., DESCRIPTION, NAMESPACE, R, R/.Rhistory, R/blanks.R,
+	  R/rawToDisplay.R, R/write.xport.R, R/xport.NA.R,
+	  R/xport.character.R, R/xport.dateFMT.R, R/xport.file.header.R,
+	  R/xport.fill.R, R/xport.member.header.R, R/xport.namestr.R,
+	  R/xport.namestr.header.R, R/xport.numeric.R,
+	  R/xport.obs.header.R, R/zzz.R, inst, inst/doc,
+	  inst/doc/SAS_TS140.txt, inst/doc/index.html, inst/doc/r2xpt.doc,
+	  man, man/write.xport.Rd, src, src/SASxport.so, src/cnxptiee.c,
+	  src/cnxptiee.h, src/test_fields.c, src/writeSAS.c,
+	  src/writeSAS.h, tests, tests/Alfalfa.xpt, tests/Alfalfa2.xpt,
+	  tests/Alfalfa_Test.R: Add SVNxport package
 

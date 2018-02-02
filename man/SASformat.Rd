@@ -64,12 +64,10 @@ SAStype(x) <- value
 fail.time <- c(10,20)
 
 # set attributes
-%% label(fail.time) <- 'Failure Time'
 SASformat(fail.time) <- 'Numeric2'
 SASiformat(fail.time) <- 'Numeric2'
 
 # display individual attributes
-%% label(fail.time)
 SASformat(fail.time)
 SASiformat(fail.time)
 

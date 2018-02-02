@@ -1,12 +1,20 @@
+#' @importFrom stringi stri_trans_general
+#' @export
 makeSASNames <- function(names, nchar=8, maxPasses=10, quiet=FALSE)
   {
     ## This function takes a vector of potential SAS dataset or
     ## variable names and converts them into *unique* 8-character
     ## names.
 
+    #!# # Step -2: convert to ASCII
+    #!# names <- stri_trans_general(names, "Any-Latin; Latin-ASCII")
+
+    #!# # Step -1: strip all whitespace
+    #!# names <- gsub("[[:space:]]+", "", names)
+
     # Step 0: converce to uppercase
     names <- toupper(names)
-
+    
     # Step 1: expand/truncate to 8 characters
     tooLong <- nchar(names, "bytes")>8
     if (any(tooLong))
@@ -32,14 +40,14 @@ makeSASNames <- function(names, nchar=8, maxPasses=10, quiet=FALSE)
         names(digitChars) <- names(repeatCount)
         newNames <- make.names(substr(varNames, 1, nchar-digitChars[varNames]), unique=TRUE)
         changed <- newNames != names
-
+        
         ##newNames[changed] <- gsub("\\.([0-9]+)$","\\1", newNames[changed])
         varNames <- newNames
       }
 
     if(any(duplicated(varNames)))
       stop("Unable to make all names unique after ", passes, " passes.")
-
+    
     if(any(dups) && !quiet)
       warning("Made ",sum(dups)," duplicate names unique.")
 

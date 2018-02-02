@@ -18,7 +18,7 @@
  *  This file is derived from code in the SAS Technical Support
  *  document TS-140 "The Record Layout of a Data Set in SAS Transport
  *  (XPORT) Format" available as
- *       http://ftp.sas.com/techsup/download/technote/ts140.html
+ *       https://support.sas.com/techsup/technote/ts140.pdf
  */
 
 #ifndef SASEXPORT_H
@@ -28,6 +28,8 @@
 #include "foreign.h"
 #include "swap_bytes.h"
 #include <errno.h>
+#include "to_bigend.h"
+#include "ibm2ieee.h"
 
 /* double cnxptiee(double from, int fromtype, int totype); */
 

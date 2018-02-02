@@ -1,5 +1,4 @@
-`xport.dateFMT` <-
-  function(when, fill=16)
+xport.dateFMT <- function(when, fill=16)
   {
     if(missing(when)) when <- Sys.time()
     

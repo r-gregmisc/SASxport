@@ -1,3 +1,5 @@
+#' @importFrom Hmisc label
+#' @export
 write.xport <- function(...,
                         list=base::list(),
                         file = stop("'file' must be specified"),
@@ -188,7 +190,7 @@ write.xport <- function(...,
 
             # compute variable length
             if(is.character(var))
-              varLen <- max(c(8,nchar(var, "bytes") ) )
+              varLen <- max(c(8,nchar(var, "bytes", keepNA=FALSE) ) )
             else
               varLen <- 8
 
