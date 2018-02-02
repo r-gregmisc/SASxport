@@ -17,7 +17,7 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 
-Loaded SASxport version 1.5.4 (2017-05-22).
+Loaded SASxport version 1.5.5 (2018-01-13).
 
   Type `?SASxport' for usage information.
 
@@ -71,4 +71,4 @@ In makeSASNames(colnames(df)) : Made 5 duplicate names unique.
 > 
 > proc.time()
    user  system elapsed 
-  1.710   0.106   1.836 
+  1.735   0.099   1.863 

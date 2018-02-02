@@ -17,7 +17,7 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 
-Loaded SASxport version 1.5.4 (2017-05-22).
+Loaded SASxport version 1.5.5 (2018-01-13).
 
   Type `?SASxport' for usage information.
 
@@ -96,4 +96,4 @@ Warning messages:
 > 
 > proc.time()
    user  system elapsed 
-  4.408   0.145   4.577 
+  4.427   0.141   4.599 

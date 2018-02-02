@@ -17,7 +17,7 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 
-Loaded SASxport version 1.5.4 (2017-05-22).
+Loaded SASxport version 1.5.5 (2018-01-13).
 
   Type `?SASxport' for usage information.
 
@@ -71,4 +71,4 @@ $IRIS2
 > 
 > proc.time()
    user  system elapsed 
-  1.648   0.101   1.760 
+  1.609   0.091   1.714 

@@ -17,7 +17,7 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 
-Loaded SASxport version 1.5.4 (2017-05-22).
+Loaded SASxport version 1.5.5 (2018-01-13).
 
   Type `?SASxport' for usage information.
 
@@ -168,7 +168,7 @@ Attaching package: 'Hmisc'
 
 The following objects are masked from 'package:base':
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 
 rd.xpr> describe(w$TEST)   # see labels, format names for dataset test
@@ -177,35 +177,46 @@ w$TEST
  5  Variables      2  Observations
 --------------------------------------------------------------------------------
 RACE 
-      n missing  unique   value 
-      1       1       1    blue 
+       n  missing distinct    value 
+       1        1        1     blue 
+               
+Value      blue
+Frequency     1
+Proportion    1
 --------------------------------------------------------------------------------
 AGE : Age at Beginning of Study 
-      n missing  unique    Info    Mean 
-      2       0       2       1    30.5 
-
-30 (1, 50%), 31 (1, 50%) 
+       n  missing distinct     Info     Mean      Gmd 
+       2        0        2        1     30.5        1 
+                  
+Value       30  31
+Frequency    1   1
+Proportion 0.5 0.5
 --------------------------------------------------------------------------------
 D1 
-      n missing  unique 
-      2       0       2 
-
-2002-03-03 (1, 50%), 2002-06-03 (1, 50%) 
+       n  missing distinct 
+       2        0        2 
+                                
+Value      2002-03-03 2002-06-03
+Frequency           1          1
+Proportion        0.5        0.5
 --------------------------------------------------------------------------------
 DT1 
-                  n             missing              unique                Info 
+                  n             missing            distinct                Info 
                   2                   0                   2                   1 
-               Mean 
-2002-04-18 09:36:34 
-
-2002-03-03 09:31:02 (1, 50%) 
-2002-06-03 09:42:07 (1, 50%) 
+               Mean                 Gmd 
+2002-04-18 09:36:34 1970-04-03 00:11:05 
+                                
+Value      1015147862 1023097327
+Frequency           1          1
+Proportion        0.5        0.5
 --------------------------------------------------------------------------------
 T1 
-       n  missing   unique     Info     Mean 
-       2        0        2        1 11:13:59 
-
-11:13:45 (1, 50%), 11:14:13 (1, 50%) 
+       n  missing distinct     Info     Mean      Gmd 
+       2        0        2        1 11:13:59 00:00:28 
+                      
+Value      40425 40453
+Frequency      1     1
+Proportion   0.5   0.5
 --------------------------------------------------------------------------------
 
 rd.xpr> lapply(w, describe, "")# see descriptive stats in more detail for each variable
@@ -215,35 +226,46 @@ $TEST
  5  Variables      2  Observations
 --------------------------------------------------------------------------------
 RACE 
-      n missing  unique   value 
-      1       1       1    blue 
+       n  missing distinct    value 
+       1        1        1     blue 
+               
+Value      blue
+Frequency     1
+Proportion    1
 --------------------------------------------------------------------------------
 AGE : Age at Beginning of Study 
-      n missing  unique    Info    Mean 
-      2       0       2       1    30.5 
-
-30 (1, 50%), 31 (1, 50%) 
+       n  missing distinct     Info     Mean      Gmd 
+       2        0        2        1     30.5        1 
+                  
+Value       30  31
+Frequency    1   1
+Proportion 0.5 0.5
 --------------------------------------------------------------------------------
 D1 
-      n missing  unique 
-      2       0       2 
-
-2002-03-03 (1, 50%), 2002-06-03 (1, 50%) 
+       n  missing distinct 
+       2        0        2 
+                                
+Value      2002-03-03 2002-06-03
+Frequency           1          1
+Proportion        0.5        0.5
 --------------------------------------------------------------------------------
 DT1 
-                  n             missing              unique                Info 
+                  n             missing            distinct                Info 
                   2                   0                   2                   1 
-               Mean 
-2002-04-18 09:36:34 
-
-2002-03-03 09:31:02 (1, 50%) 
-2002-06-03 09:42:07 (1, 50%) 
+               Mean                 Gmd 
+2002-04-18 09:36:34 1970-04-03 00:11:05 
+                                
+Value      1015147862 1023097327
+Frequency           1          1
+Proportion        0.5        0.5
 --------------------------------------------------------------------------------
 T1 
-       n  missing   unique     Info     Mean 
-       2        0        2        1 11:13:59 
-
-11:13:45 (1, 50%), 11:14:13 (1, 50%) 
+       n  missing distinct     Info     Mean      Gmd 
+       2        0        2        1 11:13:59 00:00:28 
+                      
+Value      40425 40453
+Frequency      1     1
+Proportion   0.5   0.5
 --------------------------------------------------------------------------------
 
 $Z
@@ -252,58 +274,58 @@ $Z
  6  Variables      100  Observations
 --------------------------------------------------------------------------------
 X3 
-      n missing  unique    Info    Mean     .05     .10     .25     .50     .75 
-    100       0     100       1  0.5131 0.05585 0.13304 0.26428 0.51257 0.80719 
-    .90     .95 
-0.93059 0.96426 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+     100        0      100        1   0.5131   0.3408  0.05585  0.13304 
+     .25      .50      .75      .90      .95 
+ 0.26428  0.51257  0.80719  0.93059  0.96426 
 
-lowest : 0.00576 0.01524 0.02380 0.02627 0.05351
-highest: 0.96948 0.97473 0.98010 0.98096 0.99390 
+lowest : 0.005760193 0.015239716 0.023796082 0.026271820 0.053512573
+highest: 0.969482422 0.974731445 0.980102539 0.980957031 0.993896484
 --------------------------------------------------------------------------------
 X4 
-      n missing  unique    Info    Mean     .05     .10     .25     .50     .75 
-    100       0     100       1  0.5119 0.06694 0.09393 0.22310 0.49638 0.82109 
-    .90     .95 
-0.92206 0.94963 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+     100        0      100        1   0.5119   0.3583  0.06694  0.09393 
+     .25      .50      .75      .90      .95 
+ 0.22310  0.49638  0.82109  0.92206  0.94963 
 
-lowest : 0.02636 0.02890 0.02926 0.03010 0.05395
-highest: 0.95790 0.96828 0.97047 0.97466 0.98267 
+lowest : 0.02636161 0.02890442 0.02926101 0.03009592 0.05395064
+highest: 0.95790482 0.96828461 0.97046804 0.97465801 0.98267412
 --------------------------------------------------------------------------------
 X5 
-      n missing  unique    Info    Mean     .05     .10     .25     .50     .75 
-    100       0     100       1  0.4888 0.04286 0.06765 0.19898 0.46766 0.77899 
-    .90     .95 
-0.89237 0.91886 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+     100        0      100        1   0.4888   0.3626  0.04286  0.06765 
+     .25      .50      .75      .90      .95 
+ 0.19898  0.46766  0.77899  0.89237  0.91886 
 
-lowest : 0.004134 0.007872 0.008811 0.038577 0.039260
-highest: 0.933789 0.975597 0.984074 0.996114 0.997253 
+lowest : 0.004133753 0.007872077 0.008811487 0.038577245 0.039259837
+highest: 0.933788894 0.975597342 0.984073751 0.996114468 0.997252798
 --------------------------------------------------------------------------------
 X6 
-      n missing  unique    Info    Mean     .05     .10     .25     .50     .75 
-    100       0     100       1  0.4987 0.09022 0.18649 0.26865 0.46423 0.72667 
-    .90     .95 
-0.85553 0.93149 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+     100        0      100        1   0.4987   0.3133  0.09022  0.18649 
+     .25      .50      .75      .90      .95 
+ 0.26865  0.46423  0.72667  0.85553  0.93149 
 
-lowest : 0.01010 0.01943 0.03064 0.05931 0.08775
-highest: 0.93330 0.96090 0.97310 0.97840 0.99511 
+lowest : 0.01009577 0.01943226 0.03063606 0.05930633 0.08775397
+highest: 0.93329615 0.96089912 0.97309719 0.97839957 0.99510797
 --------------------------------------------------------------------------------
 X7 
-      n missing  unique    Info    Mean     .05     .10     .25     .50     .75 
-    100       0     100       1  0.5533  0.0850  0.1474  0.3313  0.5666  0.8120 
-    .90     .95 
- 0.9176  0.9517 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+     100        0      100        1   0.5533   0.3282   0.0850   0.1474 
+     .25      .50      .75      .90      .95 
+  0.3313   0.5666   0.8120   0.9176   0.9517 
 
-lowest : 0.04201 0.04716 0.04986 0.05864 0.07641
-highest: 0.96377 0.97244 0.97413 0.99318 0.99791 
+lowest : 0.04201044 0.04715550 0.04986308 0.05864216 0.07641118
+highest: 0.96377103 0.97244354 0.97412609 0.99317888 0.99790806
 --------------------------------------------------------------------------------
 X8 
-      n missing  unique    Info    Mean     .05     .10     .25     .50     .75 
-    100       0     100       1  0.4809 0.04251 0.06831 0.27122 0.49223 0.71333 
-    .90     .95 
-0.87322 0.91886 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+     100        0      100        1   0.4809   0.3351  0.04251  0.06831 
+     .25      .50      .75      .90      .95 
+ 0.27122  0.49223  0.71333  0.87322  0.91886 
 
-lowest : 0.007269 0.010586 0.013044 0.018595 0.039906
-highest: 0.930491 0.935669 0.936941 0.958679 0.959636 
+lowest : 0.007268806 0.010585836 0.013044060 0.018595368 0.039905848
+highest: 0.930490654 0.935669079 0.936940561 0.958679024 0.959635779
 --------------------------------------------------------------------------------
 
 $FORMATS
@@ -312,68 +334,116 @@ $FORMATS
  21  Variables      3  Observations
 --------------------------------------------------------------------------------
 FMTNAME 
-      n missing  unique   value 
-      3       0       1    RACE 
+       n  missing distinct    value 
+       3        0        1     RACE 
+               
+Value      RACE
+Frequency     3
+Proportion    1
 --------------------------------------------------------------------------------
 START 
-      n missing  unique 
-      3       0       3 
-
-               1 (1, 33%),                2 (1, 33%) 
-               3 (1, 33%) 
+       n  missing distinct 
+       3        0        3 
+                                                             
+Value                     1                2                3
+Frequency                 1                1                1
+Proportion            0.333            0.333            0.333
 --------------------------------------------------------------------------------
 END 
-      n missing  unique 
-      3       0       3 
-
-               1 (1, 33%),                2 (1, 33%) 
-               3 (1, 33%) 
+       n  missing distinct 
+       3        0        3 
+                                                             
+Value                     1                2                3
+Frequency                 1                1                1
+Proportion            0.333            0.333            0.333
 --------------------------------------------------------------------------------
 LABEL 
-      n missing  unique 
-      3       0       3 
-
-blue (1, 33%), green (1, 33%), purple (1, 33%) 
+       n  missing distinct 
+       3        0        3 
+                               
+Value        blue  green purple
+Frequency       1      1      1
+Proportion  0.333  0.333  0.333
 --------------------------------------------------------------------------------
 MIN 
-      n missing  unique    Info    Mean 
-      3       0       1       0       1 
+       n  missing distinct     Info     Mean      Gmd 
+       3        0        1        0        1        0 
+            
+Value      1
+Frequency  3
+Proportion 1
 --------------------------------------------------------------------------------
 MAX 
-      n missing  unique    Info    Mean 
-      3       0       1       0      40 
+       n  missing distinct     Info     Mean      Gmd 
+       3        0        1        0       40        0 
+             
+Value      40
+Frequency   3
+Proportion  1
 --------------------------------------------------------------------------------
 DEFAULT 
-      n missing  unique    Info    Mean 
-      3       0       1       0       6 
+       n  missing distinct     Info     Mean      Gmd 
+       3        0        1        0        6        0 
+            
+Value      6
+Frequency  3
+Proportion 1
 --------------------------------------------------------------------------------
 LENGTH 
-      n missing  unique    Info    Mean 
-      3       0       1       0       6 
+       n  missing distinct     Info     Mean      Gmd 
+       3        0        1        0        6        0 
+            
+Value      6
+Frequency  3
+Proportion 1
 --------------------------------------------------------------------------------
 FUZZ 
-      n missing  unique    Info    Mean 
-      3       0       1       0   1e-12 
+       n  missing distinct     Info     Mean      Gmd 
+       3        0        1        0    1e-12        0 
+                
+Value      1e-12
+Frequency      3
+Proportion     1
 --------------------------------------------------------------------------------
 MULT 
-      n missing  unique    Info    Mean 
-      3       0       1       0       0 
+       n  missing distinct     Info     Mean      Gmd 
+       3        0        1        0        0        0 
+            
+Value      0
+Frequency  3
+Proportion 1
 --------------------------------------------------------------------------------
 NOEDIT 
-      n missing  unique    Info    Mean 
-      3       0       1       0       0 
+       n  missing distinct     Info     Mean      Gmd 
+       3        0        1        0        0        0 
+            
+Value      0
+Frequency  3
+Proportion 1
 --------------------------------------------------------------------------------
 TYPE 
-      n missing  unique   value 
-      3       0       1       N 
+       n  missing distinct    value 
+       3        0        1        N 
+            
+Value      N
+Frequency  3
+Proportion 1
 --------------------------------------------------------------------------------
 SEXCL 
-      n missing  unique   value 
-      3       0       1       N 
+       n  missing distinct    value 
+       3        0        1        N 
+            
+Value      N
+Frequency  3
+Proportion 1
 --------------------------------------------------------------------------------
 EEXCL 
-      n missing  unique   value 
-      3       0       1       N 
+       n  missing distinct    value 
+       3        0        1        N 
+            
+Value      N
+Frequency  3
+Proportion 1
 --------------------------------------------------------------------------------
 
 Variables with all observations missing:
@@ -471,28 +541,6 @@ X5 0.4887739 0.3141976 0.004133753 0.9972528
 X6 0.4986746 0.2710817 0.010095772 0.9951080
 X7 0.5533156 0.2843679 0.042010437 0.9979081
 X8 0.4809487 0.2892945 0.007268806 0.9596358
-Warning messages:
-1: In structure(NULL, class = "describe") :
-  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
-  Consider 'structure(list(), *)' instead.
-2: In structure(NULL, class = "describe") :
-  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
-  Consider 'structure(list(), *)' instead.
-3: In structure(NULL, class = "describe") :
-  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
-  Consider 'structure(list(), *)' instead.
-4: In structure(NULL, class = "describe") :
-  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
-  Consider 'structure(list(), *)' instead.
-5: In structure(NULL, class = "describe") :
-  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
-  Consider 'structure(list(), *)' instead.
-6: In structure(NULL, class = "describe") :
-  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
-  Consider 'structure(list(), *)' instead.
-7: In structure(NULL, class = "describe") :
-  Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.
-  Consider 'structure(list(), *)' instead.
 > ## Read example dataset from a local file
 > testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
 > w <- read.xport(testFile, names.tolower=TRUE)
@@ -2153,4 +2201,4 @@ $Z
 > 
 > proc.time()
    user  system elapsed 
-  2.980   0.149   3.279 
+  3.063   0.145   3.351 
