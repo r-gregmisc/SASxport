@@ -1,3 +1,12 @@
+Version 1.5.5 - 2018-02-01
+--------------------------
+
+- Maintainer changed back to Gregory Warnes <greg@warnes.net>
+- Integrated changes contributed by Mango Solutions (from
+  https://github.com/mangothecat/SASxport)
+- Updated SASxport package to work with Hmisc >= 4.1
+- Code now hosted on github
+
 Version 1.5.4 - 2016-03-25
 --------------------------
 
