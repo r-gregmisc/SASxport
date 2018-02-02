@@ -16,12 +16,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(SASxport)
-
-Loaded SASxport version 1.5.5 (2018-01-13).
-
-  Type `?SASxport' for usage information.
-
-
 > 
 > data(iris)
 > write.xport(Iris1=iris[1:2,],
@@ -71,4 +65,4 @@ $IRIS2
 > 
 > proc.time()
    user  system elapsed 
-  1.609   0.091   1.714 
+  1.610   0.088   1.708 

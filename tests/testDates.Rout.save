@@ -16,12 +16,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(SASxport)
-
-Loaded SASxport version 1.5.5 (2018-01-13).
-
-  Type `?SASxport' for usage information.
-
-
 > Sys.setenv("TZ"="GMT")
 > 
 > ## Create a small data set containing dates, times, and date-times
@@ -63,4 +57,4 @@ In makeSASNames(colnames(df)) : Truncated 1 long names to 8 characters.
 > 
 > proc.time()
    user  system elapsed 
-  1.610   0.094   1.720 
+  1.626   0.092   1.731 
