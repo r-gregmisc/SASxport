@@ -16,12 +16,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(SASxport)
-
-Loaded SASxport version 1.5.5 (2018-01-13).
-
-  Type `?SASxport' for usage information.
-
-
 > Sys.setenv("TZ"="GMT")
 > 
 > ##
@@ -88,4 +82,4 @@ Warning messages:
 > 
 > proc.time()
    user  system elapsed 
-  1.925   0.098   2.046 
+  1.867   0.095   1.978 

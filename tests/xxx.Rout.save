@@ -16,12 +16,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(SASxport)
-
-Loaded SASxport version 1.5.5 (2018-01-13).
-
-  Type `?SASxport' for usage information.
-
-
 > Sys.setenv("TZ"="GMT")
 > 
 > ## manually create a data set
@@ -224,4 +218,4 @@ HEX:    20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20
 > 
 > proc.time()
    user  system elapsed 
-  1.593   0.104   1.711 
+  1.588   0.103   1.712 

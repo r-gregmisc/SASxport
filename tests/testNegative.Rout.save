@@ -16,12 +16,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(SASxport)
-
-Loaded SASxport version 1.5.5 (2018-01-13).
-
-  Type `?SASxport' for usage information.
-
-
 > Sys.setenv("TZ"="GMT")
 > 
 > df1 <- data.frame( f=c(1.0, -1.0), d=as.integer(c(-1,1) )  )
@@ -49,4 +43,4 @@ In makeSASNames(colnames(df)) : Truncated 2 long names to 8 characters.
 > 
 > proc.time()
    user  system elapsed 
-  1.730   0.098   1.859 
+  1.745   0.095   1.873 

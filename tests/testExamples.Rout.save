@@ -16,12 +16,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(SASxport)
-
-Loaded SASxport version 1.5.5 (2018-01-13).
-
-  Type `?SASxport' for usage information.
-
-
 > Sys.setenv("TZ"="GMT")
 > 
 > set.seed(42)
@@ -130,7 +124,7 @@ lkp.xp> lookup.xport(alfFile)
 
 SAS xport file
 --------------
-Filename: `/Users/gwarnes/Google Drive/src/SASxport_clean.Rcheck/SASxport/extdata/Alfalfa.xpt'
+Filename: `/Users/gwarnes/Google Drive/src/SASxport.Rcheck/SASxport/extdata/Alfalfa.xpt'
 
 Variables in data set `SPEC':
  dataset   name      type format flength fdigits iformat iflength ifdigits
@@ -164,7 +158,7 @@ lkp.xp> w
 
 SAS xport file
 --------------
-Filename: `/Users/gwarnes/Google Drive/src/SASxport_clean.Rcheck/SASxport/extdata/test2.xpt'
+Filename: `/Users/gwarnes/Google Drive/src/SASxport.Rcheck/SASxport/extdata/test2.xpt'
 
 Variables in data set `TEST':
  dataset name    type   format flength fdigits iformat iflength ifdigits
@@ -258,7 +252,7 @@ lkp.xp> wS # same display
 
 SAS xport file
 --------------
-Filename: `/Users/gwarnes/Google Drive/src/SASxport_clean.Rcheck/SASxport/extdata/test2.xpt'
+Filename: `/Users/gwarnes/Google Drive/src/SASxport.Rcheck/SASxport/extdata/test2.xpt'
 
 Variables in data set `TEST':
  dataset name    type   format flength fdigits iformat iflength ifdigits
@@ -1010,7 +1004,7 @@ wrt.xp> lookup.xport(tmp)
 
 SAS xport file
 --------------
-Filename: `/var/folders/gc/c3c2p5_d4td159rblkqbp4s1xjhdh_/T//RtmpoDBlRk/file456069ecff18.dat'
+Filename: `/var/folders/gc/c3c2p5_d4td159rblkqbp4s1xjhdh_/T//RtmpVk6xq0/fileb54e5ad35661.dat'
 
 Variables in data set `ABC':
  dataset name    type format flength fdigits iformat iflength ifdigits
@@ -1096,4 +1090,4 @@ wrt.xp>
 > 
 > proc.time()
    user  system elapsed 
-  2.459   0.119   2.628 
+  2.455   0.116   2.631 
