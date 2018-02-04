@@ -1,3 +1,11 @@
+Version 1.5.7 - 2018-02-03
+--------------------------
+
+- Add automated testing via TravisCI (for Linux) and AppVeyor (for Windows)
+- Add code coverage info via CodeCov.io
+- Update & fix badges in README.md
+- Minor reformatting of README.md
+
 Version 1.5.6 - 2018-02-02
 --------------------------
 
