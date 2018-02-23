@@ -3,8 +3,8 @@
 \docType{data}
 \title{ Example SAS data set }
 \description{
-  This data set exists to provide an example file for lookup.xport() and
-  read.xport()
+  Alfalfa data from Brian Yandell's book \emph{Practical Data Analysis for
+  Designed Experiments}.
 }
 \usage{data(Alfalfa)}
 \format{
@@ -23,7 +23,11 @@
   \code{HARV2}) than population "min".  (Surprise! Shock!  Awe!)
   }
 \source{
-  The 'Alfalfa.xpt' file was obtained from the R 'foreign' package.
+  \url{http://pages.stat.wisc.edu/~yandell/pda/data/Alfalfa/alfalfa.dat}.
+}
+\references{
+Yandell, Brian S. \emph{Practical data analysis for designed experiments}.
+Vol. 39. Crcd Press, 1997.
 }
 \examples{
 data(Alfalfa)
