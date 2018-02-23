@@ -1,4 +1,5 @@
 DATA cars1;
+  length MAKE $6;
   input MAKE $ PRICE MPG REP78 FOREIGN;
 DATALINES;
 AMC    4099 22 3 0
@@ -37,7 +38,7 @@ PROC MEANS DATA=cars1;
 RUN;
 
 LIBNAME out XPORT './cars.xpt';
- 
+
 DATA out.cars;
   SET cars1;
 RUN;

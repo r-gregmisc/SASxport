@@ -54,7 +54,7 @@ data SPEC;
   run;
 
 
-libname xportout xport '\\tsclient\RDP_SHARED\Alfalfa.xpt';
+libname xportout xport '.\Alfalfa.xpt';
 proc copy in=work out=xportout memtype=data;
   select SPEC;
 run;
