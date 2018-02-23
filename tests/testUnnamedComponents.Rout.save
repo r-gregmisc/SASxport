@@ -2195,4 +2195,4 @@ $Z
 > 
 > proc.time()
    user  system elapsed 
-  3.036   0.143   3.450 
+  3.247   0.176   3.562 
