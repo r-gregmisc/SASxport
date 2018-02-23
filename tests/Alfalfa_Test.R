@@ -12,21 +12,22 @@ str(SPEC)
 ## Write it out again, pretending to be the same OS, SAS version, and creation date
 write.xport(SPEC,
             file="Alfalfa2.xpt",
-            cDate=strptime("10DEC99:15:56:30", format="%d%b%y:%H:%M:%S"),
-            osType="OSF1",
-            sasVer="7.00",
+            cDate=strptime("23FEB18:03:32:49", format="%d%b%y:%H:%M:%S"),
+            osType="X64_DS12",
+            sasVer="9.4",
             autogen.formats=FALSE
             )
 
 ## Display for diff
-write.xport(SPEC,
-            file="", # display inline
-            cDate=strptime("10DEC99:15:56:30", format="%d%b%y:%H:%M:%S"),
-            osType="OSF1",
-            sasVer="7.00",
-            autogen.formats=FALSE,
-            verbose=TRUE
-            )
+if(!interactive())
+  write.xport(SPEC,
+              file="", # display inline
+              cDate=strptime("23FEB18:03:32:49", format="%d%b%y:%H:%M:%S"),
+              osType="X64_DS12",
+              sasVer="9.4",
+              autogen.formats=FALSE,
+              verbose=TRUE
+              )
 
 
 ## Load both files back in as raw data

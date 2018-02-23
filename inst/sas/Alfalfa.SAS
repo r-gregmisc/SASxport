@@ -1,12 +1,13 @@
 /*
-This data is from Brian Yandell's book _Practical Data Analysis for Designed
-Experiments_ (PDA) and was downloaded from the PDA data repository
-http://pages.stat.wisc.edu/~yandell/pda/data/Alfalfa/alfalfa.dat
+This data is from Brian Yandell's book \emph{Practical Data Analysis
+for Designed Experiments} and was downloaded from the available from
+\url{http://pages.stat.wisc.edu/~yandell/pda/data/Alfalfa/alfalfa.dat}.
 */
 
 
 data SPEC;
-  infile DATALINES dsd missover;
+  infile DATALINES;
+  length pop $3;
   input pop $ sample rep seedwt harv1 harv2;
   CARDS;
     min 0 1 64 171.7 180.3
@@ -53,7 +54,7 @@ data SPEC;
   run;
 
 
-libname xportout xport 'Alfalfa.xpt';
+libname xportout xport '\\tsclient\RDP_SHARED\Alfalfa.xpt';
 proc copy in=work out=xportout memtype=data;
   select SPEC;
 run;
