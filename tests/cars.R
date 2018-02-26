@@ -2,7 +2,7 @@ library(SASxport)
 Sys.setenv("TZ"="GMT")
 
 
-cars <- read.table(file="cars.sas", skip=3, nrows=26,
+cars <- read.table(file="cars.sas", skip=4, nrows=26,
                    col.names=c("MAKE","PRICE","MPG","REP78","FOREIGN"),
                    header=F)
 
@@ -13,21 +13,22 @@ summary(cars)
 ## Write to file
 write.xport(cars,
             file="cars2.xpt",
-            cDate=strptime("28JUL07: 20:59:49", format="%d%b%y:%H:%M:%S"),
-            osType="SunOS",
-            sasVer="9.1",
+            cDate=strptime("23FEB18:04:03:38", format="%d%b%y:%H:%M:%S"),
+            osType="X64_DS12",
+            sasVer="9.4",
             autogen.formats=FALSE
             )
 
 ## Display for diff
-write.xport(cars,
-            file="",
-            cDate=strptime("28JUL07: 20:59:49", format="%d%b%y:%H:%M:%S"),
-            osType="SunOS",
-            sasVer="9.1",
-            autogen.formats=FALSE,
-            verbose=TRUE
-            )
+if(!interactive())
+  write.xport(cars,
+              file="",
+              cDate=strptime("23FEB18:04:03:38", format="%d%b%y:%H:%M:%S"),
+              osType="X64_DS12",
+              sasVer="9.4",
+              autogen.formats=FALSE,
+              verbose=TRUE
+              )
 
 ## Load both files back in as raw data
 a.1 <- readBin( con="cars.xpt",  what=raw(), n=1e5)

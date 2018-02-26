@@ -1,5 +1,6 @@
 library(SASxport)
 Sys.setenv("TZ"="GMT")
+Sys.setlocale(locale="C")
 
 set.seed(42)
 

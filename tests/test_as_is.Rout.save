@@ -66,4 +66,4 @@ Variables in data set `PUROMYCI':
 > 
 > proc.time()
    user  system elapsed 
-  1.579   0.096   1.679 
+  1.748   0.129   1.883 

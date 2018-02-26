@@ -43,4 +43,4 @@ In makeSASNames(colnames(df)) : Truncated 2 long names to 8 characters.
 > 
 > proc.time()
    user  system elapsed 
-  1.745   0.095   1.873 
+  1.815   0.117   1.948 

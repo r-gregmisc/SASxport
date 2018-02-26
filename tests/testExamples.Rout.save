@@ -1004,7 +1004,7 @@ wrt.xp> lookup.xport(tmp)
 
 SAS xport file
 --------------
-Filename: `/var/folders/gc/c3c2p5_d4td159rblkqbp4s1xjhdh_/T//RtmpVk6xq0/fileb54e5ad35661.dat'
+Filename: `/var/folders/gc/c3c2p5_d4td159rblkqbp4s1xjhdh_/T//RtmpcNRdhA/file34e64ef05fbb.dat'
 
 Variables in data set `ABC':
  dataset name    type format flength fdigits iformat iflength ifdigits
@@ -1090,4 +1090,4 @@ wrt.xp>
 > 
 > proc.time()
    user  system elapsed 
-  2.455   0.116   2.631 
+  2.875   0.164   3.140 

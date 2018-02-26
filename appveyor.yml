@@ -15,24 +15,6 @@ cache:
 
 # Adapt as necessary starting from here
 
-platform: x64
-
-environment:
-  global:
-    WARNINGS_ARE_ERRORS: 1
-    R_ARCH: x64
-
-  matrix:
-  - R_VERSION: release
-
-  - R_VERSION: oldrel
-
-  - R_VERSION: devel
-    PKGTYPE: source
-
-matrix:
-  fast_finish: true
-
 build_script:
   - travis-tool.sh install_deps
 

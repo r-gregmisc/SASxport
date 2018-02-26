@@ -1,3 +1,22 @@
+Version 1.6.0 -- 2018-02-23
+---------------------------
+
+Bug fixes:
+
+- `write.xport()` no longer sets an 8 character minumum length on string
+  variables.
+
+Other changes:
+
+- SAS-generated example xport files have been refreshed and some have modified
+  to include string variables with less than 8 characters.  
+- SAS code to generate all example datasets is now included.
+- The manual page for the 'Alfalfa' dataset now properly attributes the 
+  source of the data to Brian Yandell's book _Practical Data Analysis for
+  Designed Experiments_.
+- Minor improvements to settings for automatic code testing & test coverage.
+
+
 Version 1.5.7 - 2018-02-03
 --------------------------
 

@@ -190,7 +190,7 @@ write.xport <- function(...,
 
             # compute variable length
             if(is.character(var))
-              varLen <- max(c(8,nchar(var, "bytes", keepNA=FALSE) ) )
+              varLen <- max(c(1,nchar(var, "bytes", keepNA=FALSE) ) )
             else
               varLen <- 8
 
