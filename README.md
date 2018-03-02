@@ -6,6 +6,7 @@
 [![](http://www.r-pkg.org/badges/version/SASxport)](http://www.r-pkg.org/pkg/SASxport)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/SASxport)](http://www.r-pkg.org/pkg/SASxport)
 [![Coverage Status](https://codecov.io/gh/warnes/SASxport/branch/master/graph/badge.svg)](https://codecov.io/gh/warnes/SASxport)
+[![Coverage Status](https://coveralls.io/repos/github/warnes/SASxport/badge.svg)](https://coveralls.io/github/warnes/SASxport)
 
 <!--- The current version of Pandoc used with RStudio doesn't handle this properly.  Try again in the next version. ---!>
 <!--- [![Linux Build Status](https://img.shields.io/travis/warnes/SASxport.svg?label=Linux)](https://travis-ci.org/warnes/SASxport)
