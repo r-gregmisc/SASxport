@@ -69,7 +69,7 @@ print.summary.lookup.xport <- function(x, ...)
   cat("--------------\n");
   cat("Filename: `", attr(x,"file"), "'\n", sep="")
   cat("\n")
-  for(dSetName in levels(x$dataset))
+  for(dSetName in unique(x$dataset))
     {
       cat("Variables in data set `", dSetName, "':\n", sep="")
       print(as.data.frame(x)[x$dataset==dSetName,], row.names=FALSE)
