@@ -1,6 +1,6 @@
 
-R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin15.6.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -187,8 +187,8 @@ Frequency    1   1
 Proportion 0.5 0.5
 --------------------------------------------------------------------------------
 D1 
-       n  missing distinct 
-       2        0        2 
+         n    missing   distinct       Info       Mean        Gmd 
+         2          0          2          1 2002-04-18         92 
                                 
 Value      2002-03-03 2002-06-03
 Frequency           1          1
@@ -198,19 +198,19 @@ DT1
                   n             missing            distinct                Info 
                   2                   0                   2                   1 
                Mean                 Gmd 
-2002-04-18 09:36:34 1970-04-03 00:11:05 
-                                
-Value      1015147862 1023097327
-Frequency           1          1
-Proportion        0.5        0.5
+2002-04-18 09:36:34             7949465 
+                                                  
+Value      2002-03-03 09:31:02 2002-06-03 09:42:07
+Frequency                    1                   1
+Proportion                 0.5                 0.5
 --------------------------------------------------------------------------------
 T1 
        n  missing distinct     Info     Mean      Gmd 
-       2        0        2        1 11:13:59 00:00:28 
-                      
-Value      40425 40453
-Frequency      1     1
-Proportion   0.5   0.5
+       2        0        2        1 11:13:59       28 
+                                                  
+Value      1970-01-01 11:13:45 1970-01-01 11:14:13
+Frequency                    1                   1
+Proportion                 0.5                 0.5
 --------------------------------------------------------------------------------
 
 rd.xpr> lapply(w, describe, "")# see descriptive stats in more detail for each variable
@@ -236,8 +236,8 @@ Frequency    1   1
 Proportion 0.5 0.5
 --------------------------------------------------------------------------------
 D1 
-       n  missing distinct 
-       2        0        2 
+         n    missing   distinct       Info       Mean        Gmd 
+         2          0          2          1 2002-04-18         92 
                                 
 Value      2002-03-03 2002-06-03
 Frequency           1          1
@@ -247,19 +247,19 @@ DT1
                   n             missing            distinct                Info 
                   2                   0                   2                   1 
                Mean                 Gmd 
-2002-04-18 09:36:34 1970-04-03 00:11:05 
-                                
-Value      1015147862 1023097327
-Frequency           1          1
-Proportion        0.5        0.5
+2002-04-18 09:36:34             7949465 
+                                                  
+Value      2002-03-03 09:31:02 2002-06-03 09:42:07
+Frequency                    1                   1
+Proportion                 0.5                 0.5
 --------------------------------------------------------------------------------
 T1 
        n  missing distinct     Info     Mean      Gmd 
-       2        0        2        1 11:13:59 00:00:28 
-                      
-Value      40425 40453
-Frequency      1     1
-Proportion   0.5   0.5
+       2        0        2        1 11:13:59       28 
+                                                  
+Value      1970-01-01 11:13:45 1970-01-01 11:14:13
+Frequency                    1                   1
+Proportion                 0.5                 0.5
 --------------------------------------------------------------------------------
 
 $Z
@@ -2195,4 +2195,4 @@ $Z
 > 
 > proc.time()
    user  system elapsed 
-  3.247   0.176   3.562 
+  1.899   0.235   2.134 

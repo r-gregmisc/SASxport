@@ -1,6 +1,6 @@
 
-R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin15.6.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -17,6 +17,8 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 > Sys.setenv("TZ"="GMT")
+> Sys.setlocale(locale="C")
+[1] "C/C/C/C/C/en_US.UTF-8"
 > 
 > set.seed(42)
 > 
@@ -103,7 +105,7 @@ $SASiformat
 
 
 SASfrm> ## SAStype only applies to data frames
-SASfrm> df <- data.frame( fail.time, day=c("Mon","Tue") )
+SASfrm> df <- data.frame( fail.time, day=c("Mon","Tue"), stringsAsFactors=TRUE )
 
 SASfrm> SAStype(df) <- "USER"
 
@@ -124,7 +126,7 @@ lkp.xp> lookup.xport(alfFile)
 
 SAS xport file
 --------------
-Filename: `/Users/gwarnes/Google Drive/src/SASxport.Rcheck/SASxport/extdata/Alfalfa.xpt'
+Filename: `/Users/gwarnes/src/SASxport.Rcheck/SASxport/extdata/Alfalfa.xpt'
 
 Variables in data set `SPEC':
  dataset   name      type format flength fdigits iformat iflength ifdigits
@@ -158,7 +160,7 @@ lkp.xp> w
 
 SAS xport file
 --------------
-Filename: `/Users/gwarnes/Google Drive/src/SASxport.Rcheck/SASxport/extdata/test2.xpt'
+Filename: `/Users/gwarnes/src/SASxport.Rcheck/SASxport/extdata/test2.xpt'
 
 Variables in data set `TEST':
  dataset name    type   format flength fdigits iformat iflength ifdigits
@@ -252,7 +254,7 @@ lkp.xp> wS # same display
 
 SAS xport file
 --------------
-Filename: `/Users/gwarnes/Google Drive/src/SASxport.Rcheck/SASxport/extdata/test2.xpt'
+Filename: `/Users/gwarnes/src/SASxport.Rcheck/SASxport/extdata/test2.xpt'
 
 Variables in data set `TEST':
  dataset name    type   format flength fdigits iformat iflength ifdigits
@@ -536,8 +538,8 @@ Frequency    1   1
 Proportion 0.5 0.5
 --------------------------------------------------------------------------------
 D1 
-       n  missing distinct 
-       2        0        2 
+         n    missing   distinct       Info       Mean        Gmd 
+         2          0          2          1 2002-04-18         92 
                                 
 Value      2002-03-03 2002-06-03
 Frequency           1          1
@@ -547,19 +549,19 @@ DT1
                   n             missing            distinct                Info 
                   2                   0                   2                   1 
                Mean                 Gmd 
-2002-04-18 09:36:34 1970-04-03 00:11:05 
-                                
-Value      1015147862 1023097327
-Frequency           1          1
-Proportion        0.5        0.5
+2002-04-18 09:36:34             7949465 
+                                                  
+Value      2002-03-03 09:31:02 2002-06-03 09:42:07
+Frequency                    1                   1
+Proportion                 0.5                 0.5
 --------------------------------------------------------------------------------
 T1 
        n  missing distinct     Info     Mean      Gmd 
-       2        0        2        1 11:13:59 00:00:28 
-                      
-Value      40425 40453
-Frequency      1     1
-Proportion   0.5   0.5
+       2        0        2        1 11:13:59       28 
+                                                  
+Value      1970-01-01 11:13:45 1970-01-01 11:14:13
+Frequency                    1                   1
+Proportion                 0.5                 0.5
 --------------------------------------------------------------------------------
 
 rd.xpr> lapply(w, describe, "")# see descriptive stats in more detail for each variable
@@ -585,8 +587,8 @@ Frequency    1   1
 Proportion 0.5 0.5
 --------------------------------------------------------------------------------
 D1 
-       n  missing distinct 
-       2        0        2 
+         n    missing   distinct       Info       Mean        Gmd 
+         2          0          2          1 2002-04-18         92 
                                 
 Value      2002-03-03 2002-06-03
 Frequency           1          1
@@ -596,19 +598,19 @@ DT1
                   n             missing            distinct                Info 
                   2                   0                   2                   1 
                Mean                 Gmd 
-2002-04-18 09:36:34 1970-04-03 00:11:05 
-                                
-Value      1015147862 1023097327
-Frequency           1          1
-Proportion        0.5        0.5
+2002-04-18 09:36:34             7949465 
+                                                  
+Value      2002-03-03 09:31:02 2002-06-03 09:42:07
+Frequency                    1                   1
+Proportion                 0.5                 0.5
 --------------------------------------------------------------------------------
 T1 
        n  missing distinct     Info     Mean      Gmd 
-       2        0        2        1 11:13:59 00:00:28 
-                      
-Value      40425 40453
-Frequency      1     1
-Proportion   0.5   0.5
+       2        0        2        1 11:13:59       28 
+                                                  
+Value      1970-01-01 11:13:45 1970-01-01 11:14:13
+Frequency                    1                   1
+Proportion                 0.5                 0.5
 --------------------------------------------------------------------------------
 
 $Z
@@ -963,7 +965,11 @@ wrt.xp> ## R version of the example given in TS-140
 wrt.xp> #####
 wrt.xp> 
 wrt.xp> ## manually create a data set
-wrt.xp> abc <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )
+wrt.xp> abc <- data.frame(
+wrt.xp+   x=c(1, 2, NA, NA),
+wrt.xp+   y=c('a', 'B', NA, '*'),
+wrt.xp+   stringsAsFactors=TRUE
+wrt.xp+   )
 
 wrt.xp> ## look at it
 wrt.xp> abc
@@ -987,7 +993,7 @@ wrt.xp> SAStype(abc) <- 'MYTYPE'
 wrt.xp> ## verify the additions
 wrt.xp> str(abc)
 'data.frame':	4 obs. of  2 variables:
- $ x: atomic  1 2 NA NA
+ $ x: num  1 2 NA NA
   ..- attr(*, "SASformat")= chr "date7."
  $ y: Factor w/ 3 levels "*","B","a": 3 2 NA 1
   ..- attr(*, "label")= chr "character variable"
@@ -1004,7 +1010,7 @@ wrt.xp> lookup.xport(tmp)
 
 SAS xport file
 --------------
-Filename: `/var/folders/gc/c3c2p5_d4td159rblkqbp4s1xjhdh_/T//RtmpcNRdhA/file34e64ef05fbb.dat'
+Filename: `/var/folders/v8/3b2_t61j33x_32bbdf54rkc5d0dc9b/T//Rtmp01iEyq/fileab5fa1d474a.dat'
 
 Variables in data set `ABC':
  dataset name    type format flength fdigits iformat iflength ifdigits
@@ -1090,4 +1096,4 @@ wrt.xp>
 > 
 > proc.time()
    user  system elapsed 
-  2.875   0.164   3.140 
+  1.516   0.176   1.688 

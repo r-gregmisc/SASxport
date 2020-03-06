@@ -10,7 +10,8 @@ Sys.setenv("TZ"="GMT")
 abc.out <- data.frame(
   x=c(1,     2, NA,   NA),
   y=c('a', 'B', NA,  '*'),
-  z=c(1,     3, Inf,  NA)
+  z=c(1,     3, Inf,  NA),
+  stringsAsFactors = TRUE
 )
 
 ## add a data set label (not used by R)

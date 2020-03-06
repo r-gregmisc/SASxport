@@ -95,7 +95,11 @@ write.xport(...,
 #####
 
 ## manually create a data set
-abc <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )
+abc <- data.frame(
+  x=c(1, 2, NA, NA),
+  y=c('a', 'B', NA, '*'),
+  stringsAsFactors=TRUE
+  )
 
 ## look at it
 abc

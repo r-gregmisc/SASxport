@@ -41,4 +41,4 @@ Imports: Hmisc, utils, stringi
 Suggests: chron
 URL: https://github.com/warnes/SASxport
 BugReports: https://github.com/warnes/SASxport/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1

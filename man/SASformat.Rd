@@ -75,7 +75,7 @@ SASiformat(fail.time)
 attributes(fail.time)
 
 ## SAStype only applies to data frames
-df <- data.frame( fail.time, day=c("Mon","Tue") )
+df <- data.frame( fail.time, day=c("Mon","Tue"), stringsAsFactors=TRUE )
 SAStype(df) <- "USER"
 
 SAStype(df)
