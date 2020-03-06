@@ -335,7 +335,7 @@
 	  tests/testManyNames.R, tests/testManyNames.Rout.save: New
 	  makeSASNames() function creates valid SAS names from a list of R
 	  object or column names, properly handling case conversion (all
-	  converted to upper-case), length restructions (8 characters), and
+	  converted to upper-case), length restrictions (8 characters), and
 	  making duplicate names unique. This is not as obvious as it
 	  appears,
 	  since the process of shortening names can render cause name to
@@ -448,22 +448,22 @@
 	  'SASformat' attribute. For consistency, the input format
 	  information
 	  is now stored in the 'SASiformat' attribute.
-	  
+
 	  - The functions for extracting and setting the format and iformat
 	  information have been renamed to 'SASformat' and 'SASiformat',
 	  etc.
-	  
+
 	  - In order to properly handle SAS format information, we now use
 	  a
 	  locally modified version of foreign::lookup.xport and
 	  foreign::read.xport.
-	  
+
 	  - Various typo corrections
-	  
+
 	  - Creation of a new function fstr() to generate sas format name
 	  strings
 	  using name, length, and digits information.
-	  
+
 	  - Addion of a toSAS method for chron() objects
 	* [r1202] R/xport.R, src/SASxport.c, src/SASxport.h: Copy code from
 	  foreign for lookup.xport() and read.xport(), extend

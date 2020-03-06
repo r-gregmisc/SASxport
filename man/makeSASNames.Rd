@@ -12,7 +12,7 @@ makeSASNames(names, nchar = 8, maxPasses = 10, quiet=FALSE)
 \arguments{
   \item{names}{character vector of candidate names}
   \item{nchar}{maximum number of characters}
-  \item{maxPasses}{maximum number of interations to resolve
+  \item{maxPasses}{maximum number of iterations to resolve
     truncation-related name duplication.}
   \item{quiet}{Logical indicating whether to generate warning messages
     when names are truncated or made unique.}
@@ -20,7 +20,7 @@ makeSASNames(names, nchar = 8, maxPasses = 10, quiet=FALSE)
 \details{
   This function creates valid SAS names from a list of R object or
   column names, properly handling case conversion (all converted to
-  upper-case), length restructions (8 characters), and making duplicate
+  upper-case), length restrictions (8 characters), and making duplicate
   names unique. This is not as obvious as it appears, since the process
   of shortening names can cause duplicates, and adding digits to the end
   of names to make them unique can make them too long, so a few

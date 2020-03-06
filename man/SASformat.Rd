@@ -16,7 +16,7 @@
 \alias{SAStype<-.default}
 
 \title{
-Set or Retreive the 'label', 'SASformat', 'SASiformat', or 'SAStype'
+Set or Retrieve the 'label', 'SASformat', 'SASiformat', or 'SAStype'
 attribute of a vector or (components of) a data frame
 }
 \description{

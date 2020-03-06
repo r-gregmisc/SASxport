@@ -24,7 +24,7 @@
    }
    In addition, labels are supported for variable and data frames, as
    are dataset 'types'.
-   
+
    The \code{write.xport} function writes one or more data sets into a
    SAS xport formatted file.  Standard R data types, including date and
    time objects (e.g. \code{Date}, and \code{POSIX.t}) are stored with
@@ -46,9 +46,9 @@
 lookup.xport            Lookup Information on a SAS XPORT Format
                         Library
 read.xport              Import SAS XPORT files
-toSAS.default           Convert R data object for storage in SAS 
+toSAS.default           Convert R data object for storage in SAS
                         xport file
-units                   Set or Retrieve the label, SASformat, 
+units                   Set or Retrieve the label, SASformat,
                         SASiformat, or units Attribute of a Vector
 write.xport             Write data to a SAS XPORT file
 makeSASNames            Create valid SAS names from a character vector.
