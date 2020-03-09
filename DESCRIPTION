@@ -39,7 +39,7 @@ License: GPL-2
 Language: en-US
 Depends: R (>= 3.3.0)
 Imports: Hmisc, utils, stringi
-Suggests: chron
+Suggests: chron, ggplot2
 URL: https://github.com/warnes/SASxport
 BugReports: https://github.com/warnes/SASxport/issues
 RoxygenNote: 7.0.2
