@@ -1,3 +1,11 @@
+Version 1.7.0 - 2020-03-08
+--------------------------
+
+Changes:
+
+- Update for compatibility with R 4.0.0.
+
+
 Version 1.6.0 -- 2018-02-23
 ---------------------------
 
@@ -73,7 +81,7 @@ Other changes:
 - Modified several test files to display generated .xpt data so that
   issues can be more easily detected and diagnosed.
 
-- C code cleanup and reorgaization to improve clarity.
+- C code cleanup and reorganization to improve clarity.
 
 
 Version 1.4.0 - 2014-04-09
@@ -98,7 +106,7 @@ Version 1.3.6 2013-10-09
 
 Bug fixes:
 
-- In manual pages for read.xport() and lookup.xporT(): Update URL for
+- In manual pages for read.xport() and lookup.xport(): Update URL for
   'test2.xpt', and use a local copy for executed example code.
 
 Version 1.3.5 2013-06-14
@@ -131,14 +139,14 @@ New features:
 Bug fixes:
 
 - Integrate patch from foreign package to properly handle xport files
-  with datasets that end exactly on an 80-byte record boundry & add
+  with datasets that end exactly on an 80-byte record boundary & add
   corresponding test file.
 
 - Replace file.path(path.package(...)) with system.file(...)
 
 Changes:
 
-- Remove oboslete .First.lib() function
+- Remove obsolete .First.lib() function
 
 - Replace file.path(path.package(...)) with system.file(...)
 
@@ -187,7 +195,7 @@ Version 1.2.2 2007-11-09
 
 Bug fixes:
 
--  Apply patches to fix problems on 64 bit platforms, as sumitted by
+-  Apply patches to fix problems on 64 bit platforms, as submitted by
    Brian Ripley.
 
 
@@ -196,7 +204,7 @@ Version 1.2.1 2007-11-05
 
 Other:
 
-- Correct warning message due to extraneous ';' charcters after
+- Correct warning message due to extraneous ';' characters after
   function closing braces.
 
 
@@ -251,7 +259,7 @@ Version 1.1.0 -
 
 New Features:
 
-- Add support for autogeneration of SAS FORMAT information as a PROC
+- Add support for auto-generation of SAS FORMAT information as a PROC
   CONTENTS fmtin= dataset.   This enables R factors to be handled
   properly on the receiving system.
 
@@ -260,12 +268,12 @@ Bug Fixes:
 
 Other:
 
-
+# 
 
 Version 1.0.0
 -------------
 
-New Fetures:
+New Features:
 
 
 

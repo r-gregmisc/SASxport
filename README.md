@@ -84,9 +84,9 @@ of data frames:
 * SAS labels are stored in `label` attributes on each variable,
   and are accessible using the `label` function.
 * SAS formats are stored in `SASformat` attributes on each
-  variable, and are accessable using `SASformat`.
+  variable, and are accessible using `SASformat`.
 * SAS iformats are stored in `SASiformat` attributes on each
-  variable, and are accessable using `SASiformat`.
+  variable, and are accessible using `SASiformat`.
 * SAS integer variables are stored as integers unless
   `force.integer` is `FALSE`.
 

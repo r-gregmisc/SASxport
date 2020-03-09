@@ -86,10 +86,10 @@ read.xport(file,
     and are accessible using the \code{\link{label}} function.
 
     \item SAS formats are stored in "SASformat" attributes on each
-    variable, and are accessable using \code{\link{SASformat}}
+    variable, and are accessible using \code{\link{SASformat}}
 
     \item SAS iformats are stored in "SASiformat" attributes on each
-    variable, and are accessable using \code{\link{SASiformat}}
+    variable, and are accessible using \code{\link{SASiformat}}
 
     \item SAS integer variables are stored as integers unless
       \code{force.integer} is \code{FALSE}
@@ -100,7 +100,7 @@ read.xport(file,
   objects with appropriate labels.
 
   If a datasets in the original file has a label or type, these will be
-  stored in the corresponding 'lable' and 'SAStype' attributes, which
+  stored in the corresponding 'label' and 'SAStype' attributes, which
   can be accessed by the \code{\link{label}} and \code{\link{SAStype}}
   functions.
 }

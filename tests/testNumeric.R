@@ -12,7 +12,7 @@ char <- as.character( c(NA, '', paste(letters,LETTERS,sep="",collapse=''), '-123
 factor <- factor    ( c(NA, '', 'Z', 'AA', '', 'ZZ' ) )
 
 # this gets properly handled
-df <- data.frame(ints, dbls, char, factor) 
+df <- data.frame(ints, dbls, char, factor, stringsAsFactors = TRUE)
 write.xport(df, file='testNumeric.xpt')
 df.2 <- read.xport(file='testNumeric.xpt')
 
@@ -20,7 +20,7 @@ stopifnot( all(df == df.2, na.rm=TRUE) )
 df.2
 
 # this gets properly handled
-df <- data.frame(ints, dbls, char, factor, stringsAsFactors=FALSE) 
+df <- data.frame(ints, dbls, char, factor, stringsAsFactors=FALSE)
 write.xport(df, file='testNumeric.xpt')
 df.2 <- read.xport(file='testNumeric.xpt')
 

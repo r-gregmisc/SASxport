@@ -1,6 +1,6 @@
 
-R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin15.6.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -33,7 +33,10 @@ Type 'q()' to quit R.
 > 
 > stopifnot(all(df1==df2))
 > 
-> df3 <- data.frame(x.continuous=seq(-100,100,by=0.5), x.integer=as.integer(seq(-100,100,by=0.5)) )
+> df3 <- data.frame(
++   x.continuous=seq(-100,100,by=0.5),
++   x.integer=as.integer(seq(-100,100,by=0.5))
++   )
 > write.xport(df3, file='df3.xpt')
 Warning message:
 In makeSASNames(colnames(df)) : Truncated 2 long names to 8 characters.
@@ -43,4 +46,4 @@ In makeSASNames(colnames(df)) : Truncated 2 long names to 8 characters.
 > 
 > proc.time()
    user  system elapsed 
-  1.815   0.117   1.948 
+  1.317   0.149   1.467 

@@ -4,7 +4,8 @@ Sys.setenv("TZ"="GMT")
 
 cars <- read.table(file="cars.sas", skip=4, nrows=26,
                    col.names=c("MAKE","PRICE","MPG","REP78","FOREIGN"),
-                   header=F)
+                   header=FALSE,
+                   stringsAsFactors = TRUE)
 
 head(cars, n=5)
 

@@ -4,7 +4,6 @@
 \name{reexports}
 \alias{reexports}
 \alias{label}
-\alias{reexports}
 \alias{label<-}
 \title{Objects exported from other packages}
 \keyword{internal}
