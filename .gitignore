@@ -8,3 +8,4 @@ src/*.dll
 *.rds
 cran-comments.md
 CRAN-RELEASE
+revdep

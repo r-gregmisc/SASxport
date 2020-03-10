@@ -5,3 +5,4 @@
 TODO.md
 ^CRAN-RELEASE$
 ^cran-comments\.md$
+^revdep
