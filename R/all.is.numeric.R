@@ -1,9 +1,11 @@
 ##
-## Code originally from Frank Harrell's 'Hmisc' library: 
+## Code originally from Frank Harrell's 'Hmisc' library:
 ##   http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/Hmisc
 ## Copied with permission on 2007-08-04
 ##
-
+#'
+#' @importFrom Hmisc %nin%
+#'
 all.is.numeric <- function(x, what=c('test','vector'), extras=c('.','NA'))
 {
   what <- match.arg(what)

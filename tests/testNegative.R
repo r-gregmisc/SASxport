@@ -10,7 +10,10 @@ print(df2)
 
 stopifnot(all(df1==df2))
 
-df3 <- data.frame(x.continuous=seq(-100,100,by=0.5), x.integer=as.integer(seq(-100,100,by=0.5)) )
+df3 <- data.frame(
+  x.continuous=seq(-100,100,by=0.5),
+  x.integer=as.integer(seq(-100,100,by=0.5))
+  )
 write.xport(df3, file='df3.xpt')
 df4 <- read.xport(file='df3.xpt')
 

@@ -6,3 +6,6 @@ src/*.o
 src/*.so
 src/*.dll
 *.rds
+cran-comments.md
+CRAN-RELEASE
+revdep

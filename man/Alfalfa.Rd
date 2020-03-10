@@ -10,7 +10,7 @@
 \format{
   A data frame with 40 observations on the following 6 variables.
   \describe{
-    \item{\code{POP}}{Population, a factor with levels \code{MAX} amd \code{min}}
+    \item{\code{POP}}{Population, a factor with levels \code{MAX} and \code{min}}
     \item{\code{SAMPLE}}{Sample ID (0:5)}
     \item{\code{REP}}{Replicate (always 1)}
     \item{\code{SEEDWT}}{Seed weight}

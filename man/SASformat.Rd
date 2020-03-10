@@ -16,7 +16,7 @@
 \alias{SAStype<-.default}
 
 \title{
-Set or Retreive the 'label', 'SASformat', 'SASiformat', or 'SAStype'
+Set or Retrieve the 'label', 'SASformat', 'SASiformat', or 'SAStype'
 attribute of a vector or (components of) a data frame
 }
 \description{
@@ -75,7 +75,7 @@ SASiformat(fail.time)
 attributes(fail.time)
 
 ## SAStype only applies to data frames
-df <- data.frame( fail.time, day=c("Mon","Tue") )
+df <- data.frame( fail.time, day=c("Mon","Tue"), stringsAsFactors=TRUE )
 SAStype(df) <- "USER"
 
 SAStype(df)
