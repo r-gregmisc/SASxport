@@ -184,13 +184,14 @@ write.xport <- function(...,
             varLabel <- attr(var, "label")
             varFormat <- attr(var, "SASformat")
             varIFormat <- attr(var, "SASiformat")
+            varLength <- attr(var, "SASlength")
 
             # Convert R object to SAS object
             df[[i]] <- var <- toSAS(var, format.info=formats)
 
             # compute variable length
             if(is.character(var))
-              varLen <- max(c(1,nchar(var, "bytes", keepNA=FALSE) ) )
+              varLen <- ifelse(is.null(varLength), max(c(1,nchar(var, "bytes", keepNA=FALSE))), varLength)
             else
               varLen <- 8
 
