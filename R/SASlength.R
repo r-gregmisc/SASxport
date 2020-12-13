@@ -32,7 +32,7 @@ SASlength.data.frame <- function(x, default = NULL) {
 `SASlength<-.data.frame` <- function(x, value)
 {
   if( ncol(x) != length(value) )
-    stop("vector of formats must match number of data frame columns")
+    stop("vector of lengths must match number of data frame columns")
 
   for(i in 1:ncol(x))
     attr(x[[i]],'SASlength') <- value[i]

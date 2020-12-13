@@ -1,6 +1,6 @@
 Package: SASxport
 Title: Read and Write 'SAS' 'XPORT' Files
-Version: 1.7.1
+Version: 1.8.0
 Date: 2020-12-12
 Description: Functions for reading, listing
     the contents of, and writing 'SAS' 'xport' format files.
@@ -42,4 +42,4 @@ Imports: Hmisc, utils, stringi
 Enhances: chron
 URL: https://github.com/warnes/SASxport
 BugReports: https://github.com/warnes/SASxport/issues
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1

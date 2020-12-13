@@ -90,6 +90,19 @@ SAStype(df)
 ## Example showing specification of default return value
 a <- 70
 label(a, default="no label")
+
+## Change length attribute for a character vector
+chars <- c("a", "b", "c")
+SASlength(chars) <- 3  # Increase the length
+SASlength(chars)       # Verify vector length
+
+# Change length attribute for data.frame
+a_df <- data.frame(
+  x = c("a", "b", "c"),
+  y = c("x", "y", "z")
+)
+SASlength(a_df) <- c(3, 4)
+SASlength(a_df) # Display length of each variable
 }
 \keyword{utilities}
 \keyword{interface}

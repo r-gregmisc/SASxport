@@ -190,10 +190,18 @@ write.xport <- function(...,
             df[[i]] <- var <- toSAS(var, format.info=formats)
 
             # compute variable length
-            if(is.character(var))
-              varLen <- ifelse(is.null(varLength), max(c(1,nchar(var, "bytes", keepNA=FALSE))), varLength)
-            else
+            if(is.character(var)){
+              # If variable is character, use varLength if available.
+              if(is.null(varLength)){
+                varLen <- max(c(1,nchar(var, "bytes", keepNA=FALSE)))
+              } else {
+                varLen <- varLength
+              }
+            }
+            else{
+              # If variable is numberic, length is 8
               varLen <- 8
+            }
 
             # fill in variable offset and length information
             offsetTable[i, "len"]    <- varLen

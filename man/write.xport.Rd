@@ -86,7 +86,7 @@ write.xport(...,
   \code{\link{label}},
   \code{\link{SAStype}},
   \code{\link{SASformat}},
-  \code{\link{SASiformat}}
+  \code{\link{SASiformat}},
   and \code{\link{SASlength}}
 }
 \examples{
@@ -114,6 +114,9 @@ label(abc$y) <- 'character variable'
 ## add a dataset label and type
 label(abc) <- 'Simple example'
 SAStype(abc) <- 'MYTYPE'
+
+## Specify a length for the character variables
+SASlength(abc) <- c(NA, 3)
 
 ## verify the additions
 str(abc)
