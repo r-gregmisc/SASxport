@@ -192,14 +192,14 @@ write.xport <- function(...,
             # compute variable length
             if(is.character(var)){
               # If variable is character, use varLength if available.
-              if(is.null(varLength)){
+              if(length(varLength)==0){
                 varLen <- max(c(1,nchar(var, "bytes", keepNA=FALSE)))
               } else {
                 varLen <- varLength
               }
             }
             else{
-              # If variable is numberic, length is 8
+              # If variable is numeric, length is 8
               varLen <- 8
             }
 
