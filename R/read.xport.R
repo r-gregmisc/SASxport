@@ -203,7 +203,7 @@ read.xport <- function(file,
 
           if(nam[i] %in% names(iformats) && iformats[nam[i]] > "" )
             {
-              SASformat(x) <- formats[[nam[i]]]
+              SASiformat(x) <- iformats[[nam[i]]]
             changed <- TRUE
             }
 
