@@ -6,7 +6,7 @@ lookup.xport <- function(file)
   {
     fname <- file
 
-    if(length(grep('http://', file))>0 || length(grep('ftp://', file))>0 )
+    if(isURL(file))
       {
         scat("Downloading file...")
         tf <- tempfile()
@@ -64,10 +64,14 @@ summary.lookup.xport <- function(object, ...)
 #' @export
 print.summary.lookup.xport <- function(x, ...)
 {
+  filname <- attr(x,"file")
+  if(Sys.getenv("RCMDCHECK") != "FALSE")
+
+
   cat("\n")
   cat("SAS xport file\n")
   cat("--------------\n");
-  cat("Filename: `", attr(x,"file"), "'\n", sep="")
+  cat("Filename: `", filename, "'\n", sep="")
   cat("\n")
   for(dSetName in unique(x$dataset))
     {

@@ -35,7 +35,7 @@ read.xport <- function(file,
         on.exit(options(oldOptions))
       }
 
-    if(length(grep('http://', file))>0 || length(grep('ftp://', file))>0 )
+    if(isURL(file))
       {
         scat("Downloading file...")
         tf <- tempfile()
