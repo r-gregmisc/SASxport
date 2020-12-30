@@ -21,7 +21,9 @@
 ### License along with this program; if not, a copy is available at
 ### http://www.r-project.org/Licenses/
 
-lookup.xport.inner <- function(file) .Call('xport_info', file, PACKAGE = "SASxport")
+lookup.xport.inner <- function(file) {
+  .Call('xport_info', file, PACKAGE = "SASxport")
+}
 
 read.xport.inner <- function(file, stringsAsFactors=FALSE)
 {

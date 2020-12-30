@@ -180,7 +180,7 @@ write.xport <- function(...,
             scat("", i , "...")
             var <- df[[i]]
 
-            # get attribute information before any transformations!"
+            # Stash user-specified attribute information
             varLabel <- attr(var, "label")
             varFormat <- attr(var, "SASformat")
             varIFormat <- attr(var, "SASiformat")
@@ -188,6 +188,24 @@ write.xport <- function(...,
 
             # Convert R object to SAS object
             df[[i]] <- var <- toSAS(var, format.info=formats)
+
+            # Enforce user-specified attribute information
+            postVarLabel <- attr(var, "label")
+            postVarFormat <- attr(var, "SASformat")
+            postVarIFormat <- attr(var, "SASiformat")
+            postVarLength <- attr(var, "SASlength")
+
+            if(length(varLabel)==0)
+              varLabel <- postVarLabel
+
+            if(length(varFormat)==0)
+              varFormat <- postVarFormat
+
+            if(length(varIFormat)==0)
+              varIFormat <- postVarIFormat
+
+            if(length(varLength)==0)
+              varLength <- postVarLength
 
             # compute variable length
             if(is.character(var)){

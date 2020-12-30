@@ -53,8 +53,8 @@ read.xport <- function(file,
     scat("Extracting data file information...")
     dsinfo <- lookup.xport.inner(file)
 
-    dsLabels <- sapply(dsinfo, label)
-    dsTypes  <- sapply(dsinfo, SAStype)
+    dsLabels <- trimws(sapply(dsinfo, label))
+    dsTypes  <- trimws(sapply(dsinfo, SAStype))
 
     if(length(keep))
       whichds <- toupper(keep)
@@ -77,7 +77,7 @@ read.xport <- function(file,
     scat("Processing contents...")
     ## PROC FORMAT CNTLOUT= dataset present?
     fds <- NULL
-    if(!length(formats)) {
+    if(length(formats)==0) {
       fds <- sapply(dsinfo, function(x)
                     all(c('FMTNAME','START','END','MIN','MAX','FUZZ')
                         %in% x$name))
@@ -126,15 +126,22 @@ read.xport <- function(file,
 
       scat('.')
 
-      label(w, self=TRUE)   <- dsLabels[k]
-      names(label(w, self=TRUE)) <- NULL
-      SAStype(w) <- dsTypes[k]
-      names(SAStype(w)) <- NULL
+      if (nchar(dsLabels[k]) != 0)
+      {
+        label(w, self=TRUE)   <- dsLabels[k]
+        names(label(w, self=TRUE)) <- NULL
+      }
 
       nam      <- names.tolower(makeNames(names(w), allow=name.chars))
       names(w) <- nam
-      dinfo    <- dsinfo[[k]]
 
+      if(nchar(dsTypes[k]) != 0)
+      {
+        SAStype(w) <- dsTypes[k]
+        names(SAStype(w)) <- NULL
+      }
+
+      dinfo    <- dsinfo[[k]]
       fmt <- dinfo$format
       formats  <- fstr( fmt, dinfo$flength, dinfo$fdigits)
 
