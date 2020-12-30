@@ -175,8 +175,8 @@ class(w)
 sapply(w, head)
 
 \dontrun{
-## Or read a copy of test2.xpt available on the web:
-url <- 'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/Hmisc/test2.xpt'
+## Or read a copy of Hmisc's test2.xpt from the web:
+url <- 'https://github.com/harrelfe/Hmisc/raw/master/inst/tests/test2.xpt'
 w <- read.xport(url)
 }
 
