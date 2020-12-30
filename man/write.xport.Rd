@@ -76,8 +76,7 @@ write.xport(...,
 }
 \author{Gregory R. Warnes \email{greg@warnes.net}}
 \note{
-   This package was created with partial funding by Metrum Institute
-   \url{http://metruminstitute.org}.
+   This package was created with partial funding by Metrum Institute.
 }
 \seealso{
   \code{\link{toSAS}},

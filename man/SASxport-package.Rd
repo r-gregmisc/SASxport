@@ -80,8 +80,7 @@ makeSASNames            Create valid SAS names from a character vector.
   terms of the GNU General Public License, version 2.0 or later.
 }
 \section{Funding}{
-  This creation of this package was partially funded by Metrum Institute
-  \url{http://metruminstitute.org}.
+  This creation of this package was partially funded by Metrum Institute.
   }
 \section{Maintainer}{
   Gregory R. Warnes \email{greg@warnes.net}
