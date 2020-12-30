@@ -1,7 +1,7 @@
 
-R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
-Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
+R version 4.0.3 (2020-10-10) -- "Bunny-Wunnies Freak Out"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -43,8 +43,6 @@ Variables in data set `PUROMYCI':
  $ CONC : num  0.02 0.02 0.06 0.06 0.11 0.11 0.22 0.22 0.56 0.56 ...
  $ RATE : int  76 47 97 107 123 139 159 152 191 201 ...
  $ STATE: Factor w/ 2 levels "treated","untreated": 1 1 1 1 1 1 1 1 1 1 ...
- - attr(*, "label")= chr " "
- - attr(*, "SAStype")= chr " "
 > 
 > stopifnot( class(x$STATE)=="factor" )
 > 
@@ -57,8 +55,6 @@ Variables in data set `PUROMYCI':
  $ CONC : num  0.02 0.02 0.06 0.06 0.11 0.11 0.22 0.22 0.56 0.56 ...
  $ RATE : int  76 47 97 107 123 139 159 152 191 201 ...
  $ STATE: chr  "treated" "treated" "treated" "treated" ...
- - attr(*, "label")= chr " "
- - attr(*, "SAStype")= chr " "
 > 
 > stopifnot( class(x$STATE)=="character" )
 > 
@@ -66,4 +62,4 @@ Variables in data set `PUROMYCI':
 > 
 > proc.time()
    user  system elapsed 
-  1.162   0.125   1.280 
+  2.362   0.359   3.778 

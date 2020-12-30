@@ -1,7 +1,7 @@
 
-R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
-Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
+R version 4.0.3 (2020-10-10) -- "Bunny-Wunnies Freak Out"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -25,38 +25,59 @@ Type 'q()' to quit R.
 > 
 > 
 > temp <- data.frame(
-+   x=c(1, 2, 3, 4, 5 ),
++   x=c(1L, 2L, 3L, 4L, 5L), # integer
++   z=c(1.1, 2.2, 3.3, 4.4, 5.5), # real
 +   y=c('a', 'B', 'c', 'd', 'e' ),
-+   dates=strptime(dates, "%m/%d/%y"),
-+   datetimes=strptime( paste(dates,times), "%m/%d/%y %H:%M:%S"),
-+   stringsAsFactors = TRUE
++   date=as.Date(dates, format="%m/%d/%y"),
++   datetime=strptime( paste(dates,times), "%m/%d/%y %H:%M:%S"),
++   stringsAsFactors = FALSE
 + )
 > 
 > print(temp)
-  x y      dates           datetimes
-1 1 a 1992-02-27 1992-02-27 23:03:20
-2 2 B 1992-02-27 1992-02-27 22:29:56
-3 3 c 1992-01-14 1992-01-14 01:03:30
-4 4 d 1992-02-28 1992-02-28 18:21:03
-5 5 e 1992-02-01 1992-02-01 16:56:26
+  x   z y       date            datetime
+1 1 1.1 a 1992-02-27 1992-02-27 23:03:20
+2 2 2.2 B 1992-02-27 1992-02-27 22:29:56
+3 3 3.3 c 1992-01-14 1992-01-14 01:03:30
+4 4 4.4 d 1992-02-28 1992-02-28 18:21:03
+5 5 5.5 e 1992-02-01 1992-02-01 16:56:26
 > 
 > write.xport( DATETIME=temp, file="datetime.xpt")
-Warning message:
-In makeSASNames(colnames(df)) : Truncated 1 long names to 8 characters.
-> temp2 <- read.xport(file="datetime.xpt", names.tolower=FALSE)
+> temp2 <- read.xport(file="datetime.xpt",
++                     names.tolower=TRUE,
++                     verbose = TRUE)
+### Checking if the specified file has the appropriate header ###
+### Extracting data file information... ###
+### Reading the data file... ###
+### Processing contents... ###
+### Processing SAS dataset DATETIME ###
+### . ###
+### . ###
+### Done ###
 > 
 > print(temp2)
-  X Y      DATES   DATETIME
-1 1 a 1014768000 1014851000
-2 2 B 1014768000 1014848996
-3 3 c 1010966400 1010970210
-4 4 d 1014854400 1014920463
-5 5 e 1012521600 1012582586
+  x   z y       date            datetime
+1 1 1.1 a 1992-02-27 1992-02-27 23:03:20
+2 2 2.2 B 1992-02-27 1992-02-27 22:29:56
+3 3 3.3 c 1992-01-14 1992-01-14 01:03:30
+4 4 4.4 d 1992-02-28 1992-02-28 18:21:03
+5 5 5.5 e 1992-02-01 1992-02-01 16:56:26
 > 
+> # Strip off SASformats added by read.xport so comparison won't fail
+> for(col in colnames(temp2))
++   SASformat(temp2[[col]]) <- NULL
 > 
 > identical(temp, temp2)
-[1] FALSE
+[1] TRUE
+> 
+> # Test for issue #19: toSAS() - The number of seconds since
+> # 1960-01-01:00:00:00 GMT is greater than it is supposed to be
+> 
+> zeroDate <- ISOdate(1960, 01, 01, 00, 00, 00, tz="GMT")
+> zeroSAS <- toSAS(zeroDate, format="DATETIME19.")
+> 
+> stopifnot(zeroSAS==0)
+> 
 > 
 > proc.time()
    user  system elapsed 
-  1.311   0.128   1.436 
+  1.697   0.230   1.984 
