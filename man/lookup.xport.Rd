@@ -30,15 +30,15 @@ lookup.xport(file)
   \item{width}{ SAS format width, }
   \item{label}{ Variable label, }
   \item{nobs}{ Number of observations. }
-  
+
 }
 \details{
   The   \code{lookup.xport} function is a simple wrapper for the
   \code{\link[foreign]{lookup.xport}} function  provided by the
   \code{foreign} library.  The wrapper adds the ability to handle URL's,
   and returns an object of class  \code{lookup.xport} for which
-  appropriate \code{print}, and \code{summary} functions are provided. 
-} 
+  appropriate \code{print}, and \code{summary} functions are provided.
+}
 \seealso{
   For complete documentation of \code{lookup.xport} see the manual page
   for \code{\link[foreign]{lookup.xport}}.
@@ -51,7 +51,7 @@ lookup.xport(alfFile)
 
 ## Read a copy of test2.xpt available on the web:
 \dontrun{
-url <- 'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/Hmisc/test2.xpt'
+url <- 'https://github.com/harrelfe/Hmisc/raw/master/inst/tests/test2.xpt'
 w <- lookup.xport(url)
 }
 ## Or use the local copy...
@@ -73,7 +73,7 @@ wS <- summary(w)
 wS # same display
 
 # variable names within all data sets
-wS$name 
+wS$name
 
 }
 \keyword{file}

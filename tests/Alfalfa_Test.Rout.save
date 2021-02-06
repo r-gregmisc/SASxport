@@ -1,7 +1,6 @@
-
-R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
-Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
+R version 4.0.3 (2020-10-10) -- "Bunny-Wunnies Freak Out"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -40,8 +39,6 @@ Type 'q()' to quit R.
  $ SEEDWT: int  64 54 40 45 64 75 45 63 65 59 ...
  $ HARV1 : num  172 138 146 170 125 ...
  $ HARV2 : num  180 151 129 191 173 ...
- - attr(*, "label")= chr " "
- - attr(*, "SAStype")= chr " "
 > 
 > ## Write it out again, pretending to be the same OS, SAS version, and creation date
 > write.xport(SPEC,
@@ -843,4 +840,4 @@ HEX:    20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 
 > 
 > proc.time()
    user  system elapsed 
-  1.326   0.209   1.537 
+  1.896   0.297   2.352 

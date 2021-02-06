@@ -1,3 +1,8 @@
+Version 1.8.0- 2020-12-12
+--------------------------
+- Add the functionality for specifying 'length' SAS XPT attributes for character
+  variables
+
 Version 1.7.0 - 2020-03-08
 --------------------------
 

@@ -6,7 +6,7 @@ lookup.xport <- function(file)
   {
     fname <- file
 
-    if(length(grep('http://', file))>0 || length(grep('ftp://', file))>0 )
+    if(isURL(file))
       {
         scat("Downloading file...")
         tf <- tempfile()

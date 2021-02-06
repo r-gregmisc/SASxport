@@ -15,14 +15,17 @@
 \alias{SAStype<-}
 \alias{SAStype<-.default}
 
+\alias{SASlength}
+\alias{SASlength<-}
+
 \title{
-Set or Retrieve the 'label', 'SASformat', 'SASiformat', or 'SAStype'
-attribute of a vector or (components of) a data frame
+Set or Retrieve the 'label', 'SASformat', 'SASiformat', 'SAStype', or
+'SASlength' attribute of a vector or (components of) a data frame
 }
 \description{
   Sets or retrieves the %\code{"label"},%
   \code{"SASformat"},
-  \code{"SASiformat"}, or \code{SAStype} attribute of an object.
+  \code{"SASiformat"}, \code{SAStype}, or \code{SASlength} attribute of an object.
 
   More comprehensive support for object labels, and SASformat, are
   available in Frank Harrell's \code{Hmisc} package.
@@ -38,18 +41,22 @@ SASiformat(x) <- value
 
 SAStype(x, default)
 SAStype(x) <- value
+
+SASlength(x, default)
+SASlength(x) <- value
 }
 \arguments{
 \item{x}{any object}
 \item{value}{new value for the  \code{"label"}, \code{"SASformat"},
-  \code{"SASiformat"}, or \code{SAStype}  attribute of an object.}
+  \code{"SASiformat"}, \code{SAStype}, or \code{SASlength} attribute of an
+  object.}
 \item{default}{value to return when no appropriate attribute is
   found.  The usual return value is NULL.}
 }
 \value{
   the contents of the \code{"label"}, \code{"SASformat"},
-  \code{"SASiformat"}, \code{"SAStype"} attribute of x, if any;
-  otherwise, the value provided by \code{default}.
+  \code{"SASiformat"}, \code{"SAStype"}, or \code{"SASlength"} attribute of x,
+  if any; otherwise, the value provided by \code{default}.
 }
 \author{
   Gregory R. Warnes \email{greg@warnes.net} based on code from the
@@ -83,6 +90,19 @@ SAStype(df)
 ## Example showing specification of default return value
 a <- 70
 label(a, default="no label")
+
+## Change length attribute for a character vector
+chars <- c("a", "b", "c")
+SASlength(chars) <- 3  # Increase the length
+SASlength(chars)       # Verify vector length
+
+# Change length attribute for data.frame
+a_df <- data.frame(
+  x = c("a", "b", "c"),
+  y = c("x", "y", "z")
+)
+SASlength(a_df) <- c(3, 4)
+SASlength(a_df) # Display length of each variable
 }
 \keyword{utilities}
 \keyword{interface}

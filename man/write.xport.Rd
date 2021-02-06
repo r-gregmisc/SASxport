@@ -56,11 +56,11 @@ write.xport(...,
   The SAS XPORT format allows each dataset to have a label and a type
   (set via the \code{\link{label}} and \code{\link{SAStype}} functions).
   In addition, each variable may have a corresponding label, display
-  format, and input format.  To set these values, add the attribute
-  'label', 'SASformat', or 'SASiformat' to individual data frame.  These
-  attributes may be set using the \code{\link{label}},
-  \code{\link{SASformat}}, and \code{\link{SASiformat}} functions. (See
-  examples provided below.)
+  format, input format, and length.  To set these values, add the attribute
+  'label', 'SASformat', 'SASiformat', or 'SASlength' to individual data frame
+  variables.  These attributes may be set using the \code{\link{label}},
+  \code{\link{SASformat}}, \code{\link{SASiformat}}, or \code{\link{SASlength}}
+  functions. (See examples provided below.)
 
   The actual translation of R objects to objects appropriate for SAS is
   handled by the \code{\link{toSAS}} generic and associated methods,
@@ -76,8 +76,7 @@ write.xport(...,
 }
 \author{Gregory R. Warnes \email{greg@warnes.net}}
 \note{
-   This package was created with partial funding by Metrum Institute
-   \url{http://metruminstitute.org}.
+   This package was created with partial funding by Metrum Institute.
 }
 \seealso{
   \code{\link{toSAS}},
@@ -86,7 +85,8 @@ write.xport(...,
   \code{\link{label}},
   \code{\link{SAStype}},
   \code{\link{SASformat}},
-  and \code{\link{SASiformat}}
+  \code{\link{SASiformat}},
+  and \code{\link{SASlength}}
 }
 \examples{
 
@@ -113,6 +113,9 @@ label(abc$y) <- 'character variable'
 ## add a dataset label and type
 label(abc) <- 'Simple example'
 SAStype(abc) <- 'MYTYPE'
+
+## Specify a length for the character variables
+SASlength(abc) <- c(NA, 3)
 
 ## verify the additions
 str(abc)

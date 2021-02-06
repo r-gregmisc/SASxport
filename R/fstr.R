@@ -5,7 +5,7 @@ fstr <- function(name, length, digits)
     inner <- function(i)
       {
         if( invalid(name[i]) )
-          return("")
+          name[i] <- ""
         if( invalid( length[i] ) )
           return(name[i])
         if( invalid(digits[i]) )

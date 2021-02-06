@@ -63,14 +63,10 @@ stopifnot( SAStype(abc.out, "MISSING!") ==
 SASformat(abc.out)
 SASformat(abc.in)
 
-#!# This test fails, and the issue should be itentified and corrected
-#!# in the next version.
-#!# stopifnot( identical(SASformat(abc.out), SASformat(abc.in ) ) )
+stopifnot( identical(SASformat(abc.out), SASformat(abc.in ) ) )
 
 SASiformat(abc.out)
 SASiformat(abc.in )
 
-#!# This test fails, and the issue should be itentified and corrected
-#!# in the next version.
-#!# stopifnot( identical(SASiformat(abc.out), SASiformat(abc.in ) ) )
+stopifnot( identical(SASiformat(abc.out), SASiformat(abc.in ) ) )
 
