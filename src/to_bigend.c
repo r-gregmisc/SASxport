@@ -38,20 +38,36 @@ void to_bigend( unsigned char *intp, size_t size)
 }
 
 /* test code */
+long init_value(size_t value_sz, unsigned char *num_pattern)
+  {
+    long value = 0;
+    for (size_t x = 0, ls = 0; x < value_sz; x++, ls += 8)
+    {
+        value += (long)num_pattern[value_sz - 1 - x] << ls;
+    }
+    return value;
+  }
+
 void test_to_bigend()
 {
-  unsigned char  byte_pattern[1] = { 0x00 };
-  unsigned char  byte_value      = 0x00;
+    
+  unsigned char num_pattern[sizeof(long)];
+  for (size_t x = 0; x < sizeof(long); x++)
+    {
+       num_pattern[x] = sizeof(long) - 1 - x;
+    }
 
-  unsigned char  short_pattern[2] = { 0x01, 0x00 };   /* NB: big endian byte pattern */
-  short   short_value       = 0x0100;          /* NB: hex is also written big endian */
+  unsigned char *byte_pattern = num_pattern + sizeof(long) - sizeof(unsigned char);
+  unsigned char byte_value = init_value(sizeof byte_value, byte_pattern);
 
-  unsigned char  int_pattern[4]   = { 0x03, 0x02, 0x01, 0x00 };
-  int     int_value        = 0x03020100;
+  unsigned char *short_pattern = num_pattern + sizeof(long) - sizeof(short);
+  short   short_value      = init_value(sizeof short_value, short_pattern);
 
-  unsigned char  long_pattern[4]  = { 0x03, 0x02, 0x01, 0x00 };
-  long    long_value       = 0x03020100;
+  unsigned char *int_pattern = num_pattern + sizeof(long) - sizeof(int);
+  int     int_value        = init_value(sizeof int_value, int_pattern);
 
+  unsigned char *long_pattern = num_pattern;
+  long    long_value       = init_value(sizeof long_value, num_pattern);  
   /* Do the to_bigend, then test */
 
   /* byte */
